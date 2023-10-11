@@ -32,7 +32,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void OnLoadedScene()
         {
-            _stateMachine.Enter<SetupApplicationState, string>(_staticDataService.Config.MainScene);
+            _stateMachine.Enter<SetupApplicationState>();
         }
     }
 }

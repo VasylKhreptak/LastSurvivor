@@ -4,7 +4,7 @@ using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Infrastructure.StateMachine.Game.States
 {
-    public class BootstrapAnalyticsState : IPayloadedState<string>, IGameState
+    public class BootstrapAnalyticsState : IState, IGameState
     {
         private readonly IStateMachine<IGameState> _gameStateMachine;
         private readonly IRuntimeDataService _runtimeDataService;
@@ -16,10 +16,10 @@ namespace Infrastructure.StateMachine.Game.States
             _runtimeDataService = runtimeDataService;
         }
 
-        public void Enter(string payload)
+        public void Enter()
         {
             _runtimeDataService.RuntimeData.AnalyticsData.SessionsCount++;
-            _gameStateMachine.Enter<LoadLevelState, string>(payload);
+            _gameStateMachine.Enter<TryLoadTutorialState>();
         }
     }
 }

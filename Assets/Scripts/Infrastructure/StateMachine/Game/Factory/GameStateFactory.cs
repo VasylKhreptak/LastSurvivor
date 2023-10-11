@@ -24,6 +24,7 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(SetupApplicationState)] = Get<SetupApplicationState>,
                 [typeof(LoadDataState)] = Get<LoadDataState>,
                 [typeof(BootstrapAnalyticsState)] = Get<BootstrapAnalyticsState>,
+                [typeof(TryLoadTutorialState)] = Get<TryLoadTutorialState>,
                 [typeof(LoadLevelState)] = Get<LoadLevelState>,
                 [typeof(GameLoopState)] = Get<GameLoopState>,
             };

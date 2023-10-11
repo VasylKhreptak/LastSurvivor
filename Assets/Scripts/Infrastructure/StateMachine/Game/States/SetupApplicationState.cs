@@ -5,7 +5,7 @@ using Screen = UnityEngine.Device.Screen;
 
 namespace Infrastructure.StateMachine.Game.States
 {
-    public class SetupApplicationState : IPayloadedState<string>, IGameState
+    public class SetupApplicationState : IState, IGameState
     {
         private readonly IStateMachine<IGameState> _gameStateMachine;
 
@@ -14,10 +14,10 @@ namespace Infrastructure.StateMachine.Game.States
             _gameStateMachine = gameStateMachine;
         }
 
-        public void Enter(string payload)
+        public void Enter()
         {
             DisableSleepTimeout();
-            _gameStateMachine.Enter<LoadDataState, string>(payload);
+            _gameStateMachine.Enter<LoadDataState>();
         }
 
         private void DisableSleepTimeout()
