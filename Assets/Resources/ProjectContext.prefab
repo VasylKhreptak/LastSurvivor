@@ -74,5 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230cfc2d07a24b3db22bc4bf876ffdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coroutineRunnerPrefab: {fileID: 4887711409807021592, guid: af20cc914570f91468c1d19709321c30, type: 3}
-  _loadingCurtainPrefab: {fileID: 2892134926150037562, guid: f58594695b3bfe3459ed1fcb9c931960, type: 3}
+  _coroutineRunnerPrefab: {fileID: 4887711409807021592, guid: af20cc914570f91468c1d19709321c30,
+    type: 3}
+  _loadingScreenPrefab: {fileID: 2892134926150037562, guid: f58594695b3bfe3459ed1fcb9c931960,
+    type: 3}
+  _transitionScreenPrefab: {fileID: 2892134926150037562, guid: 4e1b09fe7347304418aa3b8265b5eaf4,
+    type: 3}
