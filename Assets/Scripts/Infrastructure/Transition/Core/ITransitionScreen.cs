@@ -1,7 +1,13 @@
-﻿namespace Infrastructure.Transition.Core
+﻿using System;
+
+namespace Infrastructure.Transition.Core
 {
-    public class ITransitionScreen
+    public interface ITransitionScreen
     {
-        
+        public event Action OnHidden;
+
+        public void Show();
+
+        public void Hide();
     }
 }
