@@ -22,7 +22,9 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter()
         {
-            bool finishedTutorial = _runtimeDataService.RuntimeData.PlayerData.FinishedTutorial;
+            // bool finishedTutorial = _runtimeDataService.RuntimeData.PlayerData.FinishedTutorial;
+
+            bool finishedTutorial = true;
 
             string nextSceneName = finishedTutorial ? _staticDataService.Config.MainScene : _staticDataService.Config.TutorialScene;
 

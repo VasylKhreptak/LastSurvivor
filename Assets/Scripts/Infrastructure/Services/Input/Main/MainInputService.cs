@@ -4,25 +4,33 @@ using UnityEngine;
 namespace Infrastructure.Services.Input.Main
 {
     public class MainInputService : MonoBehaviour, IMainInputService
-    {        
-        public float Horizontal
+    {
+        [Header("References")]
+        [SerializeField] private Joystick _joystick;
+
+        #region MonoBehaviour
+
+        private void OnValidate()
         {
-            get;
+            _joystick = GetComponentInChildren<Joystick>();
         }
-        
-        public float Vertical
-        {
-            get;
-        }
-        
+
+        #endregion
+
+        public float Horizontal => _joystick.Horizontal;
+
+        public float Vertical => _joystick.Vertical;
+
+        public Vector2 Direction => _joystick.Direction;
+
         public void Enable()
         {
-            
+            gameObject.SetActive(false);
         }
-        
+
         public void Disable()
         {
-        
+            gameObject.SetActive(true);
         }
     }
 }
