@@ -53,10 +53,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         {
             Container.Bind<ICoroutineRunner>().To<CoroutineRunner>().FromComponentInNewPrefab(_coroutineRunnerPrefab).AsSingle();
             Container.Bind<ILoadingScreen>().To<LoadingScreen>().FromComponentInNewPrefab(_loadingScreenPrefab).AsSingle();
-            Container.Bind<ITransitionScreen>()
-                .To<TransitionScreen>()
-                .FromComponentInNewPrefab(_transitionScreenPrefab)
-                .AsSingle();
+            Container.Bind<ITransitionScreen>().To<TransitionScreen>().FromComponentInNewPrefab(_transitionScreenPrefab).AsSingle();
         }
 
         private void BindServices()
