@@ -16,7 +16,7 @@ namespace Infrastructure.Services.SaveLoadHandler
 
         public void Save()
         {
-            foreach (var saveHandler in _saveHandlers)
+            foreach (ISaveHandler saveHandler in _saveHandlers)
             {
                 saveHandler.Save();
             }
@@ -24,7 +24,7 @@ namespace Infrastructure.Services.SaveLoadHandler
 
         public void Load()
         {
-            foreach (var loadHandler in _loadHandlers)
+            foreach (ILoadHandler loadHandler in _loadHandlers)
             {
                 loadHandler.Load();
             }
@@ -79,9 +79,7 @@ namespace Infrastructure.Services.SaveLoadHandler
         private void OnApplicationFocus(bool hasFocus)
         {
             if (hasFocus == false)
-            {
                 Save();
-            }
         }
     }
 }

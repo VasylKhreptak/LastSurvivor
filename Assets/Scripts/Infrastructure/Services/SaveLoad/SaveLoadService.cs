@@ -29,7 +29,8 @@ namespace Infrastructure.Services.SaveLoad
                 {
                     T instance = JsonConvert.DeserializeObject<T>(jsonData);
 
-                    if (instance == null) return defaultValue;
+                    if (instance == null)
+                        return defaultValue;
 
                     return instance;
                 }

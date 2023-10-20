@@ -7,9 +7,7 @@ namespace Infrastructure.StateMachine.Game
 {
     public class GameStateMachine : StateMachine<IGameState>, ITickable
     {
-        protected GameStateMachine(GameStateFactory stateFactory) : base(stateFactory)
-        {
-        }
+        protected GameStateMachine(GameStateFactory stateFactory) : base(stateFactory) { }
 
         public void Tick()
         {

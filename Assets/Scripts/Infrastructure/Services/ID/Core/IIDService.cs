@@ -2,8 +2,5 @@
 
 namespace Infrastructure.Services.ID.Core
 {
-    public interface IIDService : IProvider<long>
-    {
-
-    }
+    public interface IIDService : IProvider<long> { }
 }

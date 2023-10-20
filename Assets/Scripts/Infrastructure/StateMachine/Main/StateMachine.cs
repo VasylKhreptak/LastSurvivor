@@ -46,9 +46,7 @@ namespace Infrastructure.StateMachine.Main
         public bool Back()
         {
             if (_lastStateInfo == null)
-            {
                 return false;
-            }
 
             _lastStateInfo.Enter();
             return true;

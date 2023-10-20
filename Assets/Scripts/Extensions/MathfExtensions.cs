@@ -11,7 +11,8 @@ namespace Extensions
         {
             probability = Mathf.Clamp01(probability);
 
-            if (probability == 0) return false;
+            if (probability == 0)
+                return false;
 
             return Random.value <= probability;
         }
@@ -19,13 +20,9 @@ namespace Extensions
         public static void Probability(float probability, Action onTrue, Action onFalse = null)
         {
             if (Probability(probability))
-            {
                 onTrue?.Invoke();
-            }
             else
-            {
                 onFalse?.Invoke();
-            }
         }
 
         public static float Dispersion(this List<Vector3> vectors)
@@ -33,9 +30,7 @@ namespace Extensions
             int count = vectors.Count;
 
             if (count == 0)
-            {
                 return 0f;
-            }
 
             Vector3 sum = Vector3.zero;
             for (int i = 0; i < count; i++)
@@ -61,9 +56,7 @@ namespace Extensions
             int count = vectors.Count;
 
             if (count == 0)
-            {
                 return 0;
-            }
 
             Vector3 sum = Vector3.zero;
             foreach (Vector3 vector in vectors)

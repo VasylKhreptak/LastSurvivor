@@ -1,7 +1,4 @@
 ﻿namespace Infrastructure.StateMachine.Main.States.Core
 {
-    public interface IBaseState
-    {
-        
-    }
+    public interface IBaseState { }
 }

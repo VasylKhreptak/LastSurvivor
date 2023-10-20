@@ -41,7 +41,7 @@ namespace Infrastructure.SceneManagement
         private IEnumerator LoadSceneRoutine(string name, Action onComplete = null)
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(name);
-            
+
             yield return new WaitUntil(() => asyncOperation.isDone);
 
             onComplete?.Invoke();

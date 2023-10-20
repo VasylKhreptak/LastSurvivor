@@ -7,11 +7,11 @@ namespace Extensions
     public static class IEnumerableExtensions
     {
         /// <summary>
-        /// Returns the random element taking into account the weight of each element;
+        ///     Returns the random element taking into account the weight of each element;
         /// </summary>
         public static TSource GetByWeight<TSource>(this IEnumerable<TSource> source, Func<TSource, float> weight)
         {
-            var enumerable = source as TSource[] ?? source.ToArray();
+            TSource[] enumerable = source as TSource[] ?? source.ToArray();
             float totalWeight = enumerable.Sum(weight);
 
             float randomNumber = UnityEngine.Random.value * totalWeight;
@@ -21,9 +21,7 @@ namespace Extensions
             {
                 weightSum += weight(item);
                 if (weightSum >= randomNumber)
-                {
                     return item;
-                }
             }
 
             throw new InvalidOperationException("Failed to retrieve a random item by weight.");
@@ -33,7 +31,8 @@ namespace Extensions
         {
             foreach (TSource item in source)
             {
-                if (predicate(item)) return true;
+                if (predicate(item))
+                    return true;
             }
 
             return false;

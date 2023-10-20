@@ -24,9 +24,7 @@ namespace Infrastructure.StateMachine.Main.States.Factory
         public IBaseState Create(Type type)
         {
             if (_statesMap.TryGetValue(type, out Func<IBaseState> state))
-            {
                 return state();
-            }
 
             throw new Exception($"State for {type.Name} can't be created");
         }

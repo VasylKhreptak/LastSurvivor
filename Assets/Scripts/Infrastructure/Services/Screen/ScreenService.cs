@@ -10,8 +10,8 @@ namespace Infrastructure.Services.Screen
     {
         private const float _updateInterval = 1 / 10f;
 
-        private ReactiveProperty<ScreenOrientation> _screenOrientation = new ReactiveProperty<ScreenOrientation>();
-        private ReactiveProperty<Vector2Int> _screenResolution = new ReactiveProperty<Vector2Int>();
+        private readonly ReactiveProperty<ScreenOrientation> _screenOrientation = new ReactiveProperty<ScreenOrientation>();
+        private readonly ReactiveProperty<Vector2Int> _screenResolution = new ReactiveProperty<Vector2Int>();
 
         private IDisposable _intervalSubscription;
 

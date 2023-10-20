@@ -4,7 +4,8 @@ using Infrastructure.StateMachine.Main.States.Info.Core;
 
 namespace Infrastructure.StateMachine.Main.States.Info
 {
-    public class PayloadedStateInfo<TState, TBaseState, TPayload> : IStateInfo where TState : class, IPayloadedState<TPayload>, TBaseState
+    public class PayloadedStateInfo<TState, TBaseState, TPayload> : IStateInfo
+        where TState : class, IPayloadedState<TPayload>, TBaseState
     {
         private readonly StateMachine<TBaseState> _stateMachine;
         private readonly TPayload _payload;

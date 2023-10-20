@@ -14,7 +14,7 @@ namespace DebuggerOptions
             _stateMachine = stateMachine;
         }
 
-        [UsedImplicitly] 
+        [UsedImplicitly]
         public void EnterBootstrapState() => _stateMachine.Enter<BootstrapState>();
     }
 }

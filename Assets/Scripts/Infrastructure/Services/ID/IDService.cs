@@ -4,7 +4,7 @@ namespace Infrastructure.Services.ID
 {
     public class IDService : IIDService
     {
-        private long _value = 0;
+        private long _value;
 
         public long Get() => _value++;
     }

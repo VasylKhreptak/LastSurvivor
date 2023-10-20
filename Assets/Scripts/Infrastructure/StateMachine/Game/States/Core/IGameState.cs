@@ -1,7 +1,4 @@
 ﻿namespace Infrastructure.StateMachine.Main.States.Core
 {
-    public interface IGameState
-    {
-        
-    }
+    public interface IGameState { }
 }

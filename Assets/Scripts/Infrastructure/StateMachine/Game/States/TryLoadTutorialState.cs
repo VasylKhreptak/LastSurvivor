@@ -26,7 +26,8 @@ namespace Infrastructure.StateMachine.Game.States
 
             bool finishedTutorial = true;
 
-            string nextSceneName = finishedTutorial ? _staticDataService.Config.MainScene : _staticDataService.Config.TutorialScene;
+            string nextSceneName =
+                finishedTutorial ? _staticDataService.Config.MainScene : _staticDataService.Config.TutorialScene;
 
             _stateMachine.Enter<LoadLevelState, string>(nextSceneName);
         }

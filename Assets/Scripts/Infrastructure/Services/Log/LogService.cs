@@ -19,25 +19,19 @@ namespace Infrastructure.Services.Log
         public void Log(object message)
         {
             if (_staticDataService.Config.LogType.HasFlag(LogType.Info))
-            {
                 Debug.Log(message);
-            }
         }
 
         public void LogWarning(object message)
         {
             if (_staticDataService.Config.LogType.HasFlag(LogType.Warning))
-            {
                 Debug.LogWarning(message);
-            }
         }
 
         public void LogError(object message)
         {
             if (_staticDataService.Config.LogType.HasFlag(LogType.Error))
-            {
                 Debug.LogError(message);
-            }
         }
     }
 }

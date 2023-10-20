@@ -1,6 +1,4 @@
 ﻿namespace Infrastructure.Data.Core
 {
-    public interface ISaveLoadHandler : ISaveHandler, ILoadHandler
-    {
-    }
+    public interface ISaveLoadHandler : ISaveHandler, ILoadHandler { }
 }

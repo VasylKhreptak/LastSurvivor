@@ -1,5 +1,4 @@
-﻿using System;
-using Infrastructure.Data.Static;
+﻿using Infrastructure.Data.Static;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
 
@@ -9,17 +8,15 @@ namespace Infrastructure.Services.StaticData
     {
         private const string GameConfigPath = "StaticData/GameConfig";
         private const string GameBalancePath = "StaticData/GameBalance";
-        
-        private GameConfig _gameConfig;
-        private GameBalance _gameBalance;
 
-        public GameConfig Config => _gameConfig;
-        public GameBalance Balance => _gameBalance;
+        public GameConfig Config { get; private set; }
+
+        public GameBalance Balance { get; private set; }
 
         public void Load()
         {
-            _gameConfig = Resources.Load<GameConfig>(GameConfigPath);
-            _gameBalance = Resources.Load<GameBalance>(GameBalancePath);
+            Config = Resources.Load<GameConfig>(GameConfigPath);
+            Balance = Resources.Load<GameBalance>(GameBalancePath);
         }
     }
 }

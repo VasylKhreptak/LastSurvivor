@@ -43,8 +43,8 @@ namespace Graphics.Screen.Utility
         private void StartObserving()
         {
             StopObserving();
-            _subscription = Observable
-                .CombineLatest(_screeService.ScreenOrientation, _screeService.ScreenResolution, (orientation, resolution) => (orientation, resolution))
+            _subscription = _screeService.ScreenOrientation
+                .CombineLatest(_screeService.ScreenResolution, (orientation, resolution) => (orientation, resolution))
                 .DoOnSubscribe(UpdateArea)
                 .Subscribe(tuple => UpdateArea());
         }

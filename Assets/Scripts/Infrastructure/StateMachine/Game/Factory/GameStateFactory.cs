@@ -16,9 +16,8 @@ namespace Infrastructure.StateMachine.Game.Factory
             _cachedStatesMap = new Dictionary<Type, IBaseState>();
         }
 
-        protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister()
-        {
-            return new Dictionary<Type, Func<IBaseState>>()
+        protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister() =>
+            new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(BootstrapState)] = Get<BootstrapState>,
                 [typeof(SetupApplicationState)] = Get<SetupApplicationState>,
@@ -26,16 +25,13 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(BootstrapAnalyticsState)] = Get<BootstrapAnalyticsState>,
                 [typeof(TryLoadTutorialState)] = Get<TryLoadTutorialState>,
                 [typeof(LoadLevelState)] = Get<LoadLevelState>,
-                [typeof(GameLoopState)] = Get<GameLoopState>,
+                [typeof(GameLoopState)] = Get<GameLoopState>
             };
-        }
 
         private IBaseState Get<TState>() where TState : IBaseState
         {
             if (_cachedStatesMap.TryGetValue(typeof(TState), out IBaseState state))
-            {
                 return state;
-            }
 
             state = _container.Resolve<TState>();
             _cachedStatesMap.Add(typeof(TState), state);

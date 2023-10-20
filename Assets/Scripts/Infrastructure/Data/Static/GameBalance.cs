@@ -3,8 +3,5 @@
 namespace Infrastructure.Data.Static
 {
     [CreateAssetMenu(fileName = "GameBalance", menuName = "ScriptableObjects/Static/GameBalance", order = 0)]
-    public class GameBalance : ScriptableObject
-    {
-
-    }
+    public class GameBalance : ScriptableObject { }
 }

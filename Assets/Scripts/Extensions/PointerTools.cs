@@ -6,10 +6,7 @@ namespace Extensions
 {
     public static class PointerTools
     {
-        public static bool IsPointerOverUI()
-        {
-            return IsPointerOverUI(Input.mousePosition);
-        }
+        public static bool IsPointerOverUI() => IsPointerOverUI(Input.mousePosition);
 
         public static bool IsPointerOverUI(Vector2 screenPosition)
         {
@@ -27,9 +24,7 @@ namespace Extensions
         public static bool IsPointerOverUI(int touchID)
         {
             if (Input.touchCount <= touchID)
-            {
                 return false;
-            }
 
             return IsPointerOverUI(Input.GetTouch(touchID).position);
         }

@@ -12,8 +12,8 @@ namespace Infrastructure.Editor
         [MenuItem("GameObject/Infrastructure/GameRunner", false)]
         public static void CreateGameRunner()
         {
-            var gameRunnerPrefab = Resources.Load(GameRunnerPrefabPath);
-            var root = PrefabUtility.InstantiatePrefab(gameRunnerPrefab) as GameObject;
+            Object gameRunnerPrefab = Resources.Load(GameRunnerPrefabPath);
+            GameObject root = PrefabUtility.InstantiatePrefab(gameRunnerPrefab) as GameObject;
             Selection.activeGameObject = root;
 
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());

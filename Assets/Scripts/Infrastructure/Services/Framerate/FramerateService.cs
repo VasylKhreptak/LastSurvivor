@@ -13,12 +13,12 @@ namespace Infrastructure.Services.Framerate
         private const float FrameCaptureInterval = 0.1f;
         private const int FrameBuffer = 10;
 
-        private FloatReactiveProperty _averageFramerate = new FloatReactiveProperty(0);
+        private readonly FloatReactiveProperty _averageFramerate = new FloatReactiveProperty(0);
         public IReadOnlyReactiveProperty<float> AverageFramerate => _averageFramerate;
 
-        private Queue<float> _capturedFrames = new Queue<float>(FrameBuffer);
+        private readonly Queue<float> _capturedFrames = new Queue<float>(FrameBuffer);
 
-        private CompositeDisposable _subscriptions = new CompositeDisposable();
+        private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
 
         public void Initialize()
         {
@@ -66,9 +66,7 @@ namespace Infrastructure.Services.Framerate
         private void CaptureFrame()
         {
             if (_capturedFrames.Count == FrameBuffer)
-            {
                 _capturedFrames.Dequeue();
-            }
 
             _capturedFrames.Enqueue(1f / Time.unscaledDeltaTime);
         }
