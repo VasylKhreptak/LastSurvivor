@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using Infrastructure.EntryPoints.Core;
+using UnityEngine;
 using Zenject;
 
 namespace Infrastructure.EntryPoints.Game
 {
-    public class GameRunner : MonoBehaviour
+    public class GameRunner : MonoBehaviour, IEntryPoint
     {
         private void Awake()
+        {
+            Enter();
+        }
+
+        public void Enter()
         {
             if (FindObjectOfType<ProjectContext>() == null)
             {
