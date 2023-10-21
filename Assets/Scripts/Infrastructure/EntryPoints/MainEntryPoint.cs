@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using Data.Scenes.Main;
 using Infrastructure.Data.Static;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -9,17 +10,16 @@ namespace Infrastructure.EntryPoints
 {
     public class MainEntryPoint : MonoBehaviour, IEntryPoint
     {
-        [Header("References")]
-        [SerializeField] private Transform _playerSpawnPoint;
-
         private IInstantiator _instantiator;
         private GamePrefabs _prefabs;
+        private MainSceneData _mainSceneData;
 
         [Inject]
-        private void Constructor(IInstantiator instantiator, IStaticDataService staticDataService)
+        private void Constructor(IInstantiator instantiator, IStaticDataService staticDataService, MainSceneData mainSceneData)
         {
             _instantiator = instantiator;
             _prefabs = staticDataService.Prefabs;
+            _mainSceneData = mainSceneData;
         }
 
         #region MonoBehaviour
@@ -40,8 +40,9 @@ namespace Infrastructure.EntryPoints
         private Transform InitializePlayer()
         {
             Transform player = _instantiator.InstantiatePrefab(_prefabs.Player).transform;
-            player.position = _playerSpawnPoint.position;
-            player.rotation = _playerSpawnPoint.rotation;
+            Transform playerSpawnTransform = _mainSceneData.PlayerSpawnTransform;
+            player.position = playerSpawnTransform.position;
+            player.rotation = playerSpawnTransform.rotation;
             return player;
         }
 

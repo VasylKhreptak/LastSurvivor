@@ -152,11 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24959d7a2194606afb9c48aae394a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpawnPoint: {fileID: 1800274540}
-  _playerPrefab: {fileID: 2010385809691140896, guid: 42bb4a6d065198a4e92f80fb413af2c0,
-    type: 3}
-  _cameraPrefab: {fileID: 4247228223840663756, guid: ccf58716d7274ca4b9a890d9a655633b,
-    type: 3}
 --- !u!4 &40515227
 Transform:
   m_ObjectHideFlags: 0
@@ -4268,6 +4263,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainInputService: {fileID: 1538117619}
+--- !u!1 &1369728312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1369728313}
+  - component: {fileID: 1369728314}
+  m_Layer: 0
+  m_Name: MainSceneDataInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1369728313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369728312}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2075507809}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1369728314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369728312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084c75ecadb54259b7e45b26d8e59963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainSceneData:
+    _playerSpawnTransform: {fileID: 1800274540}
 --- !u!1001 &1388002699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5722,6 +5763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800274540}
+  - component: {fileID: 1800274541}
   m_Layer: 0
   m_Name: PlayerSpawnPoint
   m_TagString: Untagged
@@ -5744,6 +5786,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543395369}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1800274541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800274539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7319b7750c4506afa1f380a4e7db21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: {r: 1, g: 0, b: 0, a: 0.5}
+  _range: 0.5
+  _drawOnlyWhenSelected: 1
 --- !u!1001 &1819135667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6384,6 +6441,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1350870681}
+  - {fileID: 1369728314}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -6415,6 +6473,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1350870680}
+  - {fileID: 1369728313}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2088745960

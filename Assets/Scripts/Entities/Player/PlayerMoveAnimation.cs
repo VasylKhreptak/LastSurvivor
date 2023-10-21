@@ -1,4 +1,4 @@
-﻿using Infrastructure.Data.Static.Balance;
+﻿using Data.Static.Balance;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
 using Zenject;

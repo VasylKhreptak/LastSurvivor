@@ -1,6 +1,5 @@
 using Infrastructure.Data.Core;
 using Infrastructure.Data.Static;
-using Infrastructure.Data.Static.Balance.Core;
 
 namespace Infrastructure.Services.StaticData.Core
 {

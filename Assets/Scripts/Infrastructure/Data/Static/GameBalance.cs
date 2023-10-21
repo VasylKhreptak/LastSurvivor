@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Data.Static.Balance;
+using UnityEngine;
 
-namespace Infrastructure.Data.Static.Balance.Core
+namespace Infrastructure.Data.Static
 {
     [CreateAssetMenu(fileName = "GameBalance", menuName = "ScriptableObjects/Static/GameBalance")]
     public class GameBalance : ScriptableObject

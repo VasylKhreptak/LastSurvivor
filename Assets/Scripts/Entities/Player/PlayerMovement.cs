@@ -1,4 +1,4 @@
-﻿using Infrastructure.Data.Static.Balance;
+﻿using Data.Static.Balance;
 using Infrastructure.Services.Input.Main.Core;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;

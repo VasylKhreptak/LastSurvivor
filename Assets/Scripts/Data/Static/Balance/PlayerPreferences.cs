@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Infrastructure.Data.Static.Balance
+namespace Data.Static.Balance
 {
     [Serializable]
     public class PlayerPreferences
