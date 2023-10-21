@@ -3,7 +3,7 @@ using LogType = Infrastructure.Services.Log.Core.LogType;
 
 namespace Infrastructure.Data.Static
 {
-    [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/Static/GameConfig", order = 0)]
+    [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/Static/GameConfig")]
     public class GameConfig : ScriptableObject
     {
         [Header("Scenes")]

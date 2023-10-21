@@ -2,6 +2,6 @@
 
 namespace Infrastructure.Data.Static
 {
-    [CreateAssetMenu(fileName = "GameBalance", menuName = "ScriptableObjects/Static/GameBalance", order = 0)]
+    [CreateAssetMenu(fileName = "GameBalance", menuName = "ScriptableObjects/Static/GameBalance")]
     public class GameBalance : ScriptableObject { }
 }
