@@ -42,7 +42,6 @@ namespace Entities.Player
             Vector3 verticalVelocity = Vector3.up * _player.Rigidbody.velocity.y;
 
             _player.Transform.forward = moveDirection;
-
             _player.Rigidbody.velocity = moveDirection * _speed + verticalVelocity;
         }
     }
