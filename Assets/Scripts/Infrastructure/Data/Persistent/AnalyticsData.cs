@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Data.Runtime
+﻿namespace Infrastructure.Data.Persistent
 {
     public class AnalyticsData
     {

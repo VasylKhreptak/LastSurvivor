@@ -10,8 +10,8 @@ using Infrastructure.Services.ID;
 using Infrastructure.Services.ID.Core;
 using Infrastructure.Services.Log;
 using Infrastructure.Services.Log.Core;
-using Infrastructure.Services.RuntimeData;
-using Infrastructure.Services.RuntimeData.Core;
+using Infrastructure.Services.PersistentData;
+using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.SaveLoad.Core;
 using Infrastructure.Services.SaveLoadHandler;
@@ -21,6 +21,7 @@ using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game;
 using Infrastructure.StateMachine.Game.Factory;
 using Infrastructure.StateMachine.Game.States;
+using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Infrastructure.Transition;
@@ -65,7 +66,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<IStaticDataService>().FromInstance(staticDataService).AsSingle();
             staticDataService.Load();
 
-            Container.Bind<IRuntimeDataService>().To<RuntimeDataService>().AsSingle();
+            Container.Bind<IPersistentDataService>().To<PersistentDataService>().AsSingle();
             Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
             Container.BindInterfacesTo<FramerateService>().AsSingle();
             Container.BindInterfacesTo<ScreenService>().AsSingle();
@@ -77,7 +78,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         {
             SaveLoadHandlerService saveLoadHandlerService = Container.Instantiate<SaveLoadHandlerService>();
 
-            saveLoadHandlerService.Add(Container.Resolve<IRuntimeDataService>());
+            saveLoadHandlerService.Add(Container.Resolve<IPersistentDataService>());
 
             Container.BindInterfacesTo<SaveLoadHandlerService>().FromInstance(saveLoadHandlerService).AsSingle();
         }

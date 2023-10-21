@@ -1,10 +1,6 @@
-﻿using Cinemachine;
-using Zenject;
+﻿using Zenject;
 
 public class Test : IInitializable
 {
-    public void Initialize()
-    {
-        
-    }
+    public void Initialize() { }
 }

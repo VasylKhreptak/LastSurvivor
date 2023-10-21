@@ -1,4 +1,5 @@
-﻿using Infrastructure.Services.RuntimeData.Core;
+﻿using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 
@@ -7,18 +8,18 @@ namespace Infrastructure.StateMachine.Game.States
     public class BootstrapAnalyticsState : IState, IGameState
     {
         private readonly IStateMachine<IGameState> _gameStateMachine;
-        private readonly IRuntimeDataService _runtimeDataService;
+        private readonly IPersistentDataService _persistentDataService;
 
         public BootstrapAnalyticsState(IStateMachine<IGameState> gameStateMachine,
-            IRuntimeDataService runtimeDataService)
+            IPersistentDataService persistentDataService)
         {
             _gameStateMachine = gameStateMachine;
-            _runtimeDataService = runtimeDataService;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()
         {
-            _runtimeDataService.RuntimeData.AnalyticsData.SessionsCount++;
+            _persistentDataService.PersistentData.AnalyticsData.SessionsCount++;
             _gameStateMachine.Enter<TryLoadTutorialState>();
         }
     }

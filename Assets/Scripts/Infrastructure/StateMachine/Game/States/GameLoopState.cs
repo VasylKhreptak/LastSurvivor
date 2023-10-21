@@ -1,4 +1,5 @@
-﻿using Infrastructure.StateMachine.Main.States.Core;
+﻿using Infrastructure.StateMachine.Game.States.Core;
+using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Infrastructure.StateMachine.Game.States
 {

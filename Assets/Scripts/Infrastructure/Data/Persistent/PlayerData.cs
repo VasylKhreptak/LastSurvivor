@@ -1,6 +1,6 @@
 using Plugins.Banks.Data.Economy;
 
-namespace Infrastructure.Data.Runtime
+namespace Infrastructure.Data.Persistent
 {
     public class PlayerData
     {

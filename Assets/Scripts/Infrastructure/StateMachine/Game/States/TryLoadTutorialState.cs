@@ -1,5 +1,6 @@
-﻿using Infrastructure.Services.RuntimeData.Core;
+﻿using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
+using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 
@@ -9,15 +10,15 @@ namespace Infrastructure.StateMachine.Game.States
     {
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly IStaticDataService _staticDataService;
-        private readonly IRuntimeDataService _runtimeDataService;
+        private readonly IPersistentDataService _persistentDataService;
 
         public TryLoadTutorialState(IStateMachine<IGameState> stateMachine,
             IStaticDataService staticDataService,
-            IRuntimeDataService runtimeDataService)
+            IPersistentDataService persistentDataService)
         {
             _stateMachine = stateMachine;
             _staticDataService = staticDataService;
-            _runtimeDataService = runtimeDataService;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()

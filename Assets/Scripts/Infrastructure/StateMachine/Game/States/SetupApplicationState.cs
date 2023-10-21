@@ -1,4 +1,5 @@
-﻿using Infrastructure.StateMachine.Main.Core;
+﻿using Infrastructure.StateMachine.Game.States.Core;
+using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using UnityEngine;
 using Screen = UnityEngine.Device.Screen;

@@ -1,6 +1,6 @@
-﻿namespace Infrastructure.Data.Runtime
+﻿namespace Infrastructure.Data.Persistent
 {
-    public class RuntimeData
+    public class PersistentData
     {
         public PlayerData PlayerData = new PlayerData();
         public AnalyticsData AnalyticsData = new AnalyticsData();
