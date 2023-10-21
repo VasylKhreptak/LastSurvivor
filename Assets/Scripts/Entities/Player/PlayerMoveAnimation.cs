@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Infrastructure.Data.Static.Balance;
+using Infrastructure.Services.StaticData.Core;
+using UnityEngine;
+using Zenject;
 
 namespace Entities.Player
 {
@@ -8,8 +11,15 @@ namespace Entities.Player
         [SerializeField] private Player _player;
 
         [Header("Preferences")]
-        [SerializeField] private float _targetSpeed = 5f;
         [SerializeField] private string _speedParameterName = "Speed";
+
+        private PlayerPreferences _playerPreferences;
+
+        [Inject]
+        private void Constructor(IStaticDataService staticDataService)
+        {
+            _playerPreferences = staticDataService.Balance.PlayerPreferences;
+        }
 
         #region MonoBehaviour
 
@@ -23,7 +33,7 @@ namespace Entities.Player
             Vector3 velocity = _player.Rigidbody.velocity;
             Vector2 horizontalVelocity = new Vector2(velocity.x, velocity.z);
 
-            float animationSpeed = horizontalVelocity.magnitude / _targetSpeed;
+            float animationSpeed = horizontalVelocity.magnitude / _playerPreferences.MovementSpeed;
             _player.Animator.SetFloat(_speedParameterName, animationSpeed);
         }
 
