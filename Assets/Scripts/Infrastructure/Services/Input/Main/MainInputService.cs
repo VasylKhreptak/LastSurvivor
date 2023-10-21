@@ -12,7 +12,7 @@ namespace Infrastructure.Services.Input.Main
 
         private void OnValidate()
         {
-            _joystick = GetComponentInChildren<Joystick>();
+            _joystick ??= GetComponentInChildren<Joystick>(true);
         }
 
         #endregion

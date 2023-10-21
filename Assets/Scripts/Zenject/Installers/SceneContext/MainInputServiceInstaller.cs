@@ -1,5 +1,5 @@
-﻿using Infrastructure.Services.Input.Main.Core;
-using Sirenix.OdinInspector;
+﻿using Infrastructure.Services.Input.Main;
+using Infrastructure.Services.Input.Main.Core;
 using UnityEngine;
 
 namespace Zenject.Installers.SceneContext
@@ -7,11 +7,11 @@ namespace Zenject.Installers.SceneContext
     public class MainInputServiceInstaller : MonoInstaller
     {
         [Header("References")]
-        [ShowInInspector] private IMainInputService _mainInputService;
+        [SerializeField] private MainInputService _mainInputService;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_mainInputService).AsSingle();
+            Container.BindInstance(_mainInputService as IMainInputService).AsSingle();
         }
     }
 }
