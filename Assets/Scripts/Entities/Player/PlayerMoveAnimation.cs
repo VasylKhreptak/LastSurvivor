@@ -5,38 +5,26 @@ using Zenject;
 
 namespace Entities.Player
 {
-    public class PlayerMoveAnimation : MonoBehaviour
+    public class PlayerMoveAnimation : ITickable
     {
-        [Header("References")]
-        [SerializeField] private Player _player;
+        private readonly Animator _animator;
+        private readonly Rigidbody _rigidbody;
+        private readonly PlayerPreferences _playerPreferences;
 
-        [Header("Preferences")]
-        [SerializeField] private string _speedParameterName = "Speed";
-
-        private PlayerPreferences _playerPreferences;
-
-        [Inject]
-        private void Constructor(IStaticDataService staticDataService)
+        public PlayerMoveAnimation(Animator animator, Rigidbody rigidbody, IStaticDataService staticDataService)
         {
+            _animator = animator;
+            _rigidbody = rigidbody;
             _playerPreferences = staticDataService.Balance.PlayerPreferences;
         }
 
-        #region MonoBehaviour
-
-        private void OnValidate()
+        public void Tick()
         {
-            _player ??= GetComponentInParent<Player>(true);
-        }
-
-        private void Update()
-        {
-            Vector3 velocity = _player.Rigidbody.velocity;
+            Vector3 velocity = _rigidbody.velocity;
             Vector2 horizontalVelocity = new Vector2(velocity.x, velocity.z);
 
             float animationSpeed = horizontalVelocity.magnitude / _playerPreferences.MovementSpeed;
-            _player.Animator.SetFloat(_speedParameterName, animationSpeed);
+            _animator.SetFloat(_playerPreferences.SpeedParameterName, animationSpeed);
         }
-
-        #endregion
     }
 }

@@ -6,31 +6,23 @@ using Zenject;
 
 namespace Entities.Player
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : ITickable
     {
-        [Header("References")]
-        [SerializeField] private Player _player;
+        private readonly Transform _transform;
+        private readonly Rigidbody _rigidbody;
+        private readonly IMainInputService _mainInputService;
+        private readonly PlayerPreferences _playerPreferences;
 
-        private IMainInputService _mainInputService;
-        private PlayerPreferences _playerPreferences;
-
-        [Inject]
-        private void Constructor(IMainInputService mainInputService, IStaticDataService staticDataService)
+        public PlayerMovement(Transform transform, Rigidbody rigidbody, IMainInputService mainInputService,
+            IStaticDataService staticDataService)
         {
+            _transform = transform;
+            _rigidbody = rigidbody;
             _mainInputService = mainInputService;
             _playerPreferences = staticDataService.Balance.PlayerPreferences;
         }
 
-        #region MonoBehaviour
-
-        private void OnValidate()
-        {
-            _player ??= GetComponentInParent<Player>(true);
-        }
-
-        private void Update() => HandleMovement();
-
-        #endregion
+        public void Tick() => HandleMovement();
 
         private void HandleMovement()
         {
@@ -40,10 +32,10 @@ namespace Entities.Player
                 return;
 
             Vector3 moveDirection = new Vector3(input.x, 0f, input.y);
-            Vector3 verticalVelocity = Vector3.up * _player.Rigidbody.velocity.y;
+            Vector3 verticalVelocity = Vector3.up * _rigidbody.velocity.y;
 
-            _player.Transform.forward = moveDirection;
-            _player.Rigidbody.velocity = moveDirection * _playerPreferences.MovementSpeed + verticalVelocity;
+            _transform.forward = moveDirection;
+            _rigidbody.velocity = moveDirection * _playerPreferences.MovementSpeed + verticalVelocity;
         }
     }
 }

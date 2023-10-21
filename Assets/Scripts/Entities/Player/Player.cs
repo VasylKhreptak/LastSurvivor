@@ -1,25 +1,20 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Entities.Player
 {
     public class Player : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Transform _transform;
-        [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Animator _animator;
+        [SerializeField] private Context _context;
 
-        public Transform Transform => _transform;
-        public Rigidbody Rigidbody => _rigidbody;
-        public Animator Animator => _animator;
+        public Context Context => _context;
 
         #region MonoBehaviour
 
         private void OnValidate()
         {
-            _transform ??= GetComponent<Transform>();
-            _rigidbody ??= GetComponent<Rigidbody>();
-            _animator ??= GetComponent<Animator>();
+            _context ??= GetComponent<Context>();
         }
 
         #endregion

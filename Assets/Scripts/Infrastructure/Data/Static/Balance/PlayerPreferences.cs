@@ -8,7 +8,9 @@ namespace Infrastructure.Data.Static.Balance
     {
         [Header("Preferences")]
         [SerializeField] private float _movementSpeed = 5f;
+        [SerializeField] private string _speedParameterName = "Speed";
 
         public float MovementSpeed => _movementSpeed;
+        public string SpeedParameterName => _speedParameterName;
     }
 }
