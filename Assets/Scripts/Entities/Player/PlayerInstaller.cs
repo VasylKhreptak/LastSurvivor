@@ -14,7 +14,6 @@ namespace Entities.Player
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
             Container.BindInterfacesTo<PlayerMoveAnimation>().AsSingle();
-            Container.BindInterfacesTo<InterfacesTest>().AsSingle();
         }
     }
 }
