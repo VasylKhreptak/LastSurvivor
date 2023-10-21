@@ -1,6 +1,6 @@
-﻿using Zenject;
+﻿using UnityEngine;
 
-public class Test : IInitializable
+public class Test : MonoBehaviour
 {
-    public void Initialize() { }
+    public int Property { get; set; }
 }

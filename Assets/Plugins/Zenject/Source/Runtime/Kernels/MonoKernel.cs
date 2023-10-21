@@ -4,113 +4,85 @@
 
 using ModestTree;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 namespace Zenject
 {
     public abstract class MonoKernel : MonoBehaviour
     {
-        [InjectLocal]
-        TickableManager _tickableManager = null;
+        [InjectLocal] private readonly TickableManager _tickableManager;
 
-        [InjectLocal]
-        InitializableManager _initializableManager = null;
+        [InjectLocal] private readonly InitializableManager _initializableManager;
 
-        [InjectLocal]
-        DisposableManager _disposablesManager = null;
+        [InjectLocal] private readonly DisposableManager _disposablesManager;
 
-        [InjectOptional] 
-        private IDecoratableMonoKernel decoratableMonoKernel;
+        [InjectOptional] private readonly IDecoratableMonoKernel decoratableMonoKernel;
 
-        bool _hasInitialized;
-        bool _isDestroyed;
+        protected bool IsDestroyed { get; private set; }
 
-        protected bool IsDestroyed
-        {
-            get { return _isDestroyed; }
-        }
+        protected bool HasInitialized { get; private set; }
 
         public virtual void Start()
         {
-            if (decoratableMonoKernel?.ShouldInitializeOnStart()??true)
-            {
+            if (decoratableMonoKernel?.ShouldInitializeOnStart() ?? true)
                 Initialize();
-            }
         }
 
         public void Initialize()
         {
-            // We don't put this in start in case Start is overridden
-            if (!_hasInitialized)
+            if (!HasInitialized)
             {
-                _hasInitialized = true;
+                HasInitialized = true;
 
                 if (decoratableMonoKernel != null)
-                {
                     decoratableMonoKernel.Initialize();
-                }
                 else
-                {
                     _initializableManager.Initialize();
-                }
+
+                OnAfterInitialize();
             }
         }
 
+        protected virtual void OnAfterInitialize() { }
+
         public virtual void Update()
         {
-            // Don't spam the log every frame if initialization fails and leaves it as null
             if (_tickableManager != null)
             {
                 if (decoratableMonoKernel != null)
-                {
                     decoratableMonoKernel.Update();
-                }
                 else
-                {
                     _tickableManager.Update();
-                }
             }
         }
 
         public virtual void FixedUpdate()
         {
-            // Don't spam the log every frame if initialization fails and leaves it as null
             if (_tickableManager != null)
             {
                 if (decoratableMonoKernel != null)
-                {
                     decoratableMonoKernel.FixedUpdate();
-                }
                 else
-                {
                     _tickableManager.FixedUpdate();
-                }
             }
         }
 
         public virtual void LateUpdate()
         {
-            // Don't spam the log every frame if initialization fails and leaves it as null
             if (_tickableManager != null)
             {
                 if (decoratableMonoKernel != null)
-                {
                     decoratableMonoKernel.LateUpdate();
-                }
                 else
-                {
                     _tickableManager.LateUpdate();
-                }
             }
         }
 
         public virtual void OnDestroy()
         {
-            // _disposablesManager can be null if we get destroyed before the Start event
             if (_disposablesManager != null)
             {
-                Assert.That(!_isDestroyed);
-                _isDestroyed = true;
+                Assert.That(!IsDestroyed);
+                IsDestroyed = true;
 
                 if (decoratableMonoKernel != null)
                 {
