@@ -34,6 +34,7 @@ namespace Infrastructure.EntryPoints
         public void Enter()
         {
             Transform player = InitializePlayer();
+
             InitializeCamera(player);
         }
 
