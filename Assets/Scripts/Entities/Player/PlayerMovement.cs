@@ -32,11 +32,10 @@ namespace Entities.Player
                 return;
 
             Vector3 targetForward = new Vector3(input.x, 0f, input.y);
-            Vector3 currentMoveDirection =
-                Vector3.Lerp(_transform.forward, targetForward, _playerPreferences.RotateSpeed * Time.deltaTime);
+            Vector3 moveDirection = Vector3.Lerp(_transform.forward, targetForward, _playerPreferences.RotateSpeed * Time.deltaTime);
 
-            _rigidbody.MoveRotation(Quaternion.LookRotation(currentMoveDirection));
-            _rigidbody.velocity = currentMoveDirection * _playerPreferences.Velocity;
+            _rigidbody.MoveRotation(Quaternion.LookRotation(moveDirection));
+            _rigidbody.velocity = moveDirection * _playerPreferences.Velocity;
         }
     }
 }
