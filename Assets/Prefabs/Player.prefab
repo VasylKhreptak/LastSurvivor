@@ -344,6 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1122368f030465fb54421667f5155e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerViewReferences:
+    _transform: {fileID: 3485891789809885235}
+    _rigidbody: {fileID: 6381290014196155938}
+    _animator: {fileID: 596578018800772039}
 --- !u!114 &2858162737676792441
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,10 +11,10 @@ namespace Entities.Player
         private readonly Rigidbody _rigidbody;
         private readonly PlayerPreferences _playerPreferences;
 
-        public PlayerMovementAnimation(Animator animator, Rigidbody rigidbody, IStaticDataService staticDataService)
+        public PlayerMovementAnimation(PlayerViewReferences viewReferences, IStaticDataService staticDataService)
         {
-            _animator = animator;
-            _rigidbody = rigidbody;
+            _animator = viewReferences.Animator;
+            _rigidbody = viewReferences.Rigidbody;
             _playerPreferences = staticDataService.Balance.PlayerPreferences;
         }
 

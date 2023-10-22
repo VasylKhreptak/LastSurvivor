@@ -13,11 +13,11 @@ namespace Entities.Player
         private readonly IMainInputService _mainInputService;
         private readonly PlayerPreferences _playerPreferences;
 
-        public PlayerMovement(Transform transform, Rigidbody rigidbody, IMainInputService mainInputService,
+        public PlayerMovement(PlayerViewReferences playerViewReferences, IMainInputService mainInputService,
             IStaticDataService staticDataService)
         {
-            _transform = transform;
-            _rigidbody = rigidbody;
+            _transform = playerViewReferences.Transform;
+            _rigidbody = playerViewReferences.Rigidbody;
             _mainInputService = mainInputService;
             _playerPreferences = staticDataService.Balance.PlayerPreferences;
         }

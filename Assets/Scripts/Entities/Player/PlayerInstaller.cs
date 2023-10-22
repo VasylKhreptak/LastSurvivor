@@ -6,14 +6,15 @@ namespace Entities.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
+        [SerializeField] private PlayerViewReferences _playerViewReferences;
+
         public override void InstallBindings()
         {
-            Container.Bind<ToggleableManager>().AsSingle();
-            Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
-            Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
-            Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
+            Container.Bind<PlayerViewReferences>().FromInstance(_playerViewReferences).AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
             Container.BindInterfacesTo<PlayerMovementAnimation>().AsSingle();
+
+            Container.Bind<ToggleableManager>().AsSingle();
         }
     }
 }
