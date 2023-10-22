@@ -1,5 +1,7 @@
 ﻿using Cinemachine;
 using Data.Scenes.Main;
+using Entities.Player;
+using Holders.Core;
 using Infrastructure.Data.Static;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -13,13 +15,16 @@ namespace Infrastructure.EntryPoints
         private IInstantiator _instantiator;
         private GamePrefabs _prefabs;
         private MainSceneData _mainSceneData;
+        private Holder<Player> _playerHolder;
 
         [Inject]
-        private void Constructor(IInstantiator instantiator, IStaticDataService staticDataService, MainSceneData mainSceneData)
+        private void Constructor(IInstantiator instantiator, IStaticDataService staticDataService, MainSceneData mainSceneData,
+            Holder<Player> playerHolder)
         {
             _instantiator = instantiator;
             _prefabs = staticDataService.Prefabs;
             _mainSceneData = mainSceneData;
+            _playerHolder = playerHolder;
         }
 
         #region MonoBehaviour
@@ -44,6 +49,9 @@ namespace Infrastructure.EntryPoints
             Transform playerSpawnTransform = _mainSceneData.PlayerSpawnTransform;
             player.position = playerSpawnTransform.position;
             player.rotation = playerSpawnTransform.rotation;
+            
+            _playerHolder.Value = player.GetComponent<Player>();
+            
             return player;
         }
 
