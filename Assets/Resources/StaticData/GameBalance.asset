@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: GameBalance
   m_EditorClassIdentifier: 
   _playerPreferences:
-    _velocity: 5
-    _movementForce: 80000
+    _velocity: 6
     _rotateSpeed: 40
     _speedParameterName: Speed

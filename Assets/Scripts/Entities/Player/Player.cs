@@ -8,7 +8,7 @@ namespace Entities.Player
         [Header("References")]
         [SerializeField] private Context _context;
 
-        public Context Context => _context;
+        public DiContainer Container => _context.Container;
 
         #region MonoBehaviour
 
