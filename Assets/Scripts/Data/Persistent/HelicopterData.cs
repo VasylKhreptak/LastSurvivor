@@ -1,4 +1,5 @@
 ﻿using Plugins.Banks;
+using UniRx;
 using UnityEngine;
 
 namespace Data.Persistent
@@ -8,6 +9,7 @@ namespace Data.Persistent
         public float IncomeMultiplier = 1f;
         public ClampedIntegerBank FuelTank = new ClampedIntegerBank(0, 5);
 
-        public bool CanTakeOff => Mathf.Approximately(FuelTank.FillAmount.Value, 1f);
+        public IReadOnlyReactiveProperty<bool> CanTakeOff =>
+            FuelTank.FillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 1f)).ToReactiveProperty();
     }
 }
