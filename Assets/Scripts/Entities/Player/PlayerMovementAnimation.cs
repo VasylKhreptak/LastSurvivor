@@ -5,13 +5,13 @@ using Zenject;
 
 namespace Entities.Player
 {
-    public class PlayerMoveAnimation : ITickable
+    public class PlayerMovementAnimation : ITickable
     {
         private readonly Animator _animator;
         private readonly Rigidbody _rigidbody;
         private readonly PlayerPreferences _playerPreferences;
 
-        public PlayerMoveAnimation(Animator animator, Rigidbody rigidbody, IStaticDataService staticDataService)
+        public PlayerMovementAnimation(Animator animator, Rigidbody rigidbody, IStaticDataService staticDataService)
         {
             _animator = animator;
             _rigidbody = rigidbody;
@@ -23,7 +23,7 @@ namespace Entities.Player
             Vector3 velocity = _rigidbody.velocity;
             Vector2 horizontalVelocity = new Vector2(velocity.x, velocity.z);
 
-            float animationSpeed = horizontalVelocity.magnitude / _playerPreferences.MovementSpeed;
+            float animationSpeed = horizontalVelocity.magnitude / _playerPreferences.Velocity;
             _animator.SetFloat(_playerPreferences.SpeedParameterName, animationSpeed);
         }
     }

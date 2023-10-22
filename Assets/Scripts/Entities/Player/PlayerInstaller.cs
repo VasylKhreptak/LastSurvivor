@@ -13,7 +13,7 @@ namespace Entities.Player
             Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
-            Container.BindInterfacesTo<PlayerMoveAnimation>().AsSingle();
+            Container.BindInterfacesTo<PlayerMovementAnimation>().AsSingle();
         }
     }
 }
