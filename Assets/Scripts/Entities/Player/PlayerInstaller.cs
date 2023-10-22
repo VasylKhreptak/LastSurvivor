@@ -13,7 +13,6 @@ namespace Entities.Player
             Container.Bind<PlayerViewReferences>().FromInstance(_playerViewReferences).AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
             Container.BindInterfacesTo<PlayerMovementAnimation>().AsSingle();
-
             Container.Bind<ToggleableManager>().AsSingle();
         }
     }
