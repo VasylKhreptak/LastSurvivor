@@ -1,18 +1,10 @@
-using Plugins.Banks.Data.Economy.Core;
+using Plugins.Banks.Core;
 using UnityEngine;
 
-namespace Plugins.Banks.Data.Economy
+namespace Plugins.Banks
 {
     public class IntegerBank : Bank<int>
     {
-        public IntegerBank() : base(0)
-        {
-        }
-
-        public IntegerBank(int value) : base(value)
-        {
-        }
-
         public override void Add(int value)
         {
             value = Mathf.Max(0, value);
@@ -24,7 +16,8 @@ namespace Plugins.Banks.Data.Economy
         {
             value = Mathf.Max(0, value);
 
-            if (value > _value.Value) return false;
+            if (value > _value.Value)
+                return false;
 
             _value.Value -= value;
 

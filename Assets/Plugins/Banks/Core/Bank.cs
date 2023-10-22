@@ -1,10 +1,12 @@
 using UniRx;
 
-namespace Plugins.Banks.Data.Economy.Core
+namespace Plugins.Banks.Core
 {
     public abstract class Bank<T>
     {
         protected readonly ReactiveProperty<T> _value;
+
+        public IReadOnlyReactiveProperty<T> Value => _value;
 
         public Bank()
         {
@@ -15,8 +17,6 @@ namespace Plugins.Banks.Data.Economy.Core
         {
             _value = new ReactiveProperty<T>(value);
         }
-
-        public IReadOnlyReactiveProperty<T> Value => _value;
 
         public abstract void Add(T value);
 
