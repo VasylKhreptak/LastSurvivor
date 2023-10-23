@@ -1,15 +1,13 @@
 ﻿using Infrastructure.Graphics.UI.Windows.Core;
 using UnityEngine;
-using Zenject;
 
 namespace UI.HelicopterInfo
 {
-    public class HelicopterInfoWindow : MonoBehaviour, IWindow
+    public class HelicopterInfoWindow : IWindow
     {
-        private GameObject _root;
+        private readonly GameObject _root;
 
-        [Inject]
-        private void Constructor(HelicopterInfoWindowReferences references)
+        public HelicopterInfoWindow(HelicopterInfoWindowReferences references)
         {
             _root = references.Root;
         }
