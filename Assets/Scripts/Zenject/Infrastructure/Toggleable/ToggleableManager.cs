@@ -3,7 +3,7 @@ using Zenject.Infrastructure.Toggleable.Core;
 
 namespace Zenject.Infrastructure.Toggleable
 {
-    public class ToggleableManager
+    public class ToggleableManager : IEnableable, IDisableable
     {
         [Inject(Optional = true, Source = InjectSources.Local)]
         private readonly List<IEnableable> _enableables = new List<IEnableable>();
