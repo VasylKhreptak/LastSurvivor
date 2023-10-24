@@ -12,9 +12,21 @@ namespace UI.HelicopterInfo
         {
             Container.Bind<HelicopterInfoWindowReferences>().AsSingle();
             Container.Bind<HelicopterInfoWindow>().AsSingle();
-            Container.BindInterfacesTo<HelicopterIncomeMultiplierText>().AsSingle().WithArguments(_references.IncomeMultiplierText);
-            
+
+            BindHelicopterIncomeMultiplierText();
+            BindHelicopterFuelTankText();
+
             Container.Bind<ToggleableManager>().AsSingle();
+        }
+
+        private void BindHelicopterIncomeMultiplierText()
+        {
+            Container.BindInterfacesTo<HelicopterIncomeMultiplierText>().AsSingle().WithArguments(_references.IncomeMultiplierText);
+        }
+
+        private void BindHelicopterFuelTankText()
+        {
+            Container.BindInterfacesTo<HelicopterFuelTankText>().AsSingle().WithArguments(_references.FuelTankText);
         }
     }
 }

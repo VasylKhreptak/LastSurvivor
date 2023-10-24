@@ -10,6 +10,7 @@ namespace UI.HelicopterInfo
     {
         [SerializeField] private GameObject _root;
         [SerializeField] private TMP_Text _incomeMultiplierText;
+        [SerializeField] private GameObject _fuelTankTextRoot;
         [SerializeField] private TMP_Text _fuelTankText;
         [SerializeField] private Button _playButton;
 

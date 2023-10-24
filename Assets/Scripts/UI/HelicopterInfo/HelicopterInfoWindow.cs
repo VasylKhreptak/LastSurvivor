@@ -14,14 +14,8 @@ namespace UI.HelicopterInfo
 
         public bool IsActive => _root.activeSelf;
 
-        public void Show()
-        {
-            _root.SetActive(true);
-        }
+        public void Show() => _root.SetActive(true);
 
-        public void Hide()
-        {
-            _root.SetActive(false);
-        }
+        public void Hide() => _root.SetActive(false);
     }
 }

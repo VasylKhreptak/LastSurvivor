@@ -2,10 +2,11 @@
 using Data.Persistent;
 using TMPro;
 using UniRx;
+using Zenject.Infrastructure.Toggleable.Core;
 
 namespace UI.HelicopterInfo
 {
-    public class HelicopterFuelTankText
+    public class HelicopterFuelTankText : IEnableable, IDisableable
     {
         private IDisposable _subscription;
 
