@@ -23,7 +23,6 @@ using Infrastructure.StateMachine.Game.Factory;
 using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
-using Infrastructure.StateMachine.Main.States.Core;
 using Infrastructure.Transition;
 using Infrastructure.Transition.Core;
 using UnityEngine;

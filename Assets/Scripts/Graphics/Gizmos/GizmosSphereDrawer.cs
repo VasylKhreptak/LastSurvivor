@@ -1,4 +1,5 @@
 ﻿using Plugins.Animations.Extensions;
+using UnityEditor;
 using UnityEngine;
 
 namespace Graphics.Gizmos
@@ -7,14 +8,14 @@ namespace Graphics.Gizmos
     {
         [Header("Preferences")]
         [SerializeField] private Color _color = Color.red.WithAlpha(0.5f);
-        [SerializeField, Min(0)] private float _range = 0.2f;
+        [SerializeField] [Min(0)] private float _range = 0.2f;
         [SerializeField] private bool _drawOnlyWhenSelected = true;
 
 #if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {
-            if (_drawOnlyWhenSelected && UnityEditor.Selection.Contains(gameObject) == false)
+            if (_drawOnlyWhenSelected && Selection.Contains(gameObject) == false)
                 return;
 
             UnityEngine.Gizmos.color = _color;
