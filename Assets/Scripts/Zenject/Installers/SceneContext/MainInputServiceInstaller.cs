@@ -7,11 +7,21 @@ namespace Zenject.Installers.SceneContext
     public class MainInputServiceInstaller : MonoInstaller
     {
         [Header("References")]
-        [SerializeField] private MainInputService _mainInputService;
+        [SerializeField] private Joystick _joystick;
+
+        #region MonoBehaviour
+
+        private void OnValidate()
+        {
+            _joystick ??= FindObjectOfType<Joystick>();
+        }
+
+        #endregion
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_mainInputService as IMainInputService).AsSingle();
+            IMainInputService inputService = new MainInputService(_joystick);
+            Container.BindInstance(inputService).AsSingle();
         }
     }
 }

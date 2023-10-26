@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 namespace Infrastructure.Services.Input.Main.Core
 {
@@ -9,6 +10,8 @@ namespace Infrastructure.Services.Input.Main.Core
         public float Vertical { get; }
 
         public Vector2 Direction { get; }
+
+        public IReadOnlyReactiveProperty<bool> IsInteracting { get; }
 
         public void Enable();
 

@@ -1,5 +1,4 @@
 ﻿using Cinemachine;
-using Data.Scenes.Main;
 using Infrastructure.Data.Static;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -12,14 +11,12 @@ namespace Infrastructure.EntryPoints
     {
         private DiContainer _container;
         private GamePrefabs _prefabs;
-        private MainSceneData _mainSceneData;
 
         [Inject]
-        private void Constructor(DiContainer container, IStaticDataService staticDataService, MainSceneData mainSceneData)
+        private void Constructor(DiContainer container, IStaticDataService staticDataService)
         {
             _container = container;
             _prefabs = staticDataService.Prefabs;
-            _mainSceneData = mainSceneData;
         }
 
         #region MonoBehaviour
@@ -41,9 +38,6 @@ namespace Infrastructure.EntryPoints
         private Transform InitializePlayer()
         {
             Transform player = _container.InstantiatePrefab(_prefabs.Player).transform;
-            Transform playerSpawnTransform = _mainSceneData.PlayerSpawnTransform;
-            player.position = playerSpawnTransform.position;
-            player.rotation = playerSpawnTransform.rotation;
             return player;
         }
 

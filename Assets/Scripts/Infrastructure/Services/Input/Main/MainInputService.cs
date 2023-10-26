@@ -1,21 +1,17 @@
 ﻿using Infrastructure.Services.Input.Main.Core;
+using UniRx;
 using UnityEngine;
 
 namespace Infrastructure.Services.Input.Main
 {
-    public class MainInputService : MonoBehaviour, IMainInputService
+    public class MainInputService : IMainInputService
     {
-        [Header("References")]
-        [SerializeField] private Joystick _joystick;
+        private readonly Joystick _joystick;
 
-        #region MonoBehaviour
-
-        private void OnValidate()
+        public MainInputService(Joystick joystick)
         {
-            _joystick ??= GetComponentInChildren<Joystick>(true);
+            _joystick = joystick;
         }
-
-        #endregion
 
         public float Horizontal => _joystick.Horizontal;
 
@@ -23,14 +19,10 @@ namespace Infrastructure.Services.Input.Main
 
         public Vector2 Direction => _joystick.Direction;
 
-        public void Enable()
-        {
-            gameObject.SetActive(false);
-        }
+        public IReadOnlyReactiveProperty<bool> IsInteracting => _joystick.IsPressed;
 
-        public void Disable()
-        {
-            gameObject.SetActive(true);
-        }
+        public void Enable() => _joystick.gameObject.SetActive(false);
+
+        public void Disable() => _joystick.gameObject.SetActive(true);
     }
 }

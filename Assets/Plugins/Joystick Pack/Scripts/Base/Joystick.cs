@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public float Horizontal => (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x;
     public float Vertical => (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y;
-    public Vector2 Direction => new(Horizontal, Vertical);
+    public Vector2 Direction => new Vector2(Horizontal, Vertical);
 
     public float HandleRange
     {
@@ -19,9 +20,23 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         set { deadZone = Mathf.Abs(value); }
     }
 
-    public AxisOptions AxisOptions { get { return AxisOptions; } set { axisOptions = value; } }
-    public bool SnapX { get { return snapX; } set { snapX = value; } }
-    public bool SnapY { get { return snapY; } set { snapY = value; } }
+    public AxisOptions AxisOptions
+    {
+        get { return AxisOptions; }
+        set { axisOptions = value; }
+    }
+
+    public bool SnapX
+    {
+        get { return snapX; }
+        set { snapX = value; }
+    }
+
+    public bool SnapY
+    {
+        get { return snapY; }
+        set { snapY = value; }
+    }
 
     [SerializeField] private float handleRange = 1;
     [SerializeField] private float deadZone = 0;
@@ -38,12 +53,17 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     private Vector2 input = Vector2.zero;
 
+    private BoolReactiveProperty _isPressed = new BoolReactiveProperty();
+
+    public IReadOnlyReactiveProperty<bool> IsPressed => _isPressed;
+
     #region MonoBehaviour
 
     private void OnDisable()
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
+        _isPressed.Value = false;
     }
 
     #endregion
@@ -68,6 +88,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
+
+        _isPressed.Value = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -125,6 +147,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
                 else
                     return (value > 0) ? 1 : -1;
             }
+
             return value;
         }
         else
@@ -134,6 +157,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             if (value < 0)
                 return -1;
         }
+
         return 0;
     }
 
@@ -141,6 +165,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
+
+        _isPressed.Value = false;
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
@@ -151,6 +177,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             Vector2 pivotOffset = baseRect.pivot * baseRect.sizeDelta;
             return localPoint - (background.anchorMax * baseRect.sizeDelta) + pivotOffset;
         }
+
         return Vector2.zero;
     }
 }
