@@ -12,8 +12,7 @@ namespace Infrastructure.Data.Static
         [SerializeField] private string _tutorialScene = "TutorialScene";
 
         [Header("Log Preferences")]
-        [SerializeField]
-        private LogType _editorLogType = LogType.Info;
+        [SerializeField] private LogType _editorLogType = LogType.Info;
         [SerializeField] private LogType _buildLogType = LogType.Info;
 
         public string BootstrapScene => _bootstrapScene;

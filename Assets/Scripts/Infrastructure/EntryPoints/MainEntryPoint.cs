@@ -34,8 +34,8 @@ namespace Infrastructure.EntryPoints
         public void Enter()
         {
             Transform player = InitializePlayer();
-
             InitializeCamera(player);
+            InitializePlatforms();
         }
 
         private Transform InitializePlayer()
@@ -53,6 +53,19 @@ namespace Infrastructure.EntryPoints
             CinemachineVirtualCamera virtualCamera = cameraRoot.GetComponentInChildren<CinemachineVirtualCamera>(true);
             virtualCamera.Follow = target;
             virtualCamera.LookAt = target;
+
+            Camera camera = cameraRoot.GetComponentInChildren<Camera>(true);
+            _container.BindInstance(camera).AsSingle();
+        }
+
+        private void InitializePlatforms()
+        {
+            InitializeHelicopterPlatform();
+        }
+
+        private void InitializeHelicopterPlatform()
+        {
+            _container.InstantiatePrefab(_prefabs.HelicopterPlatform);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace TransformUtilities.Looker
 {
     public class TransformLooker : ITickable
     {
-        public readonly TransformLookerPreferences Preferences;
+        private readonly TransformLookerPreferences Preferences;
 
         public TransformLooker(TransformLookerPreferences preferences)
         {

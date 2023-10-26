@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2010385809691140896, guid: 42bb4a6d065198a4e92f80fb413af2c0, type: 3}
   _camera: {fileID: 4247228223840663756, guid: ccf58716d7274ca4b9a890d9a655633b, type: 3}
+  _helicopterPlatform: {fileID: 6399390264546074170, guid: f07802b9c24abf6478910d556f16dc21,
+    type: 3}

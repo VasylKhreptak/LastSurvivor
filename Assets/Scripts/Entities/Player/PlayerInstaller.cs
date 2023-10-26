@@ -6,6 +6,7 @@ namespace Entities.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
+        [Header("References")]
         [SerializeField] private PlayerViewReferences _playerViewReferences;
 
         public override void InstallBindings()

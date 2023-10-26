@@ -8,7 +8,9 @@ namespace Infrastructure.Data.Static
     {
         [Header("Balance")]
         [SerializeField] private PlayerPreferences _playerPreferences;
+        [SerializeField] private TransformLookerPreferences _transformLookerPreferences;
 
         public PlayerPreferences PlayerPreferences => _playerPreferences;
+        public TransformLookerPreferences TransformLookerPreferences => _transformLookerPreferences;
     }
 }
