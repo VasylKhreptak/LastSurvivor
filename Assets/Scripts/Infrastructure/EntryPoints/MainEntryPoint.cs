@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using Entities.Player;
 using Infrastructure.Data.Static;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -30,15 +31,16 @@ namespace Infrastructure.EntryPoints
 
         public void Enter()
         {
-            Transform player = InitializePlayer();
-            InitializeCamera(player);
+            Transform playerTransform = InitializePlayer();
+            InitializeCamera(playerTransform);
             InitializePlatforms();
         }
 
         private Transform InitializePlayer()
         {
-            Transform player = _container.InstantiatePrefab(_prefabs.Player).transform;
-            return player;
+            GameObject playerObject = _container.InstantiatePrefab(_prefabs.Player);
+            _container.Bind<Player>().FromComponentOn(playerObject).AsSingle();
+            return playerObject.transform;
         }
 
         private void InitializeCamera(Transform target)
