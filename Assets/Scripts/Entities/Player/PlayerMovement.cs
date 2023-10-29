@@ -1,6 +1,5 @@
 ﻿using Data.Static.Balance;
 using Infrastructure.Services.Input.Main.Core;
-using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
 using Zenject;
 
@@ -9,33 +8,69 @@ namespace Entities.Player
     public class PlayerMovement : ITickable
     {
         private readonly Transform _transform;
-        private readonly Rigidbody _rigidbody;
-        private readonly IMainInputService _mainInputService;
+        private readonly Animator _animator;
+        private readonly CharacterController _characterController;
         private readonly PlayerPreferences _playerPreferences;
+        private readonly IMainInputService _inputService;
 
-        public PlayerMovement(PlayerViewReferences playerViewReferences, IMainInputService mainInputService,
-            IStaticDataService staticDataService)
+        public PlayerMovement(Transform transform, Animator animator, CharacterController characterController,
+            PlayerPreferences playerPreferences, IMainInputService mainInputService)
         {
-            _transform = playerViewReferences.Transform;
-            _rigidbody = playerViewReferences.Rigidbody;
-            _mainInputService = mainInputService;
-            _playerPreferences = staticDataService.Balance.PlayerPreferences;
+            _transform = transform;
+            _animator = animator;
+            _characterController = characterController;
+            _playerPreferences = playerPreferences;
+            _inputService = mainInputService;
         }
 
-        public void Tick() => HandleInput();
+        private Vector3 _currentDirection;
+        private Vector3 _targetDirection;
+        private Vector3 _intermediateDirection;
+        private Quaternion _targetRotation;
 
-        private void HandleInput()
+        private float _joystickMagnitude;
+        private float _speed;
+
+        private Vector3 _gravityAffectedVelocity;
+
+        public void Tick()
         {
-            Vector2 input = _mainInputService.Direction;
+            HandleRotation();
+            HandleMovement();
+            HandleGravity();
+        }
 
-            if (Mathf.Approximately(input.magnitude, 0f))
+        private void HandleRotation()
+        {
+            _currentDirection = _transform.forward;
+            _targetDirection = new Vector3(_inputService.Horizontal, 0, _inputService.Vertical);
+
+            if (_targetDirection == Vector3.zero)
                 return;
 
-            Vector3 targetForward = new Vector3(input.x, 0f, input.y);
-            Vector3 moveDirection = Vector3.Lerp(_transform.forward, targetForward, _playerPreferences.RotateSpeed * Time.deltaTime);
+            _intermediateDirection =
+                Vector3.Lerp(_currentDirection, _targetDirection, _playerPreferences.RotateSpeed * Time.deltaTime);
+            _targetRotation = Quaternion.LookRotation(_intermediateDirection);
+            _transform.rotation = _targetRotation;
+        }
 
-            _rigidbody.MoveRotation(Quaternion.LookRotation(moveDirection));
-            _rigidbody.velocity = moveDirection * _playerPreferences.Velocity;
+        private void HandleMovement()
+        {
+            _joystickMagnitude = _inputService.Direction.magnitude;
+            _speed = Mathf.Lerp(_speed, _joystickMagnitude, _playerPreferences.Acceleration * Time.deltaTime);
+            _animator.SetFloat(_playerPreferences.SpeedParameterName, _speed);
+        }
+
+        private void HandleGravity()
+        {
+            if (_characterController.isGrounded)
+            {
+                _gravityAffectedVelocity = Vector3.zero;
+                return;
+            }
+
+            _gravityAffectedVelocity += Physics.gravity * _playerPreferences.Gravity * Time.deltaTime;
+            _characterController.Move(_gravityAffectedVelocity);
         }
     }
 }

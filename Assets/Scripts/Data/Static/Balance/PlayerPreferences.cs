@@ -7,12 +7,14 @@ namespace Data.Static.Balance
     public class PlayerPreferences
     {
         [Header("Preferences")]
-        [SerializeField] private float _velocity = 5f;
+        [SerializeField] private float _acceleration = 1f;
         [SerializeField] private float _rotateSpeed = 1f;
+        [SerializeField] private float _gravity = 1f;
         [SerializeField] private string _speedParameterName = "Speed";
 
-        public float Velocity => _velocity;
+        public float Acceleration => _acceleration;
         public float RotateSpeed => _rotateSpeed;
+        public float Gravity => _gravity;
         public string SpeedParameterName => _speedParameterName;
     }
 }

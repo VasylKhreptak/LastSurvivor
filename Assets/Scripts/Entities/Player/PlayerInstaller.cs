@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Data.Static.Balance;
+using Infrastructure.Services.StaticData.Core;
+using UnityEngine;
 using Zenject;
 using Zenject.Infrastructure.Toggleable;
 
@@ -6,14 +8,21 @@ namespace Entities.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [Header("References")]
-        [SerializeField] private PlayerViewReferences _playerViewReferences;
+        private IStaticDataService _staticDataService;
+
+        [Inject]
+        private void Constructor(IStaticDataService staticDataService)
+        {
+            _staticDataService = staticDataService;
+        }
 
         public override void InstallBindings()
         {
-            Container.Bind<PlayerViewReferences>().FromInstance(_playerViewReferences).AsSingle();
+            Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
+            Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
+            Container.Bind<CharacterController>().FromComponentOnRoot().AsSingle();
+            Container.Bind<PlayerPreferences>().FromInstance(_staticDataService.Balance.PlayerPreferences).AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
-            Container.BindInterfacesTo<PlayerMovementAnimation>().AsSingle();
             Container.Bind<ToggleableManager>().AsSingle();
         }
     }
