@@ -8,7 +8,9 @@ namespace Data.Static.Balance
     {
         [Header("Preferences")]
         [SerializeField] private float _defaultLookSpeed = 1f;
+        [SerializeField] private Vector3 _rotationOffsetForUI = new Vector3(0f, 180f, 0f);
 
         public float DefaultLookSpeed => _defaultLookSpeed;
+        public Vector3 RotationOffsetForUI => _rotationOffsetForUI;
     }
 }

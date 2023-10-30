@@ -5,31 +5,31 @@ namespace TransformUtilities.Looker
 {
     public class TransformLooker : ITickable
     {
-        private readonly Transform _source;
-        private readonly Transform _target;
-        private readonly Vector3 _upwards;
-        private readonly float _rotationSpeed;
+        private readonly TransformLookerPreferences _preferences;
 
-        public TransformLooker(Transform source, Transform target, Vector3 upwards, float rotationSpeed)
+        public TransformLooker(TransformLookerPreferences preferences)
         {
-            _source = source;
-            _target = target;
-            _upwards = upwards;
-            _rotationSpeed = rotationSpeed;
+            _preferences = preferences;
         }
+
+        private Vector3 _direction;
+        private Quaternion _currentRotation;
+        private Quaternion _targetRotation;
+        private Quaternion _intermediateRotation;
 
         public void Tick() => LookStep();
 
         private void LookStep()
         {
-            if (_source == null || _target == null)
+            if (_preferences.Source == null || _preferences.Target == null)
                 return;
 
-            Vector3 direction = _target.position - _source.position;
+            _direction = _preferences.Target.position - _preferences.Source.position;
 
-            Quaternion targetRotation = Quaternion.LookRotation(direction, _upwards);
-
-            _source.rotation = Quaternion.Lerp(_source.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            _currentRotation = _preferences.Source.rotation;
+            _targetRotation = Quaternion.LookRotation(_direction, _preferences.Upwards) * Quaternion.Euler(_preferences.Offset);
+            _intermediateRotation = Quaternion.Lerp(_currentRotation, _targetRotation, _preferences.LookSpeed * Time.deltaTime);
+            _preferences.Source.rotation = _intermediateRotation;
         }
     }
 }

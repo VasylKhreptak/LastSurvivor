@@ -18,4 +18,5 @@ MonoBehaviour:
     _gravity: 1
     _speedParameterName: Speed
   _transformLookerPreferences:
-    _defaultLookSpeed: 1
+    _defaultLookSpeed: 15
+    _rotationOffsetForUI: {x: 0, y: 180, z: 0}
