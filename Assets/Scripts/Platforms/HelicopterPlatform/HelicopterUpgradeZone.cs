@@ -12,9 +12,6 @@ namespace Platforms.HelicopterPlatform
 {
     public class HelicopterUpgradeZone : IInitializable, IDisposable
     {
-        private readonly CompositeDisposable _triggerSubscriptions = new CompositeDisposable();
-        private IDisposable _inputInteractionSubscription;
-
         private readonly Collider _trigger;
         private readonly IntegerBank _gearsBank;
         private readonly IMainInputService _inputService;
@@ -26,6 +23,9 @@ namespace Platforms.HelicopterPlatform
             _gearsBank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
             _inputService = inputService;
         }
+
+        private readonly CompositeDisposable _triggerSubscriptions = new CompositeDisposable();
+        private IDisposable _inputInteractionSubscription;
 
         public void Initialize() => StartObserving();
 
