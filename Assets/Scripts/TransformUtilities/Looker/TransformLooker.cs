@@ -5,26 +5,31 @@ namespace TransformUtilities.Looker
 {
     public class TransformLooker : ITickable
     {
-        private readonly TransformLookerPreferences Preferences;
+        private readonly Transform _source;
+        private readonly Transform _target;
+        private readonly Vector3 _upwards;
+        private readonly float _rotationSpeed;
 
-        public TransformLooker(TransformLookerPreferences preferences)
+        public TransformLooker(Transform source, Transform target, Vector3 upwards, float rotationSpeed)
         {
-            Preferences = preferences;
+            _source = source;
+            _target = target;
+            _upwards = upwards;
+            _rotationSpeed = rotationSpeed;
         }
 
         public void Tick() => LookStep();
 
         private void LookStep()
         {
-            if (Preferences.Source == null || Preferences.Target == null)
+            if (_source == null || _target == null)
                 return;
 
-            Vector3 direction = Preferences.Target.position - Preferences.Source.position;
+            Vector3 direction = _target.position - _source.position;
 
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Preferences.Upwards);
+            Quaternion targetRotation = Quaternion.LookRotation(direction, _upwards);
 
-            Preferences.Source.rotation =
-                Quaternion.Lerp(Preferences.Source.rotation, targetRotation, Preferences.RotationSpeed * Time.deltaTime);
+            _source.rotation = Quaternion.Lerp(_source.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
     }
 }
