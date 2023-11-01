@@ -1,4 +1,5 @@
 ﻿using Data.Static.Balance;
+using Data.Static.Balance.Animations.Core;
 using UnityEngine;
 
 namespace Infrastructure.Data.Static
@@ -8,9 +9,9 @@ namespace Infrastructure.Data.Static
     {
         [Header("Balance")]
         [SerializeField] private PlayerPreferences _playerPreferences;
-        [SerializeField] private TransformLookerPreferences _transformLookerPreferences;
+        [SerializeField] private AnimationPreferences _animationPreferences;
 
         public PlayerPreferences PlayerPreferences => _playerPreferences;
-        public TransformLookerPreferences TransformLookerPreferences => _transformLookerPreferences;
+        public AnimationPreferences AnimationPreferences => _animationPreferences;
     }
 }

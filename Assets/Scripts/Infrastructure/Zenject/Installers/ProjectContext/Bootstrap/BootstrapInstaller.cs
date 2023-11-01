@@ -103,6 +103,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<TryLoadTutorialState>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
+            Container.Bind<LoadAppropriateLevelState>().AsSingle();
         }
 
         private void BootstrapGame() => Container.Resolve<IStateMachine<IGameState>>().Enter<BootstrapState>();

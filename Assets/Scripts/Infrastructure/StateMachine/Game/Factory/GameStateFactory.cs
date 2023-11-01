@@ -25,7 +25,8 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(BootstrapAnalyticsState)] = Get<BootstrapAnalyticsState>,
                 [typeof(TryLoadTutorialState)] = Get<TryLoadTutorialState>,
                 [typeof(LoadLevelState)] = Get<LoadLevelState>,
-                [typeof(GameLoopState)] = Get<GameLoopState>
+                [typeof(GameLoopState)] = Get<GameLoopState>,
+                [typeof(LoadAppropriateLevelState)] = Get<LoadAppropriateLevelState>
             };
 
         private IBaseState Get<TState>() where TState : IBaseState

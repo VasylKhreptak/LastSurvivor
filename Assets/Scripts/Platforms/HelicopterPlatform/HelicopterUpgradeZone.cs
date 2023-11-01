@@ -78,13 +78,9 @@ namespace Platforms.HelicopterPlatform
             _inputInteractionSubscription = _inputService.IsInteracting.Subscribe(isInteracting =>
             {
                 if (isInteracting)
-                {
                     StopTransferringGears();
-                }
                 else
-                {
                     StartTransferringGears();
-                }
             });
         }
 

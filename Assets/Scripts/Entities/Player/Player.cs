@@ -5,14 +5,12 @@ namespace Entities.Player
 {
     public class Player : MonoBehaviour
     {
-        private Transform _transform;
-
         [Inject]
         private void Constructor(Transform transform)
         {
-            _transform = transform;
+            Transform = transform;
         }
 
-        public Transform Transform => _transform;
+        public Transform Transform { get; private set; }
     }
 }
