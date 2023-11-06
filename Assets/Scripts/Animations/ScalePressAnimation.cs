@@ -28,7 +28,7 @@ namespace Animations
 
         private void OnDisable()
         {
-            KillAnimation();
+            Stop();
             ResetScale();
         }
 
@@ -40,7 +40,7 @@ namespace Animations
 
         private void OnPointerDown()
         {
-            KillAnimation();
+            Stop();
 
             _tween = _transform
                 .DOScale(_preferences.PressedScale, _preferences.PressDuration)
@@ -50,7 +50,7 @@ namespace Animations
 
         private void OnPointerUp()
         {
-            KillAnimation();
+            Stop();
 
             _tween = _transform
                 .DOScale(_preferences.ReleasedScale, _preferences.ReleaseDuration)
@@ -58,7 +58,7 @@ namespace Animations
                 .Play();
         }
 
-        private void KillAnimation() => _tween?.Kill();
+        public void Stop() => _tween?.Kill();
 
         private void ResetScale() => _transform.localScale = _preferences.ReleasedScale;
     }
