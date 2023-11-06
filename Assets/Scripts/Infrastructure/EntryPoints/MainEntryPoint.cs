@@ -57,11 +57,11 @@ namespace Infrastructure.EntryPoints
         private void InitializePlatforms()
         {
             InitializeHelicopterPlatform();
+            InitializeOilPlatform();
         }
 
-        private void InitializeHelicopterPlatform()
-        {
-            _container.InstantiatePrefab(_prefabs.HelicopterPlatform);
-        }
+        private void InitializeHelicopterPlatform() => _container.InstantiatePrefab(_prefabs.HelicopterPlatform);
+
+        private void InitializeOilPlatform() => _container.InstantiatePrefab(_prefabs.OilPlatform);
     }
 }

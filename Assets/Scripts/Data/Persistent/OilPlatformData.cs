@@ -1,10 +1,11 @@
 ﻿using Plugins.Banks;
+using UniRx;
 
 namespace Data.Persistent
 {
-    public class HelicopterPlatformData
+    public class OilPlatformData
     {
-        public readonly HelicopterData HelicopterData = new HelicopterData();
+        public readonly FloatReactiveProperty ProduceDuration = new FloatReactiveProperty(1f);
         public readonly ClampedIntegerBank UpgradeContainer = new ClampedIntegerBank(0, 100);
     }
 }

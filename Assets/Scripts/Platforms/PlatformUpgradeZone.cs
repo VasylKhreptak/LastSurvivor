@@ -6,7 +6,7 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace Platforms.HelicopterPlatform
+namespace Platforms
 {
     public abstract class PlatformUpgradeZone : MonoBehaviour
     {
