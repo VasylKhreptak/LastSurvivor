@@ -1,0 +1,24 @@
+{
+    "name": "Flexalon.Editor",
+    "rootNamespace": "",
+    "references": [
+        "Flexalon"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.modules.physics",
+            "expression": "",
+            "define": "UNITY_PHYSICS"
+        }
+    ],
+    "noEngineReferences": false
+}
