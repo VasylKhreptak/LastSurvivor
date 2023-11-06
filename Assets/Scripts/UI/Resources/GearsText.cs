@@ -4,16 +4,15 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using Zenject;
-using Resources = Data.Persistent.Resources;
 
-namespace UI.GameResources
+namespace UI.Resources
 {
-    public class MoneyText : MonoBehaviour
+    public class GearsText : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private TMP_Text _tmp;
 
-        private Resources _resources;
+        private Data.Persistent.Resources _resources;
 
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService)
@@ -33,7 +32,7 @@ namespace UI.GameResources
 
         #endregion
 
-        private void StartObserving() => _subscription = _resources.Money.Value.Subscribe(OnValueChanged);
+        private void StartObserving() => _subscription = _resources.Gears.Value.Subscribe(OnValueChanged);
 
         private void StopObserving() => _subscription?.Dispose();
 
