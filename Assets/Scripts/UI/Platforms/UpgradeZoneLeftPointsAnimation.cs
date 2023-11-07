@@ -3,7 +3,7 @@ using Plugins.Animations.Extensions;
 using UnityEngine;
 using Zenject;
 
-namespace UI.Platforms.HelicopterPlatform
+namespace UI.Platforms
 {
     public class UpgradeZoneLeftPointsAnimation : MonoBehaviour
     {

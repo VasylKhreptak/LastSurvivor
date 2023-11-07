@@ -1,5 +1,5 @@
 ﻿using System;
-using Infrastructure.Services.PersistentData.Core;
+using Data.Persistent;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -18,9 +18,9 @@ namespace UI.Platforms.HelicopterPlatform
         private IReadOnlyReactiveProperty<float> _incomeMultiplier;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService)
+        private void Constructor(HelicopterData helicopterData)
         {
-            _incomeMultiplier = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData.HelicopterData.IncomeMultiplier;
+            _incomeMultiplier = helicopterData.IncomeMultiplier;
         }
 
         private IDisposable _subscription;

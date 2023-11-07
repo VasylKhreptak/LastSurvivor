@@ -1,5 +1,4 @@
 ﻿using Data.Persistent;
-using Infrastructure.Services.PersistentData.Core;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -19,12 +18,10 @@ namespace UI.Platforms.HelicopterPlatform
         private IReadOnlyReactiveProperty<int> _maxTankLevel;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService)
+        private void Constructor(HelicopterData helicopterDta)
         {
-            HelicopterData helicopterData = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData.HelicopterData;
-
-            _currentTankLevel = helicopterData.FuelTank.Value;
-            _maxTankLevel = helicopterData.FuelTank.MaxValue;
+            _currentTankLevel = helicopterDta.FuelTank.Value;
+            _maxTankLevel = helicopterDta.FuelTank.MaxValue;
         }
 
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();

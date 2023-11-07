@@ -1,7 +1,6 @@
 ﻿using System;
 using Animations;
 using Data.Persistent;
-using Infrastructure.Services.PersistentData.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Sirenix.OdinInspector;
@@ -24,9 +23,9 @@ namespace UI.Platforms.HelicopterPlatform
         private HelicopterData _helicopterData;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService)
+        private void Constructor(HelicopterData helicopterData)
         {
-            _helicopterData = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData.HelicopterData;
+            _helicopterData = helicopterData;
         }
 
         private IAnimation _expandAnimation;
