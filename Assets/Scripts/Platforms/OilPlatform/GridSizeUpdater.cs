@@ -42,8 +42,8 @@ namespace Platforms.OilPlatform
 
         private void OnAnyGridSizeChanged()
         {
-            _grid.Rows = _platformData.GridRows.Value;
-            _grid.Columns = _platformData.GridColumns.Value;
+            _grid.Rows = (uint)_platformData.GridRows.Value;
+            _grid.Columns = (uint)_platformData.GridColumns.Value;
             _grid.ForceUpdate();
         }
     }

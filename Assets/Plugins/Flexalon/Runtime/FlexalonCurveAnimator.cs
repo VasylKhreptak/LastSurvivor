@@ -14,6 +14,10 @@ namespace Flexalon
 
         [SerializeField]
         private AnimationCurve _curve = AnimationCurve.Linear(0, 0, 1, 1);
+
+        [SerializeField]
+        private float _interpolationSpeed = 1;
+
         /// <summary> The curve to apply. Should begin at 0 and end at 1. </summary>
         public AnimationCurve Curve
         {
@@ -23,6 +27,7 @@ namespace Flexalon
 
         [SerializeField]
         private bool _animatePosition = true;
+
         /// <summary> Determines if the position should be animated. </summary>
         public bool AnimatePosition
         {
@@ -32,6 +37,7 @@ namespace Flexalon
 
         [SerializeField]
         private bool _animateRotation = true;
+
         /// <summary> Determines if the rotation should be animated. </summary>
         public bool AnimateRotation
         {
@@ -41,6 +47,7 @@ namespace Flexalon
 
         [SerializeField]
         private bool _animateScale = true;
+
         /// <summary> Determines if the scale should be animated. </summary>
         public bool AnimateScale
         {
@@ -100,7 +107,7 @@ namespace Flexalon
                 _positionTime = 0;
             }
 
-            _positionTime += Time.smoothDeltaTime;
+            _positionTime += Time.deltaTime * _interpolationSpeed;
 
             if (!_animatePosition || _positionTime > _curve.keys[_curve.keys.Length - 1].time)
             {
@@ -126,7 +133,7 @@ namespace Flexalon
                 _rotationTime = 0;
             }
 
-            _rotationTime += Time.smoothDeltaTime;
+            _rotationTime += Time.deltaTime * _interpolationSpeed;
 
             if (!_animateRotation || _rotationTime > _curve.keys[_curve.keys.Length - 1].time)
             {
@@ -152,7 +159,7 @@ namespace Flexalon
                 _scaleTime = 0;
             }
 
-            _scaleTime += Time.smoothDeltaTime;
+            _scaleTime += Time.deltaTime * _interpolationSpeed;
 
             if (!_animateScale || _scaleTime > _curve.keys[_curve.keys.Length - 1].time)
             {

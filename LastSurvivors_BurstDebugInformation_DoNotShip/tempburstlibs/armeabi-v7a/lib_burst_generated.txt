@@ -17,6 +17,7 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Burst;
 --assembly-defines=StompyRobot.SRDebugger;
+--assembly-defines=Flexalon;
 --assembly-defines=Zenject;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.VisualScripting.Flow;
@@ -24,6 +25,7 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=UniRx;
 --assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.RenderPipelines.Core.ShaderLibrary;
+--assembly-defines=Flexalon.Samples;
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.Splines;
 --assembly-defines=Unity.TextMeshPro;
@@ -88,6 +90,7 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Burst;
 --assembly-defines=StompyRobot.SRDebugger;
+--assembly-defines=Flexalon;
 --assembly-defines=Zenject;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.VisualScripting.Flow;
@@ -95,6 +98,7 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=UniRx;
 --assembly-defines=Unity.Timeline;
 --assembly-defines=Unity.RenderPipelines.Core.ShaderLibrary;
+--assembly-defines=Flexalon.Samples;
 --assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.Splines;
 --assembly-defines=Unity.TextMeshPro;
