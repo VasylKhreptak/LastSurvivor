@@ -13,10 +13,15 @@ namespace Infrastructure.Data.Static
         [SerializeField] private GameObject _helicopterPlatform;
         [SerializeField] private GameObject _oilPlatform;
 
+        [Header("Other")]
+        [SerializeField] private GameObject _fuelBarrel;
+
         public GameObject Player => _player;
         public GameObject Camera => _camera;
 
         public GameObject HelicopterPlatform => _helicopterPlatform;
         public GameObject OilPlatform => _oilPlatform;
+        
+        public GameObject FuelBarrel => _fuelBarrel;
     }
 }

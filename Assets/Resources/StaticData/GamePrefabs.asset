@@ -18,3 +18,5 @@ MonoBehaviour:
     type: 3}
   _oilPlatform: {fileID: 124250166165220449, guid: e7424621a744c414aac2c5076d708685,
     type: 3}
+  _fuelBarrel: {fileID: 5725907165404555927, guid: aad81a3a9a7ae2241acd3b64bab0b2bb,
+    type: 3}

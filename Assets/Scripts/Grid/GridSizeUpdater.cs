@@ -1,22 +1,21 @@
-﻿using Data.Persistent;
-using Flexalon;
+﻿using Flexalon;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace Platforms.OilPlatform
+namespace Grid
 {
     public class GridSizeUpdater : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private FlexalonGridLayout _grid;
 
-        private OilPlatformData _platformData;
+        private GridData _gridData;
 
         [Inject]
-        private void Constructor(OilPlatformData platformData)
+        private void Constructor(GridData gridData)
         {
-            _platformData = platformData;
+            _gridData = gridData;
         }
 
         private CompositeDisposable _subscriptions = new CompositeDisposable();
@@ -33,18 +32,16 @@ namespace Platforms.OilPlatform
 
         private void StartObserving()
         {
-            _platformData.GridRows.Skip(1).Subscribe(_ => OnAnyGridSizeChanged()).AddTo(_subscriptions);
-            _platformData.GridColumns.Skip(1).Subscribe(_ => OnAnyGridSizeChanged()).AddTo(_subscriptions);
-            OnAnyGridSizeChanged();
+            _gridData.Rows.Skip(1).Subscribe(_ => OnAnyGridSizeChanged()).AddTo(_subscriptions);
+            _gridData.Columns.Skip(1).Subscribe(_ => OnAnyGridSizeChanged()).AddTo(_subscriptions);
         }
 
-        private void StopObserving() { }
+        private void StopObserving() => _subscriptions.Clear();
 
         private void OnAnyGridSizeChanged()
         {
-            _grid.Rows = (uint)_platformData.GridRows.Value;
-            _grid.Columns = (uint)_platformData.GridColumns.Value;
-            _grid.ForceUpdate();
+            _grid.Rows = (uint)_gridData.Rows.Value;
+            _grid.Columns = (uint)_gridData.Rows.Value;
         }
     }
 }

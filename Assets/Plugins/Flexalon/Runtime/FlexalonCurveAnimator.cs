@@ -107,7 +107,7 @@ namespace Flexalon
                 _positionTime = 0;
             }
 
-            _positionTime += Time.deltaTime * _interpolationSpeed;
+            _positionTime += Time.deltaTime * _interpolationSpeed; 
 
             if (!_animatePosition || _positionTime > _curve.keys[_curve.keys.Length - 1].time)
             {

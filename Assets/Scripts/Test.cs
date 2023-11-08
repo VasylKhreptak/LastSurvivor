@@ -6,8 +6,5 @@ public class Test : MonoBehaviour
 {
     [Inject] private readonly IPersistentDataService _persistentDataService;
 
-    private void Awake()
-    {
-        Debug.Log(_persistentDataService.PersistentData == null);
-    }
+    private void Awake() { }
 }

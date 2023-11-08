@@ -14,6 +14,7 @@ namespace Flexalon
 
         [SerializeField]
         private float _interpolationSpeed = 5.0f;
+
         /// <summary> Amount the object should be interpolated towards the target at each frame.
         /// This value is multiplied by Time.deltaTime. </summary>
         public float InterpolationSpeed
@@ -24,6 +25,7 @@ namespace Flexalon
 
         [SerializeField]
         private bool _animatePosition = true;
+
         /// <summary> Determines if the position should be animated. </summary>
         public bool AnimatePosition
         {
@@ -33,6 +35,7 @@ namespace Flexalon
 
         [SerializeField]
         private bool _animateRotation = true;
+
         /// <summary> Determines if the rotation should be animated. </summary>
         public bool AnimateRotation
         {
@@ -42,6 +45,7 @@ namespace Flexalon
 
         [SerializeField]
         private bool _animateScale = true;
+
         /// <summary> Determines if the rotation should be animated. </summary>
         public bool AnimateScale
         {
