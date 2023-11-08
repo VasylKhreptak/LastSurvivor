@@ -7,12 +7,12 @@ namespace Grid
 {
     public class GridStack
     {
-        private readonly FlexalonGridLayout _grid;
+        public readonly FlexalonGridLayout Grid;
         private readonly GridData _gridData;
 
         public GridStack(FlexalonGridLayout grid, GridData gridData)
         {
-            _grid = grid;
+            Grid = grid;
             _gridData = gridData;
         }
 
@@ -21,14 +21,15 @@ namespace Grid
         public IReadOnlyReactiveProperty<bool> IsFull => _gridData.IsFull;
         public IReadOnlyReactiveProperty<bool> IsEmpty => _gridData.IsEmpty;
 
-        public Transform Root => _grid.transform;
+        public Transform Root => Grid.transform;
 
         public bool TryPush(GameObject gameObject)
         {
             if (IsFull.Value)
                 return false;
 
-            gameObject.transform.SetParent(_grid.transform, true);
+            gameObject.transform.SetParent(Grid.transform, true);
+            Grid.ForceUpdate();
             _gridData.Count.Value++;
             return true;
         }
@@ -41,15 +42,16 @@ namespace Grid
                 return false;
             }
 
-            gameObject = _grid.transform.GetChild(_grid.transform.childCount - 1).gameObject;
+            gameObject = Grid.transform.GetChild(Grid.transform.childCount - 1).gameObject;
             gameObject.transform.SetParent(null, true);
             _gridData.Count.Value--;
+            Grid.ForceUpdate();
             return true;
         }
 
         public void LoadFromGridData(GameObject prefab)
         {
-            Transform[] children = _grid.transform.GetChildren();
+            Transform[] children = Grid.transform.GetChildren();
 
             for (int i = 0; i < children.Length; i++)
             {
@@ -58,8 +60,8 @@ namespace Grid
 
             for (int i = 0; i < _gridData.Count.Value; i++)
             {
-                GameObject gameObject = Object.Instantiate(prefab, _grid.transform);
-                gameObject.transform.position = _grid.transform.position;
+                GameObject gameObject = Object.Instantiate(prefab, Grid.transform);
+                gameObject.transform.position = Grid.transform.position;
                 gameObject.transform.localScale = Vector3.zero;
             }
         }

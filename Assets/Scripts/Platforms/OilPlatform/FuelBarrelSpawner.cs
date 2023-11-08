@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using Data.Persistent;
-using Flexalon;
 using Grid;
 using Infrastructure.Data.Static;
 using Infrastructure.Services.StaticData.Core;
@@ -73,9 +73,10 @@ namespace Platforms.OilPlatform
         private void SpawnBarrel()
         {
             GameObject barrel = Instantiate(_gamePrefabs.FuelBarrel);
-            barrel.transform.position = _gridStack.Root.position;
-            barrel.transform.localScale = Vector3.zero;
             _gridStack.TryPush(barrel);
+            barrel.transform.localScale = Vector3.zero;
+            barrel.transform.localPosition =
+                _gridStack.Grid.Node.GetChild(_gridStack.Grid.transform.childCount - 1).Result.TargetPosition;
         }
 
         private void StartTimer() => _timer.Start(_platformData.BarrelProduceDuration.Value);
