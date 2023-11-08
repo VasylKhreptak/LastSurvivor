@@ -1,4 +1,6 @@
-﻿using Infrastructure.StateMachine.Game.States;
+﻿using Data.Persistent;
+using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
@@ -13,11 +15,13 @@ namespace UI.Platforms.HelicopterPlatform
         [SerializeField] private Button _button;
 
         private IStateMachine<IGameState> _stateMachine;
+        private HelicopterData _helicopterData;
 
         [Inject]
-        private void Constructor(IStateMachine<IGameState> stateMachine)
+        private void Constructor(IStateMachine<IGameState> stateMachine, IPersistentDataService persistentDataService)
         {
             _stateMachine = stateMachine;
+            _helicopterData = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData.HelicopterData;
         }
 
         #region MonoBehaivour
@@ -34,6 +38,10 @@ namespace UI.Platforms.HelicopterPlatform
 
         private void StopObserving() => _button.onClick.RemoveListener(OnClicked);
 
-        private void OnClicked() => _stateMachine.Enter<LoadAppropriateLevelState>();
+        private void OnClicked()
+        {
+            _stateMachine.Enter<LoadAppropriateLevelState>();
+            _helicopterData.FuelTank.Clear();
+        }
     }
 }

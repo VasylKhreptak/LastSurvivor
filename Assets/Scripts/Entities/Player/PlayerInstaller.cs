@@ -1,4 +1,6 @@
 ﻿using Data.Static.Balance;
+using Flexalon;
+using Grid;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
 using Zenject;
@@ -8,6 +10,9 @@ namespace Entities.Player
 {
     public class PlayerInstaller : MonoInstaller
     {
+        [Header("References")]
+        [SerializeField] private FlexalonGridLayout _barrelLayout;
+
         private IStaticDataService _staticDataService;
 
         [Inject]
@@ -24,6 +29,11 @@ namespace Entities.Player
             Container.Bind<PlayerPreferences>().FromInstance(_staticDataService.Balance.PlayerPreferences).AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
             Container.Bind<ToggleableManager>().AsSingle();
+
+            GridData gridData = new GridData(1, 1, 10);
+            Container.BindInstance(gridData).AsSingle();
+            Container.BindInstance(_barrelLayout).AsSingle();
+            Container.Bind<GridStack>().AsSingle();
         }
     }
 }
