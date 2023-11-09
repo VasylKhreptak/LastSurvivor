@@ -1532,6 +1532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654f6f568b7b4ecebbed059069df15a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _oilBarrelReceiver: {fileID: 4812053623003846431}
 --- !u!1 &6564678833389697887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,9 +1599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4377ed5e10a4ac784c1a19627ea988b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transferTo: {fileID: 4846610449345969874}
-  _jumpDuration: 0.4
-  _jumpPower: 3
+  _receiveTo: {fileID: 4846610449345969874}
+  _scaleDuration: 0.2
+  _duration: 0.4
+  _jumpPower: 2
   _jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -1625,8 +1627,56 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _rotateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.7924936
+      outSlope: 1.7924936
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.046534017
+    - serializedVersion: 3
+      time: 1.0015869
+      value: 1
+      inSlope: 1.6812878
+      outSlope: 1.6812878
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05317136
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.5032072
+      outSlope: 3.5032072
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.030487806
+    - serializedVersion: 3
+      time: 1.0015869
+      value: 1
+      inSlope: 1.3493972
+      outSlope: 1.3493972
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06450573
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _interval: 0.1
-  _maxTranferrableValue: 10
+  _maxTranferrableValue: 5
 --- !u!1 &7483964880424602202
 GameObject:
   m_ObjectHideFlags: 0

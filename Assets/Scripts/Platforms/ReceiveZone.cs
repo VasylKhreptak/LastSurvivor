@@ -6,25 +6,35 @@ using Plugins.Banks;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Platforms
 {
-    public abstract class TransferZone : MonoBehaviour
+    public abstract class ReceiveZone : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Transform _transferTo;
+        [SerializeField] private Transform _receiveTo;
+
+        [Header("Animation Preferences")]
+        [SerializeField] private float _scaleDuration = 0.2f;
+        [SerializeField] private float _duration = 0.4f;
 
         [Header("Jump Preferences")]
-        [SerializeField] private float _jumpDuration;
-        [SerializeField] private float _jumpPower = 3f;
+        [SerializeField] private float _jumpPower = 2f;
         [SerializeField] private AnimationCurve _jumpCurve;
+
+        [Header("Rotate Preferences")]
+        [SerializeField] private AnimationCurve _rotateCurve;
+
+        [Header("Scale Preferences")]
+        [SerializeField] private AnimationCurve _scaleCurve;
 
         [Header("Transfer Preferences")]
         [SerializeField] private float _interval = 0.1f;
         [SerializeField] private int _maxTranferrableValue = 10;
 
         private IntegerBank _bank;
-        private ClampedIntegerBank _transferContainer;
+        private ClampedIntegerBank _receiveContainer;
         private IMainInputService _inputService;
         private Player _player;
         private GameObject _transferringItemPrefab;
@@ -34,7 +44,7 @@ namespace Platforms
             GameObject transferringItemPrefab)
         {
             _bank = bank;
-            _transferContainer = upgradeContainer;
+            _receiveContainer = upgradeContainer;
             _inputService = inputService;
             _player = player;
             _transferringItemPrefab = transferringItemPrefab;
@@ -68,7 +78,7 @@ namespace Platforms
         private void StopObserving()
         {
             StopObservingInputInteraction();
-            StopTransferring();
+            StopReceiving();
         }
 
         private void StartObservingInputInteraction()
@@ -78,33 +88,33 @@ namespace Platforms
             _inputInteractionSubscription = _inputService.IsInteracting.Subscribe(isInteracting =>
             {
                 if (isInteracting)
-                    StopTransferring();
+                    StopReceiving();
                 else
-                    StartTransferringGears();
+                    StartReceiving();
             });
         }
 
         private void StopObservingInputInteraction() => _inputInteractionSubscription?.Dispose();
 
-        private void StartTransferringGears()
+        private void StartReceiving()
         {
-            StopTransferring();
+            StopReceiving();
 
             _transferSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_interval))
                 .DoOnSubscribe(() =>
                 {
                     if (TryTransfer() == false)
-                        StopTransferring();
+                        StopReceiving();
                 })
                 .Subscribe(_ =>
                 {
                     if (TryTransfer() == false)
-                        StopTransferring();
+                        StopReceiving();
                 });
         }
 
-        private void StopTransferring() => _transferSubscription?.Dispose();
+        private void StopReceiving() => _transferSubscription?.Dispose();
 
         private bool TryTransfer()
         {
@@ -121,29 +131,41 @@ namespace Platforms
 
             _bank.Spend(transferAmount);
 
-            OnTransferred(transferAmount);
+            OnReceived(transferAmount);
 
-            GameObject transferringItem = Instantiate(_transferringItemPrefab, _player.transform.position, Quaternion.identity);
+            GameObject transferringItem =
+                Instantiate(_transferringItemPrefab, _player.InputOutputTransform.position, Quaternion.identity);
 
-            transferringItem.transform
-                .DOJump(_transferTo.position, _jumpPower, 1, _jumpDuration)
-                .SetEase(_jumpCurve)
+            Vector3 initialScale = transferringItem.transform.localScale;
+            transferringItem.transform.localScale = Vector3.zero;
+
+            Tween jumpTween = transferringItem.transform.DOJump(_receiveTo.position, _jumpPower, 1, _duration).SetEase(_jumpCurve);
+            Tween rotateTween = transferringItem.transform
+                .DORotateQuaternion(Quaternion.LookRotation(Random.insideUnitSphere), _duration)
+                .SetEase(_rotateCurve);
+            Tween scaleTween = transferringItem.transform.DOScale(initialScale, _scaleDuration).SetEase(_scaleCurve);
+
+            DOTween
+                .Sequence()
+                .Append(jumpTween)
+                .Join(rotateTween)
+                .Join(scaleTween)
                 .OnComplete(() => Destroy(transferringItem))
                 .Play();
         }
 
-        private void OnTransferred(int amount)
+        private void OnReceived(int amount)
         {
-            _transferContainer.Add(amount);
+            _receiveContainer.Add(amount);
 
-            if (_transferContainer.IsFull.Value)
+            if (_receiveContainer.IsFull.Value)
             {
-                OnAllTransferred();
-                _transferContainer.Clear();
-                StopTransferring();
+                OnReceivedAll();
+                _receiveContainer.Clear();
+                StopReceiving();
             }
         }
 
-        protected abstract void OnAllTransferred();
+        protected abstract void OnReceivedAll();
     }
 }

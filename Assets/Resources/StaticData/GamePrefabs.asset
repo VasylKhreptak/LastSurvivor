@@ -20,3 +20,4 @@ MonoBehaviour:
     type: 3}
   _fuelBarrel: {fileID: 5725907165404555927, guid: aad81a3a9a7ae2241acd3b64bab0b2bb,
     type: 3}
+  _gear: {fileID: 1556523994000301813, guid: 841c142e7f258d141aea36f81f453d0f, type: 3}

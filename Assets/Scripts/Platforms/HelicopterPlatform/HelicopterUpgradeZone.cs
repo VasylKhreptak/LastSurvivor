@@ -2,9 +2,9 @@
 
 namespace Platforms.HelicopterPlatform
 {
-    public class HelicopterUpgradeZone : TransferZone
+    public class HelicopterUpgradeZone : ReceiveZone
     {
-        protected override void OnAllTransferred()
+        protected override void OnReceivedAll()
         {
             Debug.Log("OnAllTransferred");
         }
