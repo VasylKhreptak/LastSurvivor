@@ -33,7 +33,11 @@ namespace Animations.Platforms
 
         private void OnEnable() => StartObserving();
 
-        private void OnDisable() => StopObserving();
+        private void OnDisable()
+        {
+            StopObserving();
+            _scaleAnimation.SetEndState();
+        }
 
         #endregion
 
