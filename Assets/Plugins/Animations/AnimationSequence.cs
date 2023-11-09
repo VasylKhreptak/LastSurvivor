@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using DG.Tweening;
 using Plugins.Animations.Core;
 
 namespace Plugins.Animations
 {
-    public class AnimationGroup : IAnimation
+    public class AnimationSequence : IAnimation
     {
         private readonly IAnimation[] _animations;
 
-        public AnimationGroup(params IAnimation[] animations)
+        public AnimationSequence(params IAnimation[] animations)
         {
             _animations = animations;
         }
@@ -63,16 +63,9 @@ namespace Plugins.Animations
 
             sequence.AppendInterval(_delay);
 
-            for (int i = 0; i < _animations.Length; i++)
+            foreach (IAnimation animation in _animations)
             {
-                if (i == 0)
-                {
-                    sequence.Append(_animations[i].CreateForwardTween());
-                }
-                else
-                {
-                    sequence.Join(_animations[i].CreateForwardTween());
-                }
+                sequence.Append(animation.CreateForwardTween());
             }
 
             return sequence;
@@ -83,11 +76,17 @@ namespace Plugins.Animations
             Sequence sequence = DOTween.Sequence();
 
             sequence.AppendInterval(_delay);
-            sequence.Append(_animations[0].CreateBackwardTween());
 
-            for (int i = 1; i < _animations.Length; i++)
+            for (int i = 0; i < _animations.Length; i++)
             {
-                sequence.Join(_animations[i].CreateBackwardTween());
+                if (i == 0)
+                {
+                    sequence.Append(_animations[i].CreateBackwardTween());
+                }
+                else
+                {
+                    sequence.Join(_animations[i].CreateBackwardTween());
+                }
             }
 
             return sequence;
