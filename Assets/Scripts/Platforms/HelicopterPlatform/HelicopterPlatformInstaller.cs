@@ -40,7 +40,7 @@ namespace Platforms.HelicopterPlatform
         }
 
         #endregion
-\
+
         public override void InstallBindings()
         {
             Container.BindInstance(_bank).AsSingle();
