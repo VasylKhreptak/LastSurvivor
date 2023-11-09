@@ -26,13 +26,13 @@ namespace Platforms.HelicopterPlatform
         [SerializeField] private AnimationCurve _rotateCurve;
 
         private GridStack _playerGrid;
-        private HelicopterData _helicopterData;
+        private HelicopterPlatformData _platformData;
 
         [Inject]
-        private void Constructor(Player player, HelicopterData helicopterData)
+        private void Constructor(Player player, HelicopterPlatformData platformData)
         {
             _playerGrid = player.BarrelGridStack;
-            _helicopterData = helicopterData;
+            _platformData = platformData;
         }
 
         private IDisposable _subscription;
@@ -98,7 +98,7 @@ namespace Platforms.HelicopterPlatform
 
         private void OnReceived()
         {
-            _helicopterData.FuelTank.Add(1);
+            _platformData.FuelTank.Add(1);
             OnReceivedBarrel?.Invoke();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 
 namespace Platforms.HelicopterPlatform
@@ -21,9 +20,6 @@ namespace Platforms.HelicopterPlatform
 
         private void StopObserving() => _receiveZone.OnReceivedAll -= Upgrade;
 
-        private void Upgrade()
-        {
-            Debug.Log("Helicopter Upgraded!");
-        }
+        private void Upgrade() { }
     }
 }

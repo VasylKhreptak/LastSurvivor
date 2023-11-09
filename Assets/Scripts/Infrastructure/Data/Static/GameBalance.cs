@@ -10,8 +10,10 @@ namespace Infrastructure.Data.Static
         [Header("Balance")]
         [SerializeField] private PlayerPreferences _playerPreferences;
         [SerializeField] private AnimationPreferences _animationPreferences;
+        [SerializeField] private HelicopterUpgradePreferences _helicopterUpgradePreferences;
 
         public PlayerPreferences PlayerPreferences => _playerPreferences;
         public AnimationPreferences AnimationPreferences => _animationPreferences;
+        public HelicopterUpgradePreferences HelicopterUpgradePreferences => _helicopterUpgradePreferences;
     }
 }

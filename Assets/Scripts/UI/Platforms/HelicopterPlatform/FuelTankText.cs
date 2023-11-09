@@ -18,10 +18,10 @@ namespace UI.Platforms.HelicopterPlatform
         private IReadOnlyReactiveProperty<int> _maxTankLevel;
 
         [Inject]
-        private void Constructor(HelicopterData helicopterDta)
+        private void Constructor(HelicopterPlatformData platformData)
         {
-            _currentTankLevel = helicopterDta.FuelTank.Value;
-            _maxTankLevel = helicopterDta.FuelTank.MaxValue;
+            _currentTankLevel = platformData.FuelTank.Value;
+            _maxTankLevel = platformData.FuelTank.MaxValue;
         }
 
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();

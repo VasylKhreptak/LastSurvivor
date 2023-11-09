@@ -97,13 +97,13 @@ namespace Platforms
                 if (isInteracting)
                     StopTransferring();
                 else
-                    StartTransferringUntilFull();
+                    StartTransferring();
             });
         }
 
         private void StopObservingInputInteraction() => _inputInteractionSubscription?.Dispose();
 
-        private void StartTransferringUntilFull()
+        private void StartTransferring()
         {
             StopTransferring();
 

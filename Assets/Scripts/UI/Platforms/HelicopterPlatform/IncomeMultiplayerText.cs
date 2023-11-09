@@ -18,9 +18,9 @@ namespace UI.Platforms.HelicopterPlatform
         private IReadOnlyReactiveProperty<float> _incomeMultiplier;
 
         [Inject]
-        private void Constructor(HelicopterData helicopterData)
+        private void Constructor(HelicopterPlatformData platformData)
         {
-            _incomeMultiplier = helicopterData.IncomeMultiplier;
+            _incomeMultiplier = platformData.IncomeMultiplier;
         }
 
         private IDisposable _subscription;

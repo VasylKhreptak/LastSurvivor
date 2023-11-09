@@ -20,12 +20,12 @@ namespace UI.Platforms.HelicopterPlatform
         [SerializeField] private FadeAnimation _buttonAppearAnimation;
         [SerializeField] private ScaleAnimation _buttonScaleUpAnimation;
 
-        private HelicopterData _helicopterData;
+        private HelicopterPlatformData _platformData;
 
         [Inject]
-        private void Constructor(HelicopterData helicopterData)
+        private void Constructor(HelicopterPlatformData platformData)
         {
-            _helicopterData = helicopterData;
+            _platformData = platformData;
         }
 
         private IAnimation _expandAnimation;
@@ -53,13 +53,13 @@ namespace UI.Platforms.HelicopterPlatform
 
         #endregion
 
-        private void StartObserving() => _subscription = _helicopterData.FuelTank.IsFull.Subscribe(_ => UpdateState());
+        private void StartObserving() => _subscription = _platformData.FuelTank.IsFull.Subscribe(_ => UpdateState());
 
         private void StopObserving() => _subscription?.Dispose();
 
         private void UpdateState()
         {
-            if (_helicopterData.FuelTank.IsFull.Value)
+            if (_platformData.FuelTank.IsFull.Value)
                 Expand();
             else
                 Shrink();
@@ -83,7 +83,7 @@ namespace UI.Platforms.HelicopterPlatform
 
         private void UpdateStateImmediately()
         {
-            if (_helicopterData.FuelTank.IsFull.Value)
+            if (_platformData.FuelTank.IsFull.Value)
                 ExpandImmediately();
             else
                 ShrinkImmediately();
