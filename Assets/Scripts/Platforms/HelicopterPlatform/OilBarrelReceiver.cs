@@ -37,6 +37,8 @@ namespace Platforms.HelicopterPlatform
 
         private IDisposable _subscription;
 
+        public event Action OnReceivedBarrel;
+
         #region MonoBehaviour
 
         private void OnValidate() => _attractorTransform ??= GetComponent<Transform>();
@@ -86,14 +88,18 @@ namespace Platforms.HelicopterPlatform
                 .Sequence()
                 .Append(jumpTween)
                 .Join(rotateTween)
-                .OnComplete(() => OnReceived(barrel))
+                .OnComplete(() =>
+                {
+                    OnReceived();
+                    Destroy(barrel);
+                })
                 .Play();
         }
 
-        private void OnReceived(GameObject barrel)
+        private void OnReceived()
         {
             _helicopterData.FuelTank.Add(1);
-            Destroy(barrel);
+            OnReceivedBarrel?.Invoke();
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using Data.Persistent;
+﻿using Platforms.HelicopterPlatform;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Sirenix.OdinInspector;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -15,17 +13,15 @@ namespace Animations.Platforms
         [SerializeField] private ScaleAnimation _scaleUpAnimation;
         [SerializeField] private ScaleAnimation _scaleDownAnimation;
 
-        private HelicopterData _helicopterData;
+        private OilBarrelReceiver _oilBarrelReceiver;
 
         [Inject]
-        private void Constructor(HelicopterData helicopterData)
+        private void Constructor(OilBarrelReceiver oilBarrelReceiver)
         {
-            _helicopterData = helicopterData;
+            _oilBarrelReceiver = oilBarrelReceiver;
         }
 
         private IAnimation _scaleAnimation;
-
-        private IDisposable _fuelSubscription;
 
         #region MonoBehaviour
 
@@ -41,18 +37,9 @@ namespace Animations.Platforms
 
         #endregion
 
-        private void StartObserving()
-        {
-            _fuelSubscription = _helicopterData.FuelTank.Value
-                .Pairwise()
-                .Subscribe(pair =>
-                {
-                    if (pair.Current > pair.Previous)
-                        Punch();
-                });
-        }
+        private void StartObserving() => _oilBarrelReceiver.OnReceivedBarrel += Punch;
 
-        private void StopObserving() => _fuelSubscription?.Dispose();
+        private void StopObserving() => _oilBarrelReceiver.OnReceivedBarrel -= Punch;
 
         [Button]
         private void Punch() => _scaleAnimation.PlayForward();

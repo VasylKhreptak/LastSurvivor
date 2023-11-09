@@ -36,6 +36,12 @@ namespace Platforms.OilPlatform
             Container.BindInstance(_platformData).AsSingle();
             Container.BindInstance(_platformData.GridData).AsSingle();
             Container.BindInstance(_grid).AsSingle();
+
+            BindFuelGrid();
+        }
+
+        private void BindFuelGrid()
+        {
             GridStack gridStack = Container.Instantiate<GridStack>();
             gridStack.LoadFromGridData(_gamePrefabs.FuelBarrel);
             Container.BindInstance(gridStack).AsSingle();

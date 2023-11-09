@@ -53,13 +53,13 @@ namespace UI.Platforms.HelicopterPlatform
 
         #endregion
 
-        private void StartObserving() => _subscription = _helicopterData.FuelTank.IsFilled.Subscribe(_ => UpdateState());
+        private void StartObserving() => _subscription = _helicopterData.FuelTank.IsFull.Subscribe(_ => UpdateState());
 
         private void StopObserving() => _subscription?.Dispose();
 
         private void UpdateState()
         {
-            if (_helicopterData.FuelTank.IsFilled.Value)
+            if (_helicopterData.FuelTank.IsFull.Value)
                 Expand();
             else
                 Shrink();
@@ -83,7 +83,7 @@ namespace UI.Platforms.HelicopterPlatform
 
         private void UpdateStateImmediately()
         {
-            if (_helicopterData.FuelTank.IsFilled.Value)
+            if (_helicopterData.FuelTank.IsFull.Value)
                 ExpandImmediately();
             else
                 ShrinkImmediately();

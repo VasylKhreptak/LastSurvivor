@@ -1,6 +1,5 @@
 ﻿using Plugins.Banks;
 using UniRx;
-using UnityEngine;
 
 namespace Data.Persistent
 {
@@ -9,8 +8,5 @@ namespace Data.Persistent
         public readonly IntReactiveProperty Level = new IntReactiveProperty(1);
         public readonly FloatReactiveProperty IncomeMultiplier = new FloatReactiveProperty(1f);
         public readonly ClampedIntegerBank FuelTank = new ClampedIntegerBank(0, 5);
-
-        public IReadOnlyReactiveProperty<bool> CanTakeOff =>
-            FuelTank.FillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 1f)).ToReactiveProperty();
     }
 }

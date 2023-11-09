@@ -16,12 +16,17 @@ namespace Infrastructure.Data.Static
         [Header("Other")]
         [SerializeField] private GameObject _fuelBarrel;
 
+        [Header("Resources")]
+        [SerializeField] private GameObject _gear;
+
         public GameObject Player => _player;
         public GameObject Camera => _camera;
 
         public GameObject HelicopterPlatform => _helicopterPlatform;
         public GameObject OilPlatform => _oilPlatform;
-        
+
         public GameObject FuelBarrel => _fuelBarrel;
+
+        public GameObject Gear => _gear;
     }
 }

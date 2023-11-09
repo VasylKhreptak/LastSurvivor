@@ -30,6 +30,11 @@ namespace Entities.Player
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
             Container.Bind<ToggleableManager>().AsSingle();
 
+            BindFuelGrid();
+        }
+
+        private void BindFuelGrid()
+        {
             GridData gridData = new GridData(1, 1, 10);
             Container.BindInstance(gridData).AsSingle();
             Container.BindInstance(_barrelLayout).AsSingle();

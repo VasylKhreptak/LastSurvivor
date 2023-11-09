@@ -1542,6 +1542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4846610449345969874}
   - component: {fileID: 1075404030527330368}
+  - component: {fileID: 3723481849781140981}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -1585,6 +1586,47 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.910745, y: 1.0170985, z: 1.8296403}
   m_Center: {x: 0, y: 0.5044035, z: 0}
+--- !u!114 &3723481849781140981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6564678833389697887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4377ed5e10a4ac784c1a19627ea988b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transferTo: {fileID: 4846610449345969874}
+  _jumpDuration: 0.4
+  _jumpPower: 3
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.7924936
+      outSlope: 1.7924936
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.046534017
+    - serializedVersion: 3
+      time: 1.0015869
+      value: 1
+      inSlope: 1.6812878
+      outSlope: 1.6812878
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05317136
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _interval: 0.1
+  _maxTranferrableValue: 10
 --- !u!1 &7483964880424602202
 GameObject:
   m_ObjectHideFlags: 0
