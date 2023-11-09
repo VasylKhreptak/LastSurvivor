@@ -1533,6 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _oilBarrelReceiver: {fileID: 4812053623003846431}
+  _receiveZone: {fileID: 503174035211732560}
 --- !u!1 &6564678833389697887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,9 +1544,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4846610449345969874}
   - component: {fileID: 1075404030527330368}
-  - component: {fileID: 3723481849781140981}
+  - component: {fileID: 503174035211732560}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: ReceiveZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1587,7 +1588,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.910745, y: 1.0170985, z: 1.8296403}
   m_Center: {x: 0, y: 0.5044035, z: 0}
---- !u!114 &3723481849781140981
+--- !u!114 &503174035211732560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1596,10 +1597,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6564678833389697887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4377ed5e10a4ac784c1a19627ea988b, type: 3}
+  m_Script: {fileID: 11500000, guid: f5267a5c9a1142e5a3c0bde637e96928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _receiveTo: {fileID: 4846610449345969874}
+  _receiveToTransform: {fileID: 4846610449345969874}
   _scaleDuration: 0.2
   _duration: 0.4
   _jumpPower: 2
@@ -1609,20 +1610,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1.7924936
-      outSlope: 1.7924936
+      inSlope: 2.0646968
+      outSlope: 2.0646968
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.046534017
+      outWeight: 0.052952502
     - serializedVersion: 3
-      time: 1.0015869
+      time: 1
       value: 1
-      inSlope: 1.6812878
-      outSlope: 1.6812878
+      inSlope: 1.5922699
+      outSlope: 1.5922699
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.05317136
+      inWeight: 0.05327344
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1633,20 +1634,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1.7924936
-      outSlope: 1.7924936
+      inSlope: 2.0646968
+      outSlope: 2.0646968
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.046534017
+      outWeight: 0.052952502
     - serializedVersion: 3
-      time: 1.0015869
+      time: 1
       value: 1
-      inSlope: 1.6812878
-      outSlope: 1.6812878
+      inSlope: 1.5922699
+      outSlope: 1.5922699
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.05317136
+      inWeight: 0.05327344
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1657,26 +1658,27 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 3.5032072
-      outSlope: 3.5032072
+      inSlope: 2.0646968
+      outSlope: 2.0646968
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.030487806
+      outWeight: 0.052952502
     - serializedVersion: 3
-      time: 1.0015869
+      time: 1
       value: 1
-      inSlope: 1.3493972
-      outSlope: 1.3493972
+      inSlope: 1.5922699
+      outSlope: 1.5922699
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.06450573
+      inWeight: 0.05327344
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _interval: 0.1
+  _interval: 0.07
   _maxTranferrableValue: 5
+  _maxRange: 0.5
 --- !u!1 &7483964880424602202
 GameObject:
   m_ObjectHideFlags: 0

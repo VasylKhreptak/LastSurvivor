@@ -12,6 +12,7 @@ namespace Platforms.HelicopterPlatform
     {
         [Header("References")]
         [SerializeField] private OilBarrelReceiver _oilBarrelReceiver;
+        [SerializeField] private ReceiveZone _receiveZone;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
@@ -29,7 +30,11 @@ namespace Platforms.HelicopterPlatform
 
         #region MonoBehaviour
 
-        private void OnValidate() => _oilBarrelReceiver ??= GetComponentInChildren<OilBarrelReceiver>(true);
+        private void OnValidate()
+        {
+            _oilBarrelReceiver ??= GetComponentInChildren<OilBarrelReceiver>(true);
+            _receiveZone ??= GetComponentInChildren<ReceiveZone>(true);
+        }
 
         #endregion
 
@@ -41,12 +46,14 @@ namespace Platforms.HelicopterPlatform
             Container.BindInstance(_platformData.HelicopterData).AsSingle();
             Container.BindInstance(_oilBarrelReceiver).AsSingle();
 
-            BindUpgradeZone();
+            BindUpgradeLogic();
         }
 
-        private void BindUpgradeZone()
+        private void BindUpgradeLogic()
         {
-            Container.BindInstance(_prefabs.Gear).WhenInjectedInto<HelicopterUpgradeZone>();
+            Container.BindInstance(_prefabs.Gear).WhenInjectedInto<ReceiveZone>();
+            Container.BindInstance(_receiveZone).AsSingle();
+            Container.BindInterfacesTo<HelicopterUpgrader>().AsSingle();
         }
     }
 }

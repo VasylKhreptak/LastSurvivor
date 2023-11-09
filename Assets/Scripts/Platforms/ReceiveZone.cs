@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Entities.Player;
 using Infrastructure.Services.Input.Main.Core;
+using Plugins.Animations.Extensions;
 using Plugins.Banks;
 using UniRx;
 using UnityEngine;
@@ -10,10 +11,10 @@ using Random = UnityEngine.Random;
 
 namespace Platforms
 {
-    public abstract class ReceiveZone : MonoBehaviour
+    public class ReceiveZone : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Transform _receiveTo;
+        [SerializeField] private Transform _receiveToTransform;
 
         [Header("Animation Preferences")]
         [SerializeField] private float _scaleDuration = 0.2f;
@@ -32,6 +33,9 @@ namespace Platforms
         [Header("Transfer Preferences")]
         [SerializeField] private float _interval = 0.1f;
         [SerializeField] private int _maxTranferrableValue = 10;
+
+        [Header("Receive Zone Preferences")]
+        [SerializeField] private float _maxRange = 5f;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _receiveContainer;
@@ -52,6 +56,9 @@ namespace Platforms
 
         private IDisposable _inputInteractionSubscription;
         private IDisposable _transferSubscription;
+
+        public event Action OnReceivedAll;
+        public event Action OnReceived;
 
         #region MonoBehaviour
 
@@ -78,7 +85,7 @@ namespace Platforms
         private void StopObserving()
         {
             StopObservingInputInteraction();
-            StopReceiving();
+            StopTransferring();
         }
 
         private void StartObservingInputInteraction()
@@ -88,33 +95,44 @@ namespace Platforms
             _inputInteractionSubscription = _inputService.IsInteracting.Subscribe(isInteracting =>
             {
                 if (isInteracting)
-                    StopReceiving();
+                    StopTransferring();
                 else
-                    StartReceiving();
+                    StartTransferringUntilFull();
             });
         }
 
         private void StopObservingInputInteraction() => _inputInteractionSubscription?.Dispose();
 
-        private void StartReceiving()
+        private void StartTransferringUntilFull()
         {
-            StopReceiving();
+            StopTransferring();
+
+            int targetTransferCount = GetTransferCount();
+            int currentTransferCount = 0;
 
             _transferSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_interval))
-                .DoOnSubscribe(() =>
-                {
-                    if (TryTransfer() == false)
-                        StopReceiving();
-                })
                 .Subscribe(_ =>
                 {
+                    currentTransferCount++;
+
+                    if (currentTransferCount == targetTransferCount)
+                        StopTransferring();
+
                     if (TryTransfer() == false)
-                        StopReceiving();
+                        StopTransferring();
                 });
         }
 
-        private void StopReceiving() => _transferSubscription?.Dispose();
+        private void StopTransferring() => _transferSubscription?.Dispose();
+
+        private int GetTransferCount()
+        {
+            int leftToFill = _receiveContainer.LeftToFill.Value;
+
+            float remainder = leftToFill % _maxTranferrableValue;
+            return remainder == 0 ? leftToFill / _maxTranferrableValue : leftToFill / _maxTranferrableValue + 1;
+        }
 
         private bool TryTransfer()
         {
@@ -131,41 +149,73 @@ namespace Platforms
 
             _bank.Spend(transferAmount);
 
-            OnReceived(transferAmount);
-
             GameObject transferringItem =
                 Instantiate(_transferringItemPrefab, _player.InputOutputTransform.position, Quaternion.identity);
 
+            PlayAnimation(transferringItem, () => OnReceivedItem(transferAmount));
+        }
+
+        private void PlayAnimation(GameObject transferringItem, Action onComplete = null)
+        {
             Vector3 initialScale = transferringItem.transform.localScale;
             transferringItem.transform.localScale = Vector3.zero;
 
-            Tween jumpTween = transferringItem.transform.DOJump(_receiveTo.position, _jumpPower, 1, _duration).SetEase(_jumpCurve);
+            Tween jumpTween = transferringItem.transform
+                .DOJump(GetReceivePoint(), _jumpPower, 1, _duration)
+                .SetEase(_jumpCurve);
+
             Tween rotateTween = transferringItem.transform
                 .DORotateQuaternion(Quaternion.LookRotation(Random.insideUnitSphere), _duration)
                 .SetEase(_rotateCurve);
-            Tween scaleTween = transferringItem.transform.DOScale(initialScale, _scaleDuration).SetEase(_scaleCurve);
+
+            Tween scaleTween = transferringItem.transform
+                .DOScale(initialScale, _scaleDuration)
+                .SetEase(_scaleCurve);
 
             DOTween
                 .Sequence()
                 .Append(jumpTween)
                 .Join(rotateTween)
                 .Join(scaleTween)
-                .OnComplete(() => Destroy(transferringItem))
+                .OnComplete(() =>
+                {
+                    onComplete?.Invoke();
+                    Destroy(transferringItem);
+                })
                 .Play();
         }
 
-        private void OnReceived(int amount)
+        private void OnReceivedItem(int amount)
         {
             _receiveContainer.Add(amount);
+            OnReceived?.Invoke();
 
             if (_receiveContainer.IsFull.Value)
             {
-                OnReceivedAll();
+                OnReceivedAll?.Invoke();
                 _receiveContainer.Clear();
-                StopReceiving();
+                StopTransferring();
             }
         }
 
-        protected abstract void OnReceivedAll();
+        private Vector3 GetReceivePoint()
+        {
+            Vector3 center = _receiveToTransform.position;
+
+            Vector3 receivePoint = center + Random.insideUnitSphere * _maxRange;
+
+            receivePoint.y = center.y;
+
+            return receivePoint;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (_receiveToTransform == null)
+                return;
+
+            Gizmos.color = Color.green.WithAlpha(0.3f);
+            Gizmos.DrawSphere(_receiveToTransform.position, _maxRange);
+        }
     }
 }

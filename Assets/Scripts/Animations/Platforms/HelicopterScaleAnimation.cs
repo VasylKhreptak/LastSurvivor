@@ -1,4 +1,5 @@
-﻿using Platforms.HelicopterPlatform;
+﻿using Platforms;
+using Platforms.HelicopterPlatform;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Sirenix.OdinInspector;
@@ -14,11 +15,13 @@ namespace Animations.Platforms
         [SerializeField] private ScaleAnimation _scaleDownAnimation;
 
         private OilBarrelReceiver _oilBarrelReceiver;
+        private ReceiveZone _receiveZone;
 
         [Inject]
-        private void Constructor(OilBarrelReceiver oilBarrelReceiver)
+        private void Constructor(OilBarrelReceiver oilBarrelReceiver, ReceiveZone receiveZone)
         {
             _oilBarrelReceiver = oilBarrelReceiver;
+            _receiveZone = receiveZone;
         }
 
         private IAnimation _scaleAnimation;
@@ -37,9 +40,17 @@ namespace Animations.Platforms
 
         #endregion
 
-        private void StartObserving() => _oilBarrelReceiver.OnReceivedBarrel += Punch;
+        private void StartObserving()
+        {
+            _oilBarrelReceiver.OnReceivedBarrel += Punch;
+            _receiveZone.OnReceivedAll += Punch;
+        }
 
-        private void StopObserving() => _oilBarrelReceiver.OnReceivedBarrel -= Punch;
+        private void StopObserving()
+        {
+            _oilBarrelReceiver.OnReceivedBarrel -= Punch;
+            _receiveZone.OnReceivedAll -= Punch;
+        }
 
         [Button]
         private void Punch() => _scaleAnimation.PlayForward();
