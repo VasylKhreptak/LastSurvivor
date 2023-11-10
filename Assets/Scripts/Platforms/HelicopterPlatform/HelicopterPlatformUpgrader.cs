@@ -1,17 +1,17 @@
 ﻿using System;
 using Data.Persistent;
-using Data.Static.Balance;
+using Data.Static.Balance.Upgrade;
 using Zenject;
 
 namespace Platforms.HelicopterPlatform
 {
-    public class HelicopterUpgrader : IInitializable, IDisposable
+    public class HelicopterPlatformUpgrader : IInitializable, IDisposable
     {
         private readonly ReceiveZone _receiveZone;
         private readonly HelicopterPlatformUpgradePreferences _platformUpgradePreferences;
         private readonly HelicopterPlatformData _platformData;
 
-        public HelicopterUpgrader(ReceiveZone receiveZone, HelicopterPlatformUpgradePreferences platformUpgradePreferences,
+        public HelicopterPlatformUpgrader(ReceiveZone receiveZone, HelicopterPlatformUpgradePreferences platformUpgradePreferences,
             HelicopterPlatformData platformData)
         {
             _receiveZone = receiveZone;

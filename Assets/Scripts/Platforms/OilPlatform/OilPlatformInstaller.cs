@@ -1,4 +1,5 @@
 ﻿using Data.Persistent;
+using Data.Static.Balance.Upgrade;
 using Flexalon;
 using Grid;
 using Infrastructure.Data.Static;
@@ -14,11 +15,13 @@ namespace Platforms.OilPlatform
     {
         [Header("References")]
         [SerializeField] private FlexalonGridLayout _grid;
+        [SerializeField] private ReceiveZone _receiveZone;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
         private OilPlatformData _platformData;
         private GamePrefabs _gamePrefabs;
+        private OilPlatformUpgradePreferences _upgradePreferences;
 
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
@@ -27,6 +30,7 @@ namespace Platforms.OilPlatform
             _upgradeContainer = persistentDataService.PersistentData.PlayerData.OilPlatformData.UpgradeContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.OilPlatformData;
             _gamePrefabs = staticDataService.Prefabs;
+            _upgradePreferences = staticDataService.Balance.OilPlatformUpgradePreferences;
         }
 
         public override void InstallBindings()
@@ -36,8 +40,8 @@ namespace Platforms.OilPlatform
             Container.BindInstance(_platformData).AsSingle();
             Container.BindInstance(_platformData.GridData).AsSingle();
             Container.BindInstance(_grid).AsSingle();
-
             BindFuelGrid();
+            BindUpgradeLogic();
         }
 
         private void BindFuelGrid()
@@ -45,6 +49,14 @@ namespace Platforms.OilPlatform
             GridStack gridStack = Container.Instantiate<GridStack>();
             gridStack.LoadFromGridData(_gamePrefabs.FuelBarrel);
             Container.BindInstance(gridStack).AsSingle();
+        }
+
+        private void BindUpgradeLogic()
+        {
+            Container.BindInstance(_upgradePreferences).AsSingle();
+            Container.BindInstance(_gamePrefabs.Gear).WhenInjectedInto<ReceiveZone>();
+            Container.BindInstance(_receiveZone).AsSingle();
+            Container.BindInterfacesTo<OilPlatformUpgrader>().AsSingle();
         }
     }
 }

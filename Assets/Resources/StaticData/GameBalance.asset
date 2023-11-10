@@ -72,9 +72,13 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   _helicopterPlatformUpgradePreferences:
-    _increaseFuelCapacityEachLevel: 2
-    _incrementFuelCapacityEachUpgrade: 1
-    _increaseIncomeMultiplierEachLevel: 1
-    _incrementIncomeMultiplierEachUpgrade: 0.1
-    _increaseUpgradeCostEachLevel: 1
-    _incrementUpgradeCostEachUpgrade: 2
+    _fuelCapacityEachLevel: 2
+    _fuelCapacityEachUpgrade: 1
+    _incomeMultiplierEachLevel: 1
+    _incomeMultiplierEachUpgrade: 0.1
+    _upgradeCostEachLevel: 1
+    _upgradeCostEachUpgrade: 2
+  _oilPlatformUpgradePreferences:
+    _produceTimePercentageReduce: 0.05
+    _upgradeCostEachLevel: 1
+    _upgradeCostEachUpgrade: 2

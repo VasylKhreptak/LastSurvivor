@@ -1,5 +1,5 @@
 ﻿using Data.Persistent;
-using Data.Static.Balance;
+using Data.Static.Balance.Upgrade;
 using Infrastructure.Data.Static;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -47,16 +47,16 @@ namespace Platforms.HelicopterPlatform
             Container.BindInstance(_upgradeContainer).AsSingle();
             Container.BindInstance(_platformData).AsSingle();
             Container.BindInstance(_oilBarrelReceiver).AsSingle();
-            Container.BindInstance(_helicopterPlatformUpgradePreferences).AsSingle();
 
             BindUpgradeLogic();
         }
 
         private void BindUpgradeLogic()
         {
+            Container.BindInstance(_helicopterPlatformUpgradePreferences).AsSingle();
             Container.BindInstance(_prefabs.Gear).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_receiveZone).AsSingle();
-            Container.BindInterfacesTo<HelicopterUpgrader>().AsSingle();
+            Container.BindInterfacesTo<HelicopterPlatformUpgrader>().AsSingle();
         }
     }
 }

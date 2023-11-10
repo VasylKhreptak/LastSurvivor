@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Data.Static.Balance
+namespace Data.Static.Balance.Upgrade
 {
     [Serializable]
     public class HelicopterPlatformUpgradePreferences
