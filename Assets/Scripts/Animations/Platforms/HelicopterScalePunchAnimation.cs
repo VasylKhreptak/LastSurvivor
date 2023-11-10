@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Animations.Platforms
 {
-    public class HelicopterScaleAnimation : MonoBehaviour
+    public class HelicopterScalePunchAnimation : MonoBehaviour
     {
         [Header("Animations")]
         [SerializeField] private ScaleAnimation _scaleUpAnimation;
@@ -24,18 +24,18 @@ namespace Animations.Platforms
             _receiveZone = receiveZone;
         }
 
-        private IAnimation _scaleAnimation;
+        private IAnimation _scalePunchAnimation;
 
         #region MonoBehaviour
 
-        private void Awake() => _scaleAnimation = new AnimationSequence(_scaleUpAnimation, _scaleDownAnimation);
+        private void Awake() => _scalePunchAnimation = new AnimationSequence(_scaleUpAnimation, _scaleDownAnimation);
 
         private void OnEnable() => StartObserving();
 
         private void OnDisable()
         {
             StopObserving();
-            _scaleAnimation.SetEndState();
+            _scalePunchAnimation.SetEndState();
         }
 
         #endregion
@@ -53,6 +53,6 @@ namespace Animations.Platforms
         }
 
         [Button]
-        private void Punch() => _scaleAnimation.PlayForward();
+        private void Punch() => _scalePunchAnimation.PlayForward();
     }
 }

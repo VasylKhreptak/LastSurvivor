@@ -110,21 +110,20 @@ namespace Platforms
             StopTransferring();
 
             int targetTransferCount = GetTransferCount();
+
+            if (targetTransferCount == 0)
+                return;
+
             int currentTransferCount = 0;
 
             _transferSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_interval))
                 .Subscribe(_ =>
                 {
-                    currentTransferCount++;
-
-                    if (currentTransferCount == targetTransferCount)
-                    {
-                        StopTransferring();
-                        return;
-                    }
-
                     if (TryTransfer() == false)
+                        StopTransferring();
+
+                    if (++currentTransferCount == targetTransferCount)
                         StopTransferring();
                 });
         }
@@ -134,7 +133,6 @@ namespace Platforms
         private int GetTransferCount()
         {
             int leftToFill = _receiveContainer.LeftToFill.Value - _currentTransferAmount;
-
             float remainder = leftToFill % _maxTransfer;
             return remainder == 0 ? leftToFill / _maxTransfer : leftToFill / _maxTransfer + 1;
         }
