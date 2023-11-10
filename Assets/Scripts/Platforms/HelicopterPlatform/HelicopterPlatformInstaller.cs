@@ -19,7 +19,7 @@ namespace Platforms.HelicopterPlatform
         private ClampedIntegerBank _upgradeContainer;
         private HelicopterPlatformData _platformData;
         private GamePrefabs _prefabs;
-        private HelicopterUpgradePreferences _helicopterUpgradePreferences;
+        private HelicopterPlatformUpgradePreferences _helicopterPlatformUpgradePreferences;
 
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
@@ -28,7 +28,7 @@ namespace Platforms.HelicopterPlatform
             _upgradeContainer = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData.UpgradeContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData;
             _prefabs = staticDataService.Prefabs;
-            _helicopterUpgradePreferences = staticDataService.Balance.HelicopterUpgradePreferences;
+            _helicopterPlatformUpgradePreferences = staticDataService.Balance.HelicopterPlatformUpgradePreferences;
         }
 
         #region MonoBehaviour
@@ -47,7 +47,7 @@ namespace Platforms.HelicopterPlatform
             Container.BindInstance(_upgradeContainer).AsSingle();
             Container.BindInstance(_platformData).AsSingle();
             Container.BindInstance(_oilBarrelReceiver).AsSingle();
-            Container.BindInstance(_helicopterUpgradePreferences).AsSingle();
+            Container.BindInstance(_helicopterPlatformUpgradePreferences).AsSingle();
 
             BindUpgradeLogic();
         }

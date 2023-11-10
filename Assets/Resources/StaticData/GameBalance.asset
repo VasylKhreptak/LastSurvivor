@@ -17,9 +17,6 @@ MonoBehaviour:
     _rotateSpeed: 15
     _gravity: 1
     _speedParameterName: Speed
-  _transformLookerPreferences:
-    _defaultLookSpeed: 15
-    _rotationOffsetForUI: {x: 0, y: 180, z: 0}
   _animationPreferences:
     _scalePressAnimationPreferences:
       _pressDuration: 0.1
@@ -74,3 +71,10 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+  _helicopterPlatformUpgradePreferences:
+    _increaseFuelCapacityEachLevel: 2
+    _incrementFuelCapacityEachUpgrade: 1
+    _increaseIncomeMultiplierEachLevel: 1
+    _incrementIncomeMultiplierEachUpgrade: 0.1
+    _increaseUpgradeCostEachLevel: 1
+    _incrementUpgradeCostEachUpgrade: 2

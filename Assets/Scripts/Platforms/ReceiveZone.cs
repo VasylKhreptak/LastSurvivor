@@ -32,7 +32,7 @@ namespace Platforms
 
         [Header("Transfer Preferences")]
         [SerializeField] private float _interval = 0.1f;
-        [SerializeField] private int _maxTranferrableValue = 10;
+        [SerializeField] private int _maxTransfer = 10;
 
         [Header("Receive Zone Preferences")]
         [SerializeField] private float _maxRange = 5f;
@@ -41,21 +41,23 @@ namespace Platforms
         private ClampedIntegerBank _receiveContainer;
         private IMainInputService _inputService;
         private Player _player;
-        private GameObject _transferringItemPrefab;
+        private GameObject _itemToTransfer;
 
         [Inject]
-        public void Constructor(IntegerBank bank, ClampedIntegerBank upgradeContainer, IMainInputService inputService, Player player,
-            GameObject transferringItemPrefab)
+        public void Constructor(IntegerBank bank, ClampedIntegerBank receiveContainer, IMainInputService inputService, Player player,
+            GameObject itemToTransfer)
         {
             _bank = bank;
-            _receiveContainer = upgradeContainer;
+            _receiveContainer = receiveContainer;
             _inputService = inputService;
             _player = player;
-            _transferringItemPrefab = transferringItemPrefab;
+            _itemToTransfer = itemToTransfer;
         }
 
         private IDisposable _inputInteractionSubscription;
         private IDisposable _transferSubscription;
+
+        private int _currentTransferAmount;
 
         public event Action OnReceivedAll;
         public event Action OnReceived;
@@ -117,7 +119,10 @@ namespace Platforms
                     currentTransferCount++;
 
                     if (currentTransferCount == targetTransferCount)
+                    {
                         StopTransferring();
+                        return;
+                    }
 
                     if (TryTransfer() == false)
                         StopTransferring();
@@ -128,10 +133,10 @@ namespace Platforms
 
         private int GetTransferCount()
         {
-            int leftToFill = _receiveContainer.LeftToFill.Value;
+            int leftToFill = _receiveContainer.LeftToFill.Value - _currentTransferAmount;
 
-            float remainder = leftToFill % _maxTranferrableValue;
-            return remainder == 0 ? leftToFill / _maxTranferrableValue : leftToFill / _maxTranferrableValue + 1;
+            float remainder = leftToFill % _maxTransfer;
+            return remainder == 0 ? leftToFill / _maxTransfer : leftToFill / _maxTransfer + 1;
         }
 
         private bool TryTransfer()
@@ -145,30 +150,37 @@ namespace Platforms
 
         private void Transfer()
         {
-            int transferAmount = Mathf.Min(_bank.Value.Value, _maxTranferrableValue);
+            int transferAmount = Mathf.Min(_bank.Value.Value, _maxTransfer,
+                _receiveContainer.LeftToFill.Value - _currentTransferAmount);
 
             _bank.Spend(transferAmount);
 
             GameObject transferringItem =
-                Instantiate(_transferringItemPrefab, _player.InputOutputTransform.position, Quaternion.identity);
+                Instantiate(_itemToTransfer, _player.InputOutputTransform.position, Quaternion.identity);
 
-            PlayAnimation(transferringItem, () => OnReceivedItem(transferAmount));
+            _currentTransferAmount += transferAmount;
+            ThrowItem(transferringItem, () =>
+            {
+                OnReceivedAmount(transferAmount);
+                Destroy(transferringItem);
+                _currentTransferAmount -= transferAmount;
+            });
         }
 
-        private void PlayAnimation(GameObject transferringItem, Action onComplete = null)
+        private void ThrowItem(GameObject item, Action onComplete = null)
         {
-            Vector3 initialScale = transferringItem.transform.localScale;
-            transferringItem.transform.localScale = Vector3.zero;
+            Vector3 initialScale = item.transform.localScale;
+            item.transform.localScale = Vector3.zero;
 
-            Tween jumpTween = transferringItem.transform
+            Tween jumpTween = item.transform
                 .DOJump(GetReceivePoint(), _jumpPower, 1, _duration)
                 .SetEase(_jumpCurve);
 
-            Tween rotateTween = transferringItem.transform
+            Tween rotateTween = item.transform
                 .DORotateQuaternion(Quaternion.LookRotation(Random.insideUnitSphere), _duration)
                 .SetEase(_rotateCurve);
 
-            Tween scaleTween = transferringItem.transform
+            Tween scaleTween = item.transform
                 .DOScale(initialScale, _scaleDuration)
                 .SetEase(_scaleCurve);
 
@@ -177,23 +189,19 @@ namespace Platforms
                 .Append(jumpTween)
                 .Join(rotateTween)
                 .Join(scaleTween)
-                .OnComplete(() =>
-                {
-                    onComplete?.Invoke();
-                    Destroy(transferringItem);
-                })
+                .OnComplete(() => { onComplete?.Invoke(); })
                 .Play();
         }
 
-        private void OnReceivedItem(int amount)
+        private void OnReceivedAmount(int amount)
         {
             _receiveContainer.Add(amount);
             OnReceived?.Invoke();
 
             if (_receiveContainer.IsFull.Value)
             {
-                OnReceivedAll?.Invoke();
                 _receiveContainer.Clear();
+                OnReceivedAll?.Invoke();
                 StopTransferring();
             }
         }
