@@ -1,5 +1,4 @@
 ﻿using System;
-using Data.Persistent;
 using Data.Persistent.Platforms;
 using TMPro;
 using UniRx;

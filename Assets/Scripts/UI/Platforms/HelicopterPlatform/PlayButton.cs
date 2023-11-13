@@ -1,5 +1,4 @@
-﻿using Data.Persistent;
-using Data.Persistent.Platforms;
+﻿using Data.Persistent.Platforms;
 using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;

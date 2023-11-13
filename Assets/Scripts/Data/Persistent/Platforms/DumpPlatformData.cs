@@ -1,7 +1,4 @@
 ﻿namespace Data.Persistent.Platforms
 {
-    public class DumpPlatformData
-    {
-        
-    }
+    public class DumpPlatformData { }
 }
