@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Plugins.Timer
 {
-    public class Timer
+    public class Timer : ITimer
     {
         private readonly FloatReactiveProperty _progress = new FloatReactiveProperty(0f);
         private readonly FloatReactiveProperty _time = new FloatReactiveProperty(0f);
@@ -33,13 +33,11 @@ namespace Plugins.Timer
 
         public void Start(float duration)
         {
-            Stop();
+            Reset();
 
             _duration = Mathf.Max(0, duration);
 
             _onStarted.OnNext(Unit.Default);
-            _progress.Value = 0f;
-            _time.Value = 0f;
             _targetTime.Value = _duration;
 
             _tween = DOTween
@@ -47,10 +45,10 @@ namespace Plugins.Timer
                 .OnUpdate(() => _time.Value = _progress.Value * _targetTime.Value)
                 .OnComplete(() =>
                 {
-                    _onCompleted.OnNext(Unit.Default);
-                    _onStopped.OnNext(Unit.Default);
                     _progress.Value = 1f;
                     _time.Value = _targetTime.Value;
+                    _onCompleted.OnNext(Unit.Default);
+                    _onStopped.OnNext(Unit.Default);
                 })
                 .SetEase(Ease.Linear)
                 .Play();

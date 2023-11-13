@@ -1,7 +1,7 @@
 ﻿using Plugins.Banks;
 using UniRx;
 
-namespace Data.Persistent
+namespace Data.Persistent.Platforms
 {
     public class HelicopterPlatformData
     {

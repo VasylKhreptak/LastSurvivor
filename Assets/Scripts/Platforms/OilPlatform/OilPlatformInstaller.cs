@@ -1,4 +1,4 @@
-﻿using Data.Persistent;
+﻿using Data.Persistent.Platforms;
 using Data.Static.Balance.Upgrade;
 using Flexalon;
 using Grid;
@@ -7,7 +7,6 @@ using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Plugins.Banks;
 using UI.ClampedBanks;
-using UI.Grid;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +17,7 @@ namespace Platforms.OilPlatform
         [Header("References")]
         [SerializeField] private FlexalonGridLayout _grid;
         [SerializeField] private ReceiveZone _receiveZone;
+        [SerializeField] private FuelSpawner _fuelSpawner;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
@@ -35,9 +35,21 @@ namespace Platforms.OilPlatform
             _upgradePreferences = staticDataService.Balance.OilPlatformUpgradePreferences;
         }
 
+        #region MonoBehaviour
+
+        private void OnValidate()
+        {
+            _grid ??= GetComponentInChildren<FlexalonGridLayout>(true);
+            _receiveZone ??= GetComponentInChildren<ReceiveZone>(true);
+            _fuelSpawner ??= GetComponentInChildren<FuelSpawner>(true);
+        }
+
+        #endregion
+
         public override void InstallBindings()
         {
             Container.BindInstance(_platformData).AsSingle();
+            Container.BindInstance(_fuelSpawner).AsSingle();
             BindFuelGrid();
             BindUpgradeLogic();
         }

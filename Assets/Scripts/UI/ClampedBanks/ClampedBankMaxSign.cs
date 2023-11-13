@@ -6,7 +6,7 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace UI.Grid
+namespace UI.ClampedBanks
 {
     public class ClampedBankMaxSign : MonoBehaviour
     {

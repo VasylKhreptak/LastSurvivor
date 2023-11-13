@@ -1,5 +1,5 @@
 ﻿using System;
-using Data.Persistent;
+using Data.Persistent.Platforms;
 using Grid;
 using Infrastructure.Data.Static;
 using Infrastructure.Services.StaticData.Core;
@@ -10,7 +10,7 @@ using Zenject;
 
 namespace Platforms.OilPlatform
 {
-    public class FuelBarrelSpawner : MonoBehaviour
+    public class FuelSpawner : MonoBehaviour
     {
         private OilPlatformData _platformData;
         private GamePrefabs _gamePrefabs;
@@ -28,6 +28,8 @@ namespace Platforms.OilPlatform
 
         private IDisposable _timerCompletedSubscription;
         private IDisposable _gridSubscription;
+
+        public IReadonlyTimer Timer => _timer;
 
         #region MonoBehaviour
 
@@ -57,16 +59,20 @@ namespace Platforms.OilPlatform
             _timerCompletedSubscription = _timer.OnCompleted.Subscribe(_ =>
             {
                 SpawnBarrel();
+
+                if (_platformData.GridData.IsFull.Value)
+                    return;
+
                 StartTimer();
             });
+
             StartTimer();
         }
 
         private void StopSpawning()
         {
-            _timer.Stop();
-            _timer.Reset();
             _timerCompletedSubscription?.Dispose();
+            _timer.Reset();
         }
 
         private void SpawnBarrel()
