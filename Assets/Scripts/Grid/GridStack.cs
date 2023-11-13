@@ -1,6 +1,6 @@
 ﻿using Extensions;
 using Flexalon;
-using UniRx;
+using Plugins.Banks;
 using UnityEngine;
 
 namespace Grid
@@ -8,35 +8,30 @@ namespace Grid
     public class GridStack
     {
         public readonly FlexalonGridLayout Grid;
-        private readonly GridData _gridData;
+        public readonly ClampedIntegerBank Data;
 
-        public GridStack(FlexalonGridLayout grid, GridData gridData)
+        public GridStack(FlexalonGridLayout grid, ClampedIntegerBank data)
         {
             Grid = grid;
-            _gridData = gridData;
+            Data = data;
         }
-
-        public IReadOnlyReactiveProperty<int> Count => _gridData.Count;
-        public IReadOnlyReactiveProperty<int> Capacity => _gridData.Capacity;
-        public IReadOnlyReactiveProperty<bool> IsFull => _gridData.IsFull;
-        public IReadOnlyReactiveProperty<bool> IsEmpty => _gridData.IsEmpty;
 
         public Transform Root => Grid.transform;
 
         public bool TryPush(GameObject gameObject)
         {
-            if (IsFull.Value)
+            if (Data.IsFull.Value)
                 return false;
 
             gameObject.transform.SetParent(Grid.transform, true);
             Grid.ForceUpdate();
-            _gridData.Count.Value++;
+            Data.Add(1);
             return true;
         }
 
         public bool TryPop(out GameObject gameObject)
         {
-            if (IsEmpty.Value)
+            if (Data.IsEmpty.Value)
             {
                 gameObject = null;
                 return false;
@@ -44,12 +39,12 @@ namespace Grid
 
             gameObject = Grid.transform.GetChild(Grid.transform.childCount - 1).gameObject;
             gameObject.transform.SetParent(null, true);
-            _gridData.Count.Value--;
+            Data.Spend(1);
             Grid.ForceUpdate();
             return true;
         }
 
-        public void LoadFromGridData(GameObject prefab)
+        public void LoadWith(GameObject prefab)
         {
             Transform[] children = Grid.transform.GetChildren();
 
@@ -58,7 +53,7 @@ namespace Grid
                 Object.Destroy(children[i].gameObject);
             }
 
-            for (int i = 0; i < _gridData.Count.Value; i++)
+            for (int i = 0; i < Data.Value.Value; i++)
             {
                 GameObject gameObject = Object.Instantiate(prefab, Grid.transform);
                 gameObject.transform.position = Grid.transform.position;

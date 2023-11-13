@@ -56,7 +56,7 @@ namespace Platforms.OilPlatform
 
         private void TryTransfer()
         {
-            if (_gridStack.IsEmpty.Value || _playerGridStack.IsFull.Value)
+            if (_gridStack.Data.IsEmpty.Value || _playerGridStack.Data.IsFull.Value)
                 return;
 
             if (_gridStack.TryPop(out GameObject barrelGameObject) == false)
@@ -64,7 +64,7 @@ namespace Platforms.OilPlatform
                 _gridStack.TryPush(barrelGameObject);
                 return;
             }
-            
+
             _playerGridStack.TryPush(barrelGameObject);
         }
     }

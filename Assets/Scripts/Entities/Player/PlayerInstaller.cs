@@ -2,6 +2,7 @@
 using Flexalon;
 using Grid;
 using Infrastructure.Services.StaticData.Core;
+using Plugins.Banks;
 using UnityEngine;
 using Zenject;
 using Zenject.Infrastructure.Toggleable;
@@ -35,10 +36,9 @@ namespace Entities.Player
 
         private void BindFuelGrid()
         {
-            GridData gridData = new GridData(1, 1, 10);
-            Container.BindInstance(gridData).AsSingle();
-            Container.BindInstance(_barrelLayout).AsSingle();
-            Container.Bind<GridStack>().AsSingle();
+            ClampedIntegerBank clampedBank = new ClampedIntegerBank(0, 10);
+            GridStack gridStack = new GridStack(_barrelLayout, clampedBank);
+            Container.BindInstance(gridStack).AsSingle();
         }
     }
 }

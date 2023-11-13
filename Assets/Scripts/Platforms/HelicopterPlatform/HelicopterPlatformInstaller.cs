@@ -4,6 +4,7 @@ using Infrastructure.Data.Static;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Plugins.Banks;
+using UI.ClampedBanks;
 using UnityEngine;
 using Zenject;
 
@@ -43,8 +44,6 @@ namespace Platforms.HelicopterPlatform
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_bank).AsSingle();
-            Container.BindInstance(_upgradeContainer).AsSingle();
             Container.BindInstance(_platformData).AsSingle();
             Container.BindInstance(_oilBarrelReceiver).AsSingle();
 
@@ -53,9 +52,14 @@ namespace Platforms.HelicopterPlatform
 
         private void BindUpgradeLogic()
         {
-            Container.BindInstance(_helicopterPlatformUpgradePreferences).AsSingle();
+            Container.BindInstance(_upgradeContainer).WhenInjectedInto<ClampedBankLeftValueText>();
+
+            Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>();
+            Container.BindInstance(_upgradeContainer).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_prefabs.Gear).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_receiveZone).AsSingle();
+
+            Container.BindInstance(_helicopterPlatformUpgradePreferences).WhenInjectedInto<HelicopterPlatformUpgrader>();
             Container.BindInterfacesTo<HelicopterPlatformUpgrader>().AsSingle();
         }
     }

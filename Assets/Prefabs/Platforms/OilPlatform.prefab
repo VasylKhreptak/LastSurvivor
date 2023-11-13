@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 4079778274763443507}
   - component: {fileID: 6450244405009343747}
   - component: {fileID: 4690832558537112158}
-  - component: {fileID: 5237347242847004886}
   m_Layer: 0
   m_Name: FuelGrid
   m_TagString: Untagged
@@ -312,19 +311,6 @@ MonoBehaviour:
   _paddingBottom: 0
   _paddingFront: 0
   _paddingBack: 0
---- !u!114 &5237347242847004886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3554642125241835761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87cd434c052349bfae5bc5cf047482e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _grid: {fileID: 4079778274763443507}
 --- !u!1 &4694290787639044216
 GameObject:
   m_ObjectHideFlags: 0

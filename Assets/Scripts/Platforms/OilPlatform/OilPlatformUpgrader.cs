@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.Persistent;
 using Data.Static.Balance.Upgrade;
+using UnityEngine;
 using Zenject;
 
 namespace Platforms.OilPlatform
@@ -31,24 +32,38 @@ namespace Platforms.OilPlatform
         {
             _platformData.Level.Value++;
 
-            ReduceProduceTime();
+            TryReduceProduceTime();
             TryIncreaseUpgradeCost();
+            TryIncreaseFuelCapacity();
         }
 
-        private void ReduceProduceTime()
+        private void TryReduceProduceTime()
         {
-            _platformData.BarrelProduceDuration.Value -=
-                _platformData.BarrelProduceDuration.Value * _upgradePreferences.ProduceTimePercentageReduce;
+            float produceTime = _platformData.BarrelProduceDuration.Value;
+            produceTime -= produceTime * _upgradePreferences.ProduceTimePercentageReduce;
+            produceTime = Mathf.Max(produceTime, _upgradePreferences.MinProduceTime);
+
+            _platformData.BarrelProduceDuration.Value = produceTime;
         }
 
         private void TryIncreaseUpgradeCost()
         {
             if (_platformData.Level.Value % _upgradePreferences.UpgradeCostEachLevel == 0)
             {
-                int upgradeCost = _platformData.UpgradeContainer.MaxValue.Value +
-                                  _upgradePreferences.UpgradeCostEachUpgrade;
+                int upgradeCost = _platformData.UpgradeContainer.MaxValue.Value + _upgradePreferences.CostUpgradeAmount;
 
                 _platformData.UpgradeContainer.SetMaxValue(upgradeCost);
+            }
+        }
+
+        private void TryIncreaseFuelCapacity()
+        {
+            if (_platformData.Level.Value % _upgradePreferences.UpgradeFuelCapacityEachLevel == 0)
+            {
+                int fuelCapacity = _platformData.GridData.MaxValue.Value + _upgradePreferences.FuelCapacityUpgradeAmount;
+                fuelCapacity = Mathf.Min(fuelCapacity, _upgradePreferences.MaxFuelCapacity);
+
+                _platformData.GridData.SetMaxValue(fuelCapacity);
             }
         }
     }

@@ -73,7 +73,7 @@ namespace Platforms.HelicopterPlatform
 
         private void ReceiveBarrel()
         {
-            if (_playerGrid.IsEmpty.Value || _playerGrid.TryPop(out GameObject barrel) == false)
+            if (_playerGrid.Data.IsEmpty.Value || _playerGrid.TryPop(out GameObject barrel) == false)
                 return;
 
             Tween jumpTween = barrel.transform

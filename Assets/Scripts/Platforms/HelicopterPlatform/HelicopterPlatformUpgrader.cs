@@ -38,12 +38,12 @@ namespace Platforms.HelicopterPlatform
 
         private void TryIncreaseTankCapacity()
         {
-            bool canUpgradeTankCapacity = _platformData.Level.Value % _platformUpgradePreferences.FuelCapacityEachLevel == 0;
+            bool canUpgradeTankCapacity = _platformData.Level.Value % _platformUpgradePreferences.UpgradeFuelCapacityEachLevel == 0;
 
             if (canUpgradeTankCapacity)
             {
                 int tankCapacity = _platformData.FuelTank.MaxValue.Value +
-                                   _platformUpgradePreferences.FuelCapacityEachUpgrade;
+                                   _platformUpgradePreferences.FuelCapacityUpgradeAmount;
 
                 _platformData.FuelTank.SetMaxValue(tankCapacity);
             }
@@ -52,10 +52,10 @@ namespace Platforms.HelicopterPlatform
         private void TryIncreaseIncomeMultiplier()
         {
             bool canUpgradeIncomeMultiplier =
-                _platformData.Level.Value % _platformUpgradePreferences.IncomeMultiplierEachLevel == 0;
+                _platformData.Level.Value % _platformUpgradePreferences.UpgradeIncomeMultiplierEachLevel == 0;
 
             if (canUpgradeIncomeMultiplier)
-                _platformData.IncomeMultiplier.Value += _platformUpgradePreferences.IncomeMultiplierEachUpgrade;
+                _platformData.IncomeMultiplier.Value += _platformUpgradePreferences.IncomeMultiplierUpgradeAmount;
         }
 
         private void TryIncreaseUpgradeCost()
@@ -64,7 +64,7 @@ namespace Platforms.HelicopterPlatform
 
             if (canUpgradeUpgradeCost)
             {
-                int cost = _platformData.UpgradeContainer.MaxValue.Value + _platformUpgradePreferences.UpgradeCostEachUpgrade;
+                int cost = _platformData.UpgradeContainer.MaxValue.Value + _platformUpgradePreferences.CostUpgradeAmount;
 
                 _platformData.UpgradeContainer.SetMaxValue(cost);
             }

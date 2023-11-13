@@ -39,7 +39,7 @@ namespace Platforms.OilPlatform
 
         private void StartObserving()
         {
-            _gridSubscription = _gridStack.IsFull.Subscribe(isFull =>
+            _gridSubscription = _gridStack.Data.IsFull.Subscribe(isFull =>
             {
                 if (isFull)
                     StopSpawning();

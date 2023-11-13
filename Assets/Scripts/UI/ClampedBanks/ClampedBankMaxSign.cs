@@ -1,14 +1,14 @@
 ﻿using System;
-using Grid;
 using Plugins.Animations;
 using Plugins.Animations.Core;
+using Plugins.Banks;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 namespace UI.Grid
 {
-    public class GridMaxSign : MonoBehaviour
+    public class ClampedBankMaxSign : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private GameObject _gameObject;
@@ -17,17 +17,17 @@ namespace UI.Grid
         [SerializeField] private FadeAnimation _fadeShowAnimation;
         [SerializeField] private ScaleAnimation _scaleShowAnimation;
 
-        private GridData _gridData;
+        private ClampedIntegerBank _clampedBank;
 
         [Inject]
-        private void Constructor(GridData gridData)
+        private void Constructor(ClampedIntegerBank clampedBank)
         {
-            _gridData = gridData;
+            _clampedBank = clampedBank;
         }
 
         private IAnimation _showAnimation;
 
-        private IDisposable _gridFullSubscription;
+        private IDisposable _isFullSubscription;
 
         #region MonoBehaviour
 
@@ -51,7 +51,7 @@ namespace UI.Grid
 
         private void StartObserving()
         {
-            _gridFullSubscription = _gridData.IsFull.Subscribe(isFull =>
+            _isFullSubscription = _clampedBank.IsFull.Subscribe(isFull =>
             {
                 if (isFull)
                     Show();
@@ -60,7 +60,7 @@ namespace UI.Grid
             });
         }
 
-        private void StopObserving() => _gridFullSubscription?.Dispose();
+        private void StopObserving() => _isFullSubscription?.Dispose();
 
         private void Show()
         {

@@ -6,6 +6,8 @@ using Infrastructure.Data.Static;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Plugins.Banks;
+using UI.ClampedBanks;
+using UI.Grid;
 using UnityEngine;
 using Zenject;
 
@@ -35,27 +37,37 @@ namespace Platforms.OilPlatform
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_bank).AsSingle();
-            Container.BindInstance(_upgradeContainer).AsSingle();
             Container.BindInstance(_platformData).AsSingle();
-            Container.BindInstance(_platformData.GridData).AsSingle();
-            Container.BindInstance(_grid).AsSingle();
             BindFuelGrid();
             BindUpgradeLogic();
         }
 
         private void BindFuelGrid()
         {
+            Container.BindInstance(_grid).WhenInjectedInto<GridStack>();
+            Container.BindInstance(_platformData.GridData).WhenInjectedInto<GridStack>();
             GridStack gridStack = Container.Instantiate<GridStack>();
-            gridStack.LoadFromGridData(_gamePrefabs.FuelBarrel);
+            gridStack.LoadWith(_gamePrefabs.FuelBarrel);
             Container.BindInstance(gridStack).AsSingle();
+            Container.BindInstance(_platformData.GridData).WhenInjectedInto<ClampedBankMaxSign>();
         }
 
         private void BindUpgradeLogic()
         {
-            Container.BindInstance(_upgradePreferences).AsSingle();
+            Container.BindInstance(_upgradeContainer).WhenInjectedInto<ClampedBankLeftValueText>();
+
+            Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>(); //works
+            Container.BindInstance(_upgradeContainer).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_gamePrefabs.Gear).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_receiveZone).AsSingle();
+
+            // Container
+            //     .BindInstance(
+            //         _receiveZone) //do not work.Unable to resolve IntegerBank(_bank) when building object with type ReceiveZone
+            //     .AsSingle()
+            //     .WithArguments(_bank, _upgradeContainer, _gamePrefabs.Gear);
+
+            Container.BindInstance(_upgradePreferences).WhenInjectedInto<OilPlatformUpgrader>();
             Container.BindInterfacesTo<OilPlatformUpgrader>().AsSingle();
         }
     }
