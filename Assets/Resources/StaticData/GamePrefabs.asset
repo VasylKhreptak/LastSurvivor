@@ -18,6 +18,8 @@ MonoBehaviour:
     type: 3}
   _oilPlatform: {fileID: 124250166165220449, guid: e7424621a744c414aac2c5076d708685,
     type: 3}
+  _dumpPlatform: {fileID: 5809007234265793310, guid: d3faf9d6180c9c745ade5e05713fee17,
+    type: 3}
   _fuelBarrel: {fileID: 5725907165404555927, guid: aad81a3a9a7ae2241acd3b64bab0b2bb,
     type: 3}
   _gear: {fileID: 1556523994000301813, guid: 841c142e7f258d141aea36f81f453d0f, type: 3}

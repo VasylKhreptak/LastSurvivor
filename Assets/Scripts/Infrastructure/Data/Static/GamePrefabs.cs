@@ -12,6 +12,7 @@ namespace Infrastructure.Data.Static
         [Header("Platforms")]
         [SerializeField] private GameObject _helicopterPlatform;
         [SerializeField] private GameObject _oilPlatform;
+        [SerializeField] private GameObject _dumpPlatform;
 
         [Header("Other")]
         [SerializeField] private GameObject _fuelBarrel;
@@ -24,6 +25,7 @@ namespace Infrastructure.Data.Static
 
         public GameObject HelicopterPlatform => _helicopterPlatform;
         public GameObject OilPlatform => _oilPlatform;
+        public GameObject DumpPlatform => _dumpPlatform;
 
         public GameObject FuelBarrel => _fuelBarrel;
 
