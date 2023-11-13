@@ -5,7 +5,6 @@ using Infrastructure.Services.StaticData.Core;
 using Plugins.Banks;
 using UnityEngine;
 using Zenject;
-using Zenject.Infrastructure.Toggleable;
 
 namespace Entities.Player
 {
@@ -29,7 +28,6 @@ namespace Entities.Player
             Container.Bind<CharacterController>().FromComponentOnRoot().AsSingle();
             Container.Bind<PlayerPreferences>().FromInstance(_staticDataService.Balance.PlayerPreferences).AsSingle();
             Container.BindInterfacesTo<PlayerMovement>().AsSingle();
-            Container.Bind<ToggleableManager>().AsSingle();
 
             BindFuelGrid();
         }
