@@ -16,6 +16,11 @@ namespace Grid
             Data = data;
         }
 
+        public GridStack(FlexalonGridLayout grid, ClampedIntegerBank data, GameObject initialPrefab) : this(grid, data)
+        {
+            LoadWith(initialPrefab);
+        }
+
         public Transform Root => Grid.transform;
 
         public bool TryPush(GameObject gameObject)
@@ -44,7 +49,7 @@ namespace Grid
             return true;
         }
 
-        public void LoadWith(GameObject prefab)
+        private void LoadWith(GameObject prefab)
         {
             Transform[] children = Grid.transform.GetChildren();
 
@@ -56,8 +61,8 @@ namespace Grid
             for (int i = 0; i < Data.Value.Value; i++)
             {
                 GameObject gameObject = Object.Instantiate(prefab, Grid.transform);
+
                 gameObject.transform.position = Grid.transform.position;
-                gameObject.transform.localScale = Vector3.zero;
             }
         }
     }

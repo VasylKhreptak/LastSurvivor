@@ -57,10 +57,7 @@ namespace Platforms.OilPlatform
 
         private void BindFuelGrid()
         {
-            Container.BindInstance(_grid).WhenInjectedInto<GridStack>();
-            Container.BindInstance(_platformData.GridData).WhenInjectedInto<GridStack>();
-            GridStack gridStack = Container.Instantiate<GridStack>();
-            gridStack.LoadWith(_prefabs[Prefab.FuelBarrel]);
+            GridStack gridStack = new GridStack(_grid, _platformData.GridData, _prefabs[Prefab.FuelBarrel]);
             Container.BindInstance(gridStack).AsSingle();
             Container.BindInstance(_platformData.GridData).WhenInjectedInto<ClampedBankMaxSign>();
         }
