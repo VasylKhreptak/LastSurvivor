@@ -1,6 +1,7 @@
 ﻿using Data.Persistent.Platforms;
 using Data.Static.Balance.Upgrade;
 using Infrastructure.Data.Static;
+using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Plugins.Banks;
@@ -19,7 +20,6 @@ namespace Platforms.HelicopterPlatform
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
         private HelicopterPlatformData _platformData;
-        private GamePrefabs _prefabs;
         private HelicopterPlatformUpgradePreferences _helicopterPlatformUpgradePreferences;
 
         [Inject]
@@ -28,7 +28,6 @@ namespace Platforms.HelicopterPlatform
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
             _upgradeContainer = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData.UpgradeContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.HelicopterPlatformData;
-            _prefabs = staticDataService.Prefabs;
             _helicopterPlatformUpgradePreferences = staticDataService.Balance.HelicopterPlatformUpgradePreferences;
         }
 
@@ -56,7 +55,6 @@ namespace Platforms.HelicopterPlatform
 
             Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_upgradeContainer).WhenInjectedInto<ReceiveZone>();
-            Container.BindInstance(_prefabs.Gear).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_receiveZone).AsSingle();
 
             Container.BindInstance(_helicopterPlatformUpgradePreferences).WhenInjectedInto<HelicopterPlatformUpgrader>();

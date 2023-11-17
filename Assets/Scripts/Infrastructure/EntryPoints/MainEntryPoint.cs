@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using Entities.Player;
 using Infrastructure.Data.Static;
+using Infrastructure.Data.Static.Core;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
@@ -38,14 +39,14 @@ namespace Infrastructure.EntryPoints
 
         private Transform InitializePlayer()
         {
-            GameObject playerObject = _container.InstantiatePrefab(_prefabs.Player);
+            GameObject playerObject = _container.InstantiatePrefab(_prefabs[Prefab.Player]);
             _container.Bind<Player>().FromComponentOn(playerObject).AsSingle();
             return playerObject.transform;
         }
 
         private void InitializeCamera(Transform target)
         {
-            GameObject cameraRoot = _container.InstantiatePrefab(_prefabs.Camera);
+            GameObject cameraRoot = _container.InstantiatePrefab(_prefabs[Prefab.Camera]);
             CinemachineVirtualCamera virtualCamera = cameraRoot.GetComponentInChildren<CinemachineVirtualCamera>(true);
             virtualCamera.Follow = target;
             virtualCamera.LookAt = target;
@@ -61,10 +62,10 @@ namespace Infrastructure.EntryPoints
             InitializeDumpPlatform();
         }
 
-        private void InitializeHelicopterPlatform() => _container.InstantiatePrefab(_prefabs.HelicopterPlatform);
+        private void InitializeHelicopterPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.HelicopterPlatform]);
 
-        private void InitializeOilPlatform() => _container.InstantiatePrefab(_prefabs.OilPlatform);
+        private void InitializeOilPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.OilPlatform]);
 
-        private void InitializeDumpPlatform() => _container.InstantiatePrefab(_prefabs.DumpPlatform);
+        private void InitializeDumpPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.DumpPlatform]);
     }
 }

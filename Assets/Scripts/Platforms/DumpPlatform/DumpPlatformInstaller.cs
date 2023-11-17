@@ -1,7 +1,6 @@
 ﻿using Data.Persistent.Platforms;
-using Infrastructure.Data.Static;
+using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
-using Infrastructure.Services.StaticData.Core;
 using Plugins.Banks;
 using UI.ClampedBanks;
 using UnityEngine;
@@ -17,15 +16,13 @@ namespace Platforms.DumpPlatform
         private IntegerBank _bank;
         private ClampedIntegerBank _hireWorkerContainer;
         private DumpPlatformData _platformData;
-        private GamePrefabs _gamePrefabs;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
+        private void Constructor(IPersistentDataService persistentDataService)
         {
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
             _hireWorkerContainer = persistentDataService.PersistentData.PlayerData.DumpPlatformData.HireWorkerContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.DumpPlatformData;
-            _gamePrefabs = staticDataService.Prefabs;
         }
 
         #region MonoBehaviour
@@ -42,6 +39,7 @@ namespace Platforms.DumpPlatform
             Container.BindInstance(_platformData).AsSingle();
             BindHireWorkerZone();
             BindWorkersCountText();
+            BindWorkersRecruiter();
         }
 
         private void BindHireWorkerZone()
@@ -50,13 +48,17 @@ namespace Platforms.DumpPlatform
 
             Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<ReceiveZone>();
-            Container.BindInstance(_gamePrefabs.Gear).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_hireWorkerZone).AsSingle();
         }
 
         private void BindWorkersCountText()
         {
             Container.BindInstance(_platformData.WorkersBank).WhenInjectedInto<ClampedBankValuesText>();
+        }
+
+        private void BindWorkersRecruiter()
+        {
+            Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<WorkersRecruiter>();
         }
     }
 }

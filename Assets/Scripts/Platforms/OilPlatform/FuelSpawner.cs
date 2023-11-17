@@ -2,6 +2,7 @@
 using Data.Persistent.Platforms;
 using Grid;
 using Infrastructure.Data.Static;
+using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.StaticData.Core;
 using Plugins.Timer;
 using UniRx;
@@ -77,7 +78,7 @@ namespace Platforms.OilPlatform
 
         private void SpawnBarrel()
         {
-            GameObject barrel = Instantiate(_gamePrefabs.FuelBarrel);
+            GameObject barrel = Instantiate(_gamePrefabs[Prefab.FuelBarrel]);
             _gridStack.TryPush(barrel);
             barrel.transform.localScale = Vector3.zero;
             barrel.transform.localPosition =

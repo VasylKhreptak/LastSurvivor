@@ -1,7 +1,10 @@
 ﻿using System;
 using DG.Tweening;
 using Entities.Player;
+using Infrastructure.Data.Static;
+using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.Input.Main.Core;
+using Infrastructure.Services.StaticData.Core;
 using Plugins.Animations.Extensions;
 using Plugins.Banks;
 using UniRx;
@@ -15,6 +18,7 @@ namespace Platforms
     {
         [Header("References")]
         [SerializeField] private Transform _receiveToTransform;
+        [SerializeField] private Prefab _prefabType;
 
         [Header("Animation Preferences")]
         [SerializeField] private float _scaleDuration = 0.2f;
@@ -41,17 +45,17 @@ namespace Platforms
         private ClampedIntegerBank _receiveContainer;
         private IMainInputService _inputService;
         private Player _player;
-        private GameObject _itemToTransfer;
+        private GamePrefabs _gamePrefabs;
 
         [Inject]
         public void Constructor(IntegerBank bank, ClampedIntegerBank receiveContainer, IMainInputService inputService, Player player,
-            GameObject itemToTransfer)
+            IStaticDataService staticDataService)
         {
             _bank = bank;
             _receiveContainer = receiveContainer;
             _inputService = inputService;
             _player = player;
-            _itemToTransfer = itemToTransfer;
+            _gamePrefabs = staticDataService.Prefabs;
         }
 
         private IDisposable _inputInteractionSubscription;
@@ -154,7 +158,7 @@ namespace Platforms
             _bank.Spend(transferAmount);
 
             GameObject transferringItem =
-                Instantiate(_itemToTransfer, _player.InputOutputTransform.position, Quaternion.identity);
+                Instantiate(_gamePrefabs[_prefabType], _player.InputOutputTransform.position, Quaternion.identity);
 
             _currentTransferAmount += transferAmount;
             ThrowItem(transferringItem, () =>
