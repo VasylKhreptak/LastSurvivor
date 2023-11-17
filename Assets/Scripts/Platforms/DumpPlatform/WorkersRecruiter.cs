@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Data.Persistent.Platforms;
 using Plugins.Banks;
 using UnityEngine;
@@ -11,22 +12,19 @@ namespace Platforms.DumpPlatform
         [Header("References")]
         [SerializeField] private List<GameObject> _workers;
 
-        [Header("Preferences")]
-        [SerializeField] private int _workerPriceIncrement = 25;
-
         private ReceiveZone _receiveZone;
         private DumpPlatformData _platformData;
-        private ClampedIntegerBank _hireZone;
         private ClampedIntegerBank _workersBank;
 
         [Inject]
-        private void Constructor(ReceiveZone receiveZone, DumpPlatformData platformData, ClampedIntegerBank hireZone)
+        private void Constructor(ReceiveZone receiveZone, DumpPlatformData platformData)
         {
             _receiveZone = receiveZone;
             _platformData = platformData;
-            _hireZone = hireZone;
             _workersBank = _platformData.WorkersBank;
         }
+
+        public event Action OnHiredWorker;
 
         #region MonoBehaviour
 
@@ -58,15 +56,13 @@ namespace Platforms.DumpPlatform
 
         private void OnReceiveZoneFilled()
         {
-            if (TryHireWorker() == false)
-                return;
-
-            IncreaseWorkerPrice();
+            if (TryHireWorker())
+                OnHiredWorker?.Invoke();
         }
 
         private bool TryHireWorker()
         {
-            foreach (var worker in _workers)
+            foreach (GameObject worker in _workers)
             {
                 if (worker.activeSelf)
                     continue;
@@ -78,9 +74,5 @@ namespace Platforms.DumpPlatform
 
             return false;
         }
-
-        private void IncreaseWorkerPrice() => _hireZone.SetMaxValue(_hireZone.MaxValue.Value + _workerPriceIncrement);
-
-        private void OnHiredAllWorkers() { }
     }
 }

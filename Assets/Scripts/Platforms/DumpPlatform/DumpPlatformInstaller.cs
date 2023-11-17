@@ -1,5 +1,4 @@
 ﻿using Data.Persistent.Platforms;
-using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Plugins.Banks;
 using UI.ClampedBanks;
@@ -12,6 +11,7 @@ namespace Platforms.DumpPlatform
     {
         [Header("References")]
         [SerializeField] private ReceiveZone _hireWorkerZone;
+        [SerializeField] private WorkersRecruiter _workersRecruiter;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _hireWorkerContainer;
@@ -30,6 +30,7 @@ namespace Platforms.DumpPlatform
         private void OnValidate()
         {
             _hireWorkerZone ??= GetComponentInChildren<ReceiveZone>(true);
+            _workersRecruiter ??= GetComponentInChildren<WorkersRecruiter>(true);
         }
 
         #endregion
@@ -58,7 +59,9 @@ namespace Platforms.DumpPlatform
 
         private void BindWorkersRecruiter()
         {
-            Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<WorkersRecruiter>();
+            Container.BindInstance(_workersRecruiter).AsSingle();
+            Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<WorkerPriceIncrementor>();
+            Container.BindInterfacesTo<WorkerPriceIncrementor>().AsSingle();
         }
     }
 }
