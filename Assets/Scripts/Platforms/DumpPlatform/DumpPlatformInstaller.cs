@@ -79,6 +79,7 @@ namespace Platforms.DumpPlatform
             GridStack gridStack = new GridStack(_collectZone, _platformData.GridData, _prefabs[Prefab.Gear]);
             Container.BindInstance(gridStack).AsSingle();
             Container.BindInstance(_bank).WhenInjectedInto<CollectZone>();
+            Container.BindInstance(_platformData.GridData).WhenInjectedInto<ClampedBankMaxSign>();
         }
     }
 }

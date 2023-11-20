@@ -31,7 +31,12 @@ namespace UI.ClampedBanks
 
         #region MonoBehaviour
 
-        private void Awake() => _showAnimation = new AnimationGroup(_fadeShowAnimation, _scaleShowAnimation);
+        private void Awake()
+        {
+            _showAnimation = new AnimationGroup(_fadeShowAnimation, _scaleShowAnimation);
+
+            UpdateStateImmediately();
+        }
 
         private void OnValidate()
         {
@@ -69,5 +74,15 @@ namespace UI.ClampedBanks
         }
 
         private void Hide() => _showAnimation.PlayBackward(() => _gameObject.SetActive(false));
+
+        private void UpdateStateImmediately()
+        {
+            if (_clampedBank.IsFull.Value)
+                _showAnimation.SetEndState();
+            else
+                _showAnimation.SetStartState();
+
+            _gameObject.SetActive(_clampedBank.IsFull.Value);
+        }
     }
 }
