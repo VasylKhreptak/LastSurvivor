@@ -5,13 +5,8 @@ using Zenject;
 
 namespace Infrastructure.StateMachine.Game
 {
-    public class GameStateMachine : StateMachine<IGameState>, ITickable
+    public class GameStateMachine : StateMachine<IGameState>
     {
         protected GameStateMachine(GameStateFactory stateFactory) : base(stateFactory) { }
-
-        public void Tick()
-        {
-            Update();
-        }
     }
 }

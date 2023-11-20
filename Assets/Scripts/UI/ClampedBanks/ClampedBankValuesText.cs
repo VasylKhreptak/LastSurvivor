@@ -22,7 +22,7 @@ namespace UI.ClampedBanks
             _bank = bank;
         }
 
-        private CompositeDisposable _subscriptions = new CompositeDisposable();
+        private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
 
         #region MonoBehaviour
 

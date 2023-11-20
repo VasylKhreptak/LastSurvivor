@@ -1,6 +1,7 @@
 ﻿using System;
 using Infrastructure.StateMachine.Main.States.Core;
 using Infrastructure.StateMachine.Main.States.Info.Core;
+using Zenject;
 
 namespace Infrastructure.StateMachine.Main.States.Info
 {
@@ -8,14 +9,14 @@ namespace Infrastructure.StateMachine.Main.States.Info
     {
         private readonly StateMachine<TBaseState> _stateMachine;
         private readonly TState _state;
-        private readonly IUpdatable _updatable;
+        private readonly ITickable _tickable;
         private readonly IExitable _exitable;
 
         public StateInfo(StateMachine<TBaseState> stateMachine, TState state)
         {
             _stateMachine = stateMachine;
             _state = state;
-            _updatable = state as IUpdatable;
+            _tickable = state as ITickable;
             _exitable = state as IExitable;
             StateType = typeof(TState);
         }
@@ -24,7 +25,7 @@ namespace Infrastructure.StateMachine.Main.States.Info
 
         public virtual void Enter() => _stateMachine.Enter<TState>();
 
-        public void Update() => _updatable?.Update();
+        public void Tick() => _tickable?.Tick();
 
         public void Exit() => _exitable?.Exit();
     }

@@ -8,7 +8,7 @@ namespace Infrastructure.StateMachine.Main.States.Info.Core
 
         void Enter();
 
-        void Update();
+        void Tick();
 
         void Exit();
     }

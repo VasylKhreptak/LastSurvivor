@@ -4,22 +4,23 @@ using Infrastructure.StateMachine.Main.States.Core;
 using Infrastructure.StateMachine.Main.States.Factory.Core;
 using Infrastructure.StateMachine.Main.States.Info;
 using Infrastructure.StateMachine.Main.States.Info.Core;
+using Zenject;
 
 namespace Infrastructure.StateMachine.Main
 {
-    public class StateMachine<TBaseState> : IStateMachine<TBaseState>, IUpdatable, IDisposable
+    public class StateMachine<TBaseState> : IStateMachine<TBaseState>, ITickable, IDisposable
     {
-        private IStateInfo _currentStateInfo;
-        private IStateInfo _lastStateInfo;
-
-        public Type ActiveStateType => _currentStateInfo?.StateType;
-
         private readonly IStateFactory _stateFactory;
 
         protected StateMachine(IStateFactory stateFactory)
         {
             _stateFactory = stateFactory;
         }
+
+        private IStateInfo _currentStateInfo;
+        private IStateInfo _lastStateInfo;
+
+        public Type ActiveStateType => _currentStateInfo?.StateType;
 
         public TState Enter<TState>() where TState : class, TBaseState, IState
         {
@@ -52,10 +53,7 @@ namespace Infrastructure.StateMachine.Main
             return true;
         }
 
-        public void Update()
-        {
-            _currentStateInfo?.Update();
-        }
+        public void Tick() => _currentStateInfo?.Tick();
 
         public void Dispose()
         {
