@@ -9,34 +9,19 @@ namespace Infrastructure.StateMachine.Game.Factory
 {
     public class GameStateFactory : StateFactory
     {
-        private readonly Dictionary<Type, IBaseState> _cachedStatesMap;
-
-        public GameStateFactory(DiContainer container) : base(container)
-        {
-            _cachedStatesMap = new Dictionary<Type, IBaseState>();
-        }
+        public GameStateFactory(DiContainer container) : base(container) { }
 
         protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister() =>
             new Dictionary<Type, Func<IBaseState>>
             {
-                [typeof(BootstrapState)] = Get<BootstrapState>,
-                [typeof(SetupApplicationState)] = Get<SetupApplicationState>,
-                [typeof(LoadDataState)] = Get<LoadDataState>,
-                [typeof(BootstrapAnalyticsState)] = Get<BootstrapAnalyticsState>,
-                [typeof(TryLoadTutorialState)] = Get<TryLoadTutorialState>,
-                [typeof(LoadLevelState)] = Get<LoadLevelState>,
-                [typeof(GameLoopState)] = Get<GameLoopState>,
-                [typeof(LoadAppropriateLevelState)] = Get<LoadAppropriateLevelState>
+                [typeof(BootstrapState)] = _container.Resolve<BootstrapState>,
+                [typeof(SetupApplicationState)] = _container.Resolve<SetupApplicationState>,
+                [typeof(LoadDataState)] = _container.Resolve<LoadDataState>,
+                [typeof(BootstrapAnalyticsState)] = _container.Resolve<BootstrapAnalyticsState>,
+                [typeof(TryLoadTutorialState)] = _container.Resolve<TryLoadTutorialState>,
+                [typeof(LoadLevelState)] = _container.Resolve<LoadLevelState>,
+                [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
+                [typeof(LoadAppropriateLevelState)] = _container.Resolve<LoadAppropriateLevelState>
             };
-
-        private IBaseState Get<TState>() where TState : IBaseState
-        {
-            if (_cachedStatesMap.TryGetValue(typeof(TState), out IBaseState state))
-                return state;
-
-            state = _container.Resolve<TState>();
-            _cachedStatesMap.Add(typeof(TState), state);
-            return state;
-        }
     }
 }

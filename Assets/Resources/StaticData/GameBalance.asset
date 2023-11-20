@@ -86,3 +86,9 @@ MonoBehaviour:
     _upgradeFuelCapacityEachLevel: 3
     _fuelCapacityUpgradeAmount: 1
     _maxFuelCapacity: 18
+  _dumpWorkerPreferences:
+    _minStartDelay: 0.5
+    _maxStartDelay: 3
+    _minGearSpawnInterval: 3
+    _maxGearSpawnInterval: 5
+    _gearPrice: 10

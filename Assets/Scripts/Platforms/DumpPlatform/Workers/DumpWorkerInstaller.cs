@@ -10,8 +10,11 @@ using Zenject;
 
 namespace Platforms.DumpPlatform.Workers
 {
-    public class WorkerInstaller : MonoInstaller
+    public class DumpWorkerInstaller : MonoInstaller
     {
+        [Header("References")]
+        [SerializeField] private Transform _gearSpawnPoint;
+
         private DumpPlatformData _platformData;
         private DumpWorkerPreferences _dumpWorkerPreferences;
 
@@ -39,7 +42,7 @@ namespace Platforms.DumpPlatform.Workers
 
         private void BindStates()
         {
-            Container.Bind<WorkState>().AsSingle();
+            Container.Bind<WorkState>().AsSingle().WithArguments(_gearSpawnPoint);
             Container.Bind<IdleState>().AsSingle();
         }
     }

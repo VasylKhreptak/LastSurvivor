@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.Persistent.Platforms;
+using DG.Tweening;
+using Platforms.Zones;
 using Plugins.Banks;
 using UnityEngine;
 using Zenject;
@@ -11,6 +13,10 @@ namespace Platforms.DumpPlatform
     {
         [Header("References")]
         [SerializeField] private List<GameObject> _workers;
+
+        [Header("Scale Preferences")]
+        [SerializeField] private float _scaleDuration = 0.5f;
+        [SerializeField] private AnimationCurve _scaleCurve;
 
         private ReceiveZone _receiveZone;
         private DumpPlatformData _platformData;
@@ -68,6 +74,14 @@ namespace Platforms.DumpPlatform
                     continue;
 
                 worker.SetActive(true);
+
+                Vector3 targetScale = worker.transform.localScale;
+                worker.transform.localScale = Vector3.zero;
+                worker.transform
+                    .DOScale(targetScale, _scaleDuration)
+                    .SetEase(_scaleCurve)
+                    .Play();
+
                 _workersBank.Add(1);
                 return true;
             }

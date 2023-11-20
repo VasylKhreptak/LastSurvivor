@@ -12,7 +12,7 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Platforms
+namespace Platforms.Zones
 {
     public class ReceiveZone : MonoBehaviour
     {
@@ -72,18 +72,14 @@ namespace Platforms
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player _) == false)
-                return;
-
-            StartObservingInputInteraction();
+            if (other.TryGetComponent(out Player _))
+                StartObservingInputInteraction();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out Player _) == false)
-                return;
-
-            StopObservingInputInteraction();
+            if (other.TryGetComponent(out Player _))
+                StopObservingInputInteraction();
         }
 
         #endregion

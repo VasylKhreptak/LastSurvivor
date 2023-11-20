@@ -1,5 +1,6 @@
 ﻿using Platforms;
 using Platforms.HelicopterPlatform;
+using Platforms.Zones;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Sirenix.OdinInspector;

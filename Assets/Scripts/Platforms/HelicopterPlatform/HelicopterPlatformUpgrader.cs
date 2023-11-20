@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.Persistent.Platforms;
 using Data.Static.Balance.Upgrade;
+using Platforms.Zones;
 using Zenject;
 
 namespace Platforms.HelicopterPlatform

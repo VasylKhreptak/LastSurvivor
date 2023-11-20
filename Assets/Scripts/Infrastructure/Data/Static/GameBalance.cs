@@ -16,10 +16,15 @@ namespace Infrastructure.Data.Static
         [SerializeField] private HelicopterPlatformUpgradePreferences _helicopterPlatformUpgradePreferences;
         [SerializeField] private OilPlatformUpgradePreferences _oilPlatformUpgradePreferences;
 
+        [Space]
+        [SerializeField] private DumpWorkerPreferences _dumpWorkerPreferences;
+
         public PlayerPreferences PlayerPreferences => _playerPreferences;
         public AnimationPreferences AnimationPreferences => _animationPreferences;
 
         public HelicopterPlatformUpgradePreferences HelicopterPlatformUpgradePreferences => _helicopterPlatformUpgradePreferences;
         public OilPlatformUpgradePreferences OilPlatformUpgradePreferences => _oilPlatformUpgradePreferences;
+
+        public DumpWorkerPreferences DumpWorkerPreferences => _dumpWorkerPreferences;
     }
 }

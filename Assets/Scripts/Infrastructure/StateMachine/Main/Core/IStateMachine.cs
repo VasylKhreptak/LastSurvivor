@@ -3,7 +3,7 @@ using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Infrastructure.StateMachine.Main.Core
 {
-    public interface IStateMachine<in TBaseState>
+    public interface IStateMachine<in TBaseState> : IExitable
     {
         public Type ActiveStateType { get; }
 

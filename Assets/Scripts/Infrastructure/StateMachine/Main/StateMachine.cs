@@ -57,9 +57,7 @@ namespace Infrastructure.StateMachine.Main
 
         public void Dispose()
         {
-            _currentStateInfo?.Exit();
-
-            _currentStateInfo = null;
+            Exit();
             _lastStateInfo = null;
         }
 
@@ -68,6 +66,12 @@ namespace Infrastructure.StateMachine.Main
             _currentStateInfo?.Exit();
 
             state = _stateFactory.GetState<TState>();
+        }
+
+        public void Exit()
+        {
+            _currentStateInfo?.Exit();
+            _currentStateInfo = null;
         }
     }
 }
