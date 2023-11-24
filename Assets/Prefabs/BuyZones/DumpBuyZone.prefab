@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: _prefabType
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 708557130247862194, guid: c15a538a65422b24f91982e1756b2431,
+        type: 3}
+      propertyPath: m_text
+      value: Buy Dump
+      objectReference: {fileID: 0}
     - target: {fileID: 1112429648944209865, guid: c15a538a65422b24f91982e1756b2431,
         type: 3}
       propertyPath: _monoInstallers.Array.size
@@ -26,12 +31,12 @@ PrefabInstance:
     - target: {fileID: 3214998432792938039, guid: c15a538a65422b24f91982e1756b2431,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2.4987
+      value: 2.8227
       objectReference: {fileID: 0}
     - target: {fileID: 3214998432792938039, guid: c15a538a65422b24f91982e1756b2431,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1.4461
+      value: 1.439
       objectReference: {fileID: 0}
     - target: {fileID: 6560048231672406343, guid: c15a538a65422b24f91982e1756b2431,
         type: 3}
@@ -46,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 6560048231672406343, guid: c15a538a65422b24f91982e1756b2431,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.19
+      value: -5.61
       objectReference: {fileID: 0}
     - target: {fileID: 6560048231672406343, guid: c15a538a65422b24f91982e1756b2431,
         type: 3}
