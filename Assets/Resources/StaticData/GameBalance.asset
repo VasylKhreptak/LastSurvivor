@@ -89,6 +89,5 @@ MonoBehaviour:
   _dumpWorkerPreferences:
     _minStartDelay: 0.5
     _maxStartDelay: 3
-    _minGearSpawnInterval: 3
-    _maxGearSpawnInterval: 5
-    _gearPrice: 10
+    _minGearSpawnInterval: 4
+    _maxGearSpawnInterval: 6
