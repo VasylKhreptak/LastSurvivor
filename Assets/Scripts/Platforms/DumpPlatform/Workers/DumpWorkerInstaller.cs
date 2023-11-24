@@ -21,7 +21,7 @@ namespace Platforms.DumpPlatform.Workers
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
-            _platformData = persistentDataService.PersistentData.PlayerData.DumpPlatformData;
+            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData;
             _dumpWorkerPreferences = staticDataService.Balance.DumpWorkerPreferences;
         }
 

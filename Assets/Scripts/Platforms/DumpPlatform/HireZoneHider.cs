@@ -24,7 +24,7 @@ namespace Platforms.DumpPlatform
         private void Constructor(ReceiveZone receiveZone, IPersistentDataService persistentDataService)
         {
             _receiveZone = receiveZone;
-            _hiredWorkersBank = persistentDataService.PersistentData.PlayerData.DumpPlatformData.WorkersBank;
+            _hiredWorkersBank = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData.WorkersBank;
         }
 
         private IDisposable _bankFullnessSubscription;

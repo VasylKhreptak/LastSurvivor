@@ -29,8 +29,8 @@ namespace Platforms.DumpPlatform
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
-            _hireWorkerContainer = persistentDataService.PersistentData.PlayerData.DumpPlatformData.HireWorkerContainer;
-            _platformData = persistentDataService.PersistentData.PlayerData.DumpPlatformData;
+            _hireWorkerContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData.HireWorkerContainer;
+            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData;
             _prefabs = staticDataService.Prefabs;
         }
 

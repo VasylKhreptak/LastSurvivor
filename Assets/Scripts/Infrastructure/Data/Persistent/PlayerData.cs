@@ -7,9 +7,8 @@ namespace Infrastructure.Data.Persistent
     {
         public readonly Resources Resources = new Resources();
 
-        public readonly HelicopterPlatformData HelicopterPlatformData = new HelicopterPlatformData();
-        public readonly OilPlatformData OilPlatformData = new OilPlatformData();
-        public readonly DumpPlatformData DumpPlatformData = new DumpPlatformData();
+        public readonly PlatformsData PlatformsData = new PlatformsData();
+        public readonly BuyZonesData BuyZonesData = new BuyZonesData();
 
         public bool FinishedTutorial;
     }

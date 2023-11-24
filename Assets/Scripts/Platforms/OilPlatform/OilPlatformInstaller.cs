@@ -31,8 +31,8 @@ namespace Platforms.OilPlatform
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
-            _upgradeContainer = persistentDataService.PersistentData.PlayerData.OilPlatformData.UpgradeContainer;
-            _platformData = persistentDataService.PersistentData.PlayerData.OilPlatformData;
+            _upgradeContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.OilPlatformData.UpgradeContainer;
+            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.OilPlatformData;
             _upgradePreferences = staticDataService.Balance.OilPlatformUpgradePreferences;
             _prefabs = staticDataService.Prefabs;
         }
