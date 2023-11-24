@@ -20,6 +20,9 @@ namespace Platforms.Zones
         [SerializeField] private Transform _receiveToTransform;
         [SerializeField] private Prefab _prefabType;
 
+        [Header("Preferences")]
+        [SerializeField] private bool _clearOnReceivedAll = true;
+
         [Header("Animation Preferences")]
         [SerializeField] private float _scaleDuration = 0.2f;
         [SerializeField] private float _duration = 0.4f;
@@ -133,6 +136,10 @@ namespace Platforms.Zones
         private int GetTransferCount()
         {
             int leftToFill = _receiveContainer.LeftToFill.Value - _currentTransferAmount;
+
+            if (leftToFill == 0)
+                return 0;
+
             float remainder = leftToFill % _maxTransfer;
             return remainder == 0 ? leftToFill / _maxTransfer : leftToFill / _maxTransfer + 1;
         }
@@ -198,7 +205,9 @@ namespace Platforms.Zones
 
             if (_receiveContainer.IsFull.Value)
             {
-                _receiveContainer.Clear();
+                if (_clearOnReceivedAll)
+                    _receiveContainer.Clear();
+
                 OnReceivedAll?.Invoke();
                 StopTransferring();
             }

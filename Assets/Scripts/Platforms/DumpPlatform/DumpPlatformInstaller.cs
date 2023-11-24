@@ -56,7 +56,6 @@ namespace Platforms.DumpPlatform
         private void BindHireWorkerZone()
         {
             Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<ClampedBankLeftValueText>();
-
             Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_hireWorkerZone).AsSingle();

@@ -1,8 +1,10 @@
 ﻿using Cinemachine;
+using Data.Persistent.Platforms;
 using Entities.Player;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.EntryPoints.Core;
+using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
 using Zenject;
@@ -13,12 +15,15 @@ namespace Infrastructure.EntryPoints
     {
         private DiContainer _container;
         private GamePrefabs _prefabs;
+        private PlatformsData _platformsData;
 
         [Inject]
-        private void Constructor(DiContainer container, IStaticDataService staticDataService)
+        private void Constructor(DiContainer container, IStaticDataService staticDataService,
+            IPersistentDataService persistentDataService)
         {
             _container = container;
             _prefabs = staticDataService.Prefabs;
+            _platformsData = persistentDataService.PersistentData.PlayerData.PlatformsData;
         }
 
         #region MonoBehaviour
@@ -66,6 +71,10 @@ namespace Infrastructure.EntryPoints
 
         private void InitializeOilPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.OilPlatform]);
 
-        private void InitializeDumpPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.DumpPlatform]);
+        private void InitializeDumpPlatform()
+        {
+            Prefab prefab = _platformsData.DumpPlatformData.BuyContainer.IsFull.Value ? Prefab.DumpPlatform : Prefab.DumpBuyZone;
+            _container.InstantiatePrefab(_prefabs[prefab]);
+        }
     }
 }
