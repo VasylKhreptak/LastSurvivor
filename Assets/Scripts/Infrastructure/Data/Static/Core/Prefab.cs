@@ -11,5 +11,6 @@
         Gear = 6,
         DumpBuyZone = 7,
         Money = 8,
+        BarracksPlatform = 9,
     }
 }

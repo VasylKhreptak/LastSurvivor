@@ -65,6 +65,7 @@ namespace Infrastructure.EntryPoints
             InitializeHelicopterPlatform();
             InitializeOilPlatform();
             InitializeDumpPlatform();
+            InitializeBarracksPlatform();
         }
 
         private void InitializeHelicopterPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.HelicopterPlatform]);
@@ -75,6 +76,11 @@ namespace Infrastructure.EntryPoints
         {
             Prefab prefab = _platformsData.DumpPlatformData.BuyContainer.IsFull.Value ? Prefab.DumpPlatform : Prefab.DumpBuyZone;
             _container.InstantiatePrefab(_prefabs[prefab]);
+        }
+
+        private void InitializeBarracksPlatform()
+        {
+            _container.InstantiatePrefab(_prefabs[Prefab.BarracksPlatform]);
         }
     }
 }
