@@ -565,6 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4335951736589341373}
   - component: {fileID: 3063024013110793054}
+  - component: {fileID: 5084917402956996956}
   m_Layer: 0
   m_Name: Workers
   m_TagString: Untagged
@@ -604,13 +605,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206d0d67462b41dc8698dd1f61d1d2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _workers:
+  _entities:
   - {fileID: 5755597587504750542}
   - {fileID: 2596280300820691387}
   - {fileID: 4502709510928497979}
   - {fileID: 158628474514775289}
   - {fileID: 1089157928583638468}
-  _scaleDuration: 0.5
+--- !u!114 &5084917402956996956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609466315869854998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7457c28ca2411aa2eeb0f14d3a473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.5
   _scaleCurve:
     serializedVersion: 2
     m_Curve:
@@ -624,10 +637,10 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.6145373
-      value: 1.032054
-      inSlope: 0.62717533
-      outSlope: 0.62717533
+      time: 0.592015
+      value: 1.0756562
+      inSlope: 0.5512042
+      outSlope: 0.5512042
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -929,7 +942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hireWorkerZone: {fileID: 9153889667896275892}
-  _workersRecruiter: {fileID: 3063024013110793054}
+  _workerRecruiter: {fileID: 3063024013110793054}
   _collectZone: {fileID: 4568120416187364163}
 --- !u!1 &5954921622154856570
 GameObject:

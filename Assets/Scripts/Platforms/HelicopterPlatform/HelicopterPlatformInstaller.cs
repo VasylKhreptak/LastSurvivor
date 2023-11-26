@@ -1,5 +1,5 @@
 ﻿using Data.Persistent.Platforms;
-using Data.Static.Balance.Upgrade;
+using Data.Static.Balance.Platforms;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Platforms.Zones;
@@ -19,7 +19,7 @@ namespace Platforms.HelicopterPlatform
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
         private HelicopterPlatformData _platformData;
-        private HelicopterPlatformUpgradePreferences _helicopterPlatformUpgradePreferences;
+        private HelicopterPlatformPreferences _helicopterPlatformPreferences;
 
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
@@ -27,7 +27,7 @@ namespace Platforms.HelicopterPlatform
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
             _upgradeContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData.UpgradeContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData;
-            _helicopterPlatformUpgradePreferences = staticDataService.Balance.HelicopterPlatformUpgradePreferences;
+            _helicopterPlatformPreferences = staticDataService.Balance.HelicopterPlatformPreferences;
         }
 
         #region MonoBehaviour
@@ -56,7 +56,7 @@ namespace Platforms.HelicopterPlatform
             Container.BindInstance(_upgradeContainer).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_receiveZone).AsSingle();
 
-            Container.BindInstance(_helicopterPlatformUpgradePreferences).WhenInjectedInto<HelicopterPlatformUpgrader>();
+            Container.BindInstance(_helicopterPlatformPreferences).WhenInjectedInto<HelicopterPlatformUpgrader>();
             Container.BindInterfacesTo<HelicopterPlatformUpgrader>().AsSingle();
         }
     }

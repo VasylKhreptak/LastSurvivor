@@ -1,6 +1,6 @@
 ﻿using System;
 using Data.Persistent.Platforms;
-using Data.Static.Balance.Upgrade;
+using Data.Static.Balance.Platforms;
 using Platforms.Zones;
 using UnityEngine;
 using Zenject;
@@ -11,14 +11,14 @@ namespace Platforms.OilPlatform
     {
         private readonly ReceiveZone _receiveZone;
         private readonly OilPlatformData _platformData;
-        private readonly OilPlatformUpgradePreferences _upgradePreferences;
+        private readonly OilPlatformPreferences _preferences;
 
         public OilPlatformUpgrader(ReceiveZone receiveZone, OilPlatformData platformData,
-            OilPlatformUpgradePreferences upgradePreferences)
+            OilPlatformPreferences preferences)
         {
             _receiveZone = receiveZone;
             _platformData = platformData;
-            _upgradePreferences = upgradePreferences;
+            _preferences = preferences;
         }
 
         public void Initialize() => StartObserving();
@@ -41,17 +41,17 @@ namespace Platforms.OilPlatform
         private void TryReduceProduceTime()
         {
             float produceTime = _platformData.BarrelProduceDuration.Value;
-            produceTime -= produceTime * _upgradePreferences.ProduceTimePercentageReduce;
-            produceTime = Mathf.Max(produceTime, _upgradePreferences.MinProduceTime);
+            produceTime -= produceTime * _preferences.ProduceTimePercentageReduce;
+            produceTime = Mathf.Max(produceTime, _preferences.MinProduceTime);
 
             _platformData.BarrelProduceDuration.Value = produceTime;
         }
 
         private void TryIncreaseUpgradeCost()
         {
-            if (_platformData.Level.Value % _upgradePreferences.UpgradeCostEachLevel == 0)
+            if (_platformData.Level.Value % _preferences.UpgradeCostEachLevel == 0)
             {
-                int upgradeCost = _platformData.UpgradeContainer.MaxValue.Value + _upgradePreferences.CostUpgradeAmount;
+                int upgradeCost = _platformData.UpgradeContainer.MaxValue.Value + _preferences.CostUpgradeAmount;
 
                 _platformData.UpgradeContainer.SetMaxValue(upgradeCost);
             }
@@ -59,10 +59,10 @@ namespace Platforms.OilPlatform
 
         private void TryIncreaseFuelCapacity()
         {
-            if (_platformData.Level.Value % _upgradePreferences.UpgradeFuelCapacityEachLevel == 0)
+            if (_platformData.Level.Value % _preferences.UpgradeFuelCapacityEachLevel == 0)
             {
-                int fuelCapacity = _platformData.GridData.MaxValue.Value + _upgradePreferences.FuelCapacityUpgradeAmount;
-                fuelCapacity = Mathf.Min(fuelCapacity, _upgradePreferences.MaxFuelCapacity);
+                int fuelCapacity = _platformData.GridData.MaxValue.Value + _preferences.FuelCapacityUpgradeAmount;
+                fuelCapacity = Mathf.Min(fuelCapacity, _preferences.MaxFuelCapacity);
 
                 _platformData.GridData.SetMaxValue(fuelCapacity);
             }

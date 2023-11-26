@@ -1,5 +1,5 @@
 ﻿using System;
-using Data.Static.Balance;
+using Data.Static.Balance.Platforms;
 using Grid;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
@@ -16,12 +16,12 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
     public class WorkState : IWorkerState, IState, IExitable
     {
         private readonly Animator _animator;
-        private readonly DumpWorkerPreferences _preferences;
+        private readonly DumpPlatformPreferences _preferences;
         private readonly GridStack _gearsGrid;
         private readonly GamePrefabs _prefabs;
         private readonly Transform _gearSpawnPoint;
 
-        public WorkState(Animator animator, DumpWorkerPreferences preferences, GridStack gearsGrid,
+        public WorkState(Animator animator, DumpPlatformPreferences preferences, GridStack gearsGrid,
             Transform gearSpawnPoint, IStaticDataService staticDataService)
         {
             _animator = animator;
@@ -39,7 +39,7 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
         public void Enter()
         {
             _startDelaySubscription = Observable
-                .Timer(TimeSpan.FromSeconds(Random.Range(_preferences.MinStartDelay, _preferences.MaxStartDelay)))
+                .Timer(TimeSpan.FromSeconds(Random.Range(_preferences.MinWorkerStartDelay, _preferences.MaxWorkerStartDelay)))
                 .Subscribe(_ =>
                 {
                     SetAnimatorWorkingState(true);

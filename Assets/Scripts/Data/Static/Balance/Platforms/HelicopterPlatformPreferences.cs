@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Data.Static.Balance.Upgrade
+namespace Data.Static.Balance.Platforms
 {
     [Serializable]
-    public class HelicopterPlatformUpgradePreferences
+    public class HelicopterPlatformPreferences
     {
         [Header("Preferences")]
         [SerializeField] private int _upgradeFuelCapacityEachLevel = 2;

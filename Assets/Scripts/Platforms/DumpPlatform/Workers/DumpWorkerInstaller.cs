@@ -1,5 +1,5 @@
 ﻿using Data.Persistent.Platforms;
-using Data.Static.Balance;
+using Data.Static.Balance.Platforms;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Platforms.DumpPlatform.Workers.StateMachine;
@@ -16,20 +16,20 @@ namespace Platforms.DumpPlatform.Workers
         [SerializeField] private Transform _gearSpawnPoint;
 
         private DumpPlatformData _platformData;
-        private DumpWorkerPreferences _dumpWorkerPreferences;
+        private DumpPlatformPreferences _dumpPlatformPreferences;
 
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
             _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData;
-            _dumpWorkerPreferences = staticDataService.Balance.DumpWorkerPreferences;
+            _dumpPlatformPreferences = staticDataService.Balance.DumpPlatformPreferences;
         }
 
         public override void InstallBindings()
         {
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.BindInstance(_platformData).AsSingle();
-            Container.BindInstance(_dumpWorkerPreferences).AsSingle();
+            Container.BindInstance(_dumpPlatformPreferences).AsSingle();
             BindStateMachine();
         }
 

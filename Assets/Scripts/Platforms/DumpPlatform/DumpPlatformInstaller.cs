@@ -1,10 +1,12 @@
 ﻿using Data.Persistent.Platforms;
+using Data.Static.Balance.Platforms;
 using Flexalon;
 using Grid;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
+using Platforms.RecruitmentLogic;
 using Platforms.Zones;
 using Plugins.Banks;
 using UI.ClampedBanks;
@@ -17,13 +19,14 @@ namespace Platforms.DumpPlatform
     {
         [Header("References")]
         [SerializeField] private ReceiveZone _hireWorkerZone;
-        [SerializeField] private WorkersRecruiter _workersRecruiter;
+        [SerializeField] private EntityRecruiter _workerRecruiter;
         [SerializeField] private FlexalonGridLayout _collectZone;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _hireWorkerContainer;
         private DumpPlatformData _platformData;
         private GamePrefabs _prefabs;
+        private DumpPlatformPreferences _platformPreferences;
 
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
@@ -32,6 +35,7 @@ namespace Platforms.DumpPlatform
             _hireWorkerContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData.HireWorkerContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData;
             _prefabs = staticDataService.Prefabs;
+            _platformPreferences = staticDataService.Balance.DumpPlatformPreferences;
         }
 
         #region MonoBehaviour
@@ -39,7 +43,7 @@ namespace Platforms.DumpPlatform
         private void OnValidate()
         {
             _hireWorkerZone ??= GetComponentInChildren<ReceiveZone>(true);
-            _workersRecruiter ??= GetComponentInChildren<WorkersRecruiter>(true);
+            _workerRecruiter ??= GetComponentInChildren<EntityRecruiter>(true);
         }
 
         #endregion
@@ -51,6 +55,7 @@ namespace Platforms.DumpPlatform
             BindHireWorkerZone();
             BindWorkersCountText();
             BindWorkersRecruiter();
+            BindWorkerPriceUpdater();
         }
 
         private void BindHireWorkerZone()
@@ -68,17 +73,26 @@ namespace Platforms.DumpPlatform
 
         private void BindWorkersRecruiter()
         {
-            Container.BindInstance(_workersRecruiter).AsSingle();
-            Container.BindInstance(_hireWorkerContainer).WhenInjectedInto<WorkerPriceIncrementor>();
-            Container.BindInterfacesTo<WorkerPriceIncrementor>().AsSingle();
+            Container.BindInstance(_platformData.WorkersBank).WhenInjectedInto<EntityRecruiter>();
+            Container.BindInstance(_workerRecruiter).AsSingle();
+        }
+
+        private void BindWorkerPriceUpdater()
+        {
+            Container
+                .BindInterfacesTo<EntityPriceUpdater>()
+                .AsSingle()
+                .WithArguments(_platformData.WorkersBank,
+                    _platformData.HireWorkerContainer,
+                    _platformPreferences.WorkerHirePricePreferences);
         }
 
         private void BindGearsCollectZone()
         {
-            GridStack gridStack = new GridStack(_collectZone, _platformData.GridData, _prefabs[Prefab.Gear]);
+            GridStack gridStack = new GridStack(_collectZone, _platformData.GearsBank, _prefabs[Prefab.Gear]);
             Container.BindInstance(gridStack).AsSingle();
             Container.BindInstance(_bank).WhenInjectedInto<CollectZone>();
-            Container.BindInstance(_platformData.GridData).WhenInjectedInto<ClampedBankMaxSign>();
+            Container.BindInstance(_platformData.GearsBank).WhenInjectedInto<ClampedBankMaxSign>();
         }
     }
 }

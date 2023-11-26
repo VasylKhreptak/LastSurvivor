@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Data.Static.Balance.Upgrade
+namespace Data.Static.Balance.Platforms
 {
     [Serializable]
-    public class OilPlatformUpgradePreferences
+    public class OilPlatformPreferences
     {
         [Header("Preferences")]
         [SerializeField] private float _produceTimePercentageReduce = 0.1f;

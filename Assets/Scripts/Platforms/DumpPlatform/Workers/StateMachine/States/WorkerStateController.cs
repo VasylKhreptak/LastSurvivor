@@ -34,7 +34,7 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
 
         #endregion
 
-        private void StartObserving() => _gridFullnessSubscription = _platformData.GridData.IsFull.Subscribe(OnGridFullnessChanged);
+        private void StartObserving() => _gridFullnessSubscription = _platformData.GearsBank.IsFull.Subscribe(OnGridFullnessChanged);
 
         private void StopObserving() => _gridFullnessSubscription?.Dispose();
 

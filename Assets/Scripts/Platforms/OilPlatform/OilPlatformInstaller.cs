@@ -1,5 +1,5 @@
 ﻿using Data.Persistent.Platforms;
-using Data.Static.Balance.Upgrade;
+using Data.Static.Balance.Platforms;
 using Flexalon;
 using Grid;
 using Infrastructure.Data.Static;
@@ -24,7 +24,7 @@ namespace Platforms.OilPlatform
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
         private OilPlatformData _platformData;
-        private OilPlatformUpgradePreferences _upgradePreferences;
+        private OilPlatformPreferences _preferences;
         private GamePrefabs _prefabs;
 
         [Inject]
@@ -33,7 +33,7 @@ namespace Platforms.OilPlatform
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
             _upgradeContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.OilPlatformData.UpgradeContainer;
             _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.OilPlatformData;
-            _upgradePreferences = staticDataService.Balance.OilPlatformUpgradePreferences;
+            _preferences = staticDataService.Balance.OilPlatformPreferences;
             _prefabs = staticDataService.Prefabs;
         }
 
@@ -70,7 +70,7 @@ namespace Platforms.OilPlatform
             Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>(); //works
             Container.BindInstance(_upgradeContainer).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_receiveZone).AsSingle();
-            Container.BindInstance(_upgradePreferences).WhenInjectedInto<OilPlatformUpgrader>();
+            Container.BindInstance(_preferences).WhenInjectedInto<OilPlatformUpgrader>();
             Container.BindInterfacesTo<OilPlatformUpgrader>().AsSingle();
         }
     }

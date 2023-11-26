@@ -1,6 +1,6 @@
 ﻿using Data.Static.Balance;
 using Data.Static.Balance.Animations.Core;
-using Data.Static.Balance.Upgrade;
+using Data.Static.Balance.Platforms;
 using UnityEngine;
 
 namespace Infrastructure.Data.Static
@@ -12,19 +12,18 @@ namespace Infrastructure.Data.Static
         [SerializeField] private PlayerPreferences _playerPreferences;
         [SerializeField] private AnimationPreferences _animationPreferences;
 
-        [Header("Platforms Upgrade Preferences")]
-        [SerializeField] private HelicopterPlatformUpgradePreferences _helicopterPlatformUpgradePreferences;
-        [SerializeField] private OilPlatformUpgradePreferences _oilPlatformUpgradePreferences;
-
-        [Space]
-        [SerializeField] private DumpWorkerPreferences _dumpWorkerPreferences;
+        [Header("Platforms Preferences")]
+        [SerializeField] private HelicopterPlatformPreferences _helicopterPlatformPreferences;
+        [SerializeField] private OilPlatformPreferences _oilPlatformPreferences;
+        [SerializeField] private DumpPlatformPreferences _dumpPlatformPreferences;
+        [SerializeField] private BarracksPlatformPreferences _barracksPlatformPreferences;
 
         public PlayerPreferences PlayerPreferences => _playerPreferences;
         public AnimationPreferences AnimationPreferences => _animationPreferences;
 
-        public HelicopterPlatformUpgradePreferences HelicopterPlatformUpgradePreferences => _helicopterPlatformUpgradePreferences;
-        public OilPlatformUpgradePreferences OilPlatformUpgradePreferences => _oilPlatformUpgradePreferences;
-
-        public DumpWorkerPreferences DumpWorkerPreferences => _dumpWorkerPreferences;
+        public HelicopterPlatformPreferences HelicopterPlatformPreferences => _helicopterPlatformPreferences;
+        public OilPlatformPreferences OilPlatformPreferences => _oilPlatformPreferences;
+        public DumpPlatformPreferences DumpPlatformPreferences => _dumpPlatformPreferences;
+        public BarracksPlatformPreferences BarracksPlatformPreferences => _barracksPlatformPreferences;
     }
 }
