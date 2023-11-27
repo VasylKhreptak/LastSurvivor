@@ -39,7 +39,7 @@ namespace Infrastructure.EntryPoints
         {
             Transform playerTransform = InitializePlayer();
             InitializeCamera(playerTransform);
-            InitializePlatforms();
+            SpawnPlatforms();
         }
 
         private Transform InitializePlayer()
@@ -60,29 +60,40 @@ namespace Infrastructure.EntryPoints
             _container.BindInstance(camera).AsSingle();
         }
 
-        private void InitializePlatforms()
+        private void SpawnPlatforms()
         {
-            InitializeHelicopterPlatform();
-            InitializeOilPlatform();
-            InitializeDumpPlatform();
-            InitializeBarracksPlatform();
+            SpawnHelicopterPlatform();
+            SpawnOilPlatform();
+            SpawnDumpPlatform();
+            SpawnBarracksPlatform();
+            SpawnCollectorsPlatform();
         }
 
-        private void InitializeHelicopterPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.HelicopterPlatform]);
+        private void SpawnHelicopterPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.HelicopterPlatform]);
 
-        private void InitializeOilPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.OilPlatform]);
+        private void SpawnOilPlatform() => _container.InstantiatePrefab(_prefabs[Prefab.OilPlatform]);
 
-        private void InitializeDumpPlatform()
+        private void SpawnDumpPlatform()
         {
-            Prefab prefab = _platformsData.DumpPlatformData.BuyContainer.IsFull.Value ? Prefab.DumpPlatform : Prefab.DumpBuyZone;
+            Prefab prefab = _platformsData.DumpPlatformData.BuyContainer.IsFull.Value
+                ? Prefab.DumpPlatform
+                : Prefab.DumpBuyZone;
             _container.InstantiatePrefab(_prefabs[prefab]);
         }
 
-        private void InitializeBarracksPlatform()
+        private void SpawnBarracksPlatform()
         {
             Prefab prefab = _platformsData.BarracksPlatformData.BuyContainer.IsFull.Value
                 ? Prefab.BarracksPlatform
                 : Prefab.BarracksBuyZone;
+            _container.InstantiatePrefab(_prefabs[prefab]);
+        }
+
+        private void SpawnCollectorsPlatform()
+        {
+            Prefab prefab = _platformsData.CollectorsPlatformData.BuyContainer.IsFull.Value
+                ? Prefab.CollectorsPlatform
+                : Prefab.CollectorsBuyZone;
             _container.InstantiatePrefab(_prefabs[prefab]);
         }
     }

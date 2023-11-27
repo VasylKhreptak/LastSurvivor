@@ -14,5 +14,7 @@
         BarracksPlatform = 9,
         Soldier = 10,
         BarracksBuyZone = 11,
+        CollectorsPlatform = 12,
+        CollectorsBuyZone = 13,
     }
 }

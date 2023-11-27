@@ -17,6 +17,7 @@ namespace Infrastructure.Data.Static
         [SerializeField] private OilPlatformPreferences _oilPlatformPreferences;
         [SerializeField] private DumpPlatformPreferences _dumpPlatformPreferences;
         [SerializeField] private BarracksPlatformPreferences _barracksPlatformPreferences;
+        [SerializeField] private CollectorsPlatformPreferences _collectorsPlatformPreferences;
 
         public PlayerPreferences PlayerPreferences => _playerPreferences;
         public AnimationPreferences AnimationPreferences => _animationPreferences;
@@ -25,5 +26,6 @@ namespace Infrastructure.Data.Static
         public OilPlatformPreferences OilPlatformPreferences => _oilPlatformPreferences;
         public DumpPlatformPreferences DumpPlatformPreferences => _dumpPlatformPreferences;
         public BarracksPlatformPreferences BarracksPlatformPreferences => _barracksPlatformPreferences;
+        public CollectorsPlatformPreferences CollectorsPlatformPreferences => _collectorsPlatformPreferences;
     }
 }
