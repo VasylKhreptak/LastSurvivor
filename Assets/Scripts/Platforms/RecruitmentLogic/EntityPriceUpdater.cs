@@ -2,6 +2,7 @@
 using Data.Static.Balance.Platforms;
 using Plugins.Banks;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace Platforms.RecruitmentLogic

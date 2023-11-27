@@ -53,6 +53,7 @@ namespace Platforms.BarracksPlatform
             Container.BindInstance(_platformData.HireSoldierBank).WhenInjectedInto<ClampedBankLeftValueText>();
             Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_platformData.HireSoldierBank).WhenInjectedInto<ReceiveZone>();
+            Container.BindInstance(_hireSoldierZone).AsSingle();
         }
 
         private void BindSoldiersCountText()
