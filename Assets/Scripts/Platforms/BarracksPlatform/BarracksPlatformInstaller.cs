@@ -50,6 +50,7 @@ namespace Platforms.BarracksPlatform
 
         private void BindSoldierHireZone()
         {
+            Container.BindInstance(_platformData.SoldiersBank).WhenInjectedInto<ReceiveZoneDrawer>();
             Container.BindInstance(_platformData.HireSoldierBank).WhenInjectedInto<ClampedBankLeftValueText>();
             Container.BindInstance(_bank).WhenInjectedInto<ReceiveZone>();
             Container.BindInstance(_platformData.HireSoldierBank).WhenInjectedInto<ReceiveZone>();

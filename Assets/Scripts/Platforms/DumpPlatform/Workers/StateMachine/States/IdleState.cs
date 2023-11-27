@@ -2,7 +2,6 @@
 using Data.Persistent.Platforms;
 using Infrastructure.StateMachine.Main.States.Core;
 using Platforms.DumpPlatform.Workers.StateMachine.States.Core;
-using UnityEngine;
 
 namespace Platforms.DumpPlatform.Workers.StateMachine.States
 {
@@ -17,14 +16,8 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
 
         private IDisposable _intervalSubscription;
 
-        public void Enter()
-        {
-            Debug.Log("Started Idling");
-        }
+        public void Enter() { }
 
-        public void Exit()
-        {
-            Debug.Log("Stopped Idling");
-        }
+        public void Exit() { }
     }
 }

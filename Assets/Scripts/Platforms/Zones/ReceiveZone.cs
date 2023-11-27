@@ -97,13 +97,15 @@ namespace Platforms.Zones
         {
             StopObservingInputInteraction();
 
-            _inputInteractionSubscription = _inputService.IsInteracting.Subscribe(isInteracting =>
-            {
-                if (isInteracting)
-                    StopTransferring();
-                else
-                    StartTransferring();
-            });
+            _inputInteractionSubscription = _inputService.IsInteracting
+                .Skip(1)
+                .Subscribe(isInteracting =>
+                {
+                    if (isInteracting)
+                        StopTransferring();
+                    else
+                        StartTransferring();
+                });
         }
 
         private void StopObservingInputInteraction() => _inputInteractionSubscription?.Dispose();
