@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 1.127371, y: 0.919533, z: 1.1899948}
   ComponentScale: {x: 1, y: 1, z: 1}
-  TargetPosition: {x: 2.03, y: 1.02, z: -2.1}
+  TargetPosition: {x: 2.13, y: 1.02, z: -1.87}
   TargetRotation: {x: -0, y: -0, z: -0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TransformPosition: {x: 2.13, y: 1.02, z: -1.87}
@@ -1928,6 +1928,26 @@ PrefabInstance:
         type: 3}
       propertyPath: _prefabType
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4144025215167044012, guid: ea4db831f77dbc04fb473dea9dcbcd89,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.2835646
+      objectReference: {fileID: 0}
+    - target: {fileID: 4144025215167044012, guid: ea4db831f77dbc04fb473dea9dcbcd89,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.4391878
+      objectReference: {fileID: 0}
+    - target: {fileID: 4144025215167044012, guid: ea4db831f77dbc04fb473dea9dcbcd89,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4144025215167044012, guid: ea4db831f77dbc04fb473dea9dcbcd89,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4926763777932779284, guid: ea4db831f77dbc04fb473dea9dcbcd89,
         type: 3}
