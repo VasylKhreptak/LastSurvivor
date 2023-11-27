@@ -1,5 +1,6 @@
 ﻿using System;
 using Data.Static.Balance.Platforms;
+using DG.Tweening;
 using Grid;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
@@ -8,33 +9,38 @@ using Infrastructure.StateMachine.Main.States.Core;
 using Platforms.DumpPlatform.Workers.StateMachine.States.Core;
 using UniRx;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Platforms.DumpPlatform.Workers.StateMachine.States
 {
-    public class WorkState : IWorkerState, IState, IExitable
+    public class WorkState : IWorkerState, IState, IInitializable, IExitable
     {
         private readonly Animator _animator;
         private readonly DumpPlatformPreferences _preferences;
         private readonly GridStack _gearsGrid;
         private readonly GamePrefabs _prefabs;
-        private readonly Transform _gearSpawnPoint;
+        private readonly WorkerReferences _workerReferences;
 
         public WorkState(Animator animator, DumpPlatformPreferences preferences, GridStack gearsGrid,
-            Transform gearSpawnPoint, IStaticDataService staticDataService)
+            IStaticDataService staticDataService, WorkerReferences workerReferences)
         {
             _animator = animator;
             _preferences = preferences;
             _gearsGrid = gearsGrid;
             _prefabs = staticDataService.Prefabs;
-            _gearSpawnPoint = gearSpawnPoint;
+            _workerReferences = workerReferences;
         }
 
         private readonly int _isWorkingParameter = Animator.StringToHash("IsWorking");
 
+        private Vector3 _initialToolScale;
+
         private IDisposable _gearSpawnSubscription;
         private IDisposable _startDelaySubscription;
+
+        public void Initialize() => _initialToolScale = _workerReferences.ToolTransform.localScale;
 
         public void Enter()
         {
@@ -42,6 +48,7 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
                 .Timer(TimeSpan.FromSeconds(Random.Range(_preferences.MinWorkerStartDelay, _preferences.MaxWorkerStartDelay)))
                 .Subscribe(_ =>
                 {
+                    SetToolState(true);
                     SetAnimatorWorkingState(true);
                     StartSpawningGears();
                 });
@@ -52,6 +59,7 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
             _startDelaySubscription?.Dispose();
             SetAnimatorWorkingState(false);
             StopSpawningGears();
+            SetToolState(false);
         }
 
         private void SetAnimatorWorkingState(bool isWorking) => _animator.SetBool(_isWorkingParameter, isWorking);
@@ -76,8 +84,29 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
 
         private void SpawnGear()
         {
-            GameObject gearInstance = Object.Instantiate(_prefabs[Prefab.Gear], _gearSpawnPoint.position, _gearSpawnPoint.rotation);
+            Transform gearSpawnPoint = _workerReferences.GearSpawnPoint;
+            GameObject gearInstance = Object.Instantiate(_prefabs[Prefab.Gear], gearSpawnPoint.position, gearSpawnPoint.rotation);
             _gearsGrid.TryPush(gearInstance);
+        }
+
+        private void SetToolState(bool enabled)
+        {
+            Transform toolTransform = _workerReferences.ToolTransform;
+
+            Vector3 targetScale = enabled ? _initialToolScale : Vector3.zero;
+
+            if (enabled)
+                toolTransform.gameObject.SetActive(true);
+
+            toolTransform
+                .DOScale(targetScale, _preferences.WorkerToolAnimationDuration)
+                .SetEase(_preferences.WorkerToolAnimationCurve)
+                .OnComplete(() =>
+                {
+                    if (enabled == false)
+                        toolTransform.gameObject.SetActive(false);
+                })
+                .Play();
         }
     }
 }

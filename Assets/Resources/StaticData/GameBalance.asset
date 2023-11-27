@@ -71,23 +71,59 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  _helicopterPlatformUpgradePreferences:
+  _helicopterPlatformPreferences:
     _upgradeFuelCapacityEachLevel: 2
     _fuelCapacityUpgradeAmount: 1
     _upgradeIncomeMultiplierEachLevel: 1
     _incomeMultiplierUpgradeAmount: 0.1
     _upgradeCostEachLevel: 1
     _costUpgradeAmount: 2
-  _oilPlatformUpgradePreferences:
-    _produceTimePercentageReduce: 0.03
+  _oilPlatformPreferences:
+    _produceTimePercentageReduce: 0.1
     _minProduceTime: 0.3
     _upgradeCostEachLevel: 1
     _costUpgradeAmount: 2
     _upgradeFuelCapacityEachLevel: 3
     _fuelCapacityUpgradeAmount: 1
     _maxFuelCapacity: 18
-  _dumpWorkerPreferences:
-    _minStartDelay: 0.5
-    _maxStartDelay: 3
-    _minGearSpawnInterval: 4
-    _maxGearSpawnInterval: 6
+  _dumpPlatformPreferences:
+    _minWorkerStartDelay: 0.5
+    _maxWorkerStartDelay: 3
+    _minGearSpawnInterval: 1.5
+    _maxGearSpawnInterval: 3
+    _workerToolAnimationDuration: 0.5
+    _workerToolAnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _workerHirePricePreferences:
+      _basePrice: 100
+      _priceIncrement: 20
+  _barracksPlatformPreferences:
+    _soldierHirePricePreferences:
+      _basePrice: 100
+      _priceIncrement: 20
+  _collectorsPlatformPreferences:
+    _collectorsHirePreferences:
+      _basePrice: 100
+      _priceIncrement: 20

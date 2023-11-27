@@ -14,6 +14,10 @@ namespace Data.Static.Balance.Platforms
         [SerializeField] private float _minGearSpawnInterval = 1.5f;
         [SerializeField] private float _maxGearSpawnInterval = 3;
 
+        [Header("Worker Tool Animation Preferences")]
+        [SerializeField] private float _workerToolAnimationDuration = 0.5f;
+        [SerializeField] private AnimationCurve _workerToolAnimationCurve;
+
         [Space]
         [SerializeField] private EntityHirePricePreferences _workerHirePricePreferences;
 
@@ -24,5 +28,8 @@ namespace Data.Static.Balance.Platforms
         public float MaxGearSpawnInterval => _maxGearSpawnInterval;
 
         public EntityHirePricePreferences WorkerHirePricePreferences => _workerHirePricePreferences;
+
+        public float WorkerToolAnimationDuration => _workerToolAnimationDuration;
+        public AnimationCurve WorkerToolAnimationCurve => _workerToolAnimationCurve;
     }
 }

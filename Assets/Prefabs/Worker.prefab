@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 4024421236554066728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.131, z: 0}
+  m_LocalPosition: {x: 0, y: 0.544, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2617,7 +2617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c67e20dedd468b9e4229880f6357c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gearSpawnPoint: {fileID: 6662832305247741259}
+  _workerReferences:
+    _gearSpawnPoint: {fileID: 6662832305247741259}
+    _toolTransform: {fileID: 7368361150111653544}
 --- !u!1 &6483616983409381333
 GameObject:
   m_ObjectHideFlags: 0
