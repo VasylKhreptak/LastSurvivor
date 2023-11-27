@@ -12,6 +12,7 @@
         DumpBuyZone = 7,
         Money = 8,
         BarracksPlatform = 9,
-        Soldier = 10
+        Soldier = 10,
+        BarracksBuyZone = 11,
     }
 }

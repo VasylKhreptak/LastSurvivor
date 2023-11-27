@@ -80,7 +80,10 @@ namespace Infrastructure.EntryPoints
 
         private void InitializeBarracksPlatform()
         {
-            _container.InstantiatePrefab(_prefabs[Prefab.BarracksPlatform]);
+            Prefab prefab = _platformsData.BarracksPlatformData.BuyContainer.IsFull.Value
+                ? Prefab.BarracksPlatform
+                : Prefab.BarracksBuyZone;
+            _container.InstantiatePrefab(_prefabs[prefab]);
         }
     }
 }

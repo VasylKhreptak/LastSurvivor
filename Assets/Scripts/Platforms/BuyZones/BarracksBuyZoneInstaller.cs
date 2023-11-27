@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Platforms.BuyZones
 {
-    public class DumpBuyZoneInstaller : MonoInstaller
+    public class BarracksBuyZoneInstaller : MonoInstaller
     {
         [Header("References")]
         [SerializeField] private ReceiveZone _receiveZone;
@@ -20,7 +20,7 @@ namespace Platforms.BuyZones
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService)
         {
-            _buyContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData.BuyContainer;
+            _buyContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.BuyContainer;
             _bank = persistentDataService.PersistentData.PlayerData.Resources.Money;
         }
 
@@ -46,7 +46,7 @@ namespace Platforms.BuyZones
 
         private void BindPlatformBuyer()
         {
-            Container.BindInterfacesAndSelfTo<PlatformBuyer>().AsSingle().WithArguments(Prefab.DumpPlatform);
+            Container.BindInterfacesAndSelfTo<PlatformBuyer>().AsSingle().WithArguments(Prefab.BarracksPlatform);
         }
     }
 }
