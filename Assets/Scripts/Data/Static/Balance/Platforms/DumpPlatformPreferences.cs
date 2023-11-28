@@ -18,9 +18,9 @@ namespace Data.Static.Balance.Platforms
         [SerializeField] private float _workerToolAnimationDuration = 0.5f;
         [SerializeField] private AnimationCurve _workerToolAnimationCurve;
 
-        [Space]
+        [Header("Hire Preferences")]
         [SerializeField] private EntityHirePricePreferences _workerHirePricePreferences;
-
+        
         public float MinWorkerStartDelay => _minWorkerStartDelay;
         public float MaxWorkerStartDelay => _maxWorkerStartDelay;
 

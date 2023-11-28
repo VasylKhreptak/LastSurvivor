@@ -40,7 +40,12 @@ namespace Platforms.DumpPlatform.Workers.StateMachine.States
         private IDisposable _gearSpawnSubscription;
         private IDisposable _startDelaySubscription;
 
-        public void Initialize() => _initialToolScale = _workerReferences.ToolTransform.localScale;
+        public void Initialize()
+        {
+            _initialToolScale = _workerReferences.ToolTransform.localScale;
+            _workerReferences.ToolTransform.localScale = Vector3.zero;
+            _workerReferences.ToolTransform.gameObject.SetActive(false);
+        }
 
         public void Enter()
         {

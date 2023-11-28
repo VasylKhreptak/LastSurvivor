@@ -79,8 +79,8 @@ MonoBehaviour:
     _upgradeCostEachLevel: 1
     _costUpgradeAmount: 2
   _oilPlatformPreferences:
-    _produceTimePercentageReduce: 0.1
-    _minProduceTime: 0.3
+    _produceTimePercentageReduce: 0.05
+    _minProduceTime: 0.6
     _upgradeCostEachLevel: 1
     _costUpgradeAmount: 2
     _upgradeFuelCapacityEachLevel: 3
