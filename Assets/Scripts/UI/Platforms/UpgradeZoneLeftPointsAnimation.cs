@@ -1,4 +1,4 @@
-﻿using Entities.Player;
+﻿using Main.Entities.Player;
 using Plugins.Animations.Extensions;
 using UnityEngine;
 using Zenject;

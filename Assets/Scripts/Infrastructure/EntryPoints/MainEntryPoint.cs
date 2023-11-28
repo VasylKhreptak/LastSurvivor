@@ -1,11 +1,11 @@
 ﻿using Cinemachine;
 using Data.Persistent.Platforms;
-using Entities.Player;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
+using Main.Entities.Player;
 using UnityEngine;
 using Zenject;
 

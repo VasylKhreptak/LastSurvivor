@@ -20,7 +20,7 @@ namespace Data.Static.Balance.Platforms
 
         [Header("Hire Preferences")]
         [SerializeField] private EntityHirePricePreferences _workerHirePricePreferences;
-        
+
         public float MinWorkerStartDelay => _minWorkerStartDelay;
         public float MaxWorkerStartDelay => _maxWorkerStartDelay;
 

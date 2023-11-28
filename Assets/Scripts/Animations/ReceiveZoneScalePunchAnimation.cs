@@ -1,4 +1,4 @@
-﻿using Platforms.Zones;
+﻿using Main.Platforms.Zones;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using UnityEngine;
