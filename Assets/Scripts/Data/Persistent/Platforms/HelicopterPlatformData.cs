@@ -9,5 +9,6 @@ namespace Data.Persistent.Platforms
         public readonly FloatReactiveProperty IncomeMultiplier = new FloatReactiveProperty(1f);
         public readonly ClampedIntegerBank FuelTank = new ClampedIntegerBank(0, 5);
         public readonly ClampedIntegerBank UpgradeContainer = new ClampedIntegerBank(0, 100);
+        public int MinigunAmmoCapacity = 200;
     }
 }

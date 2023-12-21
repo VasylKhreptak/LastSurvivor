@@ -35,6 +35,7 @@ namespace Main.Platforms.HelicopterPlatform
             TryIncreaseTankCapacity();
             TryIncreaseIncomeMultiplier();
             TryIncreaseUpgradeCost();
+            TryIncreaseMinigunAmmoCapacity();
         }
 
         private void TryIncreaseTankCapacity()
@@ -69,6 +70,13 @@ namespace Main.Platforms.HelicopterPlatform
 
                 _platformData.UpgradeContainer.SetMaxValue(cost);
             }
+        }
+
+        private void TryIncreaseMinigunAmmoCapacity()
+        {
+            int capacity = _platformData.MinigunAmmoCapacity + _platformPreferences.MinigunAmmoCapacityUpgradeAmount;
+            capacity = Math.Min(capacity, _platformPreferences.MaxMinigunAmmoCapacity);
+            _platformData.MinigunAmmoCapacity = capacity;
         }
     }
 }

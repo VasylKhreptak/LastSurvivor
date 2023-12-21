@@ -15,7 +15,7 @@ using Random = UnityEngine.Random;
 
 namespace Main.Platforms.DumpPlatform.Workers.StateMachine.States
 {
-    public class WorkState : IWorkerState, IState, IInitializable, IExitable
+    public class WorkState : IWorkerState, IInitializable, IExitable
     {
         private readonly Animator _animator;
         private readonly DumpPlatformPreferences _preferences;

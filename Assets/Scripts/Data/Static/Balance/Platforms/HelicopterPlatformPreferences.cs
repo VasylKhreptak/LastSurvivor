@@ -13,6 +13,8 @@ namespace Data.Static.Balance.Platforms
         [SerializeField] private float _incomeMultiplierUpgradeAmount = 0.1f;
         [SerializeField] private int _upgradeCostEachLevel = 1;
         [SerializeField] private int _costUpgradeAmount = 2;
+        [SerializeField] private int _minigunAmmoCapacityUpgradeAmount = 4;
+        [SerializeField] private int _maxMinigunAmmoCapacity = 300;
 
         public int UpgradeFuelCapacityEachLevel => _upgradeFuelCapacityEachLevel;
         public int FuelCapacityUpgradeAmount => _fuelCapacityUpgradeAmount;
@@ -20,5 +22,7 @@ namespace Data.Static.Balance.Platforms
         public float IncomeMultiplierUpgradeAmount => _incomeMultiplierUpgradeAmount;
         public int UpgradeCostEachLevel => _upgradeCostEachLevel;
         public int CostUpgradeAmount => _costUpgradeAmount;
+        public int MinigunAmmoCapacityUpgradeAmount => _minigunAmmoCapacityUpgradeAmount;
+        public int MaxMinigunAmmoCapacity => _maxMinigunAmmoCapacity;
     }
 }
