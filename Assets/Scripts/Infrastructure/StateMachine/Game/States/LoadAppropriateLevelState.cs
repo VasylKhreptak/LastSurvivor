@@ -14,6 +14,6 @@ namespace Infrastructure.StateMachine.Game.States
             _stateMachine = stateMachine;
         }
 
-        public void Enter() => Debug.Log("LoadCurrentLevelState");
+        public void Enter() => Debug.Log("LoadAppropriteLevelState");
     }
 }

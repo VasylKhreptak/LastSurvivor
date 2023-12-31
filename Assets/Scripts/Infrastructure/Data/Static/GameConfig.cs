@@ -10,6 +10,7 @@ namespace Infrastructure.Data.Static
         [SerializeField] private string _bootstrapScene = "Bootstrap";
         [SerializeField] private string _mainScene = "MainScene";
         [SerializeField] private string _tutorialScene = "TutorialScene";
+        [SerializeField] private string _level1Scene = "Level1";
 
         [Header("Log Preferences")]
         [SerializeField] private LogType _editorLogType = LogType.Info;
@@ -18,6 +19,7 @@ namespace Infrastructure.Data.Static
         public string BootstrapScene => _bootstrapScene;
         public string MainScene => _mainScene;
         public string TutorialScene => _tutorialScene;
+        public string Level1Scene => _level1Scene;
 
         public LogType LogType => Application.isEditor ? _editorLogType : _buildLogType;
     }

@@ -1,14 +1,25 @@
-﻿using Gameplay.Weapons.Minigun.StateMachine;
+﻿using Data.Persistent.Platforms;
+using Gameplay.Weapons.Minigun.StateMachine;
 using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
+using Plugins.Banks;
 using Zenject;
 
 namespace Gameplay.Weapons.Minigun
 {
     public class MinigunInstaller : MonoInstaller
     {
+        private HelicopterPlatformData _platformData;
+
+        [Inject]
+        private void Constructor(HelicopterPlatformData platformData)
+        {
+            _platformData = platformData;
+        }
+
         public override void InstallBindings()
         {
+            BindMagazine();
             BindStateMachine();
         }
 
@@ -25,6 +36,12 @@ namespace Gameplay.Weapons.Minigun
             Container.Bind<LoopState>().AsSingle();
             Container.Bind<SpinDownState>().AsSingle();
             Container.Bind<IdleState>().AsSingle();
+        }
+
+        private void BindMagazine()
+        {
+            ClampedIntegerBank clampedIntegerBank =
+                new ClampedIntegerBank(_platformData.MinigunAmmoCapacity, _platformData.MinigunAmmoCapacity);
         }
     }
 }
