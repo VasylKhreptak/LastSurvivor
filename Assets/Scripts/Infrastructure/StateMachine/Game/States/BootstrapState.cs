@@ -1,4 +1,4 @@
-﻿using Infrastructure.Curtain.Core;
+﻿using Infrastructure.LoadingScreen.Core;
 using Infrastructure.SceneManagement.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States.Core;

@@ -1,8 +1,7 @@
 ﻿using DebuggerOptions;
 using Infrastructure.Coroutines.Runner;
 using Infrastructure.Coroutines.Runner.Core;
-using Infrastructure.Curtain;
-using Infrastructure.Curtain.Core;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.SceneManagement;
 using Infrastructure.SceneManagement.Core;
 using Infrastructure.Services.Framerate;
@@ -52,7 +51,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         private void BindMonoServices()
         {
             Container.Bind<ICoroutineRunner>().To<CoroutineRunner>().FromComponentInNewPrefab(_coroutineRunnerPrefab).AsSingle();
-            Container.Bind<ILoadingScreen>().To<LoadingScreen>().FromComponentInNewPrefab(_loadingScreenPrefab).AsSingle();
+            Container.Bind<ILoadingScreen>().To<LoadingScreen.LoadingScreen>().FromComponentInNewPrefab(_loadingScreenPrefab).AsSingle();
             Container.Bind<ITransitionScreen>().To<TransitionScreen>().FromComponentInNewPrefab(_transitionScreenPrefab).AsSingle();
         }
 
@@ -107,8 +106,6 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<LoadAppropriateLevelState>().AsSingle();
         }
 
-        private void BootstrapGame() => Container.Resolve<IStateMachine<IGameState>>().Enter<BootstrapState>();
-
         private void InitializeDebugger()
         {
             SRDebug.Init();
@@ -119,5 +116,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         {
             Container.Bind<IInitializable>().FromInstance(this).AsSingle();
         }
+        
+        private void BootstrapGame() => Container.Resolve<IStateMachine<IGameState>>().Enter<BootstrapState>();
     }
 }
