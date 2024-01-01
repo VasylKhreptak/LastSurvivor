@@ -36,7 +36,11 @@ namespace Main.Platforms.OilPlatform
 
         private void OnEnable() => StartObserving();
 
-        private void OnDisable() => StopObserving();
+        private void OnDisable()
+        {
+            StopObserving();
+            StopSpawning();
+        }
 
         #endregion
 
