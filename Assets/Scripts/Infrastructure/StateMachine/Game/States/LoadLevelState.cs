@@ -21,10 +21,7 @@ namespace Infrastructure.StateMachine.Game.States
             _loadingScreen = loadingScreen;
         }
 
-        public void Enter(string payload)
-        {
-            _sceneLoader.LoadAsync(payload, OnLoadedScene);
-        }
+        public void Enter(string payload) => _sceneLoader.LoadAsync(payload, OnLoadedScene);
 
         private void OnLoadedScene()
         {

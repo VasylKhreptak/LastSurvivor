@@ -18,9 +18,9 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(SetupApplicationState)] = _container.Resolve<SetupApplicationState>,
                 [typeof(LoadDataState)] = _container.Resolve<LoadDataState>,
                 [typeof(BootstrapAnalyticsState)] = _container.Resolve<BootstrapAnalyticsState>,
-                [typeof(TryLoadTutorialState)] = _container.Resolve<TryLoadTutorialState>,
                 [typeof(LoadLevelState)] = _container.Resolve<LoadLevelState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
+                [typeof(PlayState)] = _container.Resolve<PlayState>,
                 [typeof(LoadAppropriateLevelState)] = _container.Resolve<LoadAppropriateLevelState>
             };
     }

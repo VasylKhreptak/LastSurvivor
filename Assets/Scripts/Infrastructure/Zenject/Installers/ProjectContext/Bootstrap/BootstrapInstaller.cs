@@ -100,9 +100,9 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<SetupApplicationState>().AsSingle();
             Container.Bind<LoadDataState>().AsSingle();
             Container.Bind<BootstrapAnalyticsState>().AsSingle();
-            Container.Bind<TryLoadTutorialState>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
+            Container.Bind<PlayState>().AsSingle();
             Container.Bind<LoadAppropriateLevelState>().AsSingle();
         }
 

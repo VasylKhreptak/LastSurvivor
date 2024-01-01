@@ -1,8 +1,6 @@
-﻿using Data.Persistent.Platforms;
-using Infrastructure.StateMachine.Game.States;
+﻿using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
-using Infrastructure.Transition.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -15,16 +13,11 @@ namespace UI.Platforms.HelicopterPlatform
         [SerializeField] private Button _button;
 
         private IStateMachine<IGameState> _stateMachine;
-        private HelicopterPlatformData _helicopterPlatformData;
-        private ITransitionScreen _transitionScreen;
 
         [Inject]
-        private void Constructor(IStateMachine<IGameState> stateMachine, HelicopterPlatformData platformData,
-            ITransitionScreen transitionScreen)
+        private void Constructor(IStateMachine<IGameState> stateMachine)
         {
             _stateMachine = stateMachine;
-            _helicopterPlatformData = platformData;
-            _transitionScreen = transitionScreen;
         }
 
         #region MonoBehaivour
@@ -37,29 +30,15 @@ namespace UI.Platforms.HelicopterPlatform
 
         #endregion
 
-        private void StartObserving()
-        {
-            _button.onClick.AddListener(OnClicked);
-            _transitionScreen.OnShown += OnTransitionScreenShown;
-        }
+        private void StartObserving() => _button.onClick.AddListener(OnClicked);
 
-        private void StopObserving()
-        {
-            _button.onClick.RemoveListener(OnClicked);
-            _transitionScreen.OnShown -= OnTransitionScreenShown;
-        }
+        private void StopObserving() => _button.onClick.RemoveListener(OnClicked);
 
         private void OnClicked()
         {
-            _button.onClick.RemoveListener(OnClicked);
+            StopObserving();
 
-            _transitionScreen.Show();
-        }
-
-        private void OnTransitionScreenShown()
-        {
-            _stateMachine.Enter<LoadAppropriateLevelState>();
-            _helicopterPlatformData.FuelTank.Clear();
+            _stateMachine.Enter<PlayState>();
         }
     }
 }

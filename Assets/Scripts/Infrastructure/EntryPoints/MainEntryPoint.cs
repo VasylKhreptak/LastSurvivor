@@ -28,10 +28,7 @@ namespace Infrastructure.EntryPoints
 
         #region MonoBehaviour
 
-        private void Start()
-        {
-            Enter();
-        }
+        private void Start() => Enter();
 
         #endregion
 
