@@ -8,8 +8,8 @@ namespace Infrastructure.SceneManagement.Core
 
         public void LoadAsync(string name, Action onComplete = null);
 
-        public void LoadCurrentScene();
+        public void ReloadScene();
 
-        public void LoadCurrentSceneAsync(Action onComplete = null);
+        public void ReloadSceneAsync(Action onComplete = null);
     }
 }

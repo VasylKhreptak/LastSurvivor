@@ -28,12 +28,12 @@ namespace Infrastructure.SceneManagement
             _coroutineRunner.StartCoroutine(LoadSceneRoutine(name, onComplete));
         }
 
-        public void LoadCurrentScene()
+        public void ReloadScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public void LoadCurrentSceneAsync(Action onComplete = null)
+        public void ReloadSceneAsync(Action onComplete = null)
         {
             _coroutineRunner.StartCoroutine(LoadSceneRoutine(SceneManager.GetActiveScene().name, onComplete));
         }

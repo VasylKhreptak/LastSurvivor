@@ -38,8 +38,8 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void OnTransitionScreenShown()
         {
-            _stateMachine.Enter<LoadAppropriateLevelState>();
             _persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData.FuelTank.Clear();
+            _stateMachine.Enter<LoadAppropriateLevelState>();
         }
     }
 }

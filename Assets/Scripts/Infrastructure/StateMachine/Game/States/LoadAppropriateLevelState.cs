@@ -24,7 +24,12 @@ namespace Infrastructure.StateMachine.Game.States
         {
             if (_persistentDataService.PersistentData.PlayerData.FinishedTutorial == false)
             {
-                _stateMachine.Enter<LoadLevelState, string>(_staticDataService.Config.TutorialScene);
+                LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
+                {
+                    SceneName = _staticDataService.Config.TutorialScene,
+                };
+
+                _stateMachine.Enter<LoadSceneAsyncState, LoadSceneAsyncState.Payload>(payload);
                 return;
             }
 
