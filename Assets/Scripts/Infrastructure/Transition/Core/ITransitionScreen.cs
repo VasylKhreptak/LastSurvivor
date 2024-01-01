@@ -4,12 +4,9 @@ namespace Infrastructure.Transition.Core
 {
     public interface ITransitionScreen
     {
-        public event Action OnShown;
-        public event Action OnHidden;
+        public void Show(Action onComplete = null);
 
-        public void Show();
-
-        public void Hide();
+        public void Hide(Action onComplete = null);
 
         public void ShowImmediately();
 

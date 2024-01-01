@@ -22,16 +22,21 @@ namespace Infrastructure.Transition
 
         #endregion
 
-        public void Show()
+        public void Show(Action onComplete = null)
         {
             gameObject.SetActive(true);
-            _showAnimation.PlayForward(() => OnShown?.Invoke());
+            _showAnimation.PlayForward(() =>
+            {
+                onComplete?.Invoke();
+                OnShown?.Invoke();
+            });
         }
 
-        public void Hide()
+        public void Hide(Action onComplete = null)
         {
             _showAnimation.PlayBackward(() =>
             {
+                onComplete?.Invoke();
                 OnHidden?.Invoke();
                 gameObject.SetActive(false);
             });

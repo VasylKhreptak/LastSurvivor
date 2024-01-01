@@ -1,4 +1,5 @@
-﻿using Infrastructure.Services.PersistentData.Core;
+﻿using System;
+using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -6,7 +7,7 @@ using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Infrastructure.StateMachine.Game.States
 {
-    public class LoadAppropriateLevelState : IState, IGameState
+    public class LoadAppropriateLevelState : IPayloadedState<Action>, IGameState
     {
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly IStaticDataService _staticDataService;
@@ -20,13 +21,14 @@ namespace Infrastructure.StateMachine.Game.States
             _persistentDataService = persistentDataService;
         }
 
-        public void Enter()
+        public void Enter(Action onComplete)
         {
             if (_persistentDataService.PersistentData.PlayerData.FinishedTutorial == false)
             {
                 LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
                 {
                     SceneName = _staticDataService.Config.TutorialScene,
+                    OnComplete = onComplete
                 };
 
                 _stateMachine.Enter<LoadSceneAsyncState, LoadSceneAsyncState.Payload>(payload);
