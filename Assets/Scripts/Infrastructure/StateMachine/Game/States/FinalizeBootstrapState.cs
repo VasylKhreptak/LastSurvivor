@@ -6,13 +6,13 @@ using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Infrastructure.StateMachine.Game.States
 {
-    public class FinalyzeBootstrapState : IGameState, IState
+    public class FinalizeBootstrapState : IGameState, IState
     {
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly IStaticDataService _staticDataService;
         private readonly ILoadingScreen _loadingScreen;
 
-        public FinalyzeBootstrapState(IStateMachine<IGameState> stateMachine, IStaticDataService staticDataService,
+        public FinalizeBootstrapState(IStateMachine<IGameState> stateMachine, IStaticDataService staticDataService,
             ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;

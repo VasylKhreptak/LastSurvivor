@@ -10,8 +10,7 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly IStateMachine<IGameState> _gameStateMachine;
         private readonly ISaveLoadHandlerService _saveLoadHandlerService;
 
-        public LoadDataState(IStateMachine<IGameState> gameStateMachine,
-            ISaveLoadHandlerService saveLoadHandlerService)
+        public LoadDataState(IStateMachine<IGameState> gameStateMachine, ISaveLoadHandlerService saveLoadHandlerService)
         {
             _gameStateMachine = gameStateMachine;
             _saveLoadHandlerService = saveLoadHandlerService;
