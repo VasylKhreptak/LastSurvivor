@@ -23,18 +23,15 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter(Action onComplete)
         {
-            if (_persistentDataService.PersistentData.PlayerData.FinishedTutorial == false)
+            string sceneName = _staticDataService.Config.TutorialScene;
+
+            LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
             {
-                LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
-                {
-                    SceneName = _staticDataService.Config.TutorialScene,
-                    OnComplete = onComplete
-                };
+                SceneName = sceneName,
+                OnComplete = onComplete
+            };
 
-                _stateMachine.Enter<LoadSceneAsyncState, LoadSceneAsyncState.Payload>(payload);
-            }
-
-            //load next level
+            _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneAsyncState.Payload>(payload);
         }
     }
 }

@@ -25,8 +25,10 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void LoadAppropriateLevel()
         {
-            _persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData.FuelTank.Clear();
-            _stateMachine.Enter<LoadAppropriateLevelState, Action>(() => _transitionScreen.Hide());
+            _stateMachine.Enter<LoadAppropriateLevelState, Action>(ClearHelicopterFuelTank);
         }
+
+        private void ClearHelicopterFuelTank() =>
+            _persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData.FuelTank.Clear();
     }
 }

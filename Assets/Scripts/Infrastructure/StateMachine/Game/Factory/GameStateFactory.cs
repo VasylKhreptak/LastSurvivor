@@ -20,6 +20,7 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(BootstrapAnalyticsState)] = _container.Resolve<BootstrapAnalyticsState>,
                 [typeof(FinalizeBootstrapState)] = _container.Resolve<FinalizeBootstrapState>,
                 [typeof(LoadSceneAsyncState)] = _container.Resolve<LoadSceneAsyncState>,
+                [typeof(LoadSceneWithTransitionAsyncState)] = _container.Resolve<LoadSceneWithTransitionAsyncState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
                 [typeof(PlayState)] = _container.Resolve<PlayState>,
                 [typeof(LoadAppropriateLevelState)] = _container.Resolve<LoadAppropriateLevelState>
