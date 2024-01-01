@@ -3,8 +3,5 @@
 namespace Data.Static.Balance
 {
     [Serializable]
-    public class MinigunPreferences
-    {
-        
-    }
+    public class MinigunPreferences { }
 }

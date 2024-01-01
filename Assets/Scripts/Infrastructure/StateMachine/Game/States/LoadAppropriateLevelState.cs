@@ -32,7 +32,6 @@ namespace Infrastructure.StateMachine.Game.States
                 };
 
                 _stateMachine.Enter<LoadSceneAsyncState, LoadSceneAsyncState.Payload>(payload);
-                return;
             }
 
             //load next level
