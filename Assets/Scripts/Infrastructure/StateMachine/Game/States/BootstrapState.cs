@@ -14,9 +14,7 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly IStaticDataService _staticDataService;
         private readonly ILoadingScreen _loadingScreen;
 
-        public BootstrapState(IStateMachine<IGameState> stateMachine,
-            ISceneLoader sceneLoader,
-            IStaticDataService staticDataService,
+        public BootstrapState(IStateMachine<IGameState> stateMachine, ISceneLoader sceneLoader, IStaticDataService staticDataService,
             ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;

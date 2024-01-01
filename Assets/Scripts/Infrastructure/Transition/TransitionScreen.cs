@@ -10,9 +10,6 @@ namespace Infrastructure.Transition
         [Header("Preferences")]
         [SerializeField] private FadeAnimation _showAnimation;
 
-        public event Action OnShown;
-        public event Action OnHidden;
-
         #region MonoBehaviour
 
         private void OnDestroy()
@@ -25,11 +22,7 @@ namespace Infrastructure.Transition
         public void Show(Action onComplete = null)
         {
             gameObject.SetActive(true);
-            _showAnimation.PlayForward(() =>
-            {
-                onComplete?.Invoke();
-                OnShown?.Invoke();
-            });
+            _showAnimation.PlayForward(() => { onComplete?.Invoke(); });
         }
 
         public void Hide(Action onComplete = null)
@@ -37,7 +30,6 @@ namespace Infrastructure.Transition
             _showAnimation.PlayBackward(() =>
             {
                 onComplete?.Invoke();
-                OnHidden?.Invoke();
                 gameObject.SetActive(false);
             });
         }
@@ -46,13 +38,11 @@ namespace Infrastructure.Transition
         {
             gameObject.SetActive(true);
             _showAnimation.SetEndState();
-            OnShown?.Invoke();
         }
 
         public void HideImmediately()
         {
             _showAnimation.SetStartState();
-            OnHidden?.Invoke();
             gameObject.SetActive(false);
         }
     }
