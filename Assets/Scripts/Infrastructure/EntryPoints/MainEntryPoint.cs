@@ -5,6 +5,9 @@ using Infrastructure.Data.Static.Core;
 using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
+using Infrastructure.StateMachine.Game.States;
+using Infrastructure.StateMachine.Game.States.Core;
+using Infrastructure.StateMachine.Main.Core;
 using Main.Entities.Player;
 using UnityEngine;
 using Zenject;
@@ -37,6 +40,8 @@ namespace Infrastructure.EntryPoints
             Transform playerTransform = InitializePlayer();
             InitializeCamera(playerTransform);
             SpawnPlatforms();
+
+            _container.Resolve<IStateMachine<IGameState>>().Enter<PlayState>();
         }
 
         private Transform InitializePlayer()
