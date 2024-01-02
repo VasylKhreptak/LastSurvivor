@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Gameplay.Aim
 {
-    public class AimTrackpad : MonoBehaviour, IDragHandler
+    public class Trackpad : MonoBehaviour, IDragHandler
     {
         [Header("References")]
         [SerializeField] private RectTransform _rectTransform;

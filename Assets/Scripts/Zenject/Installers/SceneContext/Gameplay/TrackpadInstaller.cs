@@ -3,5 +3,5 @@ using Zenject.Installers.SceneContext.Core;
 
 namespace Zenject.Installers.SceneContext.Gameplay
 {
-    public class AimTrackpadInstaller : SingleInstanceInstaller<AimTrackpad> { }
+    public class TrackpadInstaller : SingleInstanceInstaller<Trackpad> { }
 }

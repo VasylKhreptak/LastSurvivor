@@ -10,10 +10,10 @@ namespace Gameplay.Aim
         [Header("References")]
         [SerializeField] private RectTransform _rectTransform;
 
-        private AimTrackpad _trackpad;
+        private Trackpad _trackpad;
 
         [Inject]
-        private void Constructor(AimTrackpad trackpad)
+        private void Constructor(Trackpad trackpad)
         {
             _trackpad = trackpad;
         }

@@ -20425,7 +20425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2fb9c4162246e1835c3f35b00e9d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parentRectTransform: {fileID: 132994866}
+  _rectTransform: {fileID: 1154708854}
   _canvas: {fileID: 132994865}
   _sensitivity: 1
 --- !u!114 &1154708856
@@ -35506,7 +35506,7 @@ GameObject:
   - component: {fileID: 2004134640}
   - component: {fileID: 2004134641}
   m_Layer: 0
-  m_Name: AimTrackpadInstaller
+  m_Name: TrackpadInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
