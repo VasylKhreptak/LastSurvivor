@@ -20388,7 +20388,7 @@ GameObject:
   - component: {fileID: 1154708856}
   - component: {fileID: 1154708855}
   m_Layer: 5
-  m_Name: AimTrackpad
+  m_Name: Trackpad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20427,7 +20427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rectTransform: {fileID: 1154708854}
   _canvas: {fileID: 132994865}
-  _sensitivity: 1
+  _sensitivity: 1.5
 --- !u!114 &1154708856
 MonoBehaviour:
   m_ObjectHideFlags: 0
