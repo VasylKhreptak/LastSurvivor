@@ -17,9 +17,11 @@ namespace Gameplay.Weapons.Minigun
         private void Constructor(IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo)
         {
             _stateMachine = stateMachine;
+            _ammo = ammo;
         }
 
         public ClampedIntegerBank Ammo => _ammo;
+
         public void StartShooting() => _stateMachine.Enter<SpinUpState>();
 
         public void StopShooting() => _stateMachine.Enter<SpinDownState>();

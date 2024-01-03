@@ -13,9 +13,11 @@ namespace Gameplay.Weapons.Minigun
     {
         [Header("References")]
         [SerializeField] private Transform _transform;
+        [SerializeField] private Transform _barrelTransform;
 
         [Header("Preferences")]
         [SerializeField] private WeaponAimer.Preferences _aimPreferences;
+        [SerializeField] private BarrelRotator.Preferences _barrelRotatorPreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
 
@@ -27,10 +29,10 @@ namespace Gameplay.Weapons.Minigun
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_transform).AsSingle();
-            BindMagazine();
-            BindStateMachine();
+            BindMinigunAmmo();
             BindAimer();
+            BindBarrelRotator();
+            BindStateMachine();
         }
 
         private void BindStateMachine()
@@ -48,14 +50,28 @@ namespace Gameplay.Weapons.Minigun
             Container.Bind<IdleState>().AsSingle();
         }
 
-        private void BindMagazine()
+        private void BindMinigunAmmo()
         {
-            ClampedIntegerBank clampedIntegerBank =
-                new ClampedIntegerBank(_helicopterPlatformData.MinigunAmmoCapacity, _helicopterPlatformData.MinigunAmmoCapacity);
+            int ammoCapacity = _helicopterPlatformData.MinigunAmmoCapacity;
 
-            Container.BindInstance(clampedIntegerBank).AsSingle();
+            ClampedIntegerBank ammo = new ClampedIntegerBank(ammoCapacity, ammoCapacity);
+            Container.BindInstance(ammo).AsSingle();
         }
 
-        private void BindAimer() => Container.BindInterfacesTo<WeaponAimer>().AsSingle().WithArguments(_aimPreferences);
+        private void BindAimer()
+        {
+            Container
+                .BindInterfacesTo<WeaponAimer>()
+                .AsSingle()
+                .WithArguments(_aimPreferences, _transform);
+        }
+
+        private void BindBarrelRotator()
+        {
+            Container
+                .BindInterfacesAndSelfTo<BarrelRotator>()
+                .AsSingle()
+                .WithArguments(_barrelTransform, _barrelRotatorPreferences);
+        }
     }
 }

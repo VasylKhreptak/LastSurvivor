@@ -1,13 +1,19 @@
 ﻿using Gameplay.Weapons.Minigun.StateMachine.States.Core;
-using UnityEngine;
+using Infrastructure.StateMachine.Main.Core;
 
 namespace Gameplay.Weapons.Minigun.StateMachine.States
 {
     public class SpinDownState : IMinigunState
     {
-        public void Enter()
+        private readonly IStateMachine<IMinigunState> _stateMachine;
+        private readonly BarrelRotator _barrelRotator;
+
+        public SpinDownState(IStateMachine<IMinigunState> stateMachine, BarrelRotator barrelRotator)
         {
-            Debug.Log("SpinDownState");
+            _stateMachine = stateMachine;
+            _barrelRotator = barrelRotator;
         }
+
+        public void Enter() => _barrelRotator.SpinDown(() => _stateMachine.Enter<IdleState>());
     }
 }
