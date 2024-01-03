@@ -38206,6 +38206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2465216074547865248, guid: af9d2770081cd1342abd7b2a31209a4b,
         type: 3}
+      propertyPath: _barrelRotatorPreferences.Reverse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465216074547865248, guid: af9d2770081cd1342abd7b2a31209a4b,
+        type: 3}
       propertyPath: _barrelRotatorPreferences.Acceleration
       value: 45
       objectReference: {fileID: 0}

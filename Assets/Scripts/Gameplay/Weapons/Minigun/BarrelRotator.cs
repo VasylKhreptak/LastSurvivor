@@ -1,4 +1,6 @@
 ﻿using System;
+using Extensions;
+using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -22,7 +24,10 @@ namespace Gameplay.Weapons.Minigun
 
         public void Dispose() => _accelerationSubscription?.Dispose();
 
-        private void Rotate() => _barrelTransform.rotation *= Quaternion.Euler(0, 0, _preferences.RotateSpeed);
+        private void Rotate()
+        {
+            _barrelTransform.rotation *= Quaternion.Euler(0, 0, (!_preferences.Reverse).ToSign() * _preferences.RotateSpeed);
+        }
 
         public void SpinUp(Action onComplete = null)
         {
@@ -59,11 +64,12 @@ namespace Gameplay.Weapons.Minigun
                     }
                 });
         }
-        
+
         [Serializable]
         public class Preferences
         {
-            public float RotateSpeed;
+            public bool Reverse;
+            [ReadOnly] public float RotateSpeed;
             public float MaxRotateSpeed;
             public float Acceleration;
         }
