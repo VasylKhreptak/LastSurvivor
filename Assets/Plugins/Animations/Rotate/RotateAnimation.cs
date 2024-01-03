@@ -19,8 +19,7 @@ namespace Plugins.Animations.Rotate
         [SerializeField] private Vector3 _endRotation;
         [SerializeField] private RotateMode _rotateMode = RotateMode.Fast;
         [SerializeField] private AnimationCurve _curve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
-
-
+        
         private Tween _tween;
 
         public float Duration => _duration;

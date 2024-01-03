@@ -2,7 +2,7 @@
 
 namespace Gameplay.Weapons.Minigun.StateMachine.States
 {
-    public class LoopState : IMinigunState
+    public class FireState : IMinigunState
     {
         public void Enter() { }
     }

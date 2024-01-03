@@ -30,7 +30,7 @@ namespace Gameplay.Aim
 
         #endregion
 
-        private void StartObserving() => _trackpad.Position.Subscribe(SetAimPosition);
+        private void StartObserving() => _trackpad.AnchoredPosition.Subscribe(SetAimPosition);
 
         private void StopObserving() => _subscription?.Dispose();
 

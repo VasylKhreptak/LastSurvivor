@@ -2,7 +2,7 @@
 
 namespace Zenject.Installers.SceneContext.Core
 {
-    public class SingleInstanceInstaller<T> : MonoInstaller where T : Object
+    public class InstanceInstaller<T> : MonoInstaller where T : Object
     {
         [Header("References")]
         [SerializeField] private T _instance;
