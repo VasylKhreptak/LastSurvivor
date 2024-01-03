@@ -14,6 +14,7 @@ namespace Gameplay.Weapons.Minigun
         [Header("Preferences")]
         [SerializeField] private WeaponAimer.Preferences _aimPreferences;
         [SerializeField] private BarrelRotator.Preferences _barrelRotatorPreferences;
+        [SerializeField] private FireState.Preferences _firePreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
 
@@ -41,7 +42,7 @@ namespace Gameplay.Weapons.Minigun
         private void BindStates()
         {
             Container.Bind<SpinUpState>().AsSingle();
-            Container.Bind<FireState>().AsSingle();
+            Container.Bind<FireState>().AsSingle().WithArguments(_firePreferences);
             Container.Bind<SpinDownState>().AsSingle();
             Container.Bind<IdleState>().AsSingle();
         }
