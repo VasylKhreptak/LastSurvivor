@@ -1,6 +1,5 @@
 ﻿using System;
 using Extensions;
-using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -9,16 +8,16 @@ namespace Gameplay.Weapons.Minigun
 {
     public class BarrelRotator : ITickable, IDisposable
     {
-        private readonly Transform _barrelTransform;
         private readonly Preferences _preferences;
 
-        public BarrelRotator(Transform barrelTransform, Preferences preferences)
+        public BarrelRotator(Preferences preferences)
         {
-            _barrelTransform = barrelTransform;
             _preferences = preferences;
         }
 
         private IDisposable _accelerationSubscription;
+
+        private float _rotateSpeed;
 
         public void Tick() => Rotate();
 
@@ -26,7 +25,8 @@ namespace Gameplay.Weapons.Minigun
 
         private void Rotate()
         {
-            _barrelTransform.rotation *= Quaternion.Euler(0, 0, (!_preferences.Reverse).ToSign() * _preferences.RotateSpeed);
+            _preferences.BarrelTransform.rotation *=
+                Quaternion.Euler(0, 0, (!_preferences.Reverse).ToSign() * _rotateSpeed * Time.deltaTime);
         }
 
         public void SpinUp(Action onComplete = null)
@@ -36,10 +36,10 @@ namespace Gameplay.Weapons.Minigun
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    _preferences.RotateSpeed = Mathf.Clamp(_preferences.RotateSpeed + _preferences.Acceleration * Time.deltaTime, 0,
+                    _rotateSpeed = Mathf.Clamp(_rotateSpeed + _preferences.Acceleration * Time.deltaTime, 0,
                         _preferences.MaxRotateSpeed);
 
-                    if (_preferences.RotateSpeed >= _preferences.MaxRotateSpeed)
+                    if (_rotateSpeed >= _preferences.MaxRotateSpeed)
                     {
                         _accelerationSubscription?.Dispose();
                         onComplete?.Invoke();
@@ -54,10 +54,10 @@ namespace Gameplay.Weapons.Minigun
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    _preferences.RotateSpeed = Mathf.Clamp(_preferences.RotateSpeed - _preferences.Acceleration * Time.deltaTime, 0,
+                    _rotateSpeed = Mathf.Clamp(_rotateSpeed - _preferences.Deceleration * Time.deltaTime, 0,
                         _preferences.MaxRotateSpeed);
 
-                    if (_preferences.RotateSpeed <= 0)
+                    if (_rotateSpeed <= 0)
                     {
                         _accelerationSubscription?.Dispose();
                         onComplete?.Invoke();
@@ -68,10 +68,17 @@ namespace Gameplay.Weapons.Minigun
         [Serializable]
         public class Preferences
         {
-            public bool Reverse;
-            [ReadOnly] public float RotateSpeed;
-            [Min(0)] public float MaxRotateSpeed;
-            [Min(0)] public float Acceleration;
+            [SerializeField] private Transform _barrelTransform;
+            [SerializeField] private bool _reverse;
+            [SerializeField, Min(0)] private float _maxRotateSpeed;
+            [SerializeField, Min(0)] private float _acceleration;
+            [SerializeField, Min(0)] private float _deceleration;
+
+            public Transform BarrelTransform => _barrelTransform;
+            public bool Reverse => _reverse;
+            public float MaxRotateSpeed => _maxRotateSpeed;
+            public float Acceleration => _acceleration;
+            public float Deceleration => _deceleration;
         }
     }
 }

@@ -11,10 +11,6 @@ namespace Gameplay.Weapons.Minigun
 {
     public class MinigunInstaller : MonoInstaller
     {
-        [Header("References")]
-        [SerializeField] private Transform _transform;
-        [SerializeField] private Transform _barrelTransform;
-
         [Header("Preferences")]
         [SerializeField] private WeaponAimer.Preferences _aimPreferences;
         [SerializeField] private BarrelRotator.Preferences _barrelRotatorPreferences;
@@ -63,7 +59,7 @@ namespace Gameplay.Weapons.Minigun
             Container
                 .BindInterfacesTo<WeaponAimer>()
                 .AsSingle()
-                .WithArguments(_aimPreferences, _transform);
+                .WithArguments(_aimPreferences);
         }
 
         private void BindBarrelRotator()
@@ -71,7 +67,7 @@ namespace Gameplay.Weapons.Minigun
             Container
                 .BindInterfacesAndSelfTo<BarrelRotator>()
                 .AsSingle()
-                .WithArguments(_barrelTransform, _barrelRotatorPreferences);
+                .WithArguments(_barrelRotatorPreferences);
         }
     }
 }

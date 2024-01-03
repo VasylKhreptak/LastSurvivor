@@ -9,5 +9,6 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         {
             Debug.Log("Fire!");
         }
+        
     }
 }

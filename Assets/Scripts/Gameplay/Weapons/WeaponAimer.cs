@@ -7,14 +7,12 @@ namespace Gameplay.Weapons
 {
     public class WeaponAimer : ITickable
     {
-        private readonly Transform _transform;
         private readonly Trackpad _trackpad;
         private readonly Camera _camera;
         private readonly Preferences _preferences;
 
-        public WeaponAimer(Transform transform, Trackpad trackpad, Camera camera, Preferences preferences)
+        public WeaponAimer(Trackpad trackpad, Camera camera, Preferences preferences)
         {
-            _transform = transform;
             _trackpad = trackpad;
             _camera = camera;
             _preferences = preferences;
@@ -28,9 +26,9 @@ namespace Gameplay.Weapons
         {
             _lookPoint = GetLookPoint();
 
-            Debug.DrawLine(_transform.position, _lookPoint, Color.red);
+            Debug.DrawLine(_preferences.Transform.position, _lookPoint, Color.red);
 
-            _transform.rotation = Quaternion.LookRotation(_lookPoint - _transform.position);
+            _preferences.Transform.rotation = Quaternion.LookRotation(_lookPoint - _preferences.Transform.position);
         }
 
         private Vector3 GetLookPoint()
@@ -50,8 +48,13 @@ namespace Gameplay.Weapons
         [Serializable]
         public class Preferences
         {
-            public LayerMask AimLayerMask;
-            public float WorkingDistance;
+            [SerializeField] private Transform _transform;
+            [SerializeField] private LayerMask _aimLayerMask;
+            [SerializeField] private float _workingDistance;
+
+            public Transform Transform => _transform;
+            public LayerMask AimLayerMask => _aimLayerMask;
+            public float WorkingDistance => _workingDistance;
         }
     }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896010075851210857}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.669, y: 1.608, z: -0.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1020397396622632827}
   - component: {fileID: 7139035862362615505}
   m_Layer: 0
-  m_Name: SM_Wep_Minigun_01_Barrel_01
+  m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 2657630373812486773}
   - component: {fileID: 3545046548198583781}
   m_Layer: 0
-  m_Name: SM_Wep_Minigun_01_Barrel_Wire_01
+  m_Name: Wire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,12 +318,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b0ff1da44361c468bea01ea5f8b755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transform: {fileID: 4146181776724600809}
   _aimPreferences:
-    AimLayerMask:
+    _transform: {fileID: 4146181776724600809}
+    _aimLayerMask:
       serializedVersion: 2
       m_Bits: 55
-    WorkingDistance: 200
+    _workingDistance: 200
+  _barrelRotatorPreferences:
+    _barrelTransform: {fileID: 993517482539922330}
+    _reverse: 0
+    _maxRotateSpeed: 65
+    _acceleration: 45
 --- !u!114 &2012973939704131223
 MonoBehaviour:
   m_ObjectHideFlags: 0
