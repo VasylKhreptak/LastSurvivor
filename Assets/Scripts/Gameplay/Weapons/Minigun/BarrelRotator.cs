@@ -70,8 +70,8 @@ namespace Gameplay.Weapons.Minigun
         {
             public bool Reverse;
             [ReadOnly] public float RotateSpeed;
-            public float MaxRotateSpeed;
-            public float Acceleration;
+            [Min(0)] public float MaxRotateSpeed;
+            [Min(0)] public float Acceleration;
         }
     }
 }
