@@ -18,7 +18,7 @@ namespace Plugins.ObjectPoolSystem.Zenject
 
             ObjectPools<T> objectPools = new ObjectPools<T>(_objectPoolPreferences);
 
-            Container.BindInstance(objectPools).AsSingle();
+            Container.Bind<IObjectPools<T>>().FromInstance(objectPools).AsSingle();
         }
     }
 }

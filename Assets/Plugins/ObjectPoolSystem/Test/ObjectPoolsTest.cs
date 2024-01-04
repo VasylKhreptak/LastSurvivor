@@ -18,7 +18,7 @@ namespace Plugins.ObjectPoolSystem.Test
         {
             while (true)
             {
-                GameObject pooledObject = _mainPool.GetPool(MainPool.Sphere).Get();
+                GameObject pooledObject = _mainPool.GetPool(MainPool.Bullet).Get();
 
                 pooledObject.transform.position = Random.insideUnitSphere * 100f;
 

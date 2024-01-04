@@ -2,7 +2,7 @@
 
 namespace Plugins.ObjectPoolSystem.Test
 {
-    public class MainPoolInstaller : ObjectPoolsInstaller<MainPool>
+    public class MainPoolsInstaller : ObjectPoolsInstaller<MainPool>
     {
 
     }

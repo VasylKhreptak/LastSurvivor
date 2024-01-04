@@ -2,6 +2,6 @@
 {
     public enum MainPool
     {
-        Sphere = 0,
+        Bullet = 0,
     }
 }

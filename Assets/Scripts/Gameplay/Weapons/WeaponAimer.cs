@@ -38,11 +38,11 @@ namespace Gameplay.Weapons
             if (Physics.Raycast(ray, out RaycastHit hitInfo, _preferences.WorkingDistance, _preferences.AimLayerMask))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hitInfo.distance, Color.green);
-                return hitInfo.point;
+                return hitInfo.point + _preferences.LookPointOffset;
             }
 
             Debug.DrawRay(ray.origin, ray.direction * _preferences.WorkingDistance, Color.green);
-            return _camera.transform.position + ray.direction * _preferences.WorkingDistance;
+            return _camera.transform.position + ray.direction * _preferences.WorkingDistance + _preferences.LookPointOffset;
         }
 
         [Serializable]
@@ -51,10 +51,12 @@ namespace Gameplay.Weapons
             [SerializeField] private Transform _transform;
             [SerializeField] private LayerMask _aimLayerMask;
             [SerializeField] private float _workingDistance;
+            [SerializeField] private Vector3 _lookPointOffset;
 
             public Transform Transform => _transform;
             public LayerMask AimLayerMask => _aimLayerMask;
             public float WorkingDistance => _workingDistance;
+            public Vector3 LookPointOffset => _lookPointOffset;
         }
     }
 }

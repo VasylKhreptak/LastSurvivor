@@ -19,12 +19,14 @@ namespace Infrastructure.Data.Static
         [SerializeField] private BarracksPlatformPreferences _barracksPlatformPreferences;
         [SerializeField] private CollectorsPlatformPreferences _collectorsPlatformPreferences;
 
-        [Header("Gameplay")]
-        [SerializeField] private MinigunPreferences _minigunPreferences;
+        #region Balance
 
         public PlayerPreferences PlayerPreferences => _playerPreferences;
-
         public AnimationPreferences AnimationPreferences => _animationPreferences;
+
+        #endregion
+
+        #region Platforms Preferences
 
         public HelicopterPlatformPreferences HelicopterPlatformPreferences => _helicopterPlatformPreferences;
         public OilPlatformPreferences OilPlatformPreferences => _oilPlatformPreferences;
@@ -32,6 +34,6 @@ namespace Infrastructure.Data.Static
         public BarracksPlatformPreferences BarracksPlatformPreferences => _barracksPlatformPreferences;
         public CollectorsPlatformPreferences CollectorsPlatformPreferences => _collectorsPlatformPreferences;
 
-        public MinigunPreferences MinigunPreferences => _minigunPreferences;
+        #endregion
     }
 }

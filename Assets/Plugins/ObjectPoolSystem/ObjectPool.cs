@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SRF;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -10,9 +11,9 @@ namespace Plugins.ObjectPoolSystem
 {
     public class ObjectPool : IObjectPool, IDisposable
     {
-        private readonly HashSet<PooledObject> _totalPool = new HashSet<PooledObject>();
-        private readonly HashSet<PooledObject> _activePool = new HashSet<PooledObject>();
-        private readonly HashSet<PooledObject> _inactivePool = new HashSet<PooledObject>();
+        private readonly List<PooledObject> _totalPool = new List<PooledObject>();
+        private readonly List<PooledObject> _activePool = new List<PooledObject>();
+        private readonly List<PooledObject> _inactivePool = new List<PooledObject>();
 
         private readonly int _initialSize;
         private readonly int _maxSize;
@@ -51,7 +52,7 @@ namespace Plugins.ObjectPoolSystem
                 return Get();
             }
 
-            PooledObject lastPooledObject = _activePool.Last();
+            PooledObject lastPooledObject = _activePool.Random();
 
             lastPooledObject.GameObject.SetActive(false);
             lastPooledObject.GameObject.SetActive(true);
