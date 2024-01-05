@@ -15,13 +15,11 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     {
         private readonly Preferences _preferences;
         private readonly IObjectPools<GeneralPool> _objectPools;
-        private readonly CameraShaker _cameraShaker;
 
-        public FireState(Preferences preferences, IObjectPools<GeneralPool> objectPools, CameraShaker cameraShaker)
+        public FireState(Preferences preferences, IObjectPools<GeneralPool> objectPools)
         {
             _preferences = preferences;
             _objectPools = objectPools;
-            _cameraShaker = cameraShaker;
         }
 
         private IDisposable _fireSubscription;
