@@ -1,4 +1,6 @@
 ﻿using System;
+using CameraUtilities;
+using CameraUtilities.Shaker;
 using Gameplay.Weapons.Bullets.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
@@ -14,11 +16,13 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     {
         private readonly Preferences _preferences;
         private readonly IObjectPools<GeneralPool> _objectPools;
+        private readonly CameraShaker _cameraShaker;
 
-        public FireState(Preferences preferences, IObjectPools<GeneralPool> objectPools)
+        public FireState(Preferences preferences, IObjectPools<GeneralPool> objectPools, CameraShaker cameraShaker)
         {
             _preferences = preferences;
             _objectPools = objectPools;
+            _cameraShaker = cameraShaker;
         }
 
         private IDisposable _fireSubscription;
@@ -42,6 +46,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         {
             FireBullet();
             FireShell();
+            // ShakeCamera();
         }
 
         private void FireBullet()
@@ -56,6 +61,8 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         }
 
         private void FireShell() { }
+
+        // private void ShakeCamera() => _cameraShaker.DoFireShake();
 
         private Vector3 GetBulletPosition()
         {

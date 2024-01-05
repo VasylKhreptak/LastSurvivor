@@ -20047,6 +20047,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1127935813}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1134641502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1134641503}
+  - component: {fileID: 1134641504}
+  m_Layer: 0
+  m_Name: CameraShaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1134641503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134641502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2075507809}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1134641504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134641502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce735d982af4607ada61ed2e7dcb971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preferences:
+    _fireShakePreferences:
+      _duration: 0.6
+      _strength: {x: 0.2, y: 0.1, z: 0}
+      _vibrato: 10
+      _randomness: 90
+      _fadeOut: 1
+    _explosionShakePreferences:
+      _duration: 0.2
+      _strength: {x: 1, y: 1, z: 1}
+      _vibrato: 10
+      _randomness: 90
+      _fadeOut: 1
+    _rotationResetPreferences:
+      _duration: 0.6
+      _ease: 4
 --- !u!1001 &1143454708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37330,6 +37390,7 @@ MonoBehaviour:
   - {fileID: 1820948753}
   - {fileID: 1199312915}
   - {fileID: 1204016290}
+  - {fileID: 1134641504}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -37365,6 +37426,7 @@ Transform:
   - {fileID: 1746983986}
   - {fileID: 1820948752}
   - {fileID: 1112536281}
+  - {fileID: 1134641503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2078668369

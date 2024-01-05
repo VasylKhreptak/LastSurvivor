@@ -326,7 +326,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 55
     _workingDistance: 200
-    _lookPointOffset: {x: 0, y: 0.5, z: 0}
+    _lookPointOffset: {x: 0, y: 0, z: 0}
   _barrelRotatorPreferences:
     _barrelTransform: {fileID: 993517482539922330}
     _reverse: 1
