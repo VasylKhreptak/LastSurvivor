@@ -1,7 +1,4 @@
 ﻿namespace CameraUtilities.Shaker
 {
-    public class CameraShaker
-    {
-        
-    }
+    public class CameraShaker { }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using CameraUtilities;
 using CameraUtilities.Shaker;
 using Gameplay.Weapons.Bullets.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
@@ -46,7 +45,6 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         {
             FireBullet();
             FireShell();
-            // ShakeCamera();
         }
 
         private void FireBullet()
@@ -61,8 +59,6 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         }
 
         private void FireShell() { }
-
-        // private void ShakeCamera() => _cameraShaker.DoFireShake();
 
         private Vector3 GetBulletPosition()
         {

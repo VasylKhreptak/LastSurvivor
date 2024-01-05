@@ -15,5 +15,17 @@ namespace Extensions
 
             return children;
         }
+
+        public static Transform CreateParent(this Transform transform, string name)
+        {
+            Transform parent = new GameObject(name).transform;
+            Transform childParent = transform.parent;
+            parent.SetParent(childParent);
+            parent.position = transform.position;
+            parent.rotation = transform.rotation;
+            parent.localScale = transform.localScale;
+            transform.SetParent(parent);
+            return parent;
+        }
     }
 }

@@ -20092,21 +20092,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preferences:
-    _fireShakePreferences:
-      _duration: 0.6
-      _strength: {x: 0.2, y: 0.1, z: 0}
-      _vibrato: 10
-      _randomness: 90
-      _fadeOut: 1
-    _explosionShakePreferences:
-      _duration: 0.2
-      _strength: {x: 1, y: 1, z: 1}
-      _vibrato: 10
-      _randomness: 90
-      _fadeOut: 1
-    _rotationResetPreferences:
-      _duration: 0.6
-      _ease: 4
+    Speed: 1
+    Axis: {x: 1, y: 1, z: 0}
+    Amplitude: 1
 --- !u!1001 &1143454708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32068,13 +32056,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803726998}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.26866373, y: 0.6549808, z: -0.26988858, w: 0.6526716}
+  m_LocalRotation: {x: 0.26488683, y: 0.655618, z: -0.26488683, w: 0.655618}
   m_LocalPosition: {x: 1.15, y: 3.37, z: -1.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5183883730816375094}
-  m_LocalEulerAnglesHint: {x: 44.768, y: 90.19, z: -0.029}
+  m_LocalEulerAnglesHint: {x: 44, y: 90, z: 0}
 --- !u!114 &1803727002
 MonoBehaviour:
   m_ObjectHideFlags: 0
