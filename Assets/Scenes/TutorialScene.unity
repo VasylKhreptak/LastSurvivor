@@ -19601,6 +19601,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1109782505}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1112536280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1112536281}
+  m_Layer: 0
+  m_Name: PoolsInstallers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1112536281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112536280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1199312914}
+  - {fileID: 1204016289}
+  m_Father: {fileID: 2075507809}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1114274300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21710,7 +21743,7 @@ GameObject:
   - component: {fileID: 1199312914}
   - component: {fileID: 1199312915}
   m_Layer: 0
-  m_Name: MainPoolsInstaller
+  m_Name: GeneralPoolsInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21724,12 +21757,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199312913}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2075507809}
+  m_Father: {fileID: 1112536281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1199312915
 MonoBehaviour:
@@ -21747,8 +21780,68 @@ MonoBehaviour:
   - Key: 0
     Prefab: {fileID: 2347811216486613142, guid: c90e139c33589bd43aeaa671e660e2ec,
       type: 3}
-    InitialSize: 20
+    InitialSize: 0
     MaxSize: 150
+--- !u!1 &1204016288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1204016289}
+  - component: {fileID: 1204016290}
+  m_Layer: 0
+  m_Name: ParticlePoolsInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1204016289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204016288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1112536281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1204016290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204016288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72410bee80d04a9d86f5b3f4d072bb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectPoolPreferences:
+  - Key: 1
+    Prefab: {fileID: 1830290776695720477, guid: 8765646894850024e8310d5349c3102f,
+      type: 3}
+    InitialSize: 5
+    MaxSize: 40
+  - Key: 2
+    Prefab: {fileID: 8312876692420609305, guid: 438914c6a9b87834d9b79967d4b198f6,
+      type: 3}
+    InitialSize: 2
+    MaxSize: 30
+  - Key: 3
+    Prefab: {fileID: 4830121994293342856, guid: c0cd28035d8125946b9cf19e9d0c4536,
+      type: 3}
+    InitialSize: 10
+    MaxSize: 40
 --- !u!1001 &1205102003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37236,6 +37329,7 @@ MonoBehaviour:
   - {fileID: 1746983987}
   - {fileID: 1820948753}
   - {fileID: 1199312915}
+  - {fileID: 1204016290}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -37270,7 +37364,7 @@ Transform:
   - {fileID: 434303060}
   - {fileID: 1746983986}
   - {fileID: 1820948752}
-  - {fileID: 1199312914}
+  - {fileID: 1112536281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2078668369

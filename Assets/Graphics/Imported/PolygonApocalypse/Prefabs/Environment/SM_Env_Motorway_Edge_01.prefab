@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23813885192465712}
   - component: {fileID: 5601957495283201563}
   - component: {fileID: 2562141985799009647}
+  - component: {fileID: 7463793831733876282}
   m_Layer: 0
   m_Name: SM_Env_Motorway_Edge_01
   m_TagString: Untagged
@@ -127,3 +128,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7832079, y: 2.237149, z: 5.0003805}
   m_Center: {x: -6.009051, y: 0.09859347, z: -2.5001903}
+--- !u!114 &7463793831733876282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105148862239902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0

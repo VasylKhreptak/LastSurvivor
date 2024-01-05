@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4690260145916008}
   - component: {fileID: 33610779269987422}
   - component: {fileID: 23442548580829076}
-  - component: {fileID: 6035111623666964042}
+  - component: {fileID: 3096718238646985384}
+  - component: {fileID: 8932814185974243987}
   m_Layer: 0
   m_Name: SM_Veh_Prison_Bus_01
   m_TagString: Untagged
@@ -94,8 +95,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6035111623666964042
-BoxCollider:
+--- !u!64 &3096718238646985384
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -112,9 +113,23 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5379424, y: 2.993744, z: 8.089359}
-  m_Center: {x: 0.051225305, y: 1.7257574, z: 0.5442941}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 2b6430a119950944ba29672242f16b6f, type: 3}
+--- !u!114 &8932814185974243987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063686525367896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 1
 --- !u!1 &1068083333950072
 GameObject:
   m_ObjectHideFlags: 0

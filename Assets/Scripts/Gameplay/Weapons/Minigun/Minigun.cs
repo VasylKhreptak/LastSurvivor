@@ -11,16 +11,15 @@ namespace Gameplay.Weapons.Minigun
     public class Minigun : MonoBehaviour, IWeapon
     {
         private IStateMachine<IMinigunState> _stateMachine;
-        private ClampedIntegerBank _ammo;
 
         [Inject]
         private void Constructor(IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo)
         {
             _stateMachine = stateMachine;
-            _ammo = ammo;
+            Ammo = ammo;
         }
 
-        public ClampedIntegerBank Ammo => _ammo;
+        public ClampedIntegerBank Ammo { get; private set; }
 
         public void StartShooting() => _stateMachine.Enter<SpinUpState>();
 

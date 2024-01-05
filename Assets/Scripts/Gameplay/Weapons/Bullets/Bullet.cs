@@ -8,7 +8,7 @@ namespace Gameplay.Weapons.Bullets
         [Header("References")]
         [SerializeField] private Transform _transform;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField, Min(0)] private float _damage;
+        [SerializeField] [Min(0)] private float _damage;
 
         #region MonoBehaviour
 

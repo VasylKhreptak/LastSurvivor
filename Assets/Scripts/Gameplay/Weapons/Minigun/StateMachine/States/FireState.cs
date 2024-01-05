@@ -2,8 +2,8 @@
 using Gameplay.Weapons.Bullets.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
-using Plugins.ObjectPoolSystem.Test;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,9 +13,9 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     public class FireState : IMinigunState, IExitable
     {
         private readonly Preferences _preferences;
-        private readonly IObjectPools<MainPool> _objectPools;
+        private readonly IObjectPools<GeneralPool> _objectPools;
 
-        public FireState(Preferences preferences, IObjectPools<MainPool> objectPools)
+        public FireState(Preferences preferences, IObjectPools<GeneralPool> objectPools)
         {
             _preferences = preferences;
             _objectPools = objectPools;
@@ -46,7 +46,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
         private void FireBullet()
         {
-            GameObject bulletObject = _objectPools.GetPool(MainPool.Bullet).Get();
+            GameObject bulletObject = _objectPools.GetPool(GeneralPool.Bullet).Get();
             IBullet bullet = bulletObject.GetComponent<IBullet>();
 
             bulletObject.transform.position = GetBulletPosition();

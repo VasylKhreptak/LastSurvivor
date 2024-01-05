@@ -70,9 +70,9 @@ namespace Gameplay.Weapons.Minigun
         {
             [SerializeField] private Transform _barrelTransform;
             [SerializeField] private bool _reverse;
-            [SerializeField, Min(0)] private float _maxRotateSpeed;
-            [SerializeField, Min(0)] private float _acceleration;
-            [SerializeField, Min(0)] private float _deceleration;
+            [SerializeField] [Min(0)] private float _maxRotateSpeed;
+            [SerializeField] [Min(0)] private float _acceleration;
+            [SerializeField] [Min(0)] private float _deceleration;
 
             public Transform BarrelTransform => _barrelTransform;
             public bool Reverse => _reverse;

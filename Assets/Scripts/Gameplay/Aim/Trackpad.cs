@@ -25,7 +25,7 @@ namespace Gameplay.Aim
         private readonly Vector2ReactiveProperty _anchoredPosition = new Vector2ReactiveProperty();
         private readonly BoolReactiveProperty _isPressed = new BoolReactiveProperty();
 
-        private Vector3[] _corners = new Vector3[4];
+        private readonly Vector3[] _corners = new Vector3[4];
 
         public IReadOnlyReactiveProperty<Vector2> AnchoredPosition => _anchoredPosition;
         public IReadOnlyReactiveProperty<bool> IsPressed => _isPressed;

@@ -11,7 +11,7 @@ namespace Plugins.ObjectPoolSystem.Zenject
 
         public override void InstallBindings()
         {
-            foreach (var preference in _objectPoolPreferences)
+            foreach (ObjectPoolPreference<T> preference in _objectPoolPreferences)
             {
                 preference.CreateFunc = () => Container.InstantiatePrefab(preference.Prefab, transform);
             }

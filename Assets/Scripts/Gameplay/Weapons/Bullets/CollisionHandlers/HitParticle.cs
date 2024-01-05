@@ -1,47 +1,53 @@
 ﻿using System;
+using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
-using Plugins.ObjectPoolSystem.Test;
 using Terrain.Surfaces.Core;
 using UnityEngine;
 using UnityEngine.Rendering;
-using Random = UnityEngine.Random;
 
 namespace Gameplay.Weapons.Bullets.CollisionHandlers
 {
     public class HitParticle
     {
         private readonly Preferences _preferences;
-        private readonly IObjectPools<MainPool> _objectPools;
+        private readonly IObjectPools<Particle> _particlePools;
 
-        public HitParticle(Preferences preferences)
+        public HitParticle(Preferences preferences, IObjectPools<Particle> particlePools)
         {
             _preferences = preferences;
+            _particlePools = particlePools;
         }
 
-        public void Play(Collision collision)
+        public void Spawn(Collision collision)
         {
             ISurface surface = collision.gameObject.GetComponent<ISurface>();
 
             if (surface == null)
                 return;
 
-            MainPool particle = _preferences.GetParticle(surface.Type);
+            if (_preferences.TryGetParticle(surface.Type, out Particle particle) == false)
+                return;
 
-            GameObject particleObject = _objectPools.GetPool(particle).Get();
+            Spawn(collision, particle);
+        }
+
+        private void Spawn(Collision collision, Particle particle)
+        {
+            GameObject particleObject = _particlePools.GetPool(particle).Get();
 
             Vector3 hitNormal = collision.contacts[0].normal;
 
             particleObject.transform.position = collision.contacts[0].point;
             particleObject.transform.forward = hitNormal;
-            particleObject.transform.rotation *= Quaternion.AngleAxis(Random.Range(0, 360), hitNormal);
         }
 
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private SerializedDictionary<SurfaceType, MainPool> _surfaceParticleMap;
+            [SerializeField] private SerializedDictionary<SurfaceType, Particle> _surfaceParticleMap;
 
-            public MainPool GetParticle(SurfaceType surfaceType) => _surfaceParticleMap[surfaceType];
+            public bool TryGetParticle(SurfaceType surfaceType, out Particle particle) =>
+                _surfaceParticleMap.TryGetValue(surfaceType, out particle);
         }
     }
 }

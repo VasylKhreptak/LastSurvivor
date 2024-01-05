@@ -30,7 +30,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         private void OnCollisionEnter(Collision collision)
         {
             _trailReseter.Reset();
-            _hitParticle.Play(collision);
+            _hitParticle.Spawn(collision);
             _gameObject.SetActive(false);
         }
     }

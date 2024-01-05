@@ -331,5 +331,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitParticlePreferences:
     _surfaceParticleMap:
-      m_Keys: 
-      m_Values: 
+      m_Keys: 000000000100000002000000
+      m_Values: 010000000200000003000000

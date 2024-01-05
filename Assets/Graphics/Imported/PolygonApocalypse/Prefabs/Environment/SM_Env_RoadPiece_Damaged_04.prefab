@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33267402169766764}
   - component: {fileID: 23544867166675202}
   - component: {fileID: 9075392602940674642}
+  - component: {fileID: 5675295954934141230}
   m_Layer: 0
   m_Name: SM_Env_RoadPiece_Damaged_04
   m_TagString: Untagged
@@ -106,3 +107,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 74c3a8c8429ca284f89cbfc586b91570, type: 3}
+--- !u!114 &5675295954934141230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504001875290252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0

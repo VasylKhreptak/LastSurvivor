@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6005934290696465430}
   - component: {fileID: 6559856046847261297}
   - component: {fileID: 2795361725591505664}
+  - component: {fileID: 6153382589994211575}
   m_Layer: 0
   m_Name: SM_Env_Motorway_Edge_Destroyed_03
   m_TagString: Untagged
@@ -193,3 +194,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9292326, y: 2.3336465, z: 1.5407867}
   m_Center: {x: -5.9927535, y: 0.050344706, z: -0.7703934}
+--- !u!114 &6153382589994211575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789524403283464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0

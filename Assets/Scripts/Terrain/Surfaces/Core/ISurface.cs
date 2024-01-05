@@ -2,6 +2,6 @@
 {
     public interface ISurface
     {
-        public SurfaceType @Type { get; }
+        public SurfaceType Type { get; }
     }
 }
