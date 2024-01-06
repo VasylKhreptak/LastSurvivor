@@ -20103,7 +20103,7 @@ MonoBehaviour:
         Amplitude: 0
       _shakeUpDuration: 0.05
       _shakeDuration: 0
-      _shakeDownDuration: 0.1
+      _shakeDownDuration: 0.3
       _targetAmplitude: 0.4
       _shakeUpCurve:
         serializedVersion: 2
