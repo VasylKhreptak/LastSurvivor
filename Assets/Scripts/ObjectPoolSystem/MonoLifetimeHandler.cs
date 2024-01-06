@@ -1,6 +1,4 @@
-﻿using System;
-using UniRx;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ObjectPoolSystem
 {
@@ -9,28 +7,21 @@ namespace ObjectPoolSystem
         [Header("References")]
         [SerializeField] private GameObject _gameObject;
 
-        [Header("Preferences")]
-        [SerializeField] private float _lifetime = 1f;
+        [Space]
+        [SerializeField] private LifetimeHandler.Preferences _preferences;
 
-        private IDisposable _subscription;
+        private LifetimeHandler _lifetimeHandler;
 
         #region MonoBehaviour
 
         private void OnValidate() => _gameObject ??= GetComponent<GameObject>();
 
-        private void OnEnable() => StartTimer();
+        private void Awake() => _lifetimeHandler = new LifetimeHandler(_gameObject, _preferences);
 
-        private void OnDisable() => StopTimer();
+        private void OnEnable() => _lifetimeHandler.Enable();
+
+        private void OnDisable() => _lifetimeHandler.Disable();
 
         #endregion
-
-        private void StartTimer()
-        {
-            _subscription = Observable
-                .Timer(TimeSpan.FromSeconds(_lifetime))
-                .Subscribe(_ => _gameObject.SetActive(false));
-        }
-
-        private void StopTimer() => _subscription?.Dispose();
     }
 }
