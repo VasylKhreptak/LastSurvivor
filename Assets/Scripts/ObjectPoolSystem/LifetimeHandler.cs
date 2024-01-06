@@ -1,36 +1,42 @@
 ﻿using System;
 using UniRx;
 using UnityEngine;
+using Zenject.Infrastructure.Toggleable.Core;
 
 namespace ObjectPoolSystem
 {
-    public class LifetimeHandler : MonoBehaviour
+    public class LifetimeHandler : IEnableable, IDisableable
     {
-        [Header("References")]
-        [SerializeField] private GameObject _gameObject;
+        private readonly GameObject _gameObject;
+        private readonly Preferences _preferences;
 
-        [Header("Preferences")]
-        [SerializeField] private float _lifetime = 1f;
+        public LifetimeHandler(GameObject gameObject, Preferences preferences)
+        {
+            _gameObject = gameObject;
+            _preferences = preferences;
+        }
 
         private IDisposable _subscription;
 
-        #region MonoBehaviour
+        public void Enable() => StartTimer();
 
-        private void OnValidate() => _gameObject ??= GetComponent<GameObject>();
-
-        private void OnEnable() => StartTimer();
-
-        private void OnDisable() => StopTimer();
-
-        #endregion
+        public void Disable() => StopTimer();
 
         private void StartTimer()
         {
             _subscription = Observable
-                .Timer(TimeSpan.FromSeconds(_lifetime))
+                .Timer(TimeSpan.FromSeconds(_preferences.Lifetime))
                 .Subscribe(_ => _gameObject.SetActive(false));
         }
 
         private void StopTimer() => _subscription?.Dispose();
+
+        [Serializable]
+        public class Preferences
+        {
+            [SerializeField] private float _lifetime = 1f;
+
+            public float Lifetime => _lifetime;
+        }
     }
 }

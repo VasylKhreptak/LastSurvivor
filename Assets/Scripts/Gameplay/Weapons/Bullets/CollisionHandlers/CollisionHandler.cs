@@ -10,14 +10,12 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
     {
         private readonly GameObject _gameObject;
         private readonly Collider _collider;
-        private readonly TrailReseter _trailReseter;
         private readonly HitParticle _hitParticle;
 
-        public CollisionHandler(GameObject gameObject, Collider collider, TrailReseter trailReseter, HitParticle hitParticle)
+        public CollisionHandler(GameObject gameObject, Collider collider, HitParticle hitParticle)
         {
             _gameObject = gameObject;
             _collider = collider;
-            _trailReseter = trailReseter;
             _hitParticle = hitParticle;
         }
 
@@ -29,7 +27,6 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
 
         private void OnCollisionEnter(Collision collision)
         {
-            _trailReseter.Reset();
             _hitParticle.Spawn(collision);
             _gameObject.SetActive(false);
         }

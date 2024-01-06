@@ -1,6 +1,8 @@
 ﻿using Gameplay.Weapons.Bullets.CollisionHandlers;
+using ObjectPoolSystem;
 using UnityEngine;
 using Zenject;
+using Zenject.Infrastructure.Toggleable;
 
 namespace Gameplay.Weapons.Bullets.Core
 {
@@ -8,6 +10,7 @@ namespace Gameplay.Weapons.Bullets.Core
     {
         [Header("Preferences")]
         [SerializeField] private HitParticle.Preferences _hitParticlePreferences;
+        [SerializeField] private LifetimeHandler.Preferences _lifetimePreferences;
 
         public override void InstallBindings()
         {
@@ -16,12 +19,16 @@ namespace Gameplay.Weapons.Bullets.Core
             Container.Bind<Collider>().FromComponentOnRoot().AsSingle();
             Container.Bind<TrailRenderer>().FromComponentOnRoot().AsSingle();
 
+            Container.Bind<ToggleableManager>().AsSingle();
+
+            Container.BindInterfacesTo<LifetimeHandler>().AsSingle().WithArguments(_lifetimePreferences);
+            Container.BindInterfacesTo<TrailRenderer>().AsSingle();
+
             BindCollisionHandlers();
         }
 
         private void BindCollisionHandlers()
         {
-            Container.Bind<TrailReseter>().AsSingle();
             Container.Bind<HitParticle>().AsSingle().WithArguments(_hitParticlePreferences);
 
             Container.BindInterfacesTo<CollisionHandler>().AsSingle();

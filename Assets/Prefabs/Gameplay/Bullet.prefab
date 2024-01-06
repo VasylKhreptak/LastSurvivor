@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 2042141383671105698}
   - component: {fileID: 5657895232391601327}
   - component: {fileID: 323730215037639136}
+  - component: {fileID: 5585357420034857335}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -316,7 +317,7 @@ MonoBehaviour:
   - {fileID: 323730215037639136}
   _installerPrefabs: []
   _autoRun: 1
-  _kernel: {fileID: 0}
+  _kernel: {fileID: 5585357420034857335}
 --- !u!114 &323730215037639136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,3 +334,17 @@ MonoBehaviour:
     _surfaceParticleMap:
       m_Keys: 000000000100000002000000
       m_Values: 010000000200000003000000
+  _lifetimePreferences:
+    _lifetime: 1
+--- !u!114 &5585357420034857335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347811216486613142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b150a0e4712401684c97f1f5b52cf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
