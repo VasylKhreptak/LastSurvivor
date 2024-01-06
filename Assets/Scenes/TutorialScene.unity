@@ -20092,9 +20092,124 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preferences:
-    Speed: 1
-    Axis: {x: 1, y: 1, z: 0}
-    Amplitude: 1
+    _baseNoisePreferences:
+      Speed: 0.5
+      Strength: {x: 1, y: 1, z: 0}
+      Amplitude: 0.3
+    _fireLayerPreferences:
+      _noisePreferences:
+        Speed: 4
+        Strength: {x: 1, y: 1, z: 0}
+        Amplitude: 0
+      _shakeUpDuration: 0.05
+      _shakeDuration: 0
+      _shakeDownDuration: 0.1
+      _targetAmplitude: 0.4
+      _shakeUpCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _shakeDownCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    _explodeLayerPreferences:
+      _noisePreferences:
+        Speed: 1
+        Strength: {x: 1, y: 1, z: 0}
+        Amplitude: 0
+      _shakeUpDuration: 0.3
+      _shakeDuration: 0
+      _shakeDownDuration: 1
+      _targetAmplitude: 1
+      _shakeUpCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _shakeDownCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
 --- !u!1001 &1143454708
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,10 +21,13 @@ namespace Extensions
             Transform parent = new GameObject(name).transform;
             Transform childParent = transform.parent;
             parent.SetParent(childParent);
-            parent.position = transform.position;
-            parent.rotation = transform.rotation;
+            parent.localPosition = transform.localPosition;
+            parent.localRotation = transform.localRotation;
             parent.localScale = transform.localScale;
-            transform.SetParent(parent);
+            transform.SetParent(parent, true);
+            // transform.localPosition = Vector3.zero;
+            // transform.localRotation = Quaternion.identity;
+            // transform.localScale = Vector3.one;
             return parent;
         }
     }
