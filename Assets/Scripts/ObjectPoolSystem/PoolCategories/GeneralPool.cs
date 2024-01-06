@@ -3,6 +3,6 @@
     public enum GeneralPool
     {
         Bullet = 0,
-        BulletShell = 1,
+        BulletShell = 1
     }
 }

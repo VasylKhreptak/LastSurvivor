@@ -46,8 +46,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         {
             [SerializeField] private SerializedDictionary<SurfaceType, Particle> _surfaceParticleMap;
 
-            public bool TryGetParticle(SurfaceType surfaceType, out Particle particle) =>
-                _surfaceParticleMap.TryGetValue(surfaceType, out particle);
+            public bool TryGetParticle(SurfaceType surfaceType, out Particle particle) => _surfaceParticleMap.TryGetValue(surfaceType, out particle);
         }
     }
 }

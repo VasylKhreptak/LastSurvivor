@@ -13,8 +13,7 @@ namespace Extensions
         /// <param name="max"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public static float Evaluate(this AnimationCurve curve, float min, float max, float i) =>
-            curve.Evaluate(i) * (max - min) + min;
+        public static float Evaluate(this AnimationCurve curve, float min, float max, float i) => curve.Evaluate(i) * (max - min) + min;
 
         /// <summary>
         ///     If x == minX, returns minY

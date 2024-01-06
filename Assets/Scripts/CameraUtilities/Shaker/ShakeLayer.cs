@@ -8,7 +8,7 @@ namespace CameraUtilities.Shaker
 {
     public class ShakeLayer : ITickable, IDisposable
     {
-        private Transform _transform;
+        private readonly Transform _transform;
         private readonly Preferences _preferences;
 
         private readonly NoiseRotator _noiseRotator;
@@ -30,7 +30,7 @@ namespace CameraUtilities.Shaker
         }
 
         public void Tick() => _noiseRotator.Tick();
-        
+
         public void Shake()
         {
             _amplitudeSequence?.Kill();
@@ -55,7 +55,7 @@ namespace CameraUtilities.Shaker
             [SerializeField] private NoiseRotator.Preferences _noisePreferences;
 
             [SerializeField] private float _shakeUpDuration = 0.2f;
-            [SerializeField] private float _shakeDuration = 0f;
+            [SerializeField] private float _shakeDuration;
             [SerializeField] private float _shakeDownDuration = 0.4f;
             [SerializeField] private float _targetAmplitude = 1f;
             [SerializeField] private AnimationCurve _shakeUpCurve;

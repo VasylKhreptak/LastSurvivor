@@ -25,7 +25,7 @@ namespace Zenject.Infrastructure.Toggleable
         {
             if (_isEnabled == false)
             {
-                foreach (var enableable in _enableables)
+                foreach (IEnableable enableable in _enableables)
                 {
                     enableable.Enable();
                 }
@@ -38,7 +38,7 @@ namespace Zenject.Infrastructure.Toggleable
         {
             if (_isEnabled)
             {
-                foreach (var disableable in _disableables)
+                foreach (IDisableable disableable in _disableables)
                 {
                     disableable.Disable();
                 }

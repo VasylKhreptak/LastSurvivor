@@ -22,7 +22,7 @@ namespace CameraUtilities.Shaker
 
             Transform fireLayerTransform = _camera.transform.CreateParent("Fire Layer");
             Transform explodeLayerTransform = fireLayerTransform.CreateParent("Explode Layer");
-            
+
             _fireLayer = new ShakeLayer(fireLayerTransform, _preferences.FireLayerPreferences);
             _explodeLayer = new ShakeLayer(explodeLayerTransform, _preferences.ExplodeLayerPreferences);
             _baseNoiseRotator = new NoiseRotator(_camera.transform, _preferences.BaseNoisePreferences);
