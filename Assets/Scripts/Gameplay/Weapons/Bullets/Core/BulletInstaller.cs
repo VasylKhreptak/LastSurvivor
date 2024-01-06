@@ -24,13 +24,7 @@ namespace Gameplay.Weapons.Bullets.Core
             Container.BindInterfacesTo<LifetimeHandler>().AsSingle().WithArguments(_lifetimePreferences);
             Container.BindInterfacesTo<TrailRenderer>().AsSingle();
 
-            BindCollisionHandlers();
-        }
-
-        private void BindCollisionHandlers()
-        {
             Container.Bind<HitParticle>().AsSingle().WithArguments(_hitParticlePreferences);
-
             Container.BindInterfacesTo<CollisionHandler>().AsSingle();
         }
     }
