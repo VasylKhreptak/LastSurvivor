@@ -22,7 +22,7 @@ namespace Gameplay.Weapons.Bullets.Core
             Container.Bind<ToggleableManager>().AsSingle();
 
             Container.BindInterfacesTo<LifetimeHandler>().AsSingle().WithArguments(_lifetimePreferences);
-            Container.BindInterfacesTo<TrailRenderer>().AsSingle();
+            Container.BindInterfacesTo<TrailReseter>().AsSingle();
 
             Container.Bind<HitParticle>().AsSingle().WithArguments(_hitParticlePreferences);
             Container.BindInterfacesTo<CollisionHandler>().AsSingle();
