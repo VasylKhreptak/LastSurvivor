@@ -2,6 +2,7 @@
 {
     public enum GeneralPool
     {
-        Bullet = 0
+        Bullet = 0,
+        BulletShell = 1,
     }
 }

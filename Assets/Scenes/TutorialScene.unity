@@ -19630,8 +19630,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1199312914}
   - {fileID: 1204016289}
+  - {fileID: 1199312914}
   m_Father: {fileID: 2075507809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1114274300
@@ -21943,7 +21943,11 @@ MonoBehaviour:
   - Key: 0
     Prefab: {fileID: 2347811216486613142, guid: c90e139c33589bd43aeaa671e660e2ec,
       type: 3}
-    InitialSize: 0
+    InitialSize: 40
+    MaxSize: 150
+  - Key: 1
+    Prefab: {fileID: 137434, guid: 1895c7f6f9bfb4a4f81cae7409bf1554, type: 3}
+    InitialSize: 40
     MaxSize: 150
 --- !u!1 &1204016288
 GameObject:
@@ -37545,8 +37549,8 @@ MonoBehaviour:
   - {fileID: 434303061}
   - {fileID: 1746983987}
   - {fileID: 1820948753}
-  - {fileID: 1199312915}
   - {fileID: 1204016290}
+  - {fileID: 1199312915}
   - {fileID: 1134641504}
   _installerPrefabs: []
   _autoRun: 1

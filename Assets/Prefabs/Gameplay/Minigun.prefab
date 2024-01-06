@@ -345,10 +345,11 @@ MonoBehaviour:
       _velocity: 300
     _shell:
       _spawnPoint: {fileID: 2453552113253936444}
-      _minTorque: 0.5
-      _maxTorque: 1.5
-      _minForce: 0.5
-      _maxForce: 1.5
+      _torqueAxis: {x: 1, y: 1, z: 1}
+      _minTorque: 30
+      _maxTorque: 90
+      _minVelocity: 1.5
+      _maxVelocity: 3
 --- !u!114 &2012973939704131223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,13 +500,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8032508172916125889}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1436, y: -0.1416, z: 0.423}
+  m_LocalRotation: {x: 0.000000037252896, y: -0, z: 0.2493622, w: 0.96841025}
+  m_LocalPosition: {x: 0.144, y: -0.14160001, z: 0.437}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3869659879704908568}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 28.88}
 --- !u!1 &8604694243792073313
 GameObject:
   m_ObjectHideFlags: 0

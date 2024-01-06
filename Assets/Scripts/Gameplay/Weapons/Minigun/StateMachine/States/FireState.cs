@@ -1,5 +1,6 @@
 ﻿using System;
 using CameraUtilities.Shaker;
+using Extensions;
 using Gameplay.Weapons.Bullets.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
@@ -74,7 +75,23 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             particle.transform.forward = _preferences.Bullet.SpawnPoint.forward;
         }
 
-        private void FireShell() { }
+        private void FireShell()
+        {
+            GameObject shellObject = _generalPools.GetPool(GeneralPool.BulletShell).Get();
+
+            shellObject.transform.position = _preferences.Shell.SpawnPoint.position;
+            shellObject.transform.rotation = _preferences.Shell.SpawnPoint.rotation;
+
+            Rigidbody rigidbody = shellObject.GetComponent<Rigidbody>();
+
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+
+            rigidbody.AddRelativeTorque(RandomExtensions.Sign() *
+                                        _preferences.Shell.TorqueAxis *
+                                        Random.Range(_preferences.Shell.MinTorque, _preferences.Shell.MaxTorque));
+            rigidbody.velocity = shellObject.transform.right * Random.Range(_preferences.Shell.MinVelocity, _preferences.Shell.MaxVelocity);
+        }
 
         private void ShakeCamera() => _cameraShaker.DoFireShake();
 
@@ -144,16 +161,18 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             public class ShellBehaviour
             {
                 [SerializeField] private Transform _spawnPoint;
+                [SerializeField] private Vector3 _torqueAxis = Vector3.one;
                 [SerializeField] private float _minTorque = 0.5f;
                 [SerializeField] private float _maxTorque = 1.5f;
-                [SerializeField] private float _minForce = 0.5f;
-                [SerializeField] private float _maxForce = 1.5f;
+                [SerializeField] private float _minVelocity = 0.5f;
+                [SerializeField] private float _maxVelocity = 1.5f;
 
                 public Transform SpawnPoint => _spawnPoint;
+                public Vector3 TorqueAxis => _torqueAxis;
                 public float MinTorque => _minTorque;
                 public float MaxTorque => _maxTorque;
-                public float MinForce => _minForce;
-                public float MaxForce => _maxForce;
+                public float MinVelocity => _minVelocity;
+                public float MaxVelocity => _maxVelocity;
             }
         }
     }
