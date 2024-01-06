@@ -14,17 +14,22 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     public class FireState : IMinigunState, IExitable
     {
         private readonly Preferences _preferences;
-        private readonly IObjectPools<GeneralPool> _objectPools;
+        private readonly IObjectPools<GeneralPool> _generalPools;
         private readonly CameraShaker _cameraShaker;
+        private readonly IObjectPools<Particle> _particlePools;
 
-        public FireState(Preferences preferences, IObjectPools<GeneralPool> objectPools, CameraShaker cameraShaker)
+        public FireState(Preferences preferences, IObjectPools<GeneralPool> generalPools, CameraShaker cameraShaker,
+            IObjectPools<Particle> particlePools)
         {
             _preferences = preferences;
-            _objectPools = objectPools;
+            _generalPools = generalPools;
             _cameraShaker = cameraShaker;
+            _particlePools = particlePools;
         }
 
         private IDisposable _fireSubscription;
+
+        private Vector3 _lastBulletPosition;
 
         public void Enter() => StartFiring();
 
@@ -44,19 +49,29 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private void Fire()
         {
             FireBullet();
+            SpawnShootParticle();
             FireShell();
             ShakeCamera();
         }
 
         private void FireBullet()
         {
-            GameObject bulletObject = _objectPools.GetPool(GeneralPool.Bullet).Get();
+            GameObject bulletObject = _generalPools.GetPool(GeneralPool.Bullet).Get();
             IBullet bullet = bulletObject.GetComponent<IBullet>();
 
-            bulletObject.transform.position = GetBulletPosition();
+            Vector3 bulletPosition = GetBulletPosition();
+            _lastBulletPosition = bulletPosition;
+            bulletObject.transform.position = bulletPosition;
             bulletObject.transform.rotation = GetBulletRotation();
             bullet.Damage = GetDamage();
             AccelerateBullet(bullet);
+        }
+
+        private void SpawnShootParticle()
+        {
+            GameObject particle = _particlePools.GetPool(Particle.Shoot).Get();
+            particle.transform.position = _lastBulletPosition;
+            particle.transform.forward = _preferences.Bullet.SpawnPoint.forward;
         }
 
         private void FireShell() { }
