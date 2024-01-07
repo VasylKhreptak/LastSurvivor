@@ -11,6 +11,7 @@ namespace Gameplay.Entities.Explosive.Barrel
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private ExplosionRigidbodyAffector.Preferences _rigidbodyAffectorPreferences;
+        [SerializeField] private ExplosionDamageApplier.Preferences _explosionDamageApplierPreferences;
 
         public override void InstallBindings()
         {
@@ -18,7 +19,8 @@ namespace Gameplay.Entities.Explosive.Barrel
             Container.BindInstance(gameObject).AsSingle();
 
             Container.Bind<ExplosionRigidbodyAffector>().AsSingle().WithArguments(_rigidbodyAffectorPreferences);
-            Container.BindInterfacesTo<ExplosiveBarrelDeathHandler>().AsSingle();
+            Container.Bind<ExplosionDamageApplier>().AsSingle().WithArguments(_explosionDamageApplierPreferences);
+            Container.BindInterfacesTo<BarrelExploder>().AsSingle();
         }
     }
 }

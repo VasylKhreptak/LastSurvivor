@@ -201,14 +201,23 @@ MonoBehaviour:
       m_Bits: 55
     _upwardsModifier: 1
     _minRadius: 0
-    _maxRadius: 10
-    _minImpulse: 80
-    _maxImpulse: 150
+    _maxRadius: 7
+    _minImpulse: 150
+    _maxImpulse: 450
     _impulseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
         value: 1
         inSlope: 0
         outSlope: 0
@@ -216,23 +225,46 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  _explosionDamageApplierPreferences:
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 55
+    _minRadius: 0
+    _maxRadius: 10
+    _minDamage: 10
+    _maxDamage: 300
+    _damageCurve:
+      serializedVersion: 2
+      m_Curve:
       - serializedVersion: 3
-        time: 0.12002228
-        value: 0.66705835
-        inSlope: -2.1976268
-        outSlope: -2.1976268
+        time: 0.005317688
+        value: 0
+        inSlope: 3.499737
+        outSlope: 3.499737
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.05347734
+      - serializedVersion: 3
+        time: 0.0851317
+        value: 0.42008275
+        inSlope: 1.9529207
+        outSlope: 1.9529207
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.15335979
+        outWeight: 0.09590523
       - serializedVersion: 3
         time: 1
-        value: 0
-        inSlope: -0.17300455
-        outSlope: -0.17300455
+        value: 0.9967041
+        inSlope: 0.24088815
+        outSlope: 0.24088815
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.24722561
+        inWeight: 0.192513
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

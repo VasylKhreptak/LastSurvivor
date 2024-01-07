@@ -8,25 +8,30 @@ using UnityEngine;
 
 namespace Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core
 {
-    public class ExplosiveBarrelDeathHandler : DeathHandler
+    public class BarrelExploder : DeathHandler
     {
         private readonly GameObject _gameObject;
         private ExplosionRigidbodyAffector _rigidbodyAffector;
         private CameraShaker _cameraShaker;
         private IObjectPools<Particle> _particlePools;
+        private ExplosionDamageApplier _explosionDamageApplier;
 
-        public ExplosiveBarrelDeathHandler(IHealth health, GameObject gameObject, ExplosionRigidbodyAffector rigidbodyAffector,
-            CameraShaker cameraShaker, IObjectPools<Particle> particlePools) : base(health)
+        public BarrelExploder(IHealth health, GameObject gameObject, ExplosionRigidbodyAffector rigidbodyAffector,
+            CameraShaker cameraShaker, IObjectPools<Particle> particlePools, ExplosionDamageApplier explosionDamageApplier) : base(health)
         {
             _gameObject = gameObject;
             _rigidbodyAffector = rigidbodyAffector;
             _cameraShaker = cameraShaker;
             _particlePools = particlePools;
+            _explosionDamageApplier = explosionDamageApplier;
         }
 
         protected override void OnDied()
         {
-            _rigidbodyAffector.Affect(_gameObject.transform.position);
+            Vector3 position = _gameObject.transform.position;
+
+            _explosionDamageApplier.Apply(position);
+            _rigidbodyAffector.Affect(position);
             _cameraShaker.DoExplosionShake();
             SpawnExplosionParticle();
             Object.Destroy(_gameObject);
