@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Entities.Core.Health;
+using UnityEngine;
 
 namespace Gameplay.Weapons.Bullets.Core
 {
@@ -6,6 +7,6 @@ namespace Gameplay.Weapons.Bullets.Core
     {
         public Transform Transform { get; }
         public Rigidbody Rigidbody { get; }
-        public float Damage { get; set; }
+        public Damage Damage { get; }
     }
 }

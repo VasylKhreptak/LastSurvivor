@@ -1,14 +1,9 @@
-﻿using UnityEngine;
+﻿using Entities.Core.Health;
 
 namespace Gameplay.Entities.Explosive.Data
 {
-    public class ExplosionDamage
+    public class ExplosionDamage : Damage
     {
-        public readonly float Value;
-
-        public ExplosionDamage(float value)
-        {
-            Value = Mathf.Max(0, value);
-        }
+        public ExplosionDamage(float value) : base(value) { }
     }
 }

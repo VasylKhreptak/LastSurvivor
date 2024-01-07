@@ -1,4 +1,5 @@
-﻿using Gameplay.Weapons.Bullets.Core;
+﻿using Entities.Core.Health;
+using Gameplay.Weapons.Bullets.Core;
 using UnityEngine;
 
 namespace Gameplay.Weapons.Bullets
@@ -8,9 +9,13 @@ namespace Gameplay.Weapons.Bullets
         [Header("References")]
         [SerializeField] private Transform _transform;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] [Min(0)] private float _damage;
+        [SerializeField] private float _defaultDamage = 10f;
+
+        private Damage _damage;
 
         #region MonoBehaviour
+
+        private void Awake() => _damage = new Damage(_defaultDamage);
 
         private void OnValidate()
         {
@@ -22,11 +27,6 @@ namespace Gameplay.Weapons.Bullets
 
         public Transform Transform => _transform;
         public Rigidbody Rigidbody => _rigidbody;
-
-        public float Damage
-        {
-            get => _damage;
-            set => _damage = Mathf.Max(0, value);
-        }
+        public Damage Damage => _damage;
     }
 }

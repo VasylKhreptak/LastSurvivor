@@ -17,7 +17,7 @@ namespace Entities.Core
             _health = health;
         }
 
-        public void Accept(IBullet visitor) => _health.TakeDamage(visitor.Damage);
+        public void Accept(IBullet visitor) => _health.TakeDamage(visitor.Damage.Value);
 
         public void Accept(ExplosionDamage visitor) => _health.TakeDamage(visitor.Value);
     }

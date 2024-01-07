@@ -64,7 +64,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             _lastBulletPosition = bulletPosition;
             bulletObject.transform.position = bulletPosition;
             bulletObject.transform.rotation = GetBulletRotation();
-            bullet.Damage = GetDamage();
+            bullet.Damage.Value = GetDamage();
             AccelerateBullet(bullet);
         }
 
