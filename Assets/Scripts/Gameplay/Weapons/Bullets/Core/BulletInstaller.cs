@@ -11,6 +11,7 @@ namespace Gameplay.Weapons.Bullets.Core
         [Header("Preferences")]
         [SerializeField] private HitParticle.Preferences _hitParticlePreferences;
         [SerializeField] private LifetimeHandler.Preferences _lifetimePreferences;
+        [SerializeField] private ImpulseTransmitter.Preferences _impulseTransmitterPreferences;
 
         public override void InstallBindings()
         {
@@ -25,7 +26,8 @@ namespace Gameplay.Weapons.Bullets.Core
             Container.BindInterfacesTo<TrailReseter>().AsSingle();
 
             Container.Bind<HitParticle>().AsSingle().WithArguments(_hitParticlePreferences);
-            Container.BindInterfacesTo<CollisionHandler>().AsSingle();
+            Container.Bind<ImpulseTransmitter>().AsSingle().WithArguments(_impulseTransmitterPreferences);
+            Container.BindInterfacesTo<BulletCollisionHandler>().AsSingle();
         }
     }
 }

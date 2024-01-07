@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject.Infrastructure.Toggleable.Core;
 
-namespace Gameplay.Weapons.Bullets.CollisionHandlers
+namespace Gameplay.Weapons
 {
     public class TrailReseter : IDisableable
     {
