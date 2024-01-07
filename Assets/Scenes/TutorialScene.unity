@@ -22082,6 +22082,11 @@ MonoBehaviour:
       type: 3}
     InitialSize: 10
     MaxSize: 30
+  - Key: 5
+    Prefab: {fileID: 4303144021862426068, guid: cfc81f20333235640ac0a9ee067ed336,
+      type: 3}
+    InitialSize: 1
+    MaxSize: 10
 --- !u!1001 &1205102003
 PrefabInstance:
   m_ObjectHideFlags: 0
