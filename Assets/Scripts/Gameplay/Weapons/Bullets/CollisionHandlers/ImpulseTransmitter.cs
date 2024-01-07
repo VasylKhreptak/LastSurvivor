@@ -12,16 +12,16 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
             _preferences = preferences;
         }
 
+        private Vector3 _impulse;
+
         public void Transmit(Collision collision)
         {
             if (collision.rigidbody == null)
                 return;
 
-            Vector3 impulse = collision.impulse;
+            _impulse = collision.impulse;
 
-            Debug.DrawRay(collision.contacts[0].point, impulse, Color.red, 5f);
-
-            collision.rigidbody.AddForceAtPosition(-impulse * _preferences.ImpulseMultiplier, collision.contacts[0].point,
+            collision.rigidbody.AddForceAtPosition(-_impulse * _preferences.ImpulseMultiplier, collision.contacts[0].point,
                 ForceMode.Impulse);
         }
 
