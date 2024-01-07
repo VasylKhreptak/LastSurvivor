@@ -1,4 +1,5 @@
 ﻿using Gameplay.Weapons.Bullets.CollisionHandlers;
+using Gameplay.Weapons.Bullets.CollisionHandlers.Core;
 using ObjectPoolSystem;
 using UnityEngine;
 using Zenject;
@@ -26,6 +27,7 @@ namespace Gameplay.Weapons.Bullets.Core
             Container.BindInterfacesTo<TrailReseter>().AsSingle();
 
             Container.Bind<HitParticle>().AsSingle().WithArguments(_hitParticlePreferences);
+            Container.Bind<DamageApplier>().AsSingle();
             Container.Bind<ImpulseTransmitter>().AsSingle().WithArguments(_impulseTransmitterPreferences);
             Container.BindInterfacesTo<BulletCollisionHandler>().AsSingle();
         }

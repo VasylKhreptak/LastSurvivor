@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TransformUtilities
+namespace Utilities.TransformUtilities
 {
     public class TransformLocalRotator : MonoBehaviour
     {

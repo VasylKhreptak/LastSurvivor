@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: 1986829864367624321}
   - component: {fileID: 3072309725956543665}
   - component: {fileID: 2393415078791242719}
+  - component: {fileID: 1340447338060878035}
+  - component: {fileID: 5842275132504761259}
+  - component: {fileID: 7931056641955493420}
+  - component: {fileID: 9175440646917912870}
   m_Layer: 0
   m_Name: ExplosiveBarrel
   m_TagString: Untagged
@@ -94,7 +98,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4298118525142463062}
   serializedVersion: 4
-  m_Mass: 80
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -148,3 +152,100 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
+--- !u!114 &1340447338060878035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298118525142463062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e21d98604c6421c8c16a5485a26083c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5842275132504761259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298118525142463062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 7931056641955493420}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &7931056641955493420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298118525142463062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968c3fca4f3344d79475be80ae767f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _rigidbodyAffectorPreferences:
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 55
+    _upwardsModifier: 1
+    _minRadius: 0
+    _maxRadius: 10
+    _minImpulse: 80
+    _maxImpulse: 150
+    _impulseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.12002228
+        value: 0.66705835
+        inSlope: -2.1976268
+        outSlope: -2.1976268
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.15335979
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.17300455
+        outSlope: -0.17300455
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.24722561
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+--- !u!114 &9175440646917912870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298118525142463062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020ca83b20594d06ac7b727078751253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

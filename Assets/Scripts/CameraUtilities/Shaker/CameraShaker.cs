@@ -43,7 +43,7 @@ namespace CameraUtilities.Shaker
 
         public void DoFireShake() => _fireLayer.Shake();
 
-        public void DoExplodeShake() => _explodeLayer.Shake();
+        public void DoExplosionShake() => _explodeLayer.Shake();
 
         [Serializable]
         public class Preferences

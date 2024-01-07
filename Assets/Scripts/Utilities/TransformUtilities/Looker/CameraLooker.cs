@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace TransformUtilities.Looker
+namespace Utilities.TransformUtilities.Looker
 {
     public class CameraLooker : MonoBehaviour
     {

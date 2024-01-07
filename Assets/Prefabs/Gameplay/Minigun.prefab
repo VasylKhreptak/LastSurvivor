@@ -341,7 +341,7 @@ MonoBehaviour:
       _minScatterAngle: 0.1
       _maxScatterAngle: 1.5
       _minDamage: 5
-      _maxDamage: 20
+      _maxDamage: 15
       _velocity: 300
     _shell:
       _spawnPoint: {fileID: 2453552113253936444}

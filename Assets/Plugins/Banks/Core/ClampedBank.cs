@@ -11,6 +11,7 @@ namespace Plugins.Banks.Core
         protected readonly ReactiveProperty<float> _fillAmount;
         protected readonly ReactiveProperty<T> _leftToFill;
         public readonly IReadOnlyReactiveProperty<bool> IsFull;
+        public readonly IReadOnlyReactiveProperty<bool> IsEmpty;
 
         public ClampedBank()
         {
@@ -18,6 +19,7 @@ namespace Plugins.Banks.Core
             _fillAmount = new ReactiveProperty<float>();
             _leftToFill = new ReactiveProperty<T>();
             IsFull = _fillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 1f)).ToReadOnlyReactiveProperty();
+            IsEmpty = _fillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 0f)).ToReadOnlyReactiveProperty();
         }
 
         public ClampedBank(T value, T maxValue) : base(value)
@@ -30,6 +32,7 @@ namespace Plugins.Banks.Core
             _fillAmount = new ReactiveProperty<float>(CalculateFillAmount());
             _leftToFill = new ReactiveProperty<T>(CalculateLeftToFill());
             IsFull = _fillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 1f)).ToReadOnlyReactiveProperty();
+            IsEmpty = _fillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 0f)).ToReadOnlyReactiveProperty();
         }
 
         public IReadOnlyReactiveProperty<T> MaxValue => _maxValue;

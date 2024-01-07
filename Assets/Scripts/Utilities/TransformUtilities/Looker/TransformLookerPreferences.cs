@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TransformUtilities.Looker
+namespace Utilities.TransformUtilities.Looker
 {
     public class TransformLookerPreferences
     {

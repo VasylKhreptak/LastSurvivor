@@ -26,7 +26,7 @@ namespace Gameplay.Weapons.Bullets
         public float Damage
         {
             get => _damage;
-            set => _damage = Mathf.Min(0, value);
+            set => _damage = Mathf.Max(0, value);
         }
     }
 }

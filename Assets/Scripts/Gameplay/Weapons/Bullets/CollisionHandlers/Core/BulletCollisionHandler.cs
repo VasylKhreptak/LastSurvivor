@@ -4,7 +4,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Weapons.Bullets.CollisionHandlers
+namespace Gameplay.Weapons.Bullets.CollisionHandlers.Core
 {
     public class BulletCollisionHandler : IInitializable, IDisposable
     {
@@ -12,13 +12,16 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         private readonly Collider _collider;
         private readonly HitParticle _hitParticle;
         private readonly ImpulseTransmitter _impulseTransmitter;
+        private readonly DamageApplier _damageApplier;
 
-        public BulletCollisionHandler(GameObject gameObject, Collider collider, HitParticle hitParticle, ImpulseTransmitter impulseTransmitter)
+        public BulletCollisionHandler(GameObject gameObject, Collider collider, HitParticle hitParticle,
+            ImpulseTransmitter impulseTransmitter, DamageApplier damageApplier)
         {
             _gameObject = gameObject;
             _collider = collider;
             _hitParticle = hitParticle;
             _impulseTransmitter = impulseTransmitter;
+            _damageApplier = damageApplier;
         }
 
         private IDisposable _subscription;
@@ -30,7 +33,8 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         private void OnCollisionEnter(Collision collision)
         {
             _hitParticle.Spawn(collision);
-            _impulseTransmitter.Transmit(collision);
+            _impulseTransmitter.TryTransmit(collision);
+            _damageApplier.TryApply(collision.gameObject);
             _gameObject.SetActive(false);
         }
     }

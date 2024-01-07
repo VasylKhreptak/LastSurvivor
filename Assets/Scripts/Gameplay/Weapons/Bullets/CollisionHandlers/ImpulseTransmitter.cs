@@ -14,7 +14,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
 
         private Vector3 _impulse;
 
-        public void Transmit(Collision collision)
+        public void TryTransmit(Collision collision)
         {
             if (collision.rigidbody == null)
                 return;
