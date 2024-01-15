@@ -80,3 +80,25 @@ MonoBehaviour:
     type: 3}
   _transitionScreenPrefab: {fileID: 2892134926150037562, guid: 4e1b09fe7347304418aa3b8265b5eaf4,
     type: 3}
+  _audioPoolPreferences:
+    InitialSize: 10
+    MaxSize: 70
+    DefaultSettings:
+      AudioMixerGroup: {fileID: 24300002, guid: 7e984f512e89b60468e829489e8883e3,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 128
+      Volume: 1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 50
