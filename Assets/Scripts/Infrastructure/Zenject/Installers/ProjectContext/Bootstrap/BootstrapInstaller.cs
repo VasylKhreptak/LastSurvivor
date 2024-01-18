@@ -24,7 +24,7 @@ using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.Transition;
 using Infrastructure.Transition.Core;
-using Plugins.AudioPoolSystem;
+using Plugins.AudioService;
 using UnityEngine;
 using Zenject;
 
@@ -38,13 +38,12 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         [SerializeField] private GameObject _transitionScreenPrefab;
 
         [Header("Preferences")]
-        [SerializeField] private AudioPool.Preferences _audioPoolPreferences;
+        [SerializeField] private AudioService.Preferences _audioServicePreferences;
 
         public override void InstallBindings()
         {
             BindMonoServices();
             BindSceneLoader();
-            BindAudioPool();
             BindServices();
             BindGameStateMachine();
             InitializeDebugger();
@@ -77,10 +76,10 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<FramerateService>().AsSingle();
             Container.BindInterfacesTo<ScreenService>().AsSingle();
 
+            Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
+
             BindSaveLoadHandlerService();
         }
-
-        private void BindAudioPool() => Container.BindInterfacesTo<AudioPool>().AsSingle().WithArguments(_audioPoolPreferences);
 
         private void BindSaveLoadHandlerService()
         {

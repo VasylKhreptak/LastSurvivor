@@ -80,9 +80,9 @@ MonoBehaviour:
     type: 3}
   _transitionScreenPrefab: {fileID: 2892134926150037562, guid: 4e1b09fe7347304418aa3b8265b5eaf4,
     type: 3}
-  _audioPoolPreferences:
+  _audioServicePreferences:
     InitialSize: 10
-    MaxSize: 70
+    MaxSize: 50
     DefaultSettings:
       AudioMixerGroup: {fileID: 24300002, guid: 7e984f512e89b60468e829489e8883e3,
         type: 2}
@@ -101,4 +101,4 @@ MonoBehaviour:
       Spread: 0
       RolloffMode: 1
       MinDistance: 1
-      MaxDistance: 50
+      MaxDistance: 100
