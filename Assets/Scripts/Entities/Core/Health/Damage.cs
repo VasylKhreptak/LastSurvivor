@@ -11,10 +11,6 @@ namespace Entities.Core.Health
             Value = value;
         }
 
-        public float Value
-        {
-            get => _value;
-            set => _value = Mathf.Max(0, value);
-        }
+        public float Value { get => _value; set => _value = Mathf.Max(0, value); }
     }
 }

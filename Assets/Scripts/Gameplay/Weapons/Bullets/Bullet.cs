@@ -11,11 +11,9 @@ namespace Gameplay.Weapons.Bullets
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private float _defaultDamage = 10f;
 
-        private Damage _damage;
-
         #region MonoBehaviour
 
-        private void Awake() => _damage = new Damage(_defaultDamage);
+        private void Awake() => Damage = new Damage(_defaultDamage);
 
         private void OnValidate()
         {
@@ -27,6 +25,6 @@ namespace Gameplay.Weapons.Bullets
 
         public Transform Transform => _transform;
         public Rigidbody Rigidbody => _rigidbody;
-        public Damage Damage => _damage;
+        public Damage Damage { get; private set; }
     }
 }

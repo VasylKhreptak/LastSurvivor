@@ -41,7 +41,7 @@ namespace Gameplay.Entities.Explosive.Core
         public class Preferences
         {
             [SerializeField] private LayerMask _layerMask;
-            [SerializeField] private float _minRadius = 0f;
+            [SerializeField] private float _minRadius;
             [SerializeField] private float _maxRadius = 15f;
             [SerializeField] private float _minDamage = 10f;
             [SerializeField] private float _maxDamage = 300f;

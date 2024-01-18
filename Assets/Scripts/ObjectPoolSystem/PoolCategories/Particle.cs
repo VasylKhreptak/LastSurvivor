@@ -4,8 +4,8 @@
     {
         ConcreteImpact = 1,
         MetalImpact = 2,
-        SkinImpact = 3,
+        BodyImpact = 3,
         Shoot = 4,
-        BarrelExplosion = 5,
+        BarrelExplosion = 5
     }
 }

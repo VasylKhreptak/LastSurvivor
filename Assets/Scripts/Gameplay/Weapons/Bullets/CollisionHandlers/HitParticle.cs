@@ -1,9 +1,9 @@
 ﻿using System;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
+using Serialization.Collections.Dictionary;
 using Terrain.Surfaces.Core;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Gameplay.Weapons.Bullets.CollisionHandlers
 {
@@ -46,7 +46,8 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         {
             [SerializeField] private SerializedDictionary<SurfaceType, Particle> _surfaceParticleMap;
 
-            public bool TryGetParticle(SurfaceType surfaceType, out Particle particle) => _surfaceParticleMap.TryGetValue(surfaceType, out particle);
+            public bool TryGetParticle(SurfaceType surfaceType, out Particle particle) =>
+                _surfaceParticleMap.TryGetValue(surfaceType, out particle);
         }
     }
 }

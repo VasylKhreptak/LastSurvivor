@@ -13,6 +13,7 @@ namespace Gameplay.Weapons.Bullets.Core
         [SerializeField] private HitParticle.Preferences _hitParticlePreferences;
         [SerializeField] private LifetimeHandler.Preferences _lifetimePreferences;
         [SerializeField] private ImpulseTransmitter.Preferences _impulseTransmitterPreferences;
+        [SerializeField] private HitAudioPlayer.Preferences _hitAudioPlayerPreferences;
 
         public override void InstallBindings()
         {
@@ -26,7 +27,13 @@ namespace Gameplay.Weapons.Bullets.Core
             Container.BindInterfacesTo<LifetimeHandler>().AsSingle().WithArguments(_lifetimePreferences);
             Container.BindInterfacesTo<TrailReseter>().AsSingle();
 
+            BindCollisionHandler();
+        }
+
+        private void BindCollisionHandler()
+        {
             Container.Bind<HitParticle>().AsSingle().WithArguments(_hitParticlePreferences);
+            Container.Bind<HitAudioPlayer>().AsSingle().WithArguments(_hitAudioPlayerPreferences);
             Container.Bind<DamageApplier>().AsSingle();
             Container.Bind<ImpulseTransmitter>().AsSingle().WithArguments(_impulseTransmitterPreferences);
             Container.BindInterfacesTo<BulletCollisionHandler>().AsSingle();

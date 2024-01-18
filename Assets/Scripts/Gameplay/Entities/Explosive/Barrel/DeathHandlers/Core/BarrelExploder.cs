@@ -11,10 +11,10 @@ namespace Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core
     public class BarrelExploder : DeathHandler
     {
         private readonly GameObject _gameObject;
-        private ExplosionRigidbodyAffector _rigidbodyAffector;
-        private CameraShaker _cameraShaker;
-        private IObjectPools<Particle> _particlePools;
-        private ExplosionDamageApplier _explosionDamageApplier;
+        private readonly ExplosionRigidbodyAffector _rigidbodyAffector;
+        private readonly CameraShaker _cameraShaker;
+        private readonly IObjectPools<Particle> _particlePools;
+        private readonly ExplosionDamageApplier _explosionDamageApplier;
 
         public BarrelExploder(IHealth health, GameObject gameObject, ExplosionRigidbodyAffector rigidbodyAffector,
             CameraShaker cameraShaker, IObjectPools<Particle> particlePools, ExplosionDamageApplier explosionDamageApplier) : base(health)

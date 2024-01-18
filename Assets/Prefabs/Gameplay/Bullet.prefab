@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 168877154142570436}
   _rigidbody: {fileID: 7113816535095938019}
-  _damage: 10
+  _defaultDamage: 10
 --- !u!136 &6487985030544173715
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -332,12 +332,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitParticlePreferences:
     _surfaceParticleMap:
-      m_Keys: 000000000100000002000000
-      m_Values: 010000000200000003000000
+      _keys: 000000000100000002000000
+      _values: 010000000200000003000000
   _lifetimePreferences:
     _lifetime: 1
   _impulseTransmitterPreferences:
     _impulseMultiplier: 5
+  _hitAudioPlayerPreferences:
+    _surfaceAudioMap:
+      _keys: 
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 130
+      Volume: 1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 100
 --- !u!114 &5585357420034857335
 MonoBehaviour:
   m_ObjectHideFlags: 0

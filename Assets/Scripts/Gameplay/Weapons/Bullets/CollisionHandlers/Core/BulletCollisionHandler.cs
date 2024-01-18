@@ -13,15 +13,17 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers.Core
         private readonly HitParticle _hitParticle;
         private readonly ImpulseTransmitter _impulseTransmitter;
         private readonly DamageApplier _damageApplier;
+        private readonly HitAudioPlayer _hitAudioPlayer;
 
         public BulletCollisionHandler(GameObject gameObject, Collider collider, HitParticle hitParticle,
-            ImpulseTransmitter impulseTransmitter, DamageApplier damageApplier)
+            ImpulseTransmitter impulseTransmitter, DamageApplier damageApplier, HitAudioPlayer hitAudioPlayer)
         {
             _gameObject = gameObject;
             _collider = collider;
             _hitParticle = hitParticle;
             _impulseTransmitter = impulseTransmitter;
             _damageApplier = damageApplier;
+            _hitAudioPlayer = hitAudioPlayer;
         }
 
         private IDisposable _subscription;
@@ -34,6 +36,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers.Core
         {
             _hitParticle.Spawn(collision);
             _impulseTransmitter.TryTransmit(collision);
+            _hitAudioPlayer.Play(collision);
             _damageApplier.TryApply(collision.gameObject);
             _gameObject.SetActive(false);
         }

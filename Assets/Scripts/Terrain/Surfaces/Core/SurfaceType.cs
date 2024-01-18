@@ -4,6 +4,6 @@
     {
         Concrete = 0,
         Metal = 1,
-        Skin = 2
+        Body = 2
     }
 }

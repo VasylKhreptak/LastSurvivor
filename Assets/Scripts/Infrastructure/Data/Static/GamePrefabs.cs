@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Data.Static.Core;
+using Serialization.Collections.Dictionary;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Infrastructure.Data.Static
 {
