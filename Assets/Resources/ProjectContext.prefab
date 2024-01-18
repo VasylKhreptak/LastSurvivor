@@ -84,7 +84,7 @@ MonoBehaviour:
     InitialSize: 10
     MaxSize: 50
     DefaultSettings:
-      AudioMixerGroup: {fileID: 24300002, guid: 7e984f512e89b60468e829489e8883e3,
+      AudioMixerGroup: {fileID: 24300002, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}
       Mute: 0
       BypassEffects: 0
