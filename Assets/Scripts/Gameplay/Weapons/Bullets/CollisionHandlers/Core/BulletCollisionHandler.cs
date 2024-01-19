@@ -30,7 +30,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers.Core
 
         public void Initialize() => _subscription = _collider.OnCollisionEnterAsObservable().Subscribe(OnCollisionEnter);
 
-        public void Dispose() => _subscription.Dispose();
+        public void Dispose() => _subscription?.Dispose();
 
         private void OnCollisionEnter(Collision collision)
         {
