@@ -382,7 +382,7 @@ MonoBehaviour:
       BypassReverbZones: 0
       Loop: 0
       Priority: 130
-      Volume: 0.6
+      Volume: 0.5
       Pitch: 1
       StereoPan: 0
       SpatialBlend: 1

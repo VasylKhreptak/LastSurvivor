@@ -1,4 +1,5 @@
-﻿using Entities.Core.Health;
+﻿using Audio.Players;
+using Entities.Core.Health;
 using Entities.Core.Health.Core;
 using Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core;
 using Gameplay.Entities.Explosive.Core;
@@ -12,6 +13,7 @@ namespace Gameplay.Entities.Explosive.Barrel
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private ExplosionRigidbodyAffector.Preferences _rigidbodyAffectorPreferences;
         [SerializeField] private ExplosionDamageApplier.Preferences _explosionDamageApplierPreferences;
+        [SerializeField] private AudioPlayer.Preferences _explosionAudioPlayerPreferences;
 
         public override void InstallBindings()
         {
@@ -20,6 +22,7 @@ namespace Gameplay.Entities.Explosive.Barrel
 
             Container.Bind<ExplosionRigidbodyAffector>().AsSingle().WithArguments(_rigidbodyAffectorPreferences);
             Container.Bind<ExplosionDamageApplier>().AsSingle().WithArguments(_explosionDamageApplierPreferences);
+            Container.Bind<AudioPlayer>().AsSingle().WithArguments(_explosionAudioPlayerPreferences);
             Container.BindInterfacesTo<BarrelExploder>().AsSingle();
         }
     }

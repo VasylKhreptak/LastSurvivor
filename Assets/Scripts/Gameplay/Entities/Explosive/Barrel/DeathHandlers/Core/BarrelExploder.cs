@@ -1,4 +1,5 @@
-﻿using CameraUtilities.Shaker;
+﻿using Audio.Players;
+using CameraUtilities.Shaker;
 using Entities.Core;
 using Entities.Core.Health.Core;
 using Gameplay.Entities.Explosive.Core;
@@ -15,15 +16,18 @@ namespace Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core
         private readonly CameraShaker _cameraShaker;
         private readonly IObjectPools<Particle> _particlePools;
         private readonly ExplosionDamageApplier _explosionDamageApplier;
+        private readonly AudioPlayer _explosionAudioPlayer;
 
         public BarrelExploder(IHealth health, GameObject gameObject, ExplosionRigidbodyAffector rigidbodyAffector,
-            CameraShaker cameraShaker, IObjectPools<Particle> particlePools, ExplosionDamageApplier explosionDamageApplier) : base(health)
+            CameraShaker cameraShaker, IObjectPools<Particle> particlePools, ExplosionDamageApplier explosionDamageApplier,
+            AudioPlayer explosionAudioPlayer) : base(health)
         {
             _gameObject = gameObject;
             _rigidbodyAffector = rigidbodyAffector;
             _cameraShaker = cameraShaker;
             _particlePools = particlePools;
             _explosionDamageApplier = explosionDamageApplier;
+            _explosionAudioPlayer = explosionAudioPlayer;
         }
 
         protected override void OnDied()
@@ -33,6 +37,7 @@ namespace Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core
             _explosionDamageApplier.Apply(position);
             _rigidbodyAffector.Affect(position);
             _cameraShaker.DoExplosionShake();
+            _explosionAudioPlayer.Play(position);
             SpawnExplosionParticle();
             Object.Destroy(_gameObject);
         }

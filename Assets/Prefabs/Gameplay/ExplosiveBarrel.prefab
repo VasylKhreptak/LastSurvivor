@@ -269,6 +269,33 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  _explosionAudioPlayerPreferences:
+    _clips:
+    - {fileID: 8300000, guid: c27dbffdae9b41f42b42ca2ae5803f68, type: 3}
+    - {fileID: 8300000, guid: dc6a6f669e7483141a294e5993e86ead, type: 3}
+    - {fileID: 8300000, guid: be91a0b571db84849b437db05ae7c73e, type: 3}
+    - {fileID: 8300000, guid: b222f0724e610a2469e53986a6110f4f, type: 3}
+    - {fileID: 8300000, guid: 45716e0d362c87547b24a92bd4fda6e4, type: 3}
+    - {fileID: 8300000, guid: f88d4f306adfa1944bbea45615a99a01, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 120
+      Volume: 1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 50
 --- !u!114 &9175440646917912870
 MonoBehaviour:
   m_ObjectHideFlags: 0
