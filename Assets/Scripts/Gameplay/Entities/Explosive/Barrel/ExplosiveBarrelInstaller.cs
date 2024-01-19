@@ -1,6 +1,6 @@
 ﻿using Audio.Players;
-using Entities.Core.Health;
-using Entities.Core.Health.Core;
+using Entities.Health;
+using Entities.Health.Core;
 using Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core;
 using Gameplay.Entities.Explosive.Core;
 using UnityEngine;

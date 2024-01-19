@@ -1,9 +1,9 @@
 ﻿using System;
-using Entities.Core.Health.Core;
+using Entities.Health.Core;
 using UniRx;
 using Zenject;
 
-namespace Entities.Core
+namespace Entities.Health
 {
     public class DeathHandler : IInitializable, IDisposable
     {

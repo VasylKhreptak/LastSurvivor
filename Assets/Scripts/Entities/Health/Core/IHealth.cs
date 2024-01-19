@@ -1,6 +1,6 @@
 ﻿using UniRx;
 
-namespace Entities.Core.Health.Core
+namespace Entities.Health.Core
 {
     public interface IHealth
     {

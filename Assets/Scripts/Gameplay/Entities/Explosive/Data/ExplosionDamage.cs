@@ -1,4 +1,4 @@
-﻿using Entities.Core.Health;
+﻿using Entities.Health;
 
 namespace Gameplay.Entities.Explosive.Data
 {

@@ -1,4 +1,4 @@
-﻿using Entities.Core.Health;
+﻿using Entities.Health;
 using UnityEngine;
 
 namespace Gameplay.Weapons.Bullets.Core

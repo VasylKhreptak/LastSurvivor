@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Entities.Core.Health
+namespace Entities.Health
 {
     public class Damage
     {

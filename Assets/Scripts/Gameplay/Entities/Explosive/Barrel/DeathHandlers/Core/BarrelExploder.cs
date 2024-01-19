@@ -1,7 +1,7 @@
 ﻿using Audio.Players;
 using CameraUtilities.Shaker;
-using Entities.Core;
-using Entities.Core.Health.Core;
+using Entities.Health;
+using Entities.Health.Core;
 using Gameplay.Entities.Explosive.Core;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;

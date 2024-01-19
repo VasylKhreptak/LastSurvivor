@@ -1,11 +1,11 @@
-﻿using Entities.Core.Health.Core;
+﻿using Entities.Health.Core;
 using Gameplay.Entities.Explosive.Data;
 using Gameplay.Weapons.Bullets.Core;
 using UnityEngine;
 using Visitor;
 using Zenject;
 
-namespace Entities.Core
+namespace Entities.Health
 {
     public class Hitbox : MonoBehaviour, IVisitable<IBullet>, IVisitable<ExplosionDamage>
     {

@@ -1,4 +1,4 @@
-﻿using Entities.Core.Health.Core;
+﻿using Entities.Health.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;

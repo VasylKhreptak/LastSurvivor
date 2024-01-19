@@ -1,9 +1,9 @@
-﻿using Entities.Core.Health.Core;
+﻿using Entities.Health.Core;
 using Plugins.Banks;
 using UniRx;
 using UnityEngine;
 
-namespace Entities.Core.Health
+namespace Entities.Health
 {
     public class Health : IHealth
     {
