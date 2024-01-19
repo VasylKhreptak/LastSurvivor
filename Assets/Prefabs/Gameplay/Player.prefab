@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 8102423769198548537}
   - component: {fileID: 8291593957064981898}
   - component: {fileID: 533815037475083162}
+  - component: {fileID: 3177717270720562499}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -235,7 +236,7 @@ MonoBehaviour:
   - {fileID: 8102423769198548537}
   _installerPrefabs: []
   _autoRun: 1
-  _kernel: {fileID: 0}
+  _kernel: {fileID: 3177717270720562499}
 --- !u!114 &8102423769198548537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +301,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3177717270720562499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936570781243273599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b150a0e4712401684c97f1f5b52cf78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1772222570357447443
 GameObject:
   m_ObjectHideFlags: 0

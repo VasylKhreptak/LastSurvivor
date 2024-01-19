@@ -8,6 +8,7 @@ using Gameplay.Entities.Player.StateMachine.States.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
+using Zenject.Infrastructure.Toggleable;
 
 namespace Gameplay.Entities.Player
 {
@@ -28,7 +29,8 @@ namespace Gameplay.Entities.Player
             BindMoveAnimation();
             BindStateMachine();
 
-            Container.BindInterfacesTo<PlayerController>().AsSingle();
+            Container.BindInterfacesTo<PlayerWaypointFollower>().AsSingle();
+            Container.Bind<ToggleableManager>().AsSingle();
         }
 
         private void BindMoveAnimation() => Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
