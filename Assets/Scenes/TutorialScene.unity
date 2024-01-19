@@ -19363,6 +19363,72 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1073721607}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1075551495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075551496}
+  - component: {fileID: 1075551497}
+  m_Layer: 0
+  m_Name: LoopAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1075551496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075551495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5183883730816375094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1075551497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075551495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ee37f11754363bfef5713bbeaf927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preferences:
+    _clips:
+    - {fileID: 8300000, guid: 8144c950f37b9834886fb257aad6fb73, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 1
+      Priority: 115
+      Volume: 0.5
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 0
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 0
+      MinDistance: 1
+      MaxDistance: 500
 --- !u!1001 &1080302841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39190,6 +39256,7 @@ Transform:
   - {fileID: 5183883730816464598}
   - {fileID: 1803727001}
   - {fileID: 1082196514}
+  - {fileID: 1075551496}
   m_Father: {fileID: 681910942}
   m_LocalEulerAnglesHint: {x: 0, y: 269.803, z: 0}
 --- !u!4 &5183883730816400550
