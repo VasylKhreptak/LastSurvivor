@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
-using Serialization.Collections.Dictionary;
+using Serialization.Collections.KeyValue;
 using Terrain.Surfaces.Core;
 using UnityEngine;
 
@@ -12,10 +13,14 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         private readonly Preferences _preferences;
         private readonly IObjectPools<Particle> _particlePools;
 
+        private readonly Dictionary<SurfaceType, Particle> _surfaceParticleMap;
+
         public HitParticle(Preferences preferences, IObjectPools<Particle> particlePools)
         {
             _preferences = preferences;
             _particlePools = particlePools;
+
+            _surfaceParticleMap = _preferences.SurfaceParticlePairs.ToDictionary();
         }
 
         public void Spawn(Collision collision)
@@ -25,7 +30,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
             if (surface == null)
                 return;
 
-            if (_preferences.TryGetParticle(surface.Type, out Particle particle) == false)
+            if (_surfaceParticleMap.TryGetValue(surface.Type, out Particle particle) == false)
                 return;
 
             Spawn(collision, particle);
@@ -44,10 +49,9 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private SerializedDictionary<SurfaceType, Particle> _surfaceParticleMap;
+            [SerializeField] private KeyValuePairs<SurfaceType, Particle> _surfaceParticlePairs;
 
-            public bool TryGetParticle(SurfaceType surfaceType, out Particle particle) =>
-                _surfaceParticleMap.TryGetValue(surfaceType, out particle);
+            public KeyValuePairs<SurfaceType, Particle> SurfaceParticlePairs => _surfaceParticlePairs;
         }
     }
 }

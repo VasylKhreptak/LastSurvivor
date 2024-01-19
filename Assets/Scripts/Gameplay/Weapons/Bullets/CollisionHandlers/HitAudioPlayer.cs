@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Extensions;
 using Plugins.AudioService.Core;
-using Serialization.Collections.Dictionary;
+using Serialization.Collections.KeyValue;
 using Terrain.Surfaces.Core;
 using UnityEngine;
 using AudioSettings = Plugins.AudioService.Data.AudioSettings;
@@ -13,10 +14,14 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         private readonly IAudioService _audioService;
         private readonly Preferences _preferences;
 
+        private readonly Dictionary<SurfaceType, AudioClip[]> _surfaceAudiosMap;
+
         public HitAudioPlayer(IAudioService audioService, Preferences preferences)
         {
             _audioService = audioService;
             _preferences = preferences;
+
+            _surfaceAudiosMap = _preferences.SurfaceAudioPairs.ToDictionary();
         }
 
         public void Play(Collision collision)
@@ -26,7 +31,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
             if (surface == null)
                 return;
 
-            if (_preferences.TryGetClips(surface.Type, out AudioClip[] audioClips) == false)
+            if (_surfaceAudiosMap.TryGetValue(surface.Type, out AudioClip[] audioClips) == false)
                 return;
 
             _audioService.Play(audioClips.Random(), collision.contacts[0].point, _preferences.AudioSettings);
@@ -35,12 +40,10 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private SerializedDictionary<SurfaceType, AudioClip[]> _surfaceAudioMap;
+            [SerializeField] private KeyValuePairs<SurfaceType, AudioClip[]> _surfaceAudioPairs;
             [SerializeField] private AudioSettings _audioSettings;
 
-            public bool TryGetClips(SurfaceType surface, out AudioClip[] audioClips) =>
-                _surfaceAudioMap.TryGetValue(surface, out audioClips);
-
+            public KeyValuePairs<SurfaceType, AudioClip[]> SurfaceAudioPairs => _surfaceAudioPairs;
             public AudioSettings AudioSettings => _audioSettings;
         }
     }

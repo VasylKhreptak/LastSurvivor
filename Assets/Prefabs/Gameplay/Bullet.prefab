@@ -331,16 +331,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitParticlePreferences:
-    _surfaceParticleMap:
-      _keys: 000000000100000002000000
-      _values: 010000000200000003000000
+    _surfaceParticlePairs:
+      _pairs:
+      - Key: 0
+        Value: 1
+      - Key: 1
+        Value: 2
+      - Key: 2
+        Value: 3
+      - Key: 3
+        Value: 2
   _lifetimePreferences:
     _lifetime: 1
   _impulseTransmitterPreferences:
     _impulseMultiplier: 5
   _hitAudioPlayerPreferences:
-    _surfaceAudioMap:
-      _keys: 
+    _surfaceAudioPairs:
+      _pairs:
+      - Key: 1
+        Value:
+        - {fileID: 8300000, guid: d4affeab5da56f7459942378fa05c082, type: 3}
+        - {fileID: 8300000, guid: 93e6d4660b5bf0541af5647182f26c9b, type: 3}
+        - {fileID: 8300000, guid: 1c5d65079e07f054fb3e62621e435e58, type: 3}
+      - Key: 0
+        Value:
+        - {fileID: 8300000, guid: 333d3b6502b4c4f42938f48179b99e0d, type: 3}
+        - {fileID: 8300000, guid: c1257ebecdc749c4d8ab092a71135028, type: 3}
+        - {fileID: 8300000, guid: 17fc3ff276be03d4b9ad87b6619ca370, type: 3}
+        - {fileID: 8300000, guid: 41804c4b2950e4847bb4737422d3242f, type: 3}
+        - {fileID: 8300000, guid: a2dab053c4fa68241a4150ae152a2f52, type: 3}
+        - {fileID: 8300000, guid: 4785c79143d75cb468cf886bcd415b3d, type: 3}
+        - {fileID: 8300000, guid: 414a2770c7e274b40b1aab34bcb4823b, type: 3}
+      - Key: 2
+        Value:
+        - {fileID: 8300000, guid: 456d828b994a0a046838c0038c869596, type: 3}
+        - {fileID: 8300000, guid: b03be49ad12b49f4d9bbe0f7452ca0ce, type: 3}
+        - {fileID: 8300000, guid: 84664d108bc28f34998a312736fd234b, type: 3}
+        - {fileID: 8300000, guid: c93c3de41f72f3d4e9771dd5e0fdab63, type: 3}
+      - Key: 3
+        Value:
+        - {fileID: 8300000, guid: e7236ba9e8105e1498e517aadc4deca9, type: 3}
+        - {fileID: 8300000, guid: ed5afd0819b9f5047a7e788c7f1fa1db, type: 3}
+        - {fileID: 8300000, guid: 060654694bb4e0f44afb57b526f69640, type: 3}
     _audioSettings:
       AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}
@@ -350,7 +382,7 @@ MonoBehaviour:
       BypassReverbZones: 0
       Loop: 0
       Priority: 130
-      Volume: 1
+      Volume: 0.6
       Pitch: 1
       StereoPan: 0
       SpatialBlend: 1
@@ -359,7 +391,7 @@ MonoBehaviour:
       Spread: 0
       RolloffMode: 1
       MinDistance: 1
-      MaxDistance: 100
+      MaxDistance: 50
 --- !u!114 &5585357420034857335
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -350,6 +350,28 @@ MonoBehaviour:
       _maxTorque: 90
       _minVelocity: 1.5
       _maxVelocity: 3
+  _fireAudioPreferences:
+    _clips:
+    - {fileID: 8300000, guid: a813aad129c9e6045aa1ddcbdb8a508a, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 130
+      Volume: 1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 50
 --- !u!114 &2012973939704131223
 MonoBehaviour:
   m_ObjectHideFlags: 0

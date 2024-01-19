@@ -1,4 +1,5 @@
-﻿using Data.Persistent.Platforms;
+﻿using Audio.Players;
+using Data.Persistent.Platforms;
 using Gameplay.Weapons.Minigun.StateMachine;
 using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
@@ -15,6 +16,7 @@ namespace Gameplay.Weapons.Minigun
         [SerializeField] private WeaponAimer.Preferences _aimPreferences;
         [SerializeField] private BarrelRotator.Preferences _barrelRotatorPreferences;
         [SerializeField] private FireState.Preferences _firePreferences;
+        [SerializeField] private AudioPlayer.Preferences _fireAudioPreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
 
@@ -42,6 +44,7 @@ namespace Gameplay.Weapons.Minigun
         private void BindStates()
         {
             Container.Bind<SpinUpState>().AsSingle();
+            Container.Bind<AudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences).WhenInjectedInto<FireState>();
             Container.Bind<FireState>().AsSingle().WithArguments(_firePreferences);
             Container.Bind<SpinDownState>().AsSingle();
             Container.Bind<IdleState>().AsSingle();

@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio.Players;
 using CameraUtilities.Shaker;
 using Extensions;
 using Gameplay.Weapons.Bullets.Core;
@@ -18,14 +19,16 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private readonly IObjectPools<GeneralPool> _generalPools;
         private readonly CameraShaker _cameraShaker;
         private readonly IObjectPools<Particle> _particlePools;
+        private readonly AudioPlayer _fireAudioPlayer;
 
         public FireState(Preferences preferences, IObjectPools<GeneralPool> generalPools, CameraShaker cameraShaker,
-            IObjectPools<Particle> particlePools)
+            IObjectPools<Particle> particlePools, AudioPlayer fireAudioPlayer)
         {
             _preferences = preferences;
             _generalPools = generalPools;
             _cameraShaker = cameraShaker;
             _particlePools = particlePools;
+            _fireAudioPlayer = fireAudioPlayer;
         }
 
         private IDisposable _fireSubscription;
@@ -51,6 +54,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         {
             FireBullet();
             SpawnShootParticle();
+            PlayFireAudio();
             FireShell();
             ShakeCamera();
         }
@@ -74,6 +78,8 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             particle.transform.position = _lastBulletPosition;
             particle.transform.forward = _preferences.Bullet.SpawnPoint.forward;
         }
+
+        private void PlayFireAudio() => _fireAudioPlayer.Play(_lastBulletPosition);
 
         private void FireShell()
         {
