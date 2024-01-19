@@ -7,6 +7,7 @@ using Infrastructure.Services.PersistentData.Core;
 using Plugins.Banks;
 using UnityEngine;
 using Zenject;
+using Zenject.Infrastructure.Toggleable;
 
 namespace Gameplay.Weapons.Minigun
 {
@@ -14,9 +15,10 @@ namespace Gameplay.Weapons.Minigun
     {
         [Header("Preferences")]
         [SerializeField] private WeaponAimer.Preferences _aimPreferences;
-        [SerializeField] private BarrelRotator.Preferences _barrelRotatorPreferences;
+        [SerializeField] private BarrelSpiner.Preferences _barrelRotatorPreferences;
         [SerializeField] private FireState.Preferences _firePreferences;
         [SerializeField] private AudioPlayer.Preferences _fireAudioPreferences;
+        [SerializeField] private MinigunSpinAudio.Preferences _spinAudioPreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
 
@@ -30,8 +32,10 @@ namespace Gameplay.Weapons.Minigun
         {
             BindMinigunAmmo();
             BindAimer();
-            BindBarrelRotator();
+            BindBarrelSpiner();
+            BindBarrelSpinAudio();
             BindStateMachine();
+            Container.Bind<ToggleableManager>().AsSingle();
         }
 
         private void BindStateMachine()
@@ -66,12 +70,17 @@ namespace Gameplay.Weapons.Minigun
                 .WithArguments(_aimPreferences);
         }
 
-        private void BindBarrelRotator()
+        private void BindBarrelSpiner()
         {
             Container
-                .BindInterfacesAndSelfTo<BarrelRotator>()
+                .BindInterfacesAndSelfTo<BarrelSpiner>()
                 .AsSingle()
                 .WithArguments(_barrelRotatorPreferences);
+        }
+
+        private void BindBarrelSpinAudio()
+        {
+            Container.BindInterfacesTo<MinigunSpinAudio>().AsSingle().WithArguments(_spinAudioPreferences);
         }
     }
 }

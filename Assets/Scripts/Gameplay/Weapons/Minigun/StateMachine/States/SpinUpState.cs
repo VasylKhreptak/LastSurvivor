@@ -6,14 +6,14 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     public class SpinUpState : IMinigunState
     {
         private readonly IStateMachine<IMinigunState> _stateMachine;
-        private readonly BarrelRotator _barrelRotator;
+        private readonly BarrelSpiner _barrelSpiner;
 
-        public SpinUpState(IStateMachine<IMinigunState> stateMachine, BarrelRotator barrelRotator)
+        public SpinUpState(IStateMachine<IMinigunState> stateMachine, BarrelSpiner barrelSpiner)
         {
             _stateMachine = stateMachine;
-            _barrelRotator = barrelRotator;
+            _barrelSpiner = barrelSpiner;
         }
 
-        public void Enter() => _barrelRotator.SpinUp(() => _stateMachine.Enter<FireState>());
+        public void Enter() => _barrelSpiner.SpinUp(() => _stateMachine.Enter<FireState>());
     }
 }

@@ -6,11 +6,11 @@ using Zenject;
 
 namespace Gameplay.Weapons.Minigun
 {
-    public class BarrelRotator : ITickable, IDisposable
+    public class BarrelSpiner : ITickable, IDisposable
     {
         private readonly Preferences _preferences;
 
-        public BarrelRotator(Preferences preferences)
+        public BarrelSpiner(Preferences preferences)
         {
             _preferences = preferences;
         }

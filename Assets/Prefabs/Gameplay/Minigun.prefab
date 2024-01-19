@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 184493073946323168}
   - component: {fileID: 2465216074547865248}
   - component: {fileID: 2012973939704131223}
+  - component: {fileID: 6100285828196041980}
   m_Layer: 0
   m_Name: Minigun
   m_TagString: Untagged
@@ -307,7 +308,7 @@ MonoBehaviour:
   - {fileID: 2465216074547865248}
   _installerPrefabs: []
   _autoRun: 1
-  _kernel: {fileID: 0}
+  _kernel: {fileID: 6100285828196041980}
 --- !u!114 &2465216074547865248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,8 +332,8 @@ MonoBehaviour:
     _barrelTransform: {fileID: 993517482539922330}
     _reverse: 1
     _maxRotateSpeed: 2000
-    _acceleration: 1400
-    _deceleration: 700
+    _acceleration: 2000
+    _deceleration: 1000
   _firePreferences:
     _bullet:
       _spawnPoint: {fileID: 5868097015664678775}
@@ -372,6 +373,75 @@ MonoBehaviour:
       RolloffMode: 1
       MinDistance: 1
       MaxDistance: 50
+  _spinAudioPreferences:
+    _clip: {fileID: 8300000, guid: adce4222343108043b894e4e5076c4d2, type: 3}
+    _settings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 1
+      Priority: 120
+      Volume: 0.1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 50
+    _pitchCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _volumeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &2012973939704131223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +452,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7233ba148294eb48040a48551290687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6100285828196041980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595112117667312177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b150a0e4712401684c97f1f5b52cf78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3690495747231074349
