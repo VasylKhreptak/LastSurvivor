@@ -391,7 +391,7 @@ MonoBehaviour:
       Spread: 0
       RolloffMode: 1
       MinDistance: 1
-      MaxDistance: 50
+      MaxDistance: 60
 --- !u!114 &5585357420034857335
 MonoBehaviour:
   m_ObjectHideFlags: 0
