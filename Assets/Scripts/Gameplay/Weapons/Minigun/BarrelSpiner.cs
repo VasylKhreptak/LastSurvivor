@@ -19,6 +19,9 @@ namespace Gameplay.Weapons.Minigun
 
         private float _rotateSpeed;
 
+        public float RotateSpeed => _rotateSpeed;
+        public Preferences Settings => _preferences;
+
         public void Tick() => Rotate();
 
         public void Dispose() => _accelerationSubscription?.Dispose();

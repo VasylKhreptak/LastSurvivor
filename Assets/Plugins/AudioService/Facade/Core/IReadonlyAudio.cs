@@ -7,6 +7,7 @@ namespace Plugins.AudioService.Facade.Core
     public interface IReadonlyAudio
     {
         public IReadonlyTimer Timer { get; }
+        public float Time { get; }
         public Vector3 Position { get; }
         public Quaternion Rotation { get; }
         public AudioClip Clip { get; }

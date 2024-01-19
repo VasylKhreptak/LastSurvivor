@@ -29,6 +29,7 @@ namespace Plugins.AudioService.Core
         public void ApplySettings(int id, AudioSettings settings);
 
         public IReadonlyProperty<int, IReadonlyTimer> Timer { get; }
+        public IProperty<int, float> Time { get; }
         public IProperty<int, Vector3> Position { get; }
         public IProperty<int, Quaternion> Rotation { get; }
         public IProperty<int, AudioClip> Clip { get; }

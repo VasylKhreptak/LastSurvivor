@@ -14,6 +14,7 @@ namespace Plugins.AudioService.Facade.Core
         public void ApplySettings(AudioSettings settings);
 
         public new IReadonlyTimer Timer { get; }
+        public new float Time { get; set; }
         public new Vector3 Position { get; set; }
         public new Quaternion Rotation { get; set; }
         public new AudioClip Clip { get; set; }

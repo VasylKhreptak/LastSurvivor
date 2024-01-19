@@ -26,6 +26,19 @@ namespace Plugins.AudioService.Facade
         #region Properties
 
         public IReadonlyTimer Timer => _timer;
+
+        public float Time
+        {
+            get => _source.time;
+            set
+            {
+                value = Mathf.Clamp(value, 0, Clip.length - 0.01f);
+
+                _source.time = value;
+                _timer.SetTime(value);
+            }
+        }
+
         public Vector3 Position { get => _transform.position; set => _transform.position = value; }
         public Quaternion Rotation { get => _transform.rotation; set => _transform.rotation = value; }
         public AudioClip Clip { get => _source.clip; set => _source.clip = value; }

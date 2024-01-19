@@ -40,6 +40,8 @@ namespace Plugins.AudioService
             Func<int, bool> canAccess = id => _activePool.ContainsKey(id);
 
             Timer = new ReadonlyProperty<int, IReadonlyTimer>(canAccess, id => _activePool[id].Audio.Timer);
+            Time = new Property<int, float>(canAccess, id => _activePool[id].Audio.Time,
+                (id, value) => _activePool[id].Audio.Time = value);
             Position = new Property<int, Vector3>(canAccess, id => _activePool[id].Audio.Position,
                 (id, value) => _activePool[id].Audio.Position = value);
             Rotation = new Property<int, Quaternion>(canAccess, id => _activePool[id].Audio.Rotation,
@@ -87,6 +89,7 @@ namespace Plugins.AudioService
         #region Properties
 
         public IReadonlyProperty<int, IReadonlyTimer> Timer { get; }
+        public IProperty<int, float> Time { get; }
         public IProperty<int, Vector3> Position { get; }
         public IProperty<int, Quaternion> Rotation { get; }
         public IProperty<int, AudioClip> Clip { get; }
