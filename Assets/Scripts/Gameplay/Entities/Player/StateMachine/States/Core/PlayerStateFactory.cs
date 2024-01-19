@@ -9,6 +9,12 @@ namespace Gameplay.Entities.Player.StateMachine.States.Core
     public class PlayerStateFactory : StateFactory
     {
         public PlayerStateFactory(DiContainer container) : base(container) { }
-        protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister() => throw new NotImplementedException();
+
+        protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister() =>
+            new Dictionary<Type, Func<IBaseState>>
+            {
+                [typeof(IdleState)] = _container.Resolve<IdleState>,
+                [typeof(MoveState)] = _container.Resolve<MoveState>
+            };
     }
 }

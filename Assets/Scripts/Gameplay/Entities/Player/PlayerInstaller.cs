@@ -15,16 +15,20 @@ namespace Gameplay.Entities.Player
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
+        [SerializeField] private MoveState.Preferences _moveStatePreferences;
 
         public override void InstallBindings()
         {
+            Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health(_maxHealth)).AsSingle();
-            Container.BindInterfacesTo<PlayerDeathHandler>().AsSingle();
 
+            BindDeathHandler();
             BindMoveAnimation();
             BindStateMachine();
+
+            Container.BindInterfacesTo<PlayerController>().AsSingle();
         }
 
         private void BindMoveAnimation() => Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
@@ -39,7 +43,9 @@ namespace Gameplay.Entities.Player
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<MoveState>().AsSingle();
+            Container.Bind<MoveState>().AsSingle().WithArguments(_moveStatePreferences);
         }
+
+        private void BindDeathHandler() => Container.BindInterfacesTo<PlayerDeathHandler>().AsSingle();
     }
 }
