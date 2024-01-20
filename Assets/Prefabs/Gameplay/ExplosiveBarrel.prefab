@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968c3fca4f3344d79475be80ae767f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 50
   _rigidbodyAffectorPreferences:
     _layerMask:
       serializedVersion: 2
