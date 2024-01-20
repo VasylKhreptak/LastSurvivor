@@ -14677,7 +14677,7 @@ MonoBehaviour:
     Amplitude: 0.8
   _noiseMoverPreferences:
     Speed: 0.4
-    Strength: {x: 1, y: 1, z: 1}
+    Strength: {x: 1, y: 1.5, z: 1}
     Amplitude: 0.3
 --- !u!114 &768617216
 MonoBehaviour:
