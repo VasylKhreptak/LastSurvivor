@@ -13124,7 +13124,7 @@ Transform:
   m_Children:
   - {fileID: 1958968195}
   - {fileID: 863638241}
-  - {fileID: 5183883730816375094}
+  - {fileID: 768617214}
   - {fileID: 1950582288}
   - {fileID: 701695365}
   - {fileID: 1715677070}
@@ -14620,6 +14620,83 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 762662147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &768617213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 768617214}
+  - component: {fileID: 768617216}
+  - component: {fileID: 768617215}
+  m_Layer: 0
+  m_Name: Helicopter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &768617214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768617213}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7083223, z: -0, w: -0.70588917}
+  m_LocalPosition: {x: 48.41, y: 19.88, z: -116.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 5183883730816375094}
+  m_Father: {fileID: 681910942}
+  m_LocalEulerAnglesHint: {x: 0, y: 269.803, z: 0}
+--- !u!114 &768617215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768617213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07259776f6374f08a1039f1f4d672b21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transform: {fileID: 768617214}
+  _noiseLayer: {fileID: 5183883730816375094}
+  _helicopterMovementPreferences:
+    _followSpeed: 1
+    _distanceOffset: 5
+  _noiseRotatorPreferences:
+    Speed: 0.2
+    Strength: {x: 1, y: 1, z: 1}
+    Amplitude: 0.8
+  _noiseMoverPreferences:
+    Speed: 0.4
+    Strength: {x: 1, y: 1, z: 1}
+    Amplitude: 0.3
+--- !u!114 &768617216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768617213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 768617215}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1001 &768882099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39630,7 +39707,7 @@ GameObject:
   - component: {fileID: 5183883730813027326}
   - component: {fileID: 5183883730814063776}
   m_Layer: 0
-  m_Name: Helicopter
+  m_Name: NoiseLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39644,8 +39721,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5183883730816116436}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7083223, z: -0, w: -0.70588917}
-  m_LocalPosition: {x: 48.41, y: 19.88, z: -116.9}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -39654,7 +39731,7 @@ Transform:
   - {fileID: 1803727001}
   - {fileID: 1082196514}
   - {fileID: 1075551496}
-  m_Father: {fileID: 681910942}
+  m_Father: {fileID: 768617214}
   m_LocalEulerAnglesHint: {x: 0, y: 269.803, z: 0}
 --- !u!4 &5183883730816400550
 Transform:
