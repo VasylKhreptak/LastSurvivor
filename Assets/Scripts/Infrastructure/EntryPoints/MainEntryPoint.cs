@@ -46,7 +46,7 @@ namespace Infrastructure.EntryPoints
 
         private Transform InitializePlayer()
         {
-            GameObject playerObject = _container.InstantiatePrefab(_prefabs[Prefab.Player]);
+            GameObject playerObject = _container.InstantiatePrefab(_prefabs[Prefab.MainPlayer]);
             _container.Bind<Player>().FromComponentOn(playerObject).AsSingle();
             return playerObject.transform;
         }

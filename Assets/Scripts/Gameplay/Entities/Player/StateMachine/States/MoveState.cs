@@ -12,7 +12,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
     {
         private readonly NavMeshAgent _agent;
         private readonly Preferences _preferences;
-        private IStateMachine<IPlayerState> _stateMachine;
+        private readonly IStateMachine<IPlayerState> _stateMachine;
 
         public MoveState(NavMeshAgent agent, Preferences preferences, IStateMachine<IPlayerState> stateMachine)
         {
@@ -62,10 +62,8 @@ namespace Gameplay.Entities.Player.StateMachine.States
                 OnReachedDestination();
         }
 
-        private bool IsReachedDestination()
-        {
-            return Vector3.Distance(_agent.transform.position, _payload.Position) <= _preferences.StoppingDistance;
-        }
+        private bool IsReachedDestination() =>
+            Vector3.Distance(_agent.transform.position, _payload.Position) <= _preferences.StoppingDistance;
 
         private void OnReachedDestination()
         {

@@ -8,19 +8,16 @@ namespace Gameplay.Weapons.Minigun
 {
     public class BarrelSpiner : ITickable, IDisposable
     {
-        private readonly Preferences _preferences;
-
         public BarrelSpiner(Preferences preferences)
         {
-            _preferences = preferences;
+            Settings = preferences;
         }
 
         private IDisposable _accelerationSubscription;
 
-        private float _rotateSpeed;
+        public float RotateSpeed { get; private set; }
 
-        public float RotateSpeed => _rotateSpeed;
-        public Preferences Settings => _preferences;
+        public Preferences Settings { get; }
 
         public void Tick() => Rotate();
 
@@ -28,8 +25,8 @@ namespace Gameplay.Weapons.Minigun
 
         private void Rotate()
         {
-            _preferences.BarrelTransform.rotation *=
-                Quaternion.Euler(0, 0, (!_preferences.Reverse).ToSign() * _rotateSpeed * Time.deltaTime);
+            Settings.BarrelTransform.rotation *=
+                Quaternion.Euler(0, 0, (!Settings.Reverse).ToSign() * RotateSpeed * Time.deltaTime);
         }
 
         public void SpinUp(Action onComplete = null)
@@ -39,10 +36,10 @@ namespace Gameplay.Weapons.Minigun
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    _rotateSpeed = Mathf.Clamp(_rotateSpeed + _preferences.Acceleration * Time.deltaTime, 0,
-                        _preferences.MaxRotateSpeed);
+                    RotateSpeed = Mathf.Clamp(RotateSpeed + Settings.Acceleration * Time.deltaTime, 0,
+                        Settings.MaxRotateSpeed);
 
-                    if (_rotateSpeed >= _preferences.MaxRotateSpeed)
+                    if (RotateSpeed >= Settings.MaxRotateSpeed)
                     {
                         _accelerationSubscription?.Dispose();
                         onComplete?.Invoke();
@@ -57,10 +54,10 @@ namespace Gameplay.Weapons.Minigun
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    _rotateSpeed = Mathf.Clamp(_rotateSpeed - _preferences.Deceleration * Time.deltaTime, 0,
-                        _preferences.MaxRotateSpeed);
+                    RotateSpeed = Mathf.Clamp(RotateSpeed - Settings.Deceleration * Time.deltaTime, 0,
+                        Settings.MaxRotateSpeed);
 
-                    if (_rotateSpeed <= 0)
+                    if (RotateSpeed <= 0)
                     {
                         _accelerationSubscription?.Dispose();
                         onComplete?.Invoke();

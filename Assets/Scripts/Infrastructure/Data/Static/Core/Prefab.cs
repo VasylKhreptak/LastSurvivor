@@ -2,7 +2,7 @@
 {
     public enum Prefab
     {
-        Player = 0,
+        MainPlayer = 0,
         Camera = 1,
         HelicopterPlatform = 2,
         OilPlatform = 3,
@@ -15,6 +15,7 @@
         Soldier = 10,
         BarracksBuyZone = 11,
         CollectorsPlatform = 12,
-        CollectorsBuyZone = 13
+        CollectorsBuyZone = 13,
+        GameplayPlayer = 14
     }
 }

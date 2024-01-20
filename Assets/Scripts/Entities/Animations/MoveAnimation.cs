@@ -19,7 +19,7 @@ namespace Entities.Animations
         }
 
         private Vector3 _velocity;
-        float _normalizedSpeed;
+        private float _normalizedSpeed;
 
         public void Tick() => Animate();
 

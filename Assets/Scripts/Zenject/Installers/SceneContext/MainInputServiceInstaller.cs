@@ -11,10 +11,7 @@ namespace Zenject.Installers.SceneContext
 
         #region MonoBehaviour
 
-        private void OnValidate()
-        {
-            _joystick ??= FindObjectOfType<Joystick>();
-        }
+        private void OnValidate() => _joystick ??= FindObjectOfType<Joystick>();
 
         #endregion
 

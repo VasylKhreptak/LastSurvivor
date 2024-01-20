@@ -1,41 +1,56 @@
 ﻿using Gameplay.Entities.Player.StateMachine.States;
-using Gameplay.Entities.Player.StateMachine.States.Core;
 using Gameplay.Waypoints;
-using Infrastructure.StateMachine.Main.Core;
-using Zenject.Infrastructure.Toggleable.Core;
 
 namespace Gameplay.Entities.Player
 {
-    public class PlayerWaypointFollower : IEnableable, IDisableable
+    public class PlayerWaypointFollower
     {
-        private readonly IStateMachine<IPlayerState> _stateMachine;
+        private readonly PlayerHolder _playerHolder;
         private readonly PlayerWaypoints _playerWaypoints;
 
-        public PlayerWaypointFollower(IStateMachine<IPlayerState> stateMachine, PlayerWaypoints playerWaypoints)
+        public PlayerWaypointFollower(PlayerHolder playerHolder, PlayerWaypoints playerWaypoints)
         {
-            _stateMachine = stateMachine;
+            _playerHolder = playerHolder;
             _playerWaypoints = playerWaypoints;
         }
 
         private MoveState.Payload _moveStatePayload;
 
-        public void Enable() => MoveToNextWaypoint();
-
-        public void Disable()
+        public void Stop()
         {
             if (_moveStatePayload == null)
                 return;
 
             _moveStatePayload.OnComplete = null;
-            _stateMachine.Enter<IdleState>();
+            _moveStatePayload = null;
+
+            if (_playerHolder.Instance == null)
+                return;
+
+            _playerHolder.Instance.StateMachine.Enter<IdleState>();
         }
 
-        private void MoveToNextWaypoint()
+        public void Start()
         {
+            Stop();
+            MoveToNextWaypointRecursively();
+        }
+
+        private void MoveToNextWaypointRecursively()
+        {
+            if (_playerHolder.Instance == null)
+            {
+                Stop();
+                return;
+            }
+
             Waypoint waypoint = _playerWaypoints.GetUnfinishedWaypoint();
 
             if (waypoint == null)
+            {
+                Stop();
                 return;
+            }
 
             MoveState.Payload payload = new MoveState.Payload
             {
@@ -43,11 +58,11 @@ namespace Gameplay.Entities.Player
                 OnComplete = () =>
                 {
                     waypoint.MarkAsFinished();
-                    MoveToNextWaypoint();
+                    MoveToNextWaypointRecursively();
                 }
             };
 
-            _stateMachine.Enter<MoveState, MoveState.Payload>(payload);
+            _playerHolder.Instance.StateMachine.Enter<MoveState, MoveState.Payload>(payload);
         }
     }
 }

@@ -5,6 +5,6 @@
         Concrete = 0,
         Metal = 1,
         Body = 2,
-        Car = 3,
+        Car = 3
     }
 }
