@@ -15,11 +15,22 @@
         <option value="$PROJECT_DIR$/Temp" />
         <option value="$PROJECT_DIR$/UserSettings" />
         <option value="$PROJECT_DIR$/Assets/Graphics" />
-        <option value="$PROJECT_DIR$/Assets/Plugins" />
         <option value="$PROJECT_DIR$/Assets/Prefabs" />
         <option value="$PROJECT_DIR$/Assets/Resources" />
         <option value="$PROJECT_DIR$/Assets/Scenes" />
         <option value="$PROJECT_DIR$/Assets/URP" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Demigiant" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Easy performant outline" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Feel" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Flexalon" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Joystick Pack" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/NavMeshComponents" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Simple 3D Noise" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Sirenix" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/StompyRobot" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/TextMesh Pro" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/UniRx" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Zenject" />
       </list>
     </option>
   </component>
