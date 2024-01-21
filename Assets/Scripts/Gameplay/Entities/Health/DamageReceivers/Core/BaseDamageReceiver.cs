@@ -2,16 +2,18 @@
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Entities.Health.DamageHandlers.Core
+namespace Gameplay.Entities.Health.DamageReceivers.Core
 {
-    public class BaseDamageHandler : MonoBehaviour
+    public class BaseDamageReceiver : MonoBehaviour
     {
-        protected IHealth _health;
+        private IHealth _health;
 
         [Inject]
         private void Constructor(IHealth health)
         {
             _health = health;
         }
+        
+        protected IHealth Health => _health;
     }
 }
