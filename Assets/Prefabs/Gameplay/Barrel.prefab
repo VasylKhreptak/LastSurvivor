@@ -4945,8 +4945,8 @@ MonoBehaviour:
     _upwardsModifier: 1
     _minRadius: 0
     _maxRadius: 7
-    _minImpulse: 150
-    _maxImpulse: 450
+    _minImpulse: 40
+    _maxImpulse: 120
     _impulseCurve:
       serializedVersion: 2
       m_Curve:

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Gameplay.Entities.Health
 {
-    public class DeathHandler : IInitializable, IDisposable
+    public abstract class DeathHandler : IInitializable, IDisposable
     {
         private readonly IHealth _health;
 
@@ -20,6 +20,6 @@ namespace Gameplay.Entities.Health
 
         public void Dispose() => _subscription?.Dispose();
 
-        protected virtual void OnDied() { }
+        protected abstract void OnDied();
     }
 }
