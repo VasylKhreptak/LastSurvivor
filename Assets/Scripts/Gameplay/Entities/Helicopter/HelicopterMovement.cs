@@ -25,7 +25,6 @@ namespace Gameplay.Entities.Helicopter
 
         private Vector3 _lastPlayerPosition;
         private Vector3 _targetPosition;
-
         private Quaternion _targetRotation;
 
         public void Tick()
@@ -51,13 +50,13 @@ namespace Gameplay.Entities.Helicopter
             Vector3 targetSplinePoint = _spline.GetPointAtLinearDistance(0, targetSplineDistance, out float _);
             _targetPosition = _preferences.SplineContainer.transform.TransformPoint(targetSplinePoint);
             _targetRotation = Quaternion.LookRotation(_spline.EvaluateTangent(nearestTime));
+            _targetRotation *= Quaternion.Euler(_preferences.RotationOffset);
         }
 
         private void MoveHelicopter()
         {
             _transform.position = Vector3.Lerp(_transform.position, _targetPosition, Time.deltaTime * _preferences.FollowSpeed);
-            _transform.rotation = Quaternion.Lerp(_transform.rotation, _targetRotation * Quaternion.Euler(_preferences.RotationOffset),
-                Time.deltaTime * _preferences.RotateSpeed);
+            _transform.rotation = Quaternion.Lerp(_transform.rotation, _targetRotation, Time.deltaTime * _preferences.RotateSpeed);
         }
 
         [Serializable]
