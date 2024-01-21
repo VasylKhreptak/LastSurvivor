@@ -29,6 +29,6 @@ namespace Audio
 
         #endregion
 
-        private void Clear() => _audioService.Stop(x => _targetMixerGroupsSet.Contains(x.AudioMixerGroup));
+        private void Clear() => _audioService.StopAll(x => _targetMixerGroupsSet.Contains(x.AudioMixerGroup));
     }
 }

@@ -149,7 +149,7 @@ namespace Plugins.AudioService
             }
         }
 
-        public void Pause(Func<IReadonlyAudio, bool> predicate)
+        public void PauseAll(Func<IReadonlyAudio, bool> predicate)
         {
             foreach (var pooledObject in _activePool.Values)
             {
@@ -172,7 +172,7 @@ namespace Plugins.AudioService
             }
         }
 
-        public void Resume(Func<IReadonlyAudio, bool> predicate)
+        public void ResumeAll(Func<IReadonlyAudio, bool> predicate)
         {
             foreach (var pooledObject in _activePool.Values)
             {
@@ -195,7 +195,7 @@ namespace Plugins.AudioService
             }
         }
 
-        public void Stop(Func<IReadonlyAudio, bool> predicate)
+        public void StopAll(Func<IReadonlyAudio, bool> predicate)
         {
             foreach (var pooledObject in _activePool.Values.ToList())
             {
