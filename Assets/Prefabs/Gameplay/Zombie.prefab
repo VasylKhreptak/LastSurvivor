@@ -5966,6 +5966,87 @@ Transform:
   - {fileID: 4246860545509254054}
   m_Father: {fileID: 305551186407121297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5714023275351332874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4468592282072394913}
+  - component: {fileID: 433508265812897089}
+  - component: {fileID: 9086197279553774985}
+  m_Layer: 2
+  m_Name: EnemyDetectionTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4468592282072394913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714023275351332874}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2581983312210808883}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &433508265812897089
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714023275351332874}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &9086197279553774985
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714023275351332874}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5873289196587902044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6753,6 +6834,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7395625199127759090}
+  - {fileID: 4468592282072394913}
   - {fileID: 8663208111919929343}
   - {fileID: 4475013737757604675}
   - {fileID: 4359352594113486905}
@@ -6880,9 +6962,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230539f09b364f4f85ce0a4c0001fca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 80
   _moveAnimationPreferences:
-    _maxSpeed: 2
+    _maxSpeed: 1
     _speedParameterName: Speed
   _ragdollPreferences:
     _root: {fileID: 8663208111919929343}
@@ -6974,6 +7056,15 @@ MonoBehaviour:
     - {fileID: 1968199174766885092}
     - {fileID: 1339893354225612650}
     - {fileID: 8242182973075948536}
+  _rotationRandomizerPreferences:
+    _minAngle: {x: 0, y: 0, z: 0}
+    _maxAngle: {x: 0, y: 360, z: 0}
+  _moveStatePreferences:
+    _stoppingDistance: 0.3
+    _destinationCheckInterval: 0.1
+  _stateControllerPreferences:
+    _trigger: {fileID: 433508265812897089}
+    _updateInterval: 0.3
 --- !u!195 &937538748053821505
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6984,10 +7075,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 2
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 9999999
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

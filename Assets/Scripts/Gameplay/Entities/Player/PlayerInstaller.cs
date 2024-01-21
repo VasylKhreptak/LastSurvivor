@@ -1,10 +1,12 @@
 ﻿using Adapters.Velocity;
 using Entities.Animations;
+using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Player.DeathHandlers.Core;
 using Gameplay.Entities.Player.StateMachine;
 using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Player.StateMachine.States.Core;
+using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -16,7 +18,7 @@ namespace Gameplay.Entities.Player
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
-        [SerializeField] private MoveState.Preferences _moveStatePreferences;
+        [SerializeField] private AgentMoveState<IPlayerState>.Preferences _moveStatePreferences;
 
         public override void InstallBindings()
         {
@@ -28,12 +30,14 @@ namespace Gameplay.Entities.Player
             BindDeathHandler();
             BindMoveAnimation();
             BindStateMachine();
+            EnterIdleState();
 
             Container.BindInterfacesTo<PlayerWaypointFollower>().AsSingle();
             Container.Bind<ToggleableManager>().AsSingle();
         }
 
-        private void BindMoveAnimation() => Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
+        private void BindMoveAnimation() =>
+            Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
 
         private void BindStateMachine()
         {
@@ -49,5 +53,7 @@ namespace Gameplay.Entities.Player
         }
 
         private void BindDeathHandler() => Container.BindInterfacesTo<PlayerDeathHandler>().AsSingle();
+
+        private void EnterIdleState() => Container.Resolve<IStateMachine<IPlayerState>>().Enter<IdleState>();
     }
 }

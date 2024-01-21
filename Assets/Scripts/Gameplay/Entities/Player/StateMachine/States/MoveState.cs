@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Gameplay.Entities.Player.StateMachine.States
 {
-    public class MoveState : AgentMoveState, IPlayerState
+    public class MoveState : AgentMoveState<IPlayerState>, IPlayerState
     {
         public MoveState(NavMeshAgent agent, Preferences preferences, IStateMachine<IPlayerState> stateMachine)
             : base(agent, preferences, stateMachine) { }

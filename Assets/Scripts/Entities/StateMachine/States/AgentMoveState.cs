@@ -1,6 +1,4 @@
 ﻿using System;
-using Gameplay.Entities.Player.StateMachine.States;
-using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using UniRx;
@@ -9,13 +7,13 @@ using UnityEngine.AI;
 
 namespace Entities.StateMachine.States
 {
-    public class AgentMoveState : IPayloadedState<AgentMoveState.Payload>, IExitable
+    public class AgentMoveState<TState> : IPayloadedState<AgentMoveState<TState>.Payload>, IExitable
     {
         private readonly NavMeshAgent _agent;
         private readonly Preferences _preferences;
-        private readonly IStateMachine<IPlayerState> _stateMachine;
+        private readonly IStateMachine<TState> _stateMachine;
 
-        public AgentMoveState(NavMeshAgent agent, Preferences preferences, IStateMachine<IPlayerState> stateMachine)
+        public AgentMoveState(NavMeshAgent agent, Preferences preferences, IStateMachine<TState> stateMachine)
         {
             _agent = agent;
             _preferences = preferences;
@@ -44,8 +42,14 @@ namespace Entities.StateMachine.States
         public void Exit()
         {
             StopObservingDestination();
-            _agent.isStopped = true;
-            _agent.ResetPath();
+
+            if (_agent.isActiveAndEnabled)
+            {
+                _agent.isStopped = true;
+            }
+
+            if (_agent.isActiveAndEnabled)
+                _agent.ResetPath();
         }
 
         private void StartObservingDestination()
@@ -66,11 +70,7 @@ namespace Entities.StateMachine.States
         private bool IsReachedDestination() =>
             Vector3.Distance(_agent.transform.position, _payload.Position) <= _preferences.StoppingDistance;
 
-        private void OnReachedDestination()
-        {
-            _stateMachine.Enter<IdleState>();
-            _payload.OnComplete?.Invoke();
-        }
+        private void OnReachedDestination() => _payload.OnComplete?.Invoke();
 
         public class Payload
         {
