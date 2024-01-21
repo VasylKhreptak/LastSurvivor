@@ -1,7 +1,7 @@
 ﻿using Adapters.Velocity;
 using Entities.Animations;
-using Entities.Health;
-using Entities.Health.Core;
+using Gameplay.Entities.Health.Core;
+using Gameplay.Entities.Player.DeathHandlers.Core;
 using Gameplay.Entities.Player.StateMachine;
 using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Player.StateMachine.States.Core;
@@ -23,7 +23,7 @@ namespace Gameplay.Entities.Player
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
-            Container.Bind<IHealth>().FromInstance(new Health(_maxHealth)).AsSingle();
+            Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
             BindDeathHandler();
             BindMoveAnimation();

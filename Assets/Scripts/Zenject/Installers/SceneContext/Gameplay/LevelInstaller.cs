@@ -1,6 +1,7 @@
 ﻿using System;
 using CameraUtilities.Shaker;
 using Gameplay.Aim;
+using Gameplay.Data;
 using Gameplay.Entities.Player;
 using Gameplay.Waypoints;
 using Gameplay.Weapons;

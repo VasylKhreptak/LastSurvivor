@@ -1,4 +1,6 @@
-﻿using Entities.Health;
+﻿using Gameplay.Entities.Health;
+using Gameplay.Entities.Health.Damages;
+using Gameplay.Entities.Health.Damages.Core;
 using Gameplay.Weapons.Bullets.Core;
 using UnityEngine;
 
@@ -13,7 +15,7 @@ namespace Gameplay.Weapons.Bullets
 
         #region MonoBehaviour
 
-        private void Awake() => Damage = new Damage(_defaultDamage);
+        private void Awake() => Damage = new BulletDamage(_defaultDamage);
 
         private void OnValidate()
         {
@@ -25,6 +27,6 @@ namespace Gameplay.Weapons.Bullets
 
         public Transform Transform => _transform;
         public Rigidbody Rigidbody => _rigidbody;
-        public Damage Damage { get; private set; }
+        public BulletDamage Damage { get; private set; }
     }
 }

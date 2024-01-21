@@ -1,4 +1,6 @@
-﻿using Entities.Health;
+﻿using Gameplay.Entities.Health;
+using Gameplay.Entities.Health.Damages;
+using Gameplay.Entities.Health.Damages.Core;
 using UnityEngine;
 
 namespace Gameplay.Weapons.Bullets.Core
@@ -7,6 +9,6 @@ namespace Gameplay.Weapons.Bullets.Core
     {
         public Transform Transform { get; }
         public Rigidbody Rigidbody { get; }
-        public Damage Damage { get; }
+        public BulletDamage Damage { get; }
     }
 }
