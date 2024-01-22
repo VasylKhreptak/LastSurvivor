@@ -19,6 +19,16 @@ namespace Utilities.TransformUtilities.Looker
 
         public void Tick() => LookStep();
 
+        public void LookImmediately()
+        {
+            if (_preferences.Source == null || _preferences.Target == null)
+                return;
+
+            _direction = _preferences.Target.position - _preferences.Source.position;
+            _targetRotation = Quaternion.LookRotation(_direction, _preferences.Upwards) * Quaternion.Euler(_preferences.Offset);
+            _preferences.Source.rotation = _targetRotation;
+        }
+
         private void LookStep()
         {
             if (_preferences.Source == null || _preferences.Target == null)

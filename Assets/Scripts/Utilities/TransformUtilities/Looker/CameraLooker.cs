@@ -29,6 +29,8 @@ namespace Utilities.TransformUtilities.Looker
 
         private void Awake() => Initialize();
 
+        private void OnEnable() => _looker.LookImmediately();
+
         private void Update() => _looker.Tick();
 
         #endregion

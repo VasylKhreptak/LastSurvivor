@@ -1,4 +1,4 @@
-Shader "SyntyStudios/Zombies"
+Shader "SyntyStudios/Zombie"
 {
     Properties
     {
