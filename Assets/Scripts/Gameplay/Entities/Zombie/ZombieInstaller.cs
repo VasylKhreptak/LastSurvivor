@@ -23,7 +23,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
-        [SerializeField] private AgentMoveState<IZombieState>.Preferences _moveStatePreferences;
+        [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
         [SerializeField] private ZombieStateController.Preferences _stateControllerPreferences;
 
         public override void InstallBindings()

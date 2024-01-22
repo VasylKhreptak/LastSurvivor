@@ -18,7 +18,7 @@ namespace Gameplay.Entities.Player
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
-        [SerializeField] private AgentMoveState<IPlayerState>.Preferences _moveStatePreferences;
+        [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
 
         public override void InstallBindings()
         {

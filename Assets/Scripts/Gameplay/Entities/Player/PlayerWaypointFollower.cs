@@ -1,6 +1,5 @@
 ﻿using Entities.StateMachine.States;
 using Gameplay.Entities.Player.StateMachine.States;
-using Gameplay.Entities.Player.StateMachine.States.Core;
 using Gameplay.Waypoints;
 
 namespace Gameplay.Entities.Player
@@ -16,7 +15,7 @@ namespace Gameplay.Entities.Player
             _playerWaypoints = playerWaypoints;
         }
 
-        private AgentMoveState<IPlayerState>.Payload _moveStatePayload;
+        private AgentMoveState.Payload _moveStatePayload;
 
         public void Stop()
         {
@@ -54,7 +53,7 @@ namespace Gameplay.Entities.Player
                 return;
             }
 
-            AgentMoveState<IPlayerState>.Payload payload = new AgentMoveState<IPlayerState>.Payload
+            AgentMoveState.Payload payload = new AgentMoveState.Payload
             {
                 Position = waypoint.Position,
                 OnComplete = () =>
@@ -64,7 +63,7 @@ namespace Gameplay.Entities.Player
                 }
             };
 
-            _playerHolder.Instance.StateMachine.Enter<MoveState, AgentMoveState<IPlayerState>.Payload>(payload);
+            _playerHolder.Instance.StateMachine.Enter<MoveState, AgentMoveState.Payload>(payload);
         }
     }
 }

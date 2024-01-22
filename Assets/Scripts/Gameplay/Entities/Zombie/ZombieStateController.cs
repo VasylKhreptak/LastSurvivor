@@ -65,12 +65,12 @@ namespace Gameplay.Entities.Zombie
 
             Transform closestTransform = GetClosestTransform();
 
-            AgentMoveState<IZombieState>.Payload payload = new AgentMoveState<IZombieState>.Payload
+            AgentMoveState.Payload payload = new AgentMoveState.Payload
             {
                 Position = closestTransform.position
             };
 
-            _stateMachine.Enter<MoveState, AgentMoveState<IZombieState>.Payload>(payload);
+            _stateMachine.Enter<MoveState, AgentMoveState.Payload>(payload);
         }
 
         private Transform GetClosestTransform()
