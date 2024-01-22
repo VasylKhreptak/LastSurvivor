@@ -34,10 +34,10 @@ namespace Gameplay.Entities.Player
         public void Start()
         {
             Stop();
-            MoveToNextWaypointRecursively();
+            TryMoveToNextWaypoint();
         }
 
-        private void MoveToNextWaypointRecursively()
+        private void TryMoveToNextWaypoint()
         {
             if (_playerHolder.Instance == null)
             {
@@ -59,7 +59,7 @@ namespace Gameplay.Entities.Player
                 OnComplete = () =>
                 {
                     waypoint.MarkAsFinished();
-                    MoveToNextWaypointRecursively();
+                    TryMoveToNextWaypoint();
                 }
             };
 
