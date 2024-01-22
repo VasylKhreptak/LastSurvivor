@@ -47,7 +47,7 @@ namespace Infrastructure.EntryPoints
 
         private void InitializeWeapon()
         {
-            IWeapon weapon = FindObjectOfType<Minigun>();
+            IWeapon weapon = FindObjectOfType<Weapon>();
             _weaponHolder.Instance = weapon;
 
             WeaponShooter weaponShooter = _container.Instantiate<WeaponShooter>();

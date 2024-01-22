@@ -41,7 +41,7 @@ namespace CameraUtilities.Shaker
             _explodeLayer.Dispose();
         }
 
-        public void DoFireShake() => _fireLayer.Shake();
+        public void DoShootShake() => _fireLayer.Shake();
 
         public void DoExplosionShake() => _explodeLayer.Shake();
 

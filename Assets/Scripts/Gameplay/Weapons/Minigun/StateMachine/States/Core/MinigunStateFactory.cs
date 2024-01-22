@@ -14,7 +14,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States.Core
             new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(SpinUpState)] = _container.Resolve<SpinUpState>,
-                [typeof(FireState)] = _container.Resolve<FireState>,
+                [typeof(ShootState)] = _container.Resolve<ShootState>,
                 [typeof(SpinDownState)] = _container.Resolve<SpinDownState>,
                 [typeof(IdleState)] = _container.Resolve<IdleState>
             };

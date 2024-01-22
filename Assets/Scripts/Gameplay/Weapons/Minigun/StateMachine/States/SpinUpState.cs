@@ -14,6 +14,6 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             _barrelSpiner = barrelSpiner;
         }
 
-        public void Enter() => _barrelSpiner.SpinUp(() => _stateMachine.Enter<FireState>());
+        public void Enter() => _barrelSpiner.SpinUp(() => _stateMachine.Enter<ShootState>());
     }
 }

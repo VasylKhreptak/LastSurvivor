@@ -1,25 +1,28 @@
-﻿using Gameplay.Weapons.Core;
+﻿using System;
+using Gameplay.Weapons.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Plugins.Banks;
-using UnityEngine;
-using Zenject;
 
 namespace Gameplay.Weapons.Minigun
 {
-    public class Minigun : MonoBehaviour, IWeapon
+    public class Minigun : IWeapon
     {
-        private IStateMachine<IMinigunState> _stateMachine;
+        private readonly IStateMachine<IMinigunState> _stateMachine;
+        private readonly ShootState _shootState;
+        private readonly ClampedIntegerBank _ammo;
 
-        [Inject]
-        private void Constructor(IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo)
+        public Minigun(IStateMachine<IMinigunState> stateMachine, ShootState shootState, ClampedIntegerBank ammo)
         {
             _stateMachine = stateMachine;
-            Ammo = ammo;
+            _shootState = shootState;
+            _ammo = ammo;
         }
 
-        public ClampedIntegerBank Ammo { get; private set; }
+        public event Action<ShootData> OnShoot { add => _shootState.OnShoot += value; remove => _shootState.OnShoot -= value; }
+
+        public ClampedIntegerBank Ammo => _ammo;
 
         public void StartShooting() => _stateMachine.Enter<SpinUpState>();
 
