@@ -18,11 +18,11 @@ namespace Utilities.PhysicsUtilities
             _trigger = trigger;
         }
 
-        private readonly List<TriggerInfo<T>> _information = new List<TriggerInfo<T>>();
+        private readonly IReactiveCollection<TriggerInfo<T>> _triggers = new ReactiveCollection<TriggerInfo<T>>();
 
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
 
-        public IReadOnlyList<TriggerInfo<T>> Information => _information;
+        public IReadOnlyReactiveCollection<TriggerInfo<T>> Triggers => _triggers;
 
         public void Initialize()
         {
@@ -39,7 +39,7 @@ namespace Utilities.PhysicsUtilities
             _gameObject.OnDisableAsObservable().Subscribe(_ => OnDisabled()).AddTo(_subscriptions);
         }
 
-        private void OnDisabled() => _information.Clear();
+        private void OnDisabled() => _triggers.Clear();
 
         private void StartObservingTrigger()
         {
@@ -50,15 +50,15 @@ namespace Utilities.PhysicsUtilities
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out T value))
-                _information.Add(new TriggerInfo<T>(other.transform, value));
+                _triggers.Add(new TriggerInfo<T>(other.transform, value));
         }
 
         private void OnTriggerExit(Collider other)
         {
-            TriggerInfo<T> triggerInfo = _information.FirstOrDefault(info => info.Transform == other.transform);
+            TriggerInfo<T> triggerInfo = _triggers.FirstOrDefault(info => info.Transform == other.transform);
 
             if (triggerInfo != null)
-                _information.Remove(triggerInfo);
+                _triggers.Remove(triggerInfo);
         }
     }
 

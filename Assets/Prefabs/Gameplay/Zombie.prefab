@@ -6836,6 +6836,7 @@ Transform:
   m_Children:
   - {fileID: 7395625199127759090}
   - {fileID: 4468592282072394913}
+  - {fileID: 5363243188281373602}
   - {fileID: 8663208111919929343}
   - {fileID: 4475013737757604675}
   - {fileID: 4359352594113486905}
@@ -6994,14 +6995,10 @@ MonoBehaviour:
     - {fileID: 813657834858397421}
     - {fileID: 622311663876704251}
     - {fileID: 2501060458065199915}
+    _joints: []
     _scriptsToDisable: []
     _scriptsToDestroy:
     - {fileID: 937538748053821505}
-    - {fileID: 2630486150181374072}
-    - {fileID: 1083174825511434709}
-    - {fileID: 9117447350832549679}
-    - {fileID: 2835596606626720764}
-    - {fileID: 5817691989356136870}
     - {fileID: 1911134279619382479}
     _collidersToDisable: []
     _collidersToDestroy:
@@ -7067,6 +7064,16 @@ MonoBehaviour:
   _stateControllerPreferences:
     _trigger: {fileID: 433508265812897089}
     _updateInterval: 0.3
+  _zombieAttackPreferences:
+    _attackTrigger: {fileID: 6476738792470765270}
+    _minDamage: 10
+    _maxDamage: 20
+    _attackInterval: 0.9
+    _damageApplyDelay: 0.7
+    _layerSwitchDuration: 0.2
+    _layerFadeDelay: 0.5
+    _attackTriggerName: Attack
+    _attackLayerIndex: 1
 --- !u!195 &937538748053821505
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7080,7 +7087,7 @@ NavMeshAgent:
   m_Speed: 1
   m_Acceleration: 15
   avoidancePriority: 50
-  m_AngularSpeed: 9999999
+  m_AngularSpeed: 1e+9
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -7276,6 +7283,87 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.008365154, y: 0.84712285, z: -0.061930478}
     m_Extent: {x: 1.0295683, y: 0.96141595, z: 0.26370487}
   m_DirtyAABB: 0
+--- !u!1 &6900619893786200199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5363243188281373602}
+  - component: {fileID: 6476738792470765270}
+  - component: {fileID: 7991823468645368070}
+  m_Layer: 7
+  m_Name: AttackTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5363243188281373602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900619893786200199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.31, z: 0.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2581983312210808883}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6476738792470765270
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900619893786200199}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7991823468645368070
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900619893786200199}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6994112628296587447
 GameObject:
   m_ObjectHideFlags: 0

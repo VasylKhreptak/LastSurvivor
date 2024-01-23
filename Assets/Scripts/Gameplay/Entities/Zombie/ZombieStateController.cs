@@ -56,7 +56,7 @@ namespace Gameplay.Entities.Zombie
 
         private void UpdateState()
         {
-            if (_triggerZone.Information.Count == 0)
+            if (_triggerZone.Triggers.Count == 0)
             {
                 _stateMachine.Enter<IdleState>();
 
@@ -78,7 +78,7 @@ namespace Gameplay.Entities.Zombie
             Transform closestTransform = null;
             float closestDistance = float.MaxValue;
 
-            foreach (TriggerInfo<IVisitable<ZombieDamage>> triggerInfo in _triggerZone.Information)
+            foreach (TriggerInfo<IVisitable<ZombieDamage>> triggerInfo in _triggerZone.Triggers)
             {
                 float distance = Vector3.Distance(triggerInfo.Transform.position, _transform.position);
 

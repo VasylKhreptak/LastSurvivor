@@ -1,4 +1,4 @@
-﻿using CameraUtilities.Shaker;
+﻿using Utilities.CameraUtilities.Shaker;
 using Zenject.Infrastructure.Toggleable.Core;
 
 namespace Gameplay.Weapons.Core.Fire

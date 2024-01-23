@@ -1,5 +1,4 @@
 ﻿using System;
-using CameraUtilities.Shaker;
 using Gameplay.Aim;
 using Gameplay.Data;
 using Gameplay.Entities.Player;
@@ -8,6 +7,7 @@ using Gameplay.Weapons;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UnityEngine;
+using Utilities.CameraUtilities.Shaker;
 
 namespace Zenject.Installers.SceneContext.Gameplay
 {

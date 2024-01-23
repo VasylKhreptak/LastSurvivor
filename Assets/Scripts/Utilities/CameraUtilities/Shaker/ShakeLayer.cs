@@ -4,7 +4,7 @@ using Noise;
 using UnityEngine;
 using Zenject;
 
-namespace CameraUtilities.Shaker
+namespace Utilities.CameraUtilities.Shaker
 {
     public class ShakeLayer : ITickable, IDisposable
     {

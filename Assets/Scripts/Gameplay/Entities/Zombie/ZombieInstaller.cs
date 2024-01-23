@@ -11,6 +11,7 @@ using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.GameObjectUtilities;
+using Utilities.PhysicsUtilities;
 using Utilities.TransformUtilities;
 using Zenject;
 
@@ -25,6 +26,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
         [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
         [SerializeField] private ZombieStateController.Preferences _stateControllerPreferences;
+        [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
 
         public override void InstallBindings()
         {
@@ -41,6 +43,7 @@ namespace Gameplay.Entities.Zombie
             BindStateController();
             BindRagdoll();
             BindDeathHandler();
+            BindZombieAttacker();
             EnterIdleState();
         }
 
@@ -80,5 +83,8 @@ namespace Gameplay.Entities.Zombie
             Container.BindInterfacesTo<ZombieStateController>().AsSingle().WithArguments(transform, _stateControllerPreferences);
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IZombieState>>().Enter<IdleState>();
+
+        private void BindZombieAttacker() =>
+            Container.BindInterfacesTo<ZombieAttacker>().AsSingle().WithArguments(_zombieAttackPreferences);
     }
 }

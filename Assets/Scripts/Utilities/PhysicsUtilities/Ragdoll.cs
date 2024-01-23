@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Entities
+namespace Utilities.PhysicsUtilities
 {
     public class Ragdoll
     {
@@ -35,6 +36,7 @@ namespace Entities
             [SerializeField] private Transform _root;
             [SerializeField] private List<Collider> _colliders;
             [SerializeField] private List<Rigidbody> _rigidbodies;
+            [SerializeField] private List<Joint> _joints;
             [SerializeField] private List<Behaviour> _scriptsToDisable;
             [SerializeField] private List<Behaviour> _scriptsToDestroy;
             [SerializeField] private List<Collider> _collidersToDisable;
@@ -56,8 +58,8 @@ namespace Entities
                     return;
                 }
 
-                _colliders = new List<Collider>(_root.GetComponentsInChildren<Collider>());
-                _rigidbodies = new List<Rigidbody>(_root.GetComponentsInChildren<Rigidbody>());
+                _colliders = _root.GetComponentsInChildren<Collider>().ToList();
+                _rigidbodies = _root.GetComponentsInChildren<Rigidbody>().ToList();
             }
 
             [Button]

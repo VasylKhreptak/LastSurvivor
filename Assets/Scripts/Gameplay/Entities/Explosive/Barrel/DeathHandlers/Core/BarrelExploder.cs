@@ -1,11 +1,11 @@
 ﻿using Audio.Players;
-using CameraUtilities.Shaker;
 using Gameplay.Entities.Explosive.Core;
 using Gameplay.Entities.Health;
 using Gameplay.Entities.Health.Core;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UnityEngine;
+using Utilities.CameraUtilities.Shaker;
 
 namespace Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core
 {

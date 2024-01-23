@@ -19,20 +19,24 @@ namespace Graphics.AI
 
         #endregion
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (_ifSelectedOnly && !gameObject.Equals(Selection.activeGameObject))
                 return;
 
-            if (_agent.hasPath == false)
+            if (_agent == null || _agent.hasPath == false)
                 return;
 
             UnityEngine.Gizmos.color = _color;
 
-            for (int i = 0; i < _agent.path.corners.Length - 1; i++)
+            Vector3[] corners = _agent.path.corners;
+
+            for (int i = 0; i < corners.Length - 1; i++)
             {
-                UnityEngine.Gizmos.DrawLine(_agent.path.corners[i], _agent.path.corners[i + 1]);
+                UnityEngine.Gizmos.DrawLine(corners[i], corners[i + 1]);
             }
         }
+#endif
     }
 }
