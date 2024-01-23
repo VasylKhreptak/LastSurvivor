@@ -943,7 +943,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 251
+    m_Bits: 123
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -45891,7 +45891,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1616500446052784, guid: 5aed343e83179d249af6934614d6f0ea, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aed343e83179d249af6934614d6f0ea, type: 3}
@@ -47144,6 +47145,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _aimPreferences._aimLayerMask.m_Bits
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465216074547865248, guid: af9d2770081cd1342abd7b2a31209a4b,
+        type: 3}
+      propertyPath: _spinAudioPreferences._volumeCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465216074547865248, guid: af9d2770081cd1342abd7b2a31209a4b,
+        type: 3}
+      propertyPath: _spinAudioPreferences._volumeCurve.m_Curve.Array.data[0].outSlope
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4146181776724600809, guid: af9d2770081cd1342abd7b2a31209a4b,
         type: 3}
