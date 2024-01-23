@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 3177717270720562499}
   - component: {fileID: 8351379613462108172}
   - component: {fileID: 8236251581886391474}
+  - component: {fileID: -5959577022251268630}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -256,6 +257,7 @@ MonoBehaviour:
   _moveAnimationPreferences:
     _maxSpeed: 4
     _speedParameterName: Speed
+    _smoothTime: 5
   _moveStatePreferences:
     _stoppingDistance: 1
     _destinationCheckInterval: 0.1
@@ -340,6 +342,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d99c3196b94529a6255e2688a3a153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5959577022251268630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936570781243273599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49dd838fcf0449f1a69021d9c62e3e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: 8291593957064981898}
+  _color: {r: 1, g: 0, b: 0, a: 1}
+  _ifSelectedOnly: 0
 --- !u!1 &1772222570357447443
 GameObject:
   m_ObjectHideFlags: 0
