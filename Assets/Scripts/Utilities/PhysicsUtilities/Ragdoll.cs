@@ -4,30 +4,30 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using Zenject.Infrastructure.Toggleable.Core;
 using Object = UnityEngine.Object;
 
 namespace Utilities.PhysicsUtilities
 {
-    public class Ragdoll
+    public class Ragdoll : IEnableable, IDisableable
     {
         private readonly Preferences _preferences;
 
         public Ragdoll(Preferences preferences)
         {
             _preferences = preferences;
-
-            _preferences.Colliders.ForEach(c => c.enabled = false);
-            _preferences.Rigidbodies.ForEach(r => r.isKinematic = true);
         }
 
-        public void Activate()
+        public void Enable()
         {
             _preferences.Colliders.ForEach(c => c.enabled = true);
             _preferences.Rigidbodies.ForEach(r => r.isKinematic = false);
-            _preferences.ScriptsToDisable.ForEach(s => s.enabled = false);
-            _preferences.ScriptsToDestroy.ForEach(s => Object.Destroy(s));
-            _preferences.CollidersToDisable.ForEach(c => c.enabled = false);
-            _preferences.CollidersToDestroy.ForEach(c => Object.Destroy(c));
+        }
+
+        public void Disable()
+        {
+            _preferences.Colliders.ForEach(c => c.enabled = false);
+            _preferences.Rigidbodies.ForEach(r => r.isKinematic = true);
         }
 
         [Serializable]
@@ -36,19 +36,10 @@ namespace Utilities.PhysicsUtilities
             [SerializeField] private Transform _root;
             [SerializeField] private List<Collider> _colliders;
             [SerializeField] private List<Rigidbody> _rigidbodies;
-            [SerializeField] private List<CharacterJoint> _joints;
-            [SerializeField] private List<Behaviour> _scriptsToDisable;
-            [SerializeField] private List<Behaviour> _scriptsToDestroy;
-            [SerializeField] private List<Collider> _collidersToDisable;
-            [SerializeField] private List<Collider> _collidersToDestroy;
+            [SerializeField] private List<Joint> _joints;
 
             public IReadOnlyList<Collider> Colliders => _colliders;
             public IReadOnlyList<Rigidbody> Rigidbodies => _rigidbodies;
-            public IReadOnlyList<CharacterJoint> Joints => _joints;
-            public IReadOnlyList<Behaviour> ScriptsToDisable => _scriptsToDisable;
-            public IReadOnlyList<Behaviour> ScriptsToDestroy => _scriptsToDestroy;
-            public IReadOnlyList<Collider> CollidersToDisable => _collidersToDisable;
-            public IReadOnlyList<Collider> CollidersToDestroy => _collidersToDestroy;
 
             [Button]
             private void FindComponents()
@@ -61,18 +52,18 @@ namespace Utilities.PhysicsUtilities
 
                 _colliders = _root.GetComponentsInChildren<Collider>().ToList();
                 _rigidbodies = _root.GetComponentsInChildren<Rigidbody>().ToList();
-                _joints = _root.GetComponentsInChildren<CharacterJoint>().ToList();
+                _joints = _root.GetComponentsInChildren<Joint>().ToList();
             }
 
             [Button]
-            private void EnableComponents()
+            private void Enable()
             {
                 _colliders.ForEach(c => c.enabled = true);
                 _rigidbodies.ForEach(r => r.isKinematic = false);
             }
 
             [Button]
-            private void DisableComponents()
+            private void Disable()
             {
                 _colliders.ForEach(c => c.enabled = false);
                 _rigidbodies.ForEach(r => r.isKinematic = true);
@@ -82,8 +73,13 @@ namespace Utilities.PhysicsUtilities
             private void Destroy()
             {
                 _colliders.ForEach(Object.DestroyImmediate);
-                _joints.ForEach(Object.DestroyImmediate);
                 _rigidbodies.ForEach(Object.DestroyImmediate);
+                _joints.ForEach(joint =>
+                {
+                    joint.connectedBody = null;
+                    joint.connectedArticulationBody = null;
+                    Object.DestroyImmediate(joint);
+                });
             }
         }
     }

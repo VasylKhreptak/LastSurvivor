@@ -1,5 +1,4 @@
 ﻿using Adapters.Velocity;
-using Entities;
 using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
@@ -26,6 +25,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
         [SerializeField] private ZombieStateController.Preferences _stateControllerPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
+        [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
 
         public override void InstallBindings()
         {
@@ -38,6 +38,7 @@ namespace Gameplay.Entities.Zombie
             RandomizeSkin();
             RandomizeRotation();
             BindMoveAnimation();
+            BindRagdoll();
             BindStateMachine();
             BindStateController();
             BindDeathHandler();
@@ -48,7 +49,11 @@ namespace Gameplay.Entities.Zombie
         private void BindMoveAnimation() =>
             Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
 
-        private void BindDeathHandler() => Container.BindInterfacesTo<ZombieDeathHandler>().AsSingle();
+        private void BindDeathHandler()
+        {
+            Container.Bind<Collider>().FromComponentOnRoot().AsSingle().WhenInjectedInto<ZombieDeathHandler>();
+            Container.BindInterfacesTo<ZombieDeathHandler>().AsSingle();
+        }
 
         private void RandomizeSkin()
         {
@@ -82,5 +87,11 @@ namespace Gameplay.Entities.Zombie
 
         private void BindZombieAttacker() =>
             Container.BindInterfacesTo<ZombieAttacker>().AsSingle().WithArguments(_zombieAttackPreferences);
+
+        private void BindRagdoll()
+        {
+            Container.Bind<Ragdoll>().AsSingle().WithArguments(_ragdollPreferences);
+            Container.Resolve<Ragdoll>().Disable();
+        }
     }
 }
