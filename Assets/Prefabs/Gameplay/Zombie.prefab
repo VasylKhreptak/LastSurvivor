@@ -1939,7 +1939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4330434673806322144
 Transform:
   m_ObjectHideFlags: 0
@@ -7381,7 +7381,7 @@ MonoBehaviour:
   _moveAnimationPreferences:
     _maxSpeed: 1
     _speedParameterName: Speed
-    _smoothTime: 10
+    _smoothTime: 15
   _skinRandomizerPreferences:
     _gameObjects:
     - {fileID: 8073144373189409675}
@@ -7438,8 +7438,8 @@ MonoBehaviour:
     _minAngle: {x: 0, y: 0, z: 0}
     _maxAngle: {x: 0, y: 360, z: 0}
   _moveStatePreferences:
-    _stoppingDistance: 0.3
-    _destinationCheckInterval: 0.1
+    _stoppingDistance: 0.2
+    _destinationCheckInterval: 0.2
   _stateControllerPreferences:
     _trigger: {fileID: 433508265812897089}
     _updateInterval: 0.3
@@ -7488,6 +7488,7 @@ MonoBehaviour:
     - {fileID: 3955250366819444805}
     - {fileID: 5008600500244119178}
     - {fileID: 3715971114534268286}
+  _speed: 0
 --- !u!195 &937538748053821505
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7499,7 +7500,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 1
-  m_Acceleration: 15
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 1e+9
   m_StoppingDistance: 0
@@ -8504,7 +8505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5798234203951592945
 Transform:
   m_ObjectHideFlags: 0

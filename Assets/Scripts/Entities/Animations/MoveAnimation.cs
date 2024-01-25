@@ -19,8 +19,8 @@ namespace Entities.Animations
         }
 
         private Vector3 _velocity;
-        private float _previousNormalizedSpeed;
-        private float _normalizedSpeed;
+        private float _previousSpeed01;
+        private float _speed01;
 
         public void Tick() => Animate();
 
@@ -29,12 +29,12 @@ namespace Entities.Animations
             _velocity = _velocityAdapter.Value;
             _velocity.y = 0f;
 
-            _normalizedSpeed = Mathf.Lerp(_previousNormalizedSpeed, Mathf.Clamp01(_velocity.magnitude / _preferences.MaxSpeed),
+            _speed01 = Mathf.Lerp(_previousSpeed01, Mathf.Clamp01(_velocity.magnitude / _preferences.MaxSpeed),
                 Time.deltaTime * _preferences.SmoothTime);
 
-            _animator.SetFloat(_preferences.SpeedParameterName, _normalizedSpeed);
+            _animator.SetFloat(_preferences.SpeedParameterName, _speed01);
 
-            _previousNormalizedSpeed = _normalizedSpeed;
+            _previousSpeed01 = _speed01;
         }
 
         [Serializable]

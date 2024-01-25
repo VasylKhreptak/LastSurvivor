@@ -13,6 +13,6 @@ namespace Adapters.Velocity
             _agent = agent;
         }
 
-        public Vector3 Value => _agent.velocity;
+        public Vector3 Value => _agent.desiredVelocity;
     }
 }
