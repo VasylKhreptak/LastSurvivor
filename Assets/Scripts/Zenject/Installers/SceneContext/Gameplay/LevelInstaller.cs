@@ -1,9 +1,11 @@
 ﻿using System;
 using Gameplay.Aim;
-using Gameplay.Data;
 using Gameplay.Entities.Player;
 using Gameplay.Waypoints;
 using Gameplay.Weapons;
+using Levels.StateMachine;
+using Levels.StateMachine.States;
+using Levels.StateMachine.States.Core;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UnityEngine;
@@ -48,6 +50,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindPlayerWaypoints();
             BindPlayerWaypointsFollower();
             BindObjectPools();
+            BindLevelStateMachine();
         }
 
         private void BindHolders()
@@ -81,6 +84,20 @@ namespace Zenject.Installers.SceneContext.Gameplay
             ObjectPools<T> objectPools = new ObjectPools<T>(poolPreferences);
 
             Container.Bind<IObjectPools<T>>().FromInstance(objectPools).AsSingle();
+        }
+
+        private void BindLevelStateMachine()
+        {
+            BindLevelStates();
+            Container.Bind<LevelStateFactory>().AsSingle();
+            Container.BindInterfacesTo<LevelStateMachine>().AsSingle();
+        }
+
+        private void BindLevelStates()
+        {
+            Container.Bind<StartLevelState>().AsSingle();
+            Container.Bind<FinishLevelState>().AsSingle();
+            Container.Bind<FailLevelState>().AsSingle();
         }
     }
 }

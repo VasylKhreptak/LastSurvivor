@@ -31,6 +31,7 @@
         <option value="$PROJECT_DIR$/Assets/Plugins/TextMesh Pro" />
         <option value="$PROJECT_DIR$/Assets/Plugins/UniRx" />
         <option value="$PROJECT_DIR$/Assets/Plugins/Zenject" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/RootMotion" />
       </list>
     </option>
   </component>
