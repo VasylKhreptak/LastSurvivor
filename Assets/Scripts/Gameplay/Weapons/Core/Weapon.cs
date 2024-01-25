@@ -1,5 +1,4 @@
-﻿using System;
-using Plugins.Banks;
+﻿using Plugins.Banks;
 using UnityEngine;
 using Zenject;
 
@@ -14,8 +13,6 @@ namespace Gameplay.Weapons.Core
         {
             _weapon = weapon;
         }
-
-        public event Action<ShootData> OnShoot { add => _weapon.OnShoot += value; remove => _weapon.OnShoot -= value; }
 
         public ClampedIntegerBank Ammo => _weapon.Ammo;
 

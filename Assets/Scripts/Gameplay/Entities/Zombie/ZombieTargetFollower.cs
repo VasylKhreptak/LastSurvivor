@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Gameplay.Entities.Zombie
 {
-    public class ZombieStateController : IInitializable, IFixedTickable, IDisposable
+    public class ZombieTargetFollower : IInitializable, IFixedTickable, IDisposable
     {
         private readonly Transform _transform;
         private readonly IStateMachine<IZombieState> _stateMachine;
@@ -20,7 +20,7 @@ namespace Gameplay.Entities.Zombie
 
         private readonly TriggerZone<IVisitable<ZombieDamage>> _triggerZone;
 
-        public ZombieStateController(Transform transform, IStateMachine<IZombieState> stateMachine, Preferences preferences)
+        public ZombieTargetFollower(Transform transform, IStateMachine<IZombieState> stateMachine, Preferences preferences)
         {
             _transform = transform;
             _stateMachine = stateMachine;

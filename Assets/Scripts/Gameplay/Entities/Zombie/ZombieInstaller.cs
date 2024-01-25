@@ -23,7 +23,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
         [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
-        [SerializeField] private ZombieStateController.Preferences _stateControllerPreferences;
+        [SerializeField] private ZombieTargetFollower.Preferences _stateControllerPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
 
@@ -40,7 +40,7 @@ namespace Gameplay.Entities.Zombie
             BindMoveAnimation();
             BindRagdoll();
             BindStateMachine();
-            BindStateController();
+            BindZombieTargetFollower();
             BindDeathHandler();
             BindZombieAttacker();
             EnterIdleState();
@@ -82,8 +82,8 @@ namespace Gameplay.Entities.Zombie
             Container.Bind<MoveState>().AsSingle().WithArguments(_moveStatePreferences);
         }
 
-        private void BindStateController() =>
-            Container.BindInterfacesTo<ZombieStateController>().AsSingle().WithArguments(transform, _stateControllerPreferences);
+        private void BindZombieTargetFollower() =>
+            Container.BindInterfacesTo<ZombieTargetFollower>().AsSingle().WithArguments(transform, _stateControllerPreferences);
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IZombieState>>().Enter<IdleState>();
 

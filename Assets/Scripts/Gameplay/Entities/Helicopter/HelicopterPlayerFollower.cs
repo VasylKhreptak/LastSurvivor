@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Gameplay.Entities.Helicopter
 {
-    public class HelicopterMovement : ITickable
+    public class HelicopterPlayerFollower : ITickable
     {
         private readonly Transform _transform;
         private readonly PlayerHolder _playerHolder;
@@ -15,7 +15,7 @@ namespace Gameplay.Entities.Helicopter
 
         private readonly Spline _spline;
 
-        public HelicopterMovement(Transform transform, PlayerHolder playerHolder, Preferences preferences)
+        public HelicopterPlayerFollower(Transform transform, PlayerHolder playerHolder, Preferences preferences)
         {
             _transform = transform;
             _playerHolder = playerHolder;
@@ -26,7 +26,7 @@ namespace Gameplay.Entities.Helicopter
         private Vector3 _lastPlayerPosition;
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
-
+        
         public void Tick()
         {
             UpdateLastPlayerPosition();

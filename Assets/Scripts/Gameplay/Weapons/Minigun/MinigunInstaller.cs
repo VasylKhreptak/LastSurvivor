@@ -41,13 +41,13 @@ namespace Gameplay.Weapons.Minigun
             BindAimer();
             BindBarrelSpiner();
             BindBarrelSpinAudio();
-            BindStateMachine();
             BindWeapon();
-            BindShootCameraShaker();
             BindShootParticle();
             BindShootAudioPlayer();
             BindShellSpawner();
+            BindStateMachine();
             EnterIdleState();
+
             Container.Bind<ToggleableManager>().AsSingle();
         }
 
@@ -69,7 +69,6 @@ namespace Gameplay.Weapons.Minigun
         private void BindStates()
         {
             Container.Bind<SpinUpState>().AsSingle();
-            Container.Bind<AudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences).WhenInjectedInto<ShootState>();
             Container.Bind<ShootState>().AsSingle().WithArguments(_firePreferences);
             Container.Bind<SpinDownState>().AsSingle();
             Container.Bind<IdleState>().AsSingle();
@@ -83,39 +82,21 @@ namespace Gameplay.Weapons.Minigun
             Container.BindInstance(ammo).AsSingle();
         }
 
-        private void BindAimer()
-        {
-            Container
-                .BindInterfacesTo<WeaponAimer>()
-                .AsSingle()
-                .WithArguments(_aimPreferences);
-        }
+        private void BindAimer() => Container.BindInterfacesTo<WeaponAimer>().AsSingle().WithArguments(_aimPreferences);
 
-        private void BindBarrelSpiner()
-        {
-            Container
-                .BindInterfacesAndSelfTo<BarrelSpiner>()
-                .AsSingle()
-                .WithArguments(_barrelRotatorPreferences);
-        }
+        private void BindBarrelSpiner() =>
+            Container.BindInterfacesAndSelfTo<BarrelSpiner>().AsSingle().WithArguments(_barrelRotatorPreferences);
 
-        private void BindBarrelSpinAudio()
-        {
+        private void BindBarrelSpinAudio() =>
             Container.BindInterfacesTo<MinigunSpinAudio>().AsSingle().WithArguments(_spinAudioPreferences);
-        }
 
         private void BindWeapon() => Container.BindInterfacesTo<Minigun>().AsSingle();
 
-        private void BindShootCameraShaker() => Container.BindInterfacesTo<ShootCameraShaker>().AsSingle();
+        private void BindShootParticle() => Container.Bind<ShootParticle>().AsSingle().WithArguments(_shootParticlePreferences);
 
-        private void BindShootParticle() =>
-            Container.BindInterfacesTo<ShootParticle>().AsSingle().WithArguments(_shootParticlePreferences);
+        private void BindShootAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences);
 
-        private void BindShootAudioPlayer() =>
-            Container.BindInterfacesTo<ShootAudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences);
-
-        private void BindShellSpawner() =>
-            Container.BindInterfacesTo<ShellSpawner>().AsSingle().WithArguments(_shellSpawnerPreferences);
+        private void BindShellSpawner() => Container.Bind<ShellSpawner>().AsSingle().WithArguments(_shellSpawnerPreferences);
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IMinigunState>>().Enter<IdleState>();
     }

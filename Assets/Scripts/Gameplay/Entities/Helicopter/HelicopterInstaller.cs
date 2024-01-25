@@ -11,7 +11,7 @@ namespace Gameplay.Entities.Helicopter
         [SerializeField] private Transform _noiseLayer;
 
         [Header("Preferences")]
-        [SerializeField] private HelicopterMovement.Preferences _helicopterMovementPreferences;
+        [SerializeField] private HelicopterPlayerFollower.Preferences _helicopterMovementPreferences;
         [SerializeField] private NoiseRotator.Preferences _noiseRotatorPreferences;
         [SerializeField] private NoiseMover.Preferences _noiseMoverPreferences;
 
@@ -29,7 +29,7 @@ namespace Gameplay.Entities.Helicopter
         private void BindMovement()
         {
             BindNoiseMovement();
-            Container.BindInterfacesTo<HelicopterMovement>().AsSingle().WithArguments(_transform, _helicopterMovementPreferences);
+            Container.BindInterfacesTo<HelicopterPlayerFollower>().AsSingle().WithArguments(_transform, _helicopterMovementPreferences);
         }
 
         private void BindNoiseMovement()

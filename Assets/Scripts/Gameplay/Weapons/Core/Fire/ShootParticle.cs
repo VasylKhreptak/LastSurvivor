@@ -6,28 +6,22 @@ using Zenject.Infrastructure.Toggleable.Core;
 
 namespace Gameplay.Weapons.Core.Fire
 {
-    public class ShootParticle : IEnableable, IDisableable
+    public class ShootParticle
     {
-        private readonly IWeapon _weapon;
         private readonly IObjectPools<Particle> _particlePools;
         private readonly Preferences _preferences;
 
-        public ShootParticle(IWeapon weapon, IObjectPools<Particle> particlePools, Preferences preferences)
+        public ShootParticle(IObjectPools<Particle> particlePools, Preferences preferences)
         {
-            _weapon = weapon;
             _particlePools = particlePools;
             _preferences = preferences;
         }
 
-        public void Enable() => _weapon.OnShoot += SpawnParticle;
-
-        public void Disable() => _weapon.OnShoot -= SpawnParticle;
-
-        private void SpawnParticle(ShootData shootData)
+        public void Spawn(Vector3 position, Vector3 direction)
         {
             GameObject particle = _particlePools.GetPool(_preferences.Particle).Get();
-            particle.transform.position = shootData.Position;
-            particle.transform.forward = shootData.Direction;
+            particle.transform.position = position;
+            particle.transform.forward = direction;
         }
 
         [Serializable]

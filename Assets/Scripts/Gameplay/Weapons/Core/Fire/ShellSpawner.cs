@@ -4,34 +4,25 @@ using Extensions;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UnityEngine;
-using Zenject.Infrastructure.Toggleable.Core;
 using Random = UnityEngine.Random;
 
 namespace Gameplay.Weapons.Core.Fire
 {
-    public class ShellSpawner : IEnableable, IDisableable
+    public class ShellSpawner
     {
-        private readonly IWeapon _weapon;
         private readonly IObjectPools<GeneralPool> _generalPools;
         private readonly IVelocityAdapter _velocityAdapter;
         private readonly Preferences _preferences;
 
-        public ShellSpawner(IWeapon weapon, IObjectPools<GeneralPool> generalPools, IVelocityAdapter velocityAdapter,
+        public ShellSpawner(IObjectPools<GeneralPool> generalPools, IVelocityAdapter velocityAdapter,
             Preferences preferences)
         {
-            _weapon = weapon;
             _generalPools = generalPools;
             _velocityAdapter = velocityAdapter;
             _preferences = preferences;
         }
 
-        public void Enable() => _weapon.OnShoot += OnShoot;
-
-        public void Disable() => _weapon.OnShoot -= OnShoot;
-
-        private void OnShoot(ShootData shootData) => Spawn();
-
-        private void Spawn()
+        public void Spawn()
         {
             GameObject shellObject = _generalPools.GetPool(_preferences.Shell).Get();
 

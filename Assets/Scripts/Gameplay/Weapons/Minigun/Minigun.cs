@@ -19,9 +19,7 @@ namespace Gameplay.Weapons.Minigun
             _shootState = shootState;
             _ammo = ammo;
         }
-
-        public event Action<ShootData> OnShoot { add => _shootState.OnShoot += value; remove => _shootState.OnShoot -= value; }
-
+        
         public ClampedIntegerBank Ammo => _ammo;
 
         public void StartShooting() => _stateMachine.Enter<SpinUpState>();

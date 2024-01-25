@@ -1,7 +1,8 @@
 ﻿using System;
+using Audio.Players;
 using Extensions;
 using Gameplay.Weapons.Bullets.Core;
-using Gameplay.Weapons.Core;
+using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using ObjectPoolSystem.PoolCategories;
@@ -16,16 +17,24 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     {
         private readonly Preferences _preferences;
         private readonly IObjectPools<GeneralPool> _generalPools;
+        private readonly ShootParticle _shootParticle;
+        private readonly ShellSpawner _shellSpawner;
+        private readonly AudioPlayer _shootAudioPlayer;
 
-        public ShootState(Preferences preferences, IObjectPools<GeneralPool> generalPools)
+        public ShootState(Preferences preferences, IObjectPools<GeneralPool> generalPools, ShootParticle shootParticle,
+            ShellSpawner shellSpawner, AudioPlayer shootAudioPlayer)
         {
             _preferences = preferences;
             _generalPools = generalPools;
+            _shootParticle = shootParticle;
+            _shellSpawner = shellSpawner;
+            _shootAudioPlayer = shootAudioPlayer;
         }
 
-        public event Action<ShootData> OnShoot;
-
         private IDisposable _fireSubscription;
+
+        private Vector3 _bulletPosition;
+        private Vector3 _bulletDirection;
 
         public void Enter() => StartFiring();
 
@@ -44,6 +53,14 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
         private void Fire()
         {
+            SpawnBullet();
+            _shootParticle.Spawn(_bulletPosition, _bulletDirection);
+            _shellSpawner.Spawn();
+            _shootAudioPlayer.Play(_bulletPosition);
+        }
+
+        private void SpawnBullet()
+        {
             GameObject bulletObject = _generalPools.GetPool(GeneralPool.Bullet).Get();
             IBullet bullet = bulletObject.GetComponent<IBullet>();
 
@@ -51,13 +68,10 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             bulletObject.transform.position = bulletPosition;
             bulletObject.transform.rotation = GetBulletRotation();
             bullet.Damage.Value = GetDamage();
+            _bulletPosition = bulletPosition;
+            _bulletDirection = bulletObject.transform.forward;
             AccelerateBullet(bullet);
-            OnShoot?.Invoke(new ShootData(bulletPosition, bulletObject.transform.forward));
-
-            FireShell();
         }
-
-        private void FireShell() { }
 
         private Vector3 GetBulletPosition()
         {
