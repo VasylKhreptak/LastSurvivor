@@ -51,8 +51,10 @@ namespace Gameplay.Entities.Zombie
 
         private void BindDeathHandler()
         {
-            Container.Bind<Collider>().FromComponentOnRoot().AsSingle().WhenInjectedInto<ZombieDeathHandler>();
-            Container.BindInterfacesTo<ZombieDeathHandler>().AsSingle();
+            Container
+                .BindInterfacesTo<ZombieDeathHandler>()
+                .AsSingle()
+                .WithArguments(GetComponent<Collider>());
         }
 
         private void RandomizeSkin()

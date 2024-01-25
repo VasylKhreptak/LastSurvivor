@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Entities.Zombie
 {
-    public class ZombieAttacker : IInitializable, IDisposable
+    public class ZombieAttacker : IInitializable, IFixedTickable, IDisposable
     {
         private readonly Animator _animator;
         private readonly Preferences _preferences;
@@ -37,6 +37,8 @@ namespace Gameplay.Entities.Zombie
             StartObserving();
             _damageZone.Initialize();
         }
+
+        public void FixedTick() => _damageZone.FixedTick();
 
         public void Dispose()
         {

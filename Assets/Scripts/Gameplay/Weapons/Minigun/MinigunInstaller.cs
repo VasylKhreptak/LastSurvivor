@@ -6,6 +6,7 @@ using Gameplay.Weapons.Minigun.StateMachine;
 using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.StateMachine.Main.Core;
 using Plugins.Banks;
 using UnityEngine;
 using Zenject;
@@ -46,6 +47,7 @@ namespace Gameplay.Weapons.Minigun
             BindShootParticle();
             BindShootAudioPlayer();
             BindShellSpawner();
+            EnterIdleState();
             Container.Bind<ToggleableManager>().AsSingle();
         }
 
@@ -114,5 +116,7 @@ namespace Gameplay.Weapons.Minigun
 
         private void BindShellSpawner() =>
             Container.BindInterfacesTo<ShellSpawner>().AsSingle().WithArguments(_shellSpawnerPreferences);
+
+        private void EnterIdleState() => Container.Resolve<IStateMachine<IMinigunState>>().Enter<IdleState>();
     }
 }

@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Utilities.PhysicsUtilities
 {
-    public class TriggerZone<T> : IInitializable, IDisposable
+    public class TriggerZone<T> : IInitializable, IFixedTickable, IDisposable
     {
         private readonly Collider _trigger;
         private readonly GameObject _gameObject;
@@ -22,6 +22,8 @@ namespace Utilities.PhysicsUtilities
 
         private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
 
+        private readonly List<TriggerInfo<T>> _disabledTriggersBuffer = new List<TriggerInfo<T>>();
+
         public IReadOnlyReactiveCollection<TriggerInfo<T>> Triggers => _triggers;
 
         public void Initialize()
@@ -29,6 +31,8 @@ namespace Utilities.PhysicsUtilities
             StartObservingOnDisable();
             StartObservingTrigger();
         }
+
+        public void FixedTick() => RemoveDisabledTriggers();
 
         public void Dispose() => StopObserving();
 
@@ -50,7 +54,7 @@ namespace Utilities.PhysicsUtilities
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out T value))
-                _triggers.Add(new TriggerInfo<T>(other.transform, value));
+                _triggers.Add(new TriggerInfo<T>(other.transform, other, value));
         }
 
         private void OnTriggerExit(Collider other)
@@ -60,16 +64,32 @@ namespace Utilities.PhysicsUtilities
             if (triggerInfo != null)
                 _triggers.Remove(triggerInfo);
         }
+
+        private void RemoveDisabledTriggers()
+        {
+            foreach (TriggerInfo<T> trigger in _triggers)
+            {
+                if (trigger.Collider.enabled == false || trigger.Collider.gameObject.activeSelf == false)
+                    _disabledTriggersBuffer.Add(trigger);
+            }
+
+            foreach (TriggerInfo<T> trigger in _disabledTriggersBuffer)
+                _triggers.Remove(trigger);
+
+            _disabledTriggersBuffer.Clear();
+        }
     }
 
     public class TriggerInfo<T>
     {
         public readonly Transform Transform;
+        public readonly Collider Collider;
         public readonly T Value;
 
-        public TriggerInfo(Transform transform, T value)
+        public TriggerInfo(Transform transform, Collider collider, T value)
         {
             Transform = transform;
+            Collider = collider;
             Value = value;
         }
     }

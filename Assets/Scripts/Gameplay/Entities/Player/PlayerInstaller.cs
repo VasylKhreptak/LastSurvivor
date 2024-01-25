@@ -9,6 +9,7 @@ using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
 using UnityEngine.AI;
+using Utilities.PhysicsUtilities;
 using Zenject;
 using Zenject.Infrastructure.Toggleable;
 
@@ -19,6 +20,7 @@ namespace Gameplay.Entities.Player
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
+        [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
 
         public override void InstallBindings()
         {
@@ -27,6 +29,7 @@ namespace Gameplay.Entities.Player
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
+            BindRagdoll();
             BindDeathHandler();
             BindMoveAnimation();
             BindStateMachine();
@@ -52,8 +55,20 @@ namespace Gameplay.Entities.Player
             Container.Bind<MoveState>().AsSingle().WithArguments(_moveStatePreferences);
         }
 
-        private void BindDeathHandler() => Container.BindInterfacesTo<PlayerDeathHandler>().AsSingle();
+        private void BindDeathHandler()
+        {
+            Container
+                .BindInterfacesTo<PlayerDeathHandler>()
+                .AsSingle()
+                .WithArguments(GetComponent<Collider>());
+        }
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IPlayerState>>().Enter<IdleState>();
+
+        private void BindRagdoll()
+        {
+            Container.Bind<Ragdoll>().AsSingle().WithArguments(_ragdollPreferences);
+            Container.Resolve<Ragdoll>().Disable();
+        }
     }
 }

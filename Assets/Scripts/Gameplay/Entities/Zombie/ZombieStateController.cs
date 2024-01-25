@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Gameplay.Entities.Zombie
 {
-    public class ZombieStateController : IInitializable, IDisposable
+    public class ZombieStateController : IInitializable, IFixedTickable, IDisposable
     {
         private readonly Transform _transform;
         private readonly IStateMachine<IZombieState> _stateMachine;
@@ -36,6 +36,8 @@ namespace Gameplay.Entities.Zombie
             _triggerZone.Initialize();
             StartInterval();
         }
+
+        public void FixedTick() => _triggerZone.FixedTick();
 
         public void Dispose()
         {
