@@ -36,7 +36,7 @@ namespace Utilities.PhysicsUtilities
             [SerializeField] private Transform _root;
             [SerializeField] private List<Collider> _colliders;
             [SerializeField] private List<Rigidbody> _rigidbodies;
-            [SerializeField] private List<Joint> _joints;
+            [SerializeField] private List<CharacterJoint> _joints;
             [SerializeField] private List<Behaviour> _scriptsToDisable;
             [SerializeField] private List<Behaviour> _scriptsToDestroy;
             [SerializeField] private List<Collider> _collidersToDisable;
@@ -44,6 +44,7 @@ namespace Utilities.PhysicsUtilities
 
             public IReadOnlyList<Collider> Colliders => _colliders;
             public IReadOnlyList<Rigidbody> Rigidbodies => _rigidbodies;
+            public IReadOnlyList<CharacterJoint> Joints => _joints;
             public IReadOnlyList<Behaviour> ScriptsToDisable => _scriptsToDisable;
             public IReadOnlyList<Behaviour> ScriptsToDestroy => _scriptsToDestroy;
             public IReadOnlyList<Collider> CollidersToDisable => _collidersToDisable;
@@ -60,6 +61,7 @@ namespace Utilities.PhysicsUtilities
 
                 _colliders = _root.GetComponentsInChildren<Collider>().ToList();
                 _rigidbodies = _root.GetComponentsInChildren<Rigidbody>().ToList();
+                _joints = _root.GetComponentsInChildren<CharacterJoint>().ToList();
             }
 
             [Button]
@@ -74,6 +76,14 @@ namespace Utilities.PhysicsUtilities
             {
                 _colliders.ForEach(c => c.enabled = false);
                 _rigidbodies.ForEach(r => r.isKinematic = true);
+            }
+
+            [Button]
+            private void Destroy()
+            {
+                _colliders.ForEach(Object.DestroyImmediate);
+                _joints.ForEach(Object.DestroyImmediate);
+                _rigidbodies.ForEach(Object.DestroyImmediate);
             }
         }
     }

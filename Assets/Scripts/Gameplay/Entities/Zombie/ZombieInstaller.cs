@@ -21,7 +21,6 @@ namespace Gameplay.Entities.Zombie
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
-        [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
         [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
@@ -41,7 +40,6 @@ namespace Gameplay.Entities.Zombie
             BindMoveAnimation();
             BindStateMachine();
             BindStateController();
-            BindRagdoll();
             BindDeathHandler();
             BindZombieAttacker();
             EnterIdleState();
@@ -49,8 +47,6 @@ namespace Gameplay.Entities.Zombie
 
         private void BindMoveAnimation() =>
             Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
-
-        private void BindRagdoll() => Container.Bind<Ragdoll>().AsSingle().WithArguments(_ragdollPreferences);
 
         private void BindDeathHandler() => Container.BindInterfacesTo<ZombieDeathHandler>().AsSingle();
 
