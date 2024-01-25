@@ -7381,7 +7381,7 @@ MonoBehaviour:
   _moveAnimationPreferences:
     _maxSpeed: 1
     _speedParameterName: Speed
-    _smoothTime: 20
+    _smoothTime: 10
   _skinRandomizerPreferences:
     _gameObjects:
     - {fileID: 8073144373189409675}

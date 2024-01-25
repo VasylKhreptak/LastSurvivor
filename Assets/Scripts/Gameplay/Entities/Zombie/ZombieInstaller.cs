@@ -1,4 +1,5 @@
 ﻿using Adapters.Velocity;
+using Adapters.Velocity.Core;
 using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
@@ -26,6 +27,12 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private ZombieStateController.Preferences _stateControllerPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
+        [SerializeField] private float _speed;
+
+        private void Update()
+        {
+            _speed = Container.Resolve<IVelocityAdapter>().Value.magnitude;
+        }
 
         public override void InstallBindings()
         {
