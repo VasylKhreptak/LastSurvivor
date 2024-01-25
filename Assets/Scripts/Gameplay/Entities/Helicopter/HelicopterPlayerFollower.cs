@@ -26,7 +26,7 @@ namespace Gameplay.Entities.Helicopter
         private Vector3 _lastPlayerPosition;
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
-        
+
         public void Tick()
         {
             UpdateLastPlayerPosition();

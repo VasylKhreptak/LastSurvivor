@@ -46,7 +46,7 @@ namespace Gameplay.Entities.Explosive.Barrel
         }
 
         private void StopObservingHealth() => _healthSubscription?.Dispose();
-        
+
         private void EnableFire() => _preferences.FireParticle.SetActive(true);
 
         private void StartDamaging()

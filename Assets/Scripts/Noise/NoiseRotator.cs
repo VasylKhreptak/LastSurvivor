@@ -26,9 +26,15 @@ namespace Noise
             if (Mathf.Approximately(_preferences.Amplitude, 0) || _preferences.Strength == Vector3.zero)
                 return;
 
-            float dx = (float)NoiseS3D.Noise(Time.time * _preferences.Speed, 0f, 0f) * _preferences.Amplitude * _preferences.Strength.x;
-            float dy = (float)NoiseS3D.Noise(0f, Time.time * _preferences.Speed, 0f) * _preferences.Amplitude * _preferences.Strength.y;
-            float dz = (float)NoiseS3D.Noise(0f, 0f, Time.time * _preferences.Speed) * _preferences.Amplitude * _preferences.Strength.z;
+            float dx = (float)NoiseS3D.Noise(Time.time * _preferences.Speed, 0f, 0f) *
+                       _preferences.Amplitude *
+                       _preferences.Strength.x;
+            float dy = (float)NoiseS3D.Noise(0f, Time.time * _preferences.Speed, 0f) *
+                       _preferences.Amplitude *
+                       _preferences.Strength.y;
+            float dz = (float)NoiseS3D.Noise(0f, 0f, Time.time * _preferences.Speed) *
+                       _preferences.Amplitude *
+                       _preferences.Strength.z;
 
             Quaternion rotation = _initialLocalRotation;
 

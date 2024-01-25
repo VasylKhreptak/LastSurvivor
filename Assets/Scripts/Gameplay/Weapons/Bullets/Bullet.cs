@@ -1,6 +1,4 @@
-﻿using Gameplay.Entities.Health;
-using Gameplay.Entities.Health.Damages;
-using Gameplay.Entities.Health.Damages.Core;
+﻿using Gameplay.Entities.Health.Damages;
 using Gameplay.Weapons.Bullets.Core;
 using UnityEngine;
 

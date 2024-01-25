@@ -6,14 +6,12 @@ namespace Gameplay.Entities.Health.DamageReceivers.Core
 {
     public class BaseDamageReceiver : MonoBehaviour
     {
-        private IHealth _health;
-
         [Inject]
         private void Constructor(IHealth health)
         {
-            _health = health;
+            Health = health;
         }
-        
-        protected IHealth Health => _health;
+
+        protected IHealth Health { get; private set; }
     }
 }

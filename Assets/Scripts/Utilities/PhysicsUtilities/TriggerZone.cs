@@ -74,7 +74,9 @@ namespace Utilities.PhysicsUtilities
             }
 
             foreach (TriggerInfo<T> trigger in _disabledTriggersBuffer)
+            {
                 _triggers.Remove(trigger);
+            }
 
             _disabledTriggersBuffer.Clear();
         }

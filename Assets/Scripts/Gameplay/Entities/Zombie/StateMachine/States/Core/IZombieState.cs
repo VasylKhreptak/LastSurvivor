@@ -1,7 +1,4 @@
 ﻿namespace Gameplay.Entities.Zombie.StateMachine.States.Core
 {
-    public interface IZombieState
-    {
-        
-    }
+    public interface IZombieState { }
 }

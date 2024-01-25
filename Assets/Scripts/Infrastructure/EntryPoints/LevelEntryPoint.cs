@@ -1,7 +1,6 @@
 ﻿using Gameplay.Entities.Player;
 using Gameplay.Weapons;
 using Gameplay.Weapons.Core;
-using Gameplay.Weapons.Minigun;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.EntryPoints.Core;

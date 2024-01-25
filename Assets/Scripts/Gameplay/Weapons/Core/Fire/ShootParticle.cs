@@ -2,7 +2,6 @@
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UnityEngine;
-using Zenject.Infrastructure.Toggleable.Core;
 
 namespace Gameplay.Weapons.Core.Fire
 {

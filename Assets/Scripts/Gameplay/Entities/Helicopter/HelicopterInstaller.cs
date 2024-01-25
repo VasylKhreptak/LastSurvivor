@@ -29,7 +29,9 @@ namespace Gameplay.Entities.Helicopter
         private void BindMovement()
         {
             BindNoiseMovement();
-            Container.BindInterfacesTo<HelicopterPlayerFollower>().AsSingle().WithArguments(_transform, _helicopterMovementPreferences);
+            Container.BindInterfacesTo<HelicopterPlayerFollower>()
+                .AsSingle()
+                .WithArguments(_transform, _helicopterMovementPreferences);
         }
 
         private void BindNoiseMovement()

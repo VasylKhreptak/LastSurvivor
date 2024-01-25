@@ -1,5 +1,4 @@
-﻿using System;
-using Plugins.Banks;
+﻿using Plugins.Banks;
 
 namespace Gameplay.Weapons.Core
 {

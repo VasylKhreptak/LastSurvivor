@@ -1,5 +1,4 @@
-﻿using System;
-using Gameplay.Weapons.Core;
+﻿using Gameplay.Weapons.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -11,16 +10,15 @@ namespace Gameplay.Weapons.Minigun
     {
         private readonly IStateMachine<IMinigunState> _stateMachine;
         private readonly ShootState _shootState;
-        private readonly ClampedIntegerBank _ammo;
 
         public Minigun(IStateMachine<IMinigunState> stateMachine, ShootState shootState, ClampedIntegerBank ammo)
         {
             _stateMachine = stateMachine;
             _shootState = shootState;
-            _ammo = ammo;
+            Ammo = ammo;
         }
-        
-        public ClampedIntegerBank Ammo => _ammo;
+
+        public ClampedIntegerBank Ammo { get; }
 
         public void StartShooting() => _stateMachine.Enter<SpinUpState>();
 
