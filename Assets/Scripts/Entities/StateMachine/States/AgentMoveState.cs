@@ -24,7 +24,7 @@ namespace Entities.StateMachine.States
         {
             _payload = payload;
 
-            if (IsReachedDestination())
+            if (IsDestinationReached())
             {
                 OnReachedDestination();
                 return;
@@ -41,12 +41,7 @@ namespace Entities.StateMachine.States
             StopObservingDestination();
 
             if (_agent.isActiveAndEnabled)
-            {
                 _agent.isStopped = true;
-            }
-
-            if (_agent.isActiveAndEnabled)
-                _agent.ResetPath();
         }
 
         private void StartObservingDestination()
@@ -60,11 +55,11 @@ namespace Entities.StateMachine.States
 
         private void CheckDestination()
         {
-            if (IsReachedDestination())
+            if (IsDestinationReached())
                 OnReachedDestination();
         }
 
-        private bool IsReachedDestination() =>
+        private bool IsDestinationReached() =>
             Vector3.Distance(_agent.transform.position, _payload.Position) <= _preferences.StoppingDistance;
 
         private void OnReachedDestination() => _payload.OnComplete?.Invoke();
