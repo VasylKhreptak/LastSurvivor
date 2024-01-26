@@ -16,7 +16,7 @@ namespace Gameplay.Waypoints
             }
         }
 
-        public Waypoint GetUnfinishedWaypoint()
+        public Waypoint GetNextWaypoint()
         {
             foreach (Waypoint waypoint in _waypoints)
             {

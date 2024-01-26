@@ -1,5 +1,8 @@
 ﻿using Gameplay.Entities.Player.StateMachine.States.Core;
+using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using Levels.StateMachine.States;
+using Levels.StateMachine.States.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
@@ -15,9 +18,10 @@ namespace Gameplay.Entities.Player.StateMachine.States
         private readonly NavMeshAgent _agent;
         private readonly Ragdoll _ragdoll;
         private readonly Collider _collider;
+        private readonly IStateMachine<ILevelState> _levelStateMachine;
 
         public DeathState(MonoKernel kernel, PlayerHolder playerHolder, Animator animator, NavMeshAgent agent,
-            Ragdoll ragdoll, Collider collider)
+            Ragdoll ragdoll, Collider collider, IStateMachine<ILevelState> levelStateMachine)
         {
             _kernel = kernel;
             _playerHolder = playerHolder;
@@ -25,6 +29,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             _agent = agent;
             _ragdoll = ragdoll;
             _collider = collider;
+            _levelStateMachine = levelStateMachine;
         }
 
         public void Enter()
@@ -35,6 +40,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             _agent.enabled = false;
             _collider.enabled = false;
             _ragdoll.Enable();
+            _levelStateMachine.Enter<LevelFailedState>();
         }
     }
 }

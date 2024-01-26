@@ -35,7 +35,6 @@ namespace Gameplay.Entities.Player
             BindPlayerWaypointFollower();
             EnterIdleState();
 
-            Container.BindInterfacesTo<PlayerWaypointFollower>().AsSingle();
             Container.Bind<ToggleableManager>().AsSingle();
         }
 
@@ -66,6 +65,6 @@ namespace Gameplay.Entities.Player
             Container.Resolve<Ragdoll>().Disable();
         }
 
-        private void BindPlayerWaypointFollower() => Container.Bind<PlayerWaypointFollower>().AsSingle();
+        private void BindPlayerWaypointFollower() => Container.BindInterfacesAndSelfTo<PlayerWaypointFollower>().AsSingle();
     }
 }
