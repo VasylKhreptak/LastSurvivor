@@ -41,7 +41,7 @@ namespace Gameplay.Entities.Player
             if (waypoint == null)
             {
                 _playerStateMachine.Enter<IdleState>();
-                _levelStateMachine.Enter<LevelFinishedState>();
+                _levelStateMachine.Enter<LevelCompletedState>();
                 _finished = true;
                 return;
             }

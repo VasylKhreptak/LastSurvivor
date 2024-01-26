@@ -96,7 +96,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindLevelStates()
         {
             Container.Bind<LevelStartState>().AsSingle();
-            Container.Bind<LevelFinishedState>().AsSingle();
+            Container.Bind<LevelCompletedState>().AsSingle();
             Container.Bind<LevelFailedState>().AsSingle();
             Container.Bind<LevelLoopState>().AsSingle();
         }

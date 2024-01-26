@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace Levels.StateMachine.States
 {
-    public class LevelFinishedState : ILevelState
+    public class LevelCompletedState : ILevelState
     {
         private readonly List<Zombie> _zombies;
         private readonly PlayerHolder _playerHolder;
         private readonly Trackpad _trackpad;
 
-        public LevelFinishedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad)
+        public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
