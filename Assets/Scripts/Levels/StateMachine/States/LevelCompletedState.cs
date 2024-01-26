@@ -3,7 +3,7 @@ using Gameplay.Aim;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Levels.StateMachine.States.Core;
-using UnityEngine;
+using UI.Gameplay.Windows;
 
 namespace Levels.StateMachine.States
 {
@@ -12,12 +12,15 @@ namespace Levels.StateMachine.States
         private readonly List<Zombie> _zombies;
         private readonly PlayerHolder _playerHolder;
         private readonly Trackpad _trackpad;
+        private LevelCompletedWindow _levelCompletedWindow;
 
-        public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad)
+        public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad,
+            LevelCompletedWindow levelCompletedWindow)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
             _trackpad = trackpad;
+            _levelCompletedWindow = levelCompletedWindow;
         }
 
         public void Enter()
@@ -26,8 +29,7 @@ namespace Levels.StateMachine.States
             if (_playerHolder.Instance != null)
                 _playerHolder.Instance.WaypointFollower.Stop();
             _trackpad.enabled = false;
-
-            Debug.Log("Level Finished State!");
+            _levelCompletedWindow.Show();
         }
     }
 }

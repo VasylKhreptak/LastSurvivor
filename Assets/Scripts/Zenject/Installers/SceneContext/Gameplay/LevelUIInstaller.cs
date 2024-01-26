@@ -1,4 +1,4 @@
-﻿using UI.Windows;
+﻿using UI.Gameplay.Windows;
 using UnityEngine;
 
 namespace Zenject.Installers.SceneContext.Gameplay
@@ -7,12 +7,14 @@ namespace Zenject.Installers.SceneContext.Gameplay
     {
         [Header("References")]
         [SerializeField] private StartWindow _startWindow;
+        [SerializeField] private LevelCompletedWindow _levelCompletedWindow;
 
         #region MonoBehaviour
 
         private void OnValidate()
         {
             _startWindow ??= FindObjectOfType<StartWindow>(true);
+            _levelCompletedWindow ??= FindObjectOfType<LevelCompletedWindow>(true);
         }
 
         #endregion
@@ -20,6 +22,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         public override void InstallBindings()
         {
             Container.BindInstance(_startWindow).AsSingle();
+            Container.BindInstance(_levelCompletedWindow).AsSingle();
         }
     }
 }

@@ -6,7 +6,7 @@ using Plugins.Animations.Move;
 using UniRx;
 using UnityEngine;
 
-namespace UI.Windows
+namespace UI.Gameplay.Windows
 {
     public class StartWindow : MonoBehaviour, IWindow
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gameplay.Aim;
+using Gameplay.Data;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Waypoints;
@@ -52,6 +53,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindPlayerWaypoints();
             BindObjectPools();
             BindZombieList();
+            BindLevelData();
             BindLevelStateMachine();
         }
 
@@ -102,5 +104,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         }
 
         private void BindZombieList() => Container.Bind<List<Zombie>>().AsSingle();
+
+        private void BindLevelData() => Container.Bind<LevelData>().AsSingle();
     }
 }

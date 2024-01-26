@@ -19,7 +19,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter(Payload payload)
         {
-            _sceneLoader.LoadAsync(payload.SceneName, () => OnLoadedScene(payload));
+            _sceneLoader.LoadAsync(payload.Name, () => OnLoadedScene(payload));
         }
 
         private void OnLoadedScene(Payload payload)
@@ -30,7 +30,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         public class Payload
         {
-            public string SceneName;
+            public string Name;
             public Action OnComplete;
         }
     }

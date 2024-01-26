@@ -27,7 +27,7 @@ namespace Infrastructure.StateMachine.Game.States
 
             LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
             {
-                SceneName = sceneName,
+                Name = sceneName,
                 OnComplete = onComplete
             };
 

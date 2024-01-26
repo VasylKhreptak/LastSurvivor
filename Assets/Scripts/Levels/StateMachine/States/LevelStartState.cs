@@ -3,7 +3,7 @@ using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Infrastructure.StateMachine.Main.Core;
 using Levels.StateMachine.States.Core;
-using UI.Windows;
+using UI.Gameplay.Windows;
 
 namespace Levels.StateMachine.States
 {
