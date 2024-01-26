@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bootstrapScene: Bootstrap
   _mainScene: MainScene
+  _tutorialScene: Tutorial
   _editorLogType: -1
   _buildLogType: 0
