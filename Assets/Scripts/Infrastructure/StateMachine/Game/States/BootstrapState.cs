@@ -26,7 +26,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _loadingScreen.Show();
-            _sceneLoader.LoadAsync(_staticDataService.Config.BootstrapScene, OnLoadedScene);
+            _sceneLoader.LoadAsync(_staticDataService.Config.BootstrapScene.Name, OnLoadedScene);
         }
 
         private void OnLoadedScene() => _stateMachine.Enter<SetupApplicationState>();

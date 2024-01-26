@@ -23,7 +23,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter(Action onComplete)
         {
-            string sceneName = _staticDataService.Config.TutorialScene;
+            string sceneName = _staticDataService.Config.TutorialScene.Name;
 
             LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
             {
