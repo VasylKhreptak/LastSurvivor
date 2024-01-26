@@ -53,15 +53,10 @@ namespace Gameplay.Entities.Player
         {
             Container.Bind<IdleState>().AsSingle();
             Container.Bind<MoveState>().AsSingle().WithArguments(_moveStatePreferences);
+            Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 
-        private void BindDeathHandler()
-        {
-            Container
-                .BindInterfacesTo<PlayerDeathHandler>()
-                .AsSingle()
-                .WithArguments(GetComponent<Collider>());
-        }
+        private void BindDeathHandler() => Container.BindInterfacesTo<PlayerDeathHandler>().AsSingle();
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IPlayerState>>().Enter<IdleState>();
 

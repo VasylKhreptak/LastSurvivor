@@ -1,40 +1,20 @@
 ﻿using Gameplay.Entities.Health;
 using Gameplay.Entities.Health.Core;
-using UnityEngine;
-using UnityEngine.AI;
-using Utilities.PhysicsUtilities;
-using Zenject;
+using Gameplay.Entities.Player.StateMachine.States;
+using Gameplay.Entities.Player.StateMachine.States.Core;
+using Infrastructure.StateMachine.Main.Core;
 
 namespace Gameplay.Entities.Player
 {
     public class PlayerDeathHandler : DeathHandler
     {
-        private readonly MonoKernel _kernel;
-        private readonly PlayerHolder _playerHolder;
-        private readonly Animator _animator;
-        private readonly NavMeshAgent _agent;
-        private readonly Ragdoll _ragdoll;
-        private readonly Collider _collider;
+        private readonly IStateMachine<IPlayerState> _stateMachine;
 
-        public PlayerDeathHandler(MonoKernel kernel, PlayerHolder playerHolder, Animator animator, NavMeshAgent agent,
-            IHealth health, Ragdoll ragdoll, Collider collider) : base(health)
+        public PlayerDeathHandler(IStateMachine<IPlayerState> stateMachine, IHealth health) : base(health)
         {
-            _kernel = kernel;
-            _playerHolder = playerHolder;
-            _animator = animator;
-            _agent = agent;
-            _ragdoll = ragdoll;
-            _collider = collider;
+            _stateMachine = stateMachine;
         }
 
-        protected override void OnDied()
-        {
-            Object.Destroy(_kernel);
-            _playerHolder.Instance = null;
-            _animator.enabled = false;
-            _agent.enabled = false;
-            _collider.enabled = false;
-            _ragdoll.Enable();
-        }
+        protected override void OnDied() => _stateMachine.Enter<DeathState>();
     }
 }
