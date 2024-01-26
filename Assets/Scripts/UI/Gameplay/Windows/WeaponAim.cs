@@ -7,18 +7,18 @@ using UnityEngine;
 
 namespace UI.Gameplay.Windows
 {
-    public class LevelCompletedWindow : MonoBehaviour, IWindow
+    public class WeaponAim : MonoBehaviour, IWindow
     {
         [Header("References")]
         [SerializeField] private GameObject _gameObject;
 
         [Header("Show Animations")]
         [SerializeField] private ScaleAnimation _scaleAnimation;
-        [SerializeField] private FadeAnimation _canvasFadeAnimation;
+        [SerializeField] private FadeAnimation _fadeAnimation;
+
+        private readonly ReactiveProperty<bool> _isActive = new ReactiveProperty<bool>(false);
 
         private IAnimation _showAnimation;
-
-        private readonly BoolReactiveProperty _isActive = new BoolReactiveProperty(false);
 
         public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
 
@@ -26,7 +26,7 @@ namespace UI.Gameplay.Windows
 
         private void Awake()
         {
-            _showAnimation = new AnimationGroup(_scaleAnimation, _canvasFadeAnimation);
+            _showAnimation = new AnimationSequence(_scaleAnimation, _fadeAnimation);
             _showAnimation.SetStartState();
             _gameObject.SetActive(false);
             _isActive.Value = false;
@@ -37,11 +37,8 @@ namespace UI.Gameplay.Windows
         public void Show(Action onComplete = null)
         {
             _gameObject.SetActive(true);
-            _showAnimation.PlayForward(() =>
-            {
-                _isActive.Value = true;
-                onComplete?.Invoke();
-            });
+            _isActive.Value = true;
+            _showAnimation.PlayForward(() => onComplete?.Invoke());
         }
 
         public void Hide(Action onComplete = null)

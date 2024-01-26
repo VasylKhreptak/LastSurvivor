@@ -1,6 +1,7 @@
 ﻿using Adapters.Velocity;
 using Audio.Players;
 using Data.Persistent.Platforms;
+using Gameplay.Weapons.Core;
 using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine;
 using Gameplay.Weapons.Minigun.StateMachine.States;
@@ -26,37 +27,32 @@ namespace Gameplay.Weapons.Minigun
         [SerializeField] private ShellSpawner.Preferences _shellSpawnerPreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
+        private WeaponHolder _weaponHolder;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService)
+        private void Constructor(IPersistentDataService persistentDataService, WeaponHolder weaponHolder)
         {
             _helicopterPlatformData = persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData;
+            _weaponHolder = weaponHolder;
         }
 
         public override void InstallBindings()
         {
-            BindTransformVelocityAdapter();
+            Container.BindInterfacesTo<AdaptedTransformForVelocity>().AsSingle().WithArguments(transform);
 
             BindMinigunAmmo();
             BindAimer();
             BindBarrelSpiner();
             BindBarrelSpinAudio();
-            BindWeapon();
             BindShootParticle();
             BindShootAudioPlayer();
             BindShellSpawner();
             BindStateMachine();
+            BindWeapon();
+            RegisterWeapon();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
-        }
-
-        private void BindTransformVelocityAdapter()
-        {
-            Container
-                .BindInterfacesTo<AdaptedTransformForVelocity>()
-                .AsSingle()
-                .WithArguments(transform);
         }
 
         private void BindStateMachine()
@@ -90,8 +86,6 @@ namespace Gameplay.Weapons.Minigun
         private void BindBarrelSpinAudio() =>
             Container.BindInterfacesTo<MinigunSpinAudio>().AsSingle().WithArguments(_spinAudioPreferences);
 
-        private void BindWeapon() => Container.BindInterfacesTo<Minigun>().AsSingle();
-
         private void BindShootParticle() => Container.Bind<ShootParticle>().AsSingle().WithArguments(_shootParticlePreferences);
 
         private void BindShootAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences);
@@ -99,5 +93,13 @@ namespace Gameplay.Weapons.Minigun
         private void BindShellSpawner() => Container.Bind<ShellSpawner>().AsSingle().WithArguments(_shellSpawnerPreferences);
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IMinigunState>>().Enter<IdleState>();
+
+        private void BindWeapon()
+        {
+            Container.Bind<Transform>().FromComponentOnRoot().AsSingle().WhenInjectedInto<IWeapon>();
+            Container.BindInterfacesTo<Minigun>().AsSingle();
+        }
+
+        private void RegisterWeapon() => _weaponHolder.Instance = Container.Resolve<IWeapon>();
     }
 }

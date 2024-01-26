@@ -19,7 +19,6 @@ namespace Zenject.Installers.SceneContext.Gameplay
     public class LevelInstaller : MonoInstaller
     {
         [Header("References")]
-        [SerializeField] private Canvas _canvas;
         [SerializeField] private Camera _camera;
         [SerializeField] private Trackpad _trackpad;
 
@@ -31,11 +30,13 @@ namespace Zenject.Installers.SceneContext.Gameplay
         [SerializeField] private ObjectPoolPreference<Particle>[] _particlePoolsPreferences;
         [SerializeField] private ObjectPoolPreference<GeneralPool>[] _generalPoolsPreferences;
 
+        [Header("Weapons")]
+        [SerializeField] private WeaponAimer.Preferences _weaponAimPreferences;
+
         #region MonoBehaviour
 
         private void OnValidate()
         {
-            _canvas ??= FindObjectOfType<Canvas>(true);
             _camera ??= FindObjectOfType<Camera>(true);
             _trackpad ??= FindObjectOfType<Trackpad>(true);
         }
@@ -44,7 +45,6 @@ namespace Zenject.Installers.SceneContext.Gameplay
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_canvas).AsSingle();
             Container.BindInstance(_camera).AsSingle();
             Container.BindInstance(_trackpad).AsSingle();
 
@@ -54,6 +54,8 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindObjectPools();
             BindZombieList();
             BindLevelData();
+            BindWeaponAimer();
+            BindWeaponShooter();
             BindLevelStateMachine();
         }
 
@@ -106,5 +108,10 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindZombieList() => Container.Bind<List<Zombie>>().AsSingle();
 
         private void BindLevelData() => Container.Bind<LevelData>().AsSingle();
+
+        private void BindWeaponAimer() =>
+            Container.BindInterfacesAndSelfTo<WeaponAimer>().AsSingle().WithArguments(_weaponAimPreferences);
+
+        private void BindWeaponShooter() => Container.BindInterfacesAndSelfTo<WeaponShooter>().AsSingle();
     }
 }
