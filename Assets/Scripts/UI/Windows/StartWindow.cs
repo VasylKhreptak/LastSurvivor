@@ -1,4 +1,5 @@
-﻿using Infrastructure.Graphics.UI.Windows.Core;
+﻿using System;
+using Infrastructure.Graphics.UI.Windows.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Plugins.Animations.Move;
@@ -35,19 +36,20 @@ namespace UI.Windows
 
         #endregion
 
-        public void Show()
+        public void Show(Action onComplete = null)
         {
             _gameObject.SetActive(true);
-            _showAnimation.PlayForward();
+            _showAnimation.PlayForward(() => onComplete?.Invoke());
             _isActive.Value = true;
         }
 
-        public void Hide()
+        public void Hide(Action onComplete = null)
         {
             _showAnimation.PlayBackward(() =>
             {
                 _gameObject.SetActive(false);
                 _isActive.Value = false;
+                onComplete?.Invoke();
             });
         }
     }
