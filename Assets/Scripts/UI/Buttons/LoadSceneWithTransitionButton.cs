@@ -40,10 +40,10 @@ namespace UI.Buttons
             _button.interactable = false;
             LoadScene();
         }
-        
+
         private void LoadScene()
         {
-            LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload()
+            LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
             {
                 Name = _scene.Name
             };

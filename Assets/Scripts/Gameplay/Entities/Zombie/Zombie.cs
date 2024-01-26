@@ -5,14 +5,12 @@ namespace Gameplay.Entities.Zombie
 {
     public class Zombie : MonoBehaviour
     {
-        private ZombieTargetFollower _targetFollower;
-
         [Inject]
         private void Constructor(ZombieTargetFollower targetFollower)
         {
-            _targetFollower = targetFollower;
+            TargetFollower = targetFollower;
         }
 
-        public ZombieTargetFollower TargetFollower => _targetFollower;
+        public ZombieTargetFollower TargetFollower { get; private set; }
     }
 }

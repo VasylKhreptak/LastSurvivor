@@ -9,20 +9,18 @@ namespace Gameplay.Weapons.Minigun
 {
     public class Minigun : IWeapon
     {
-        private readonly Transform _transform;
         private readonly IStateMachine<IMinigunState> _stateMachine;
-        private readonly ClampedIntegerBank _ammo;
 
         public Minigun(Transform transform, IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo)
         {
-            _transform = transform;
+            Transform = transform;
             _stateMachine = stateMachine;
-            _ammo = ammo;
+            Ammo = ammo;
         }
 
-        public Transform Transform => _transform;
+        public Transform Transform { get; }
 
-        public ClampedIntegerBank Ammo => _ammo;
+        public ClampedIntegerBank Ammo { get; }
 
         public void StartShooting() => _stateMachine.Enter<SpinUpState>();
 

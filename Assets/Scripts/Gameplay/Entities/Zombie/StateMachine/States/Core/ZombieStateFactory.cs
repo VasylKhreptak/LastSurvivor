@@ -15,7 +15,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States.Core
             {
                 [typeof(IdleState)] = _container.Resolve<IdleState>,
                 [typeof(MoveState)] = _container.Resolve<MoveState>,
-                [typeof(DeathState)] = _container.Resolve<DeathState>,
+                [typeof(DeathState)] = _container.Resolve<DeathState>
             };
     }
 }
