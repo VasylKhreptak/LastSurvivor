@@ -4,7 +4,7 @@ using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 
-namespace Gameplay.Entities.Zombie.DeathHandlers.Core
+namespace Gameplay.Entities.Zombie
 {
     public class ZombieDeathHandler : DeathHandler
     {

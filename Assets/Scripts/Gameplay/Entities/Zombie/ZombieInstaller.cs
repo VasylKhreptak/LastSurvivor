@@ -4,7 +4,6 @@ using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Health.Damages;
-using Gameplay.Entities.Zombie.DeathHandlers.Core;
 using Gameplay.Entities.Zombie.StateMachine;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;

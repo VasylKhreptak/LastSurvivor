@@ -2,7 +2,6 @@
 using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
-using Gameplay.Entities.Player.DeathHandlers.Core;
 using Gameplay.Entities.Player.StateMachine;
 using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Player.StateMachine.States.Core;

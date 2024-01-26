@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Zenject;
 
-namespace Gameplay.Entities.Player.DeathHandlers.Core
+namespace Gameplay.Entities.Player
 {
     public class PlayerDeathHandler : DeathHandler
     {
