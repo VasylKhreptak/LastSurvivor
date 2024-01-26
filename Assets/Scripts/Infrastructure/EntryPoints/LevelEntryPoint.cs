@@ -17,18 +17,16 @@ namespace Infrastructure.EntryPoints
         private DisposableManager _disposableManager;
         private PlayerHolder _playerHolder;
         private GamePrefabs _gamePrefabs;
-        private PlayerWaypointFollower _playerWaypointFollower;
 
         [Inject]
         private void Constructor(WeaponHolder weaponHolder, DiContainer container, DisposableManager disposableManager,
-            PlayerHolder playerHolder, IStaticDataService staticDataService, PlayerWaypointFollower playerWaypointFollower)
+            PlayerHolder playerHolder, IStaticDataService staticDataService)
         {
             _weaponHolder = weaponHolder;
             _container = container;
             _disposableManager = disposableManager;
             _playerHolder = playerHolder;
             _gamePrefabs = staticDataService.Prefabs;
-            _playerWaypointFollower = playerWaypointFollower;
         }
 
         #region MonoBehaviour
@@ -41,7 +39,6 @@ namespace Infrastructure.EntryPoints
         {
             InitializeWeapon();
             InitializePlayer();
-            StartPlayerWaypointFollower();
         }
 
         private void InitializeWeapon()
@@ -61,7 +58,5 @@ namespace Infrastructure.EntryPoints
             Player player = playerObject.GetComponent<Player>();
             _playerHolder.Instance = player;
         }
-
-        private void StartPlayerWaypointFollower() => _playerWaypointFollower.Start();
     }
 }

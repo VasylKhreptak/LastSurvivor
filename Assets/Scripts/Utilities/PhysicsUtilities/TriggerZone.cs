@@ -16,6 +16,7 @@ namespace Utilities.PhysicsUtilities
         public TriggerZone(Collider trigger)
         {
             _trigger = trigger;
+            _gameObject = trigger.gameObject;
         }
 
         private readonly IReactiveCollection<TriggerInfo<T>> _triggers = new ReactiveCollection<TriggerInfo<T>>();

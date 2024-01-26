@@ -8,47 +8,43 @@ using UniRx;
 using UnityEngine;
 using Utilities.PhysicsUtilities;
 using Visitor;
-using Zenject;
 
 namespace Gameplay.Entities.Zombie
 {
-    public class ZombieTargetFollower : IInitializable, IFixedTickable, IDisposable
+    public class ZombieTargetFollower : IDisposable
     {
         private readonly Transform _transform;
         private readonly IStateMachine<IZombieState> _stateMachine;
         private readonly Preferences _preferences;
+        private readonly TriggerZone<IVisitable<ZombieDamage>> _targetsZone;
 
-        private readonly TriggerZone<IVisitable<ZombieDamage>> _triggerZone;
-
-        public ZombieTargetFollower(Transform transform, IStateMachine<IZombieState> stateMachine, Preferences preferences)
+        public ZombieTargetFollower(Transform transform, IStateMachine<IZombieState> stateMachine, Preferences preferences,
+            TriggerZone<IVisitable<ZombieDamage>> targetsZone)
         {
             _transform = transform;
             _stateMachine = stateMachine;
             _preferences = preferences;
-
-            _triggerZone = new TriggerZone<IVisitable<ZombieDamage>>(_preferences.Trigger);
+            _targetsZone = targetsZone;
         }
 
         private IDisposable _intervalSubscription;
 
-        public void Initialize()
-        {
-            _triggerZone.Initialize();
-            StartInterval();
-        }
+        public void Dispose() => Stop();
 
-        public void FixedTick() => _triggerZone.FixedTick();
+        public void Start() => StartInterval();
 
-        public void Dispose()
+        public void Stop()
         {
-            _triggerZone.Dispose();
             StopInterval();
+            _stateMachine.Enter<IdleState>();
         }
 
         private void StartInterval()
         {
+            StopInterval();
             _intervalSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_preferences.UpdateInterval))
+                .DoOnSubscribe(OnIntervalCallback)
                 .Subscribe(_ => OnIntervalCallback());
         }
 
@@ -58,7 +54,7 @@ namespace Gameplay.Entities.Zombie
 
         private void UpdateState()
         {
-            if (_triggerZone.Triggers.Count == 0)
+            if (_targetsZone.Triggers.Count == 0)
             {
                 _stateMachine.Enter<IdleState>();
 
@@ -80,7 +76,7 @@ namespace Gameplay.Entities.Zombie
             Transform closestTransform = null;
             float closestDistance = float.MaxValue;
 
-            foreach (TriggerInfo<IVisitable<ZombieDamage>> triggerInfo in _triggerZone.Triggers)
+            foreach (TriggerInfo<IVisitable<ZombieDamage>> triggerInfo in _targetsZone.Triggers)
             {
                 float distance = Vector3.Distance(triggerInfo.Transform.position, _transform.position);
 
@@ -97,13 +93,9 @@ namespace Gameplay.Entities.Zombie
         [Serializable]
         public class Preferences
         {
-            [Header("References")]
-            [SerializeField] private Collider _trigger;
-
             [Header("Preferences")]
             [SerializeField] private float _updateInterval = 0.3f;
 
-            public Collider Trigger => _trigger;
             public float UpdateInterval => _updateInterval;
         }
     }

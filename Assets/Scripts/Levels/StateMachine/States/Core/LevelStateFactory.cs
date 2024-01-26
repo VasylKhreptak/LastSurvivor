@@ -13,9 +13,10 @@ namespace Levels.StateMachine.States.Core
         protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister() =>
             new Dictionary<Type, Func<IBaseState>>
             {
-                [typeof(StartLevelState)] = _container.Resolve<StartLevelState>,
-                [typeof(FailLevelState)] = _container.Resolve<FailLevelState>,
-                [typeof(FinishLevelState)] = _container.Resolve<FinishLevelState>
+                [typeof(LevelStartState)] = _container.Resolve<LevelStartState>,
+                [typeof(LevelFailedState)] = _container.Resolve<LevelFailedState>,
+                [typeof(LevelFinishedState)] = _container.Resolve<LevelFinishedState>,
+                [typeof(LevelLoopState)] = _container.Resolve<LevelLoopState>
             };
     }
 }

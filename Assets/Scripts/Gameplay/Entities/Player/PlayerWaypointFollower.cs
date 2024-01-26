@@ -1,17 +1,19 @@
 ﻿using Entities.StateMachine.States;
 using Gameplay.Entities.Player.StateMachine.States;
+using Gameplay.Entities.Player.StateMachine.States.Core;
 using Gameplay.Waypoints;
+using Infrastructure.StateMachine.Main.Core;
 
 namespace Gameplay.Entities.Player
 {
     public class PlayerWaypointFollower
     {
-        private readonly PlayerHolder _playerHolder;
+        private readonly IStateMachine<IPlayerState> _playerStateMachine;
         private readonly PlayerWaypoints _playerWaypoints;
 
-        public PlayerWaypointFollower(PlayerHolder playerHolder, PlayerWaypoints playerWaypoints)
+        public PlayerWaypointFollower(IStateMachine<IPlayerState> playerStateMachine, PlayerWaypoints playerWaypoints)
         {
-            _playerHolder = playerHolder;
+            _playerStateMachine = playerStateMachine;
             _playerWaypoints = playerWaypoints;
         }
 
@@ -24,11 +26,7 @@ namespace Gameplay.Entities.Player
 
             _moveStatePayload.OnComplete = null;
             _moveStatePayload = null;
-
-            if (_playerHolder.Instance == null)
-                return;
-
-            _playerHolder.Instance.StateMachine.Enter<IdleState>();
+            _playerStateMachine.Enter<IdleState>();
         }
 
         public void Start()
@@ -39,12 +37,6 @@ namespace Gameplay.Entities.Player
 
         private void TryMoveToNextWaypoint()
         {
-            if (_playerHolder.Instance == null)
-            {
-                Stop();
-                return;
-            }
-
             Waypoint waypoint = _playerWaypoints.GetUnfinishedWaypoint();
 
             if (waypoint == null)
@@ -63,7 +55,7 @@ namespace Gameplay.Entities.Player
                 }
             };
 
-            _playerHolder.Instance.StateMachine.Enter<MoveState, AgentMoveState.Payload>(payload);
+            _playerStateMachine.Enter<MoveState, AgentMoveState.Payload>(payload);
         }
     }
 }

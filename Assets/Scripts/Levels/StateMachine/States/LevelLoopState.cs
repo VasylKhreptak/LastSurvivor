@@ -2,7 +2,7 @@
 
 namespace Levels.StateMachine.States
 {
-    public class FinishLevelState : ILevelState
+    public class LevelLoopState : ILevelState
     {
         public void Enter() { }
     }

@@ -7,12 +7,14 @@ namespace Gameplay.Entities.Player
 {
     public class Player : MonoBehaviour
     {
-        [Inject]
-        private void Constructor(IStateMachine<IPlayerState> stateMachine)
-        {
-            StateMachine = stateMachine;
-        }
+        private PlayerWaypointFollower _waypointFollower;
 
-        public IStateMachine<IPlayerState> StateMachine { get; private set; }
+        [Inject]
+        private void Constructor(IStateMachine<IPlayerState> stateMachine, PlayerWaypointFollower waypointFollower)
+        {
+            _waypointFollower = waypointFollower;
+        }
+        
+        public PlayerWaypointFollower WaypointFollower => _waypointFollower;
     }
 }

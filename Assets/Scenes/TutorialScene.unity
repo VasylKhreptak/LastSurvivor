@@ -20558,7 +20558,7 @@ MonoBehaviour:
     _splineContainer: {fileID: 1405029103}
     _followSpeed: 3
     _rotateSpeed: 3
-    _distanceOffset: -14
+    _distanceOffset: -10
     _rotationOffset: {x: 0, y: -90, z: 0}
   _noiseRotatorPreferences:
     Speed: 0.2
@@ -26190,6 +26190,7 @@ GameObject:
   - component: {fileID: 1154708857}
   - component: {fileID: 1154708856}
   - component: {fileID: 1154708855}
+  - component: {fileID: 1154708858}
   m_Layer: 5
   m_Name: Trackpad
   m_TagString: Untagged
@@ -26271,6 +26272,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154708853}
   m_CullTransparentMesh: 1
+--- !u!114 &1154708858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154708853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f77a46d59ad4f63a4e517e27df13707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1156379426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58805,7 +58818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5183883730816116436}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -58816,7 +58829,7 @@ Transform:
   - {fileID: 1082196514}
   - {fileID: 1075551496}
   m_Father: {fileID: 768617214}
-  m_LocalEulerAnglesHint: {x: 0, y: 269.803, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5183883730816400550
 Transform:
   m_ObjectHideFlags: 0

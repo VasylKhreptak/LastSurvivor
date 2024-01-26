@@ -33,6 +33,7 @@ namespace Gameplay.Entities.Player
             BindDeathHandler();
             BindMoveAnimation();
             BindStateMachine();
+            BindPlayerWaypointFollower();
             EnterIdleState();
 
             Container.BindInterfacesTo<PlayerWaypointFollower>().AsSingle();
@@ -70,5 +71,7 @@ namespace Gameplay.Entities.Player
             Container.Bind<Ragdoll>().AsSingle().WithArguments(_ragdollPreferences);
             Container.Resolve<Ragdoll>().Disable();
         }
+
+        private void BindPlayerWaypointFollower() => Container.Bind<PlayerWaypointFollower>().AsSingle();
     }
 }

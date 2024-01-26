@@ -6411,7 +6411,7 @@ GameObject:
   - component: {fileID: 4468592282072394913}
   - component: {fileID: 433508265812897089}
   m_Layer: 7
-  m_Name: EnemyDetectionTrigger
+  m_Name: TargetDetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7275,6 +7275,7 @@ GameObject:
   - component: {fileID: 2630486150181374072}
   - component: {fileID: 1083174825511434709}
   - component: {fileID: 9117447350832549679}
+  - component: {fileID: 3968817868999791393}
   m_Layer: 7
   m_Name: Zombie
   m_TagString: Untagged
@@ -7439,8 +7440,8 @@ MonoBehaviour:
   _moveStatePreferences:
     _stoppingDistance: 0.2
     _destinationCheckInterval: 0.2
+  _targetDetectionCollider: {fileID: 433508265812897089}
   _stateControllerPreferences:
-    _trigger: {fileID: 433508265812897089}
     _updateInterval: 0.3
   _zombieAttackPreferences:
     _attackTrigger: {fileID: 6476738792470765270}
@@ -7487,7 +7488,6 @@ MonoBehaviour:
     - {fileID: 3955250366819444805}
     - {fileID: 5008600500244119178}
     - {fileID: 3715971114534268286}
-  _speed: 0
 --- !u!195 &937538748053821505
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7547,6 +7547,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
+--- !u!114 &3968817868999791393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6613462932983406862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d966b84a545a6bca4f15f6cf736e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6847477969841304833
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Entities.Player;
+using Gameplay.Entities.Zombie;
 using Gameplay.Waypoints;
 using Gameplay.Weapons;
 using Levels.StateMachine;
@@ -48,8 +50,8 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindHolders();
             BindCameraShaker();
             BindPlayerWaypoints();
-            BindPlayerWaypointsFollower();
             BindObjectPools();
+            BindZombieList();
             BindLevelStateMachine();
         }
 
@@ -65,8 +67,6 @@ namespace Zenject.Installers.SceneContext.Gameplay
         }
 
         private void BindPlayerWaypoints() => Container.Bind<PlayerWaypoints>().AsSingle().WithArguments(_playerWaypoints);
-
-        private void BindPlayerWaypointsFollower() => Container.Bind<PlayerWaypointFollower>().AsSingle();
 
         private void BindObjectPools()
         {
@@ -95,9 +95,12 @@ namespace Zenject.Installers.SceneContext.Gameplay
 
         private void BindLevelStates()
         {
-            Container.Bind<StartLevelState>().AsSingle();
-            Container.Bind<FinishLevelState>().AsSingle();
-            Container.Bind<FailLevelState>().AsSingle();
+            Container.Bind<LevelStartState>().AsSingle();
+            Container.Bind<LevelFinishedState>().AsSingle();
+            Container.Bind<LevelFailedState>().AsSingle();
+            Container.Bind<LevelLoopState>().AsSingle();
         }
+
+        private void BindZombieList() => Container.Bind<List<Zombie>>().AsSingle();
     }
 }
