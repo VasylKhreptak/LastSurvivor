@@ -34,6 +34,8 @@ namespace Gameplay.Aim
 
         private void Awake() => _anchoredPosition.Value = _startPoint.anchoredPosition;
 
+        private void OnDisable() => _isPressed.Value = false;
+
         private void OnValidate()
         {
             _rectTransform ??= GetComponent<RectTransform>();

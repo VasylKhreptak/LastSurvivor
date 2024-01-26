@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gameplay.Aim;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Levels.StateMachine.States.Core;
@@ -10,11 +11,13 @@ namespace Levels.StateMachine.States
     {
         private readonly List<Zombie> _zombies;
         private readonly PlayerHolder _playerHolder;
+        private readonly Trackpad _trackpad;
 
-        public LevelFinishedState(List<Zombie> zombies, PlayerHolder playerHolder)
+        public LevelFinishedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
+            _trackpad = trackpad;
         }
 
         public void Enter()
@@ -22,6 +25,7 @@ namespace Levels.StateMachine.States
             _zombies.ForEach(zombie => zombie.TargetFollower.Stop());
             if (_playerHolder.Instance != null)
                 _playerHolder.Instance.WaypointFollower.Stop();
+            _trackpad.enabled = false;
 
             Debug.Log("Level Finished State!");
         }
