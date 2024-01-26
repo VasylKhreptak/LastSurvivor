@@ -41,7 +41,6 @@ namespace Gameplay.Weapons.Minigun
             Container.BindInterfacesTo<AdaptedTransformForVelocity>().AsSingle().WithArguments(transform);
 
             BindMinigunAmmo();
-            BindAimer();
             BindBarrelSpiner();
             BindBarrelSpinAudio();
             BindShootParticle();
@@ -77,8 +76,6 @@ namespace Gameplay.Weapons.Minigun
             ClampedIntegerBank ammo = new ClampedIntegerBank(ammoCapacity, ammoCapacity);
             Container.BindInstance(ammo).AsSingle();
         }
-
-        private void BindAimer() => Container.BindInterfacesTo<WeaponAimer>().AsSingle().WithArguments(_aimPreferences);
 
         private void BindBarrelSpiner() =>
             Container.BindInterfacesAndSelfTo<BarrelSpiner>().AsSingle().WithArguments(_barrelRotatorPreferences);
