@@ -15,15 +15,17 @@ namespace Levels.StateMachine.States
         private readonly Trackpad _trackpad;
         private readonly WeaponAim _weaponAim;
         private readonly WeaponAimer _weaponAimer;
+        private readonly LevelFailedWindow _levelFailedWindow;
 
         public LevelFailedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
-            WeaponAimer weaponAimer)
+            WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
             _trackpad = trackpad;
             _weaponAim = weaponAim;
             _weaponAimer = weaponAimer;
+            _levelFailedWindow = levelFailedWindow;
         }
 
         public void Enter()
@@ -36,6 +38,7 @@ namespace Levels.StateMachine.States
             _trackpad.enabled = false;
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
+            _levelFailedWindow.Show();
         }
     }
 }
