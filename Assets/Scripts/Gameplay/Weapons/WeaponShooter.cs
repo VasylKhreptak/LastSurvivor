@@ -23,7 +23,7 @@ namespace Gameplay.Weapons
         public void Dispose()
         {
             StopObserving();
-            _weaponHolder.Instance?.StopShooting();
+            _weaponHolder.Instance.Value?.StopShooting();
         }
 
         private void StartObserving()
@@ -33,9 +33,9 @@ namespace Gameplay.Weapons
                 .Subscribe(isPressed =>
                 {
                     if (isPressed)
-                        _weaponHolder.Instance?.StartShooting();
+                        _weaponHolder.Instance.Value?.StartShooting();
                     else
-                        _weaponHolder.Instance?.StopShooting();
+                        _weaponHolder.Instance.Value?.StopShooting();
                 });
         }
 

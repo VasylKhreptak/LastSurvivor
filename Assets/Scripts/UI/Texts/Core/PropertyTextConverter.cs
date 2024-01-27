@@ -26,6 +26,13 @@ namespace UI.Texts.Core
 
         public void Dispose() => _subscription?.Dispose();
 
+        public void SetObservable(IObservable<T> property)
+        {
+            Dispose();
+            _subscription = property.Subscribe(OnValueChanged);
+            Initialize();
+        }
+
         private void OnValueChanged(T value) => _tmp.text = value.ToString();
     }
 }

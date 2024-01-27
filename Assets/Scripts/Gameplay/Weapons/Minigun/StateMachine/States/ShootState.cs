@@ -6,6 +6,7 @@ using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using ObjectPoolSystem.PoolCategories;
+using Plugins.Banks;
 using Plugins.ObjectPoolSystem;
 using UniRx;
 using UnityEngine;
@@ -20,15 +21,17 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private readonly ShootParticle _shootParticle;
         private readonly ShellSpawner _shellSpawner;
         private readonly AudioPlayer _shootAudioPlayer;
+        private readonly ClampedIntegerBank _ammo;
 
         public ShootState(Preferences preferences, IObjectPools<GeneralPool> generalPools, ShootParticle shootParticle,
-            ShellSpawner shellSpawner, AudioPlayer shootAudioPlayer)
+            ShellSpawner shellSpawner, AudioPlayer shootAudioPlayer, ClampedIntegerBank ammo)
         {
             _preferences = preferences;
             _generalPools = generalPools;
             _shootParticle = shootParticle;
             _shellSpawner = shellSpawner;
             _shootAudioPlayer = shootAudioPlayer;
+            _ammo = ammo;
         }
 
         private IDisposable _fireSubscription;

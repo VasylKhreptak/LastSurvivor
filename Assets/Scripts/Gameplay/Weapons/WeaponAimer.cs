@@ -28,7 +28,7 @@ namespace Gameplay.Weapons
 
         public void Tick()
         {
-            if (Enabled == false || _weaponHolder.Instance == null)
+            if (Enabled == false || _weaponHolder.Instance.Value == null)
                 return;
 
             Aim();
@@ -38,7 +38,7 @@ namespace Gameplay.Weapons
         {
             _lookPoint = GetLookPoint();
 
-            _transform = _weaponHolder.Instance.Transform;
+            _transform = _weaponHolder.Instance.Value.Transform;
             _weaponPosition = _transform.position;
 
             Debug.DrawLine(_weaponPosition, _lookPoint, Color.red);

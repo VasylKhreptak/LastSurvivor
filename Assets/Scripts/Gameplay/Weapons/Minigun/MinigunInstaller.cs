@@ -96,6 +96,6 @@ namespace Gameplay.Weapons.Minigun
             Container.BindInterfacesTo<Minigun>().AsSingle();
         }
 
-        private void RegisterWeapon() => _weaponHolder.Instance = Container.Resolve<IWeapon>();
+        private void RegisterWeapon() => _weaponHolder.Instance.Value = Container.Resolve<IWeapon>();
     }
 }

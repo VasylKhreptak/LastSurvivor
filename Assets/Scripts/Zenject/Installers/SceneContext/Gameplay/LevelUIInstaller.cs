@@ -10,6 +10,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         [SerializeField] private StartWindow _startWindow;
         [SerializeField] private LevelCompletedWindow _levelCompletedWindow;
         [SerializeField] private LevelFailedWindow _levelFailedWindow;
+        [SerializeField] private HUD _hud;
         [SerializeField] private WeaponAim _weaponAim;
 
         #region MonoBehaviour
@@ -20,6 +21,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             _startWindow ??= FindObjectOfType<StartWindow>(true);
             _levelCompletedWindow ??= FindObjectOfType<LevelCompletedWindow>(true);
             _levelFailedWindow ??= FindObjectOfType<LevelFailedWindow>(true);
+            _hud ??= FindObjectOfType<HUD>(true);
             _weaponAim ??= FindObjectOfType<WeaponAim>(true);
         }
 
@@ -31,6 +33,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.BindInstance(_startWindow).AsSingle();
             Container.BindInstance(_levelCompletedWindow).AsSingle();
             Container.BindInstance(_levelFailedWindow).AsSingle();
+            Container.BindInstance(_hud).AsSingle();
             Container.BindInstance(_weaponAim).AsSingle();
         }
     }

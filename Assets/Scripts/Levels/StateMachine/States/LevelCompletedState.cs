@@ -16,9 +16,10 @@ namespace Levels.StateMachine.States
         private readonly LevelCompletedWindow _levelCompletedWindow;
         private readonly WeaponAim _weaponAim;
         private readonly WeaponAimer _weaponAimer;
+        private readonly HUD _hud;
 
         public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad,
-            LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer)
+            LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer, HUD hud)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -26,6 +27,7 @@ namespace Levels.StateMachine.States
             _levelCompletedWindow = levelCompletedWindow;
             _weaponAim = weaponAim;
             _weaponAimer = weaponAimer;
+            _hud = hud;
         }
 
         public void Enter()
@@ -39,6 +41,7 @@ namespace Levels.StateMachine.States
             _levelCompletedWindow.Show();
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
+            _hud.Hide();
         }
     }
 }

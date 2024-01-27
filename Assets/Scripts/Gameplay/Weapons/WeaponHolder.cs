@@ -3,5 +3,5 @@ using Holders.Core;
 
 namespace Gameplay.Weapons
 {
-    public class WeaponHolder : InstanceHolder<IWeapon> { }
+    public class WeaponHolder : ReactiveInstanceHolder<IWeapon> { }
 }
