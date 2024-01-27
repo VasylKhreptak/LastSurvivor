@@ -18,7 +18,6 @@ namespace Gameplay.Weapons.Minigun
     public class MinigunInstaller : MonoInstaller
     {
         [Header("Preferences")]
-        [SerializeField] private WeaponAimer.Preferences _aimPreferences;
         [SerializeField] private BarrelSpiner.Preferences _barrelRotatorPreferences;
         [SerializeField] private ShootState.Preferences _firePreferences;
         [SerializeField] private AudioPlayer.Preferences _fireAudioPreferences;
