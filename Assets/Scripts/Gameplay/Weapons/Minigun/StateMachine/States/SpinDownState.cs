@@ -1,9 +1,10 @@
 ﻿using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
+using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Gameplay.Weapons.Minigun.StateMachine.States
 {
-    public class SpinDownState : IMinigunState
+    public class SpinDownState : IMinigunState, IState
     {
         private readonly IStateMachine<IMinigunState> _stateMachine;
         private readonly BarrelSpiner _barrelSpiner;

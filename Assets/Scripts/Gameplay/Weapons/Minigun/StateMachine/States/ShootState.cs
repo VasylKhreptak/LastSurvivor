@@ -4,6 +4,8 @@ using Extensions;
 using Gameplay.Weapons.Bullets.Core;
 using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
+using Holders.Core;
+using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.Banks;
@@ -14,7 +16,7 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Weapons.Minigun.StateMachine.States
 {
-    public class ShootState : IMinigunState, IExitable
+    public class ShootState : IMinigunState, IPayloadedState<InstanceHolder<Action>>, IExitable
     {
         private readonly Preferences _preferences;
         private readonly IObjectPools<GeneralPool> _generalPools;
@@ -22,9 +24,11 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private readonly ShellSpawner _shellSpawner;
         private readonly AudioPlayer _shootAudioPlayer;
         private readonly ClampedIntegerBank _ammo;
+        private readonly IStateMachine<IMinigunState> _stateMachine;
 
         public ShootState(Preferences preferences, IObjectPools<GeneralPool> generalPools, ShootParticle shootParticle,
-            ShellSpawner shellSpawner, AudioPlayer shootAudioPlayer, ClampedIntegerBank ammo)
+            ShellSpawner shellSpawner, AudioPlayer shootAudioPlayer, ClampedIntegerBank ammo,
+            IStateMachine<IMinigunState> stateMachine)
         {
             _preferences = preferences;
             _generalPools = generalPools;
@@ -32,29 +36,49 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             _shellSpawner = shellSpawner;
             _shootAudioPlayer = shootAudioPlayer;
             _ammo = ammo;
+            _stateMachine = stateMachine;
         }
 
-        private IDisposable _fireSubscription;
+        private IDisposable _shootSubscription;
+
+        private InstanceHolder<Action> _reloadStatePayload;
+        private readonly InstanceHolder<Action> _spinDownStatePayload = new InstanceHolder<Action>();
 
         private Vector3 _bulletPosition;
         private Vector3 _bulletDirection;
 
-        public void Enter() => StartFiring();
-
-        public void Exit() => StopFiring();
-
-        private void StartFiring()
+        public void Enter(InstanceHolder<Action> payload = null)
         {
-            StopFiring();
-            _fireSubscription = Observable
-                .Interval(TimeSpan.FromSeconds(_preferences.FireInterval))
-                .DoOnSubscribe(Fire)
-                .Subscribe(_ => Fire());
+            _reloadStatePayload = payload;
+
+            StartShooting();
         }
 
-        private void StopFiring() => _fireSubscription?.Dispose();
+        public void Exit() => StopShooting();
 
-        private void Fire()
+        private void StartShooting()
+        {
+            StopShooting();
+            _shootSubscription = Observable
+                .Interval(TimeSpan.FromSeconds(_preferences.FireInterval))
+                .DoOnSubscribe(TryShoot)
+                .Subscribe(_ => TryShoot());
+        }
+
+        private void StopShooting() => _shootSubscription?.Dispose();
+
+        private void TryShoot()
+        {
+            if (_ammo.Spend(1))
+                Shoot();
+
+            if (_ammo.HasEnough(1))
+                return;
+            
+            _stateMachine.Enter<ReloadState, InstanceHolder<Action>>(_reloadStatePayload);
+        }
+
+        private void Shoot()
         {
             SpawnBullet();
             _shootParticle.Spawn(_bulletPosition, _bulletDirection);

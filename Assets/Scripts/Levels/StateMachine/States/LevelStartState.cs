@@ -30,7 +30,7 @@ namespace Levels.StateMachine.States
         public void Enter()
         {
             _zombies.ForEach(zombie => zombie.TargetFollower.Start());
-            _playerHolder.Instance.WaypointFollower.Start();
+            // _playerHolder.Instance.WaypointFollower.Start();
             _levelStateMachine.Enter<LevelLoopState>();
             _startWindows.Hide();
             _weaponAim.Show();

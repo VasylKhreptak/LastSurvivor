@@ -15,6 +15,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States.Core
             {
                 [typeof(SpinUpState)] = _container.Resolve<SpinUpState>,
                 [typeof(ShootState)] = _container.Resolve<ShootState>,
+                [typeof(ReloadState)] = _container.Resolve<ReloadState>,
                 [typeof(SpinDownState)] = _container.Resolve<SpinDownState>,
                 [typeof(IdleState)] = _container.Resolve<IdleState>
             };

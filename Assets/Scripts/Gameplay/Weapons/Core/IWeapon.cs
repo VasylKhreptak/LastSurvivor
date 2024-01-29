@@ -1,4 +1,5 @@
 ﻿using Plugins.Banks;
+using UniRx;
 using UnityEngine;
 
 namespace Gameplay.Weapons.Core
@@ -7,6 +8,8 @@ namespace Gameplay.Weapons.Core
     {
         public Transform Transform { get; }
         public ClampedIntegerBank Ammo { get; }
+
+        public IReadOnlyReactiveProperty<float> ReloadProgress { get; }
 
         public void StartShooting();
 

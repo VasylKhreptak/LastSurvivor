@@ -24,6 +24,7 @@ namespace Gameplay.Weapons.Minigun
         [SerializeField] private MinigunSpinAudio.Preferences _spinAudioPreferences;
         [SerializeField] private ShootParticle.Preferences _shootParticlePreferences;
         [SerializeField] private ShellSpawner.Preferences _shellSpawnerPreferences;
+        [SerializeField] private ReloadState.Preferences _reloadStatePreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
         private WeaponHolder _weaponHolder;
@@ -64,6 +65,7 @@ namespace Gameplay.Weapons.Minigun
         {
             Container.Bind<SpinUpState>().AsSingle();
             Container.Bind<ShootState>().AsSingle().WithArguments(_firePreferences);
+            Container.Bind<ReloadState>().AsSingle().WithArguments(_reloadStatePreferences);
             Container.Bind<SpinDownState>().AsSingle();
             Container.Bind<IdleState>().AsSingle();
         }
