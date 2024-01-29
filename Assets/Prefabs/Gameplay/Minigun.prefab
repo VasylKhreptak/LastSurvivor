@@ -65,11 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b0ff1da44361c468bea01ea5f8b755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimPreferences:
-    _aimLayerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    _workingDistance: 200
   _barrelRotatorPreferences:
     _barrelTransform: {fileID: 993517482539922330}
     _reverse: 1
@@ -186,6 +181,8 @@ MonoBehaviour:
     _maxTorque: 90
     _minVelocity: 1.5
     _maxVelocity: 3
+  _reloadStatePreferences:
+    _duration: 3
 --- !u!114 &7753663267292696425
 MonoBehaviour:
   m_ObjectHideFlags: 0
