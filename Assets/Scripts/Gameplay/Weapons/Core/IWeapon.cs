@@ -10,6 +10,8 @@ namespace Gameplay.Weapons.Core
         public ClampedIntegerBank Ammo { get; }
 
         public IReadOnlyReactiveProperty<float> ReloadProgress { get; }
+        
+        public IReadOnlyReactiveProperty<bool> IsReloading { get; }
 
         public void StartShooting();
 

@@ -36,6 +36,8 @@ namespace Gameplay.Weapons.Minigun
 
         public IReadOnlyReactiveProperty<float> ReloadProgress => _reloadState.ReloadProgress;
 
+        public IReadOnlyReactiveProperty<bool> IsReloading => _reloadState.IsReloading;
+
         public void StartShooting()
         {
             _reloadStatePayload.Instance = StartShooting;

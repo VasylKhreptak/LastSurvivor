@@ -32,10 +32,15 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
         public IReadOnlyReactiveProperty<float> ReloadProgress => _reloadTimer.Progress;
 
+        private BoolReactiveProperty _isReloading = new BoolReactiveProperty(false);
+
+        public IReadOnlyReactiveProperty<bool> IsReloading => _isReloading;
+
         public void Enter(InstanceHolder<Action> payload = null)
         {
             _barrelSpiner.SpinDown();
             _reloadTimer.Start(_preferences.Duration);
+            _isReloading.Value = true;
             _completeSubscription = _reloadTimer.OnCompleted.Subscribe(_ =>
             {
                 _stateMachine.Enter<IdleState>();
@@ -48,6 +53,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         {
             _reloadTimer.Reset();
             _completeSubscription?.Dispose();
+            _isReloading.Value = false;
         }
 
         [Serializable]

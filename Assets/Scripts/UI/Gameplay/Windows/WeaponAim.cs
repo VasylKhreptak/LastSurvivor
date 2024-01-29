@@ -26,7 +26,7 @@ namespace UI.Gameplay.Windows
 
         private void Awake()
         {
-            _showAnimation = new AnimationSequence(_scaleAnimation, _fadeAnimation);
+            _showAnimation = new AnimationGroup(_scaleAnimation, _fadeAnimation);
             _showAnimation.SetStartState();
             _gameObject.SetActive(false);
             _isActive.Value = false;
