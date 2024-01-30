@@ -74,7 +74,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
             if (_ammo.HasEnough(1))
                 return;
-            
+
             _stateMachine.Enter<ReloadState, InstanceHolder<Action>>(_reloadStatePayload);
         }
 

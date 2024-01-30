@@ -32,7 +32,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
         public IReadOnlyReactiveProperty<float> ReloadProgress => _reloadTimer.Progress;
 
-        private BoolReactiveProperty _isReloading = new BoolReactiveProperty(false);
+        private readonly BoolReactiveProperty _isReloading = new BoolReactiveProperty(false);
 
         public IReadOnlyReactiveProperty<bool> IsReloading => _isReloading;
 
