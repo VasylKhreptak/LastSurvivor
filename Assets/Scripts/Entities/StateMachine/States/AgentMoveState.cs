@@ -22,9 +22,6 @@ namespace Entities.StateMachine.States
 
         public void Enter(Payload payload)
         {
-            if (_agent.isActiveAndEnabled == false)
-                return;
-
             _payload = payload;
 
             if (IsDestinationReached())
