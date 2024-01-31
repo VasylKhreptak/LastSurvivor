@@ -33,7 +33,7 @@ namespace Infrastructure.EntryPoints
         public void Enter()
         {
             InitializePlayer();
-            InitializeSoldiers();
+            // InitializeSoldiers();
         }
 
         private void InitializePlayer()
@@ -43,19 +43,19 @@ namespace Infrastructure.EntryPoints
             _playerHolder.Instance = player;
         }
 
-        private void InitializeSoldiers()
-        {
-            Player player = _playerHolder.Instance;
-
-            for (int i = 0; i < player.SoldierFollowPoints.Count; i++)
-            {
-                Transform followPoint = player.SoldierFollowPoints[i];
-                GameObject soldierObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplaySoldier]);
-                soldierObject.transform.position = followPoint.position;
-                soldierObject.transform.rotation = followPoint.rotation;
-                Soldier soldier = soldierObject.GetComponent<Soldier>();
-                soldier.StateMachine.Enter<FollowTransformState, Transform>(followPoint);
-            }
-        }
+        // private void InitializeSoldiers()
+        // {
+        //     Player player = _playerHolder.Instance;
+        //
+        //     for (int i = 0; i < player.SoldierFollowPoints.Count; i++)
+        //     {
+        //         Transform followPoint = player.SoldierFollowPoints[i];
+        //         GameObject soldierObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplaySoldier]);
+        //         soldierObject.transform.position = followPoint.position;
+        //         soldierObject.transform.rotation = followPoint.rotation;
+        //         Soldier soldier = soldierObject.GetComponent<Soldier>();
+        //         soldier.StateMachine.Enter<FollowTransformState, Transform>(followPoint);
+        //     }
+        // }
     }
 }
