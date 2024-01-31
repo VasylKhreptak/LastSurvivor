@@ -708,6 +708,7 @@ GameObject:
   - component: {fileID: -66421494663024510}
   - component: {fileID: 2936173884418038386}
   - component: {fileID: 6394629372078617769}
+  - component: {fileID: -6961059525257999420}
   m_Layer: 8
   m_Name: Soldier
   m_TagString: Untagged
@@ -785,9 +786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _moveStatePreferences:
-    _stoppingDistance: 0.3
-    _destinationCheckInterval: 0.1
+  _followTransformStatePreferences:
+    _positionThreshold: 0.1
+    _updateInterval: 0.1
   _moveAnimationPreferences:
     _maxSpeed: 4
     _speedParameterName: Speed
@@ -926,6 +927,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6961059525257999420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891845772577489536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6ed0a9c55a476ebe659499f8baa6b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3176216941249231136
 GameObject:
   m_ObjectHideFlags: 0

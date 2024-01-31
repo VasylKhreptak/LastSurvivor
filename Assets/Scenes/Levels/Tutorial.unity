@@ -954,7 +954,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 1d2bfb6dde846464ab0cbddd557e04e1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: df79c50a599347f4dbe2f644ac8acf35, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &29327377
 PrefabInstance:
@@ -44424,7 +44424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.420006
+      value: 47.43
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalPosition.y
@@ -44432,23 +44432,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -112.4
+      value: -113.35
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.16198818
+      value: 0.4041391
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000027256009
+      value: -0.000000023365072
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9867927
+      value: 0.9146976
       objectReference: {fileID: 0}
     - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000012053561
+      value: 0.000000018500051
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883335094662546, guid: 72c55d02f43923547a5a694f08963584, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 132.326
       objectReference: {fileID: 0}
     - target: {fileID: 23707735709763348, guid: 72c55d02f43923547a5a694f08963584,
         type: 3}

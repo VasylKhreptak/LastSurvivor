@@ -1,5 +1,6 @@
 ﻿using System;
 using Infrastructure.StateMachine.Main.States.Core;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,26 +17,49 @@ namespace Entities.StateMachine.States
             _preferences = preferences;
         }
 
+        private IDisposable _destinationUpdateSubscription;
+
         private Transform _target;
+
+        private Vector3 _targetPosition;
+        private Vector3 _lastDestinationPosition;
 
         public void Enter(Transform target)
         {
-            if (_agent.isActiveAndEnabled == false)
-                return;
-
             _target = target;
-            
+            _lastDestinationPosition = _target.position;
+
             _agent.isStopped = false;
-            
-            ///
+            _agent.SetDestination(_lastDestinationPosition);
+            StartUpdatingDestination();
         }
 
         public void Exit()
         {
             if (_agent.isActiveAndEnabled)
                 _agent.isStopped = true;
-            
-            ///
+
+            StopUpdatingDestination();
+        }
+
+        private void StartUpdatingDestination()
+        {
+            _destinationUpdateSubscription = Observable
+                .Interval(TimeSpan.FromSeconds(_preferences.UpdateInterval))
+                .Subscribe(_ => TryUpdateDestination());
+        }
+
+        private void StopUpdatingDestination() => _destinationUpdateSubscription?.Dispose();
+
+        private void TryUpdateDestination()
+        {
+            _targetPosition = _target.position;
+
+            if (Vector3.Distance(_targetPosition, _lastDestinationPosition) > _preferences.PositionThreshold)
+            {
+                _agent.SetDestination(_targetPosition);
+                _lastDestinationPosition = _targetPosition;
+            }
         }
 
         [Serializable]

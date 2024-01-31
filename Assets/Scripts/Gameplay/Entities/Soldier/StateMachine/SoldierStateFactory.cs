@@ -15,7 +15,7 @@ namespace Gameplay.Entities.Soldier.StateMachine
             new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(IdleState)] = _container.Resolve<IdleState>,
-                [typeof(MoveState)] = _container.Resolve<MoveState>,
+                [typeof(FollowTransformState)] = _container.Resolve<FollowTransformState>,
                 [typeof(DeathState)] = _container.Resolve<DeathState>
             };
     }
