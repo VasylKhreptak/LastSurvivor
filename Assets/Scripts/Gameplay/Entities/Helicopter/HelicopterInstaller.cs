@@ -1,5 +1,9 @@
-﻿using Noise;
+﻿using Gameplay.Entities.Player;
+using Noise;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Splines;
+using Utilities.SplineUtilities;
 using Zenject;
 
 namespace Gameplay.Entities.Helicopter
@@ -11,7 +15,8 @@ namespace Gameplay.Entities.Helicopter
         [SerializeField] private Transform _noiseLayer;
 
         [Header("Preferences")]
-        [SerializeField] private HelicopterPlayerFollower.Preferences _helicopterMovementPreferences;
+        [SerializeField] private SplineContainer _splineContainer;
+        [SerializeField] private SplineTargetFollower.Preferences _helicopterMovementPreferences;
         [SerializeField] private NoiseRotator.Preferences _noiseRotatorPreferences;
         [SerializeField] private NoiseMover.Preferences _noiseMoverPreferences;
 
@@ -23,16 +28,15 @@ namespace Gameplay.Entities.Helicopter
 
         public override void InstallBindings()
         {
-            BindMovement();
+            Container.BindInstance(_transform).AsSingle();
+            Container.BindInstance(_splineContainer);
+
+            BindNoiseMovement();
+            BindPlayerFollower();
         }
 
-        private void BindMovement()
-        {
-            BindNoiseMovement();
-            Container.BindInterfacesTo<HelicopterPlayerFollower>()
-                .AsSingle()
-                .WithArguments(_transform, _helicopterMovementPreferences);
-        }
+        private void BindPlayerFollower() =>
+            Container.BindInterfacesAndSelfTo<SplineTargetFollower>().AsSingle().WithArguments(_helicopterMovementPreferences);
 
         private void BindNoiseMovement()
         {

@@ -1,8 +1,8 @@
-﻿using Infrastructure.EntryPoints.Core;
+﻿using EntryPoints.Core;
 using UnityEngine;
 using Zenject;
 
-namespace Infrastructure.EntryPoints.Game
+namespace EntryPoints.Game
 {
     public class GameRunner : MonoBehaviour, IEntryPoint
     {

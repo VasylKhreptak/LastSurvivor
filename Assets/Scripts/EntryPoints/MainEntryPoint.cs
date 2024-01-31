@@ -1,8 +1,8 @@
 ﻿using Cinemachine;
 using Data.Persistent.Platforms;
+using EntryPoints.Core;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
-using Infrastructure.EntryPoints.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States;
@@ -12,7 +12,7 @@ using Main.Entities.Player;
 using UnityEngine;
 using Zenject;
 
-namespace Infrastructure.EntryPoints
+namespace EntryPoints
 {
     public class MainEntryPoint : MonoBehaviour, IEntryPoint
     {

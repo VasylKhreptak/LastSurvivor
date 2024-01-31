@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Data;
+using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Waypoints;
@@ -33,12 +34,16 @@ namespace Zenject.Installers.SceneContext.Gameplay
         [Header("Weapons")]
         [SerializeField] private WeaponAimer.Preferences _weaponAimPreferences;
 
+        [Header("Entities")]
+        [SerializeField] private Helicopter _helicopter;
+
         #region MonoBehaviour
 
         private void OnValidate()
         {
             _camera ??= FindObjectOfType<Camera>(true);
             _trackpad ??= FindObjectOfType<Trackpad>(true);
+            _helicopter ??= FindObjectOfType<Helicopter>(true);
         }
 
         #endregion
@@ -47,6 +52,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         {
             Container.BindInstance(_camera).AsSingle();
             Container.BindInstance(_trackpad).AsSingle();
+            Container.BindInstance(_helicopter).AsSingle();
 
             BindHolders();
             BindCameraShaker();

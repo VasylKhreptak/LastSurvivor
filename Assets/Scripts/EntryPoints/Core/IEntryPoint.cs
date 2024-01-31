@@ -1,4 +1,4 @@
-namespace Infrastructure.EntryPoints.Core
+namespace EntryPoints.Core
 {
     public interface IEntryPoint
     {

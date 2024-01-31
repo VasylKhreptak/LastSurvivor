@@ -1,74 +1,85 @@
 ﻿using System;
-using Gameplay.Entities.Player;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 using Zenject;
 
-namespace Gameplay.Entities.Helicopter
+namespace Utilities.SplineUtilities
 {
-    public class HelicopterPlayerFollower : ITickable
+    public class SplineTargetFollower : ITickable
     {
         private readonly Transform _transform;
-        private readonly PlayerHolder _playerHolder;
+        private readonly Transform _splineRoot;
         private readonly Preferences _preferences;
-
         private readonly Spline _spline;
 
-        public HelicopterPlayerFollower(Transform transform, PlayerHolder playerHolder, Preferences preferences)
+        public SplineTargetFollower(Transform transform, SplineContainer splineContainer, Preferences preferences)
         {
             _transform = transform;
-            _playerHolder = playerHolder;
+            _splineRoot = splineContainer.transform;
+            _spline = splineContainer.Spline;
             _preferences = preferences;
-            _spline = _preferences.SplineContainer.Spline;
         }
 
-        private Vector3 _lastPlayerPosition;
+        private Vector3 _lastTargetPosition;
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
 
+        public Transform Target;
+
         public void Tick()
         {
-            UpdateLastPlayerPosition();
+            UpdateLastTargetPosition();
             UpdateTargetValues();
-            MoveHelicopter();
+            Move();
         }
 
-        private void UpdateLastPlayerPosition()
+        private void UpdateLastTargetPosition()
         {
-            if (_playerHolder.Instance == null)
+            if (Target == null)
                 return;
 
-            _lastPlayerPosition = _playerHolder.Instance.transform.position;
+            _lastTargetPosition = Target.position;
         }
 
         private void UpdateTargetValues()
         {
-            Vector3 localPoint = _preferences.SplineContainer.transform.InverseTransformPoint(_lastPlayerPosition);
+            Vector3 localPoint = _splineRoot.InverseTransformPoint(_lastTargetPosition);
             SplineUtility.GetNearestPoint(_spline, localPoint, out float3 _, out float nearestTime);
             float targetSplineDistance = nearestTime * _spline.GetLength() + _preferences.DistanceOffset;
             Vector3 targetSplinePoint = _spline.GetPointAtLinearDistance(0, targetSplineDistance, out float _);
-            _targetPosition = _preferences.SplineContainer.transform.TransformPoint(targetSplinePoint);
+            _targetPosition = _splineRoot.TransformPoint(targetSplinePoint);
             _targetRotation = Quaternion.LookRotation(_spline.EvaluateTangent(nearestTime));
             _targetRotation *= Quaternion.Euler(_preferences.RotationOffset);
         }
 
-        private void MoveHelicopter()
+        private void Move()
         {
             _transform.position = Vector3.Lerp(_transform.position, _targetPosition, Time.deltaTime * _preferences.FollowSpeed);
             _transform.rotation = Quaternion.Lerp(_transform.rotation, _targetRotation, Time.deltaTime * _preferences.RotateSpeed);
         }
 
+        public void FollowTargetImmediately()
+        {
+            UpdateLastTargetPosition();
+            UpdateTargetValues();
+            MoveImmediately();
+        }
+
+        private void MoveImmediately()
+        {
+            _transform.position = _targetPosition;
+            _transform.rotation = _targetRotation;
+        }
+
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private SplineContainer _splineContainer;
             [SerializeField] private float _followSpeed = 1f;
             [SerializeField] private float _rotateSpeed = 1f;
             [SerializeField] private float _distanceOffset = -5f;
             [SerializeField] private Vector3 _rotationOffset = Vector3.zero;
 
-            public SplineContainer SplineContainer => _splineContainer;
             public float FollowSpeed => _followSpeed;
             public float RotateSpeed => _rotateSpeed;
             public float DistanceOffset => _distanceOffset;

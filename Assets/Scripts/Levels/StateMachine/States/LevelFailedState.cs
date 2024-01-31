@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Aim;
+using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Weapons;
@@ -17,9 +18,10 @@ namespace Levels.StateMachine.States
         private readonly WeaponAimer _weaponAimer;
         private readonly LevelFailedWindow _levelFailedWindow;
         private readonly HUD _hud;
+        private readonly Helicopter _helicopter;
 
         public LevelFailedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
-            WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow, HUD hud)
+            WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow, HUD hud, Helicopter helicopter)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -28,6 +30,7 @@ namespace Levels.StateMachine.States
             _weaponAimer = weaponAimer;
             _levelFailedWindow = levelFailedWindow;
             _hud = hud;
+            _helicopter = helicopter;
         }
 
         public void Enter()
@@ -42,6 +45,7 @@ namespace Levels.StateMachine.States
             _weaponAimer.Enabled = false;
             _levelFailedWindow.Show();
             _hud.Hide();
+            _helicopter.TargetFollower.Target = null;
         }
     }
 }

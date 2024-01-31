@@ -24192,6 +24192,7 @@ GameObject:
   - component: {fileID: 768617214}
   - component: {fileID: 768617216}
   - component: {fileID: 768617215}
+  - component: {fileID: 768617217}
   m_Layer: 0
   m_Name: Helicopter
   m_TagString: Untagged
@@ -24229,8 +24230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 768617214}
   _noiseLayer: {fileID: 5183883730816375094}
+  _splineContainer: {fileID: 1405029103}
   _helicopterMovementPreferences:
-    _splineContainer: {fileID: 1405029103}
     _followSpeed: 3
     _rotateSpeed: 3
     _distanceOffset: -10
@@ -24261,6 +24262,18 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
+--- !u!114 &768617217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768617213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a16d1c066f411b8426cb0aa0ba9b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &769128594
 PrefabInstance:
   m_ObjectHideFlags: 0
