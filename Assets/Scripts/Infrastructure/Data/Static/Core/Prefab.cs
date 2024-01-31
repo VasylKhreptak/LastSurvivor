@@ -16,6 +16,7 @@
         BarracksBuyZone = 11,
         CollectorsPlatform = 12,
         CollectorsBuyZone = 13,
-        GameplayPlayer = 14
+        GameplayPlayer = 14,
+        GameplaySoldier = 15,
     }
 }

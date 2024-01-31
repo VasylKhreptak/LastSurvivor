@@ -7438,10 +7438,10 @@ MonoBehaviour:
     _minAngle: {x: 0, y: 0, z: 0}
     _maxAngle: {x: 0, y: 360, z: 0}
   _moveStatePreferences:
-    _stoppingDistance: 0.2
+    _stoppingDistance: 0.3
     _destinationCheckInterval: 0.2
   _targetDetectionCollider: {fileID: 433508265812897089}
-  _stateControllerPreferences:
+  _zombieTargetFollowerPreferences:
     _updateInterval: 0.3
   _zombieAttackPreferences:
     _attackTrigger: {fileID: 6476738792470765270}
