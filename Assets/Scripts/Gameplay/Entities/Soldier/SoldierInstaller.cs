@@ -6,7 +6,6 @@ using Gameplay.Entities.Soldier.StateMachine;
 using Gameplay.Entities.Soldier.StateMachine.States;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 using Utilities.PhysicsUtilities;
 using Zenject;
 
@@ -14,10 +13,12 @@ namespace Gameplay.Entities.Soldier
 {
     public class SoldierInstaller : MonoInstaller
     {
+        [SerializeField] private Transform _viewTransform;
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private AgentFollowTransformState.Preferences _followTransformStatePreferences;
-        [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
+        [SerializeField] private PlaneMoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
+        [SerializeField] private Collider _targetDetectionCollider;
 
         public override void InstallBindings()
         {
@@ -26,6 +27,9 @@ namespace Gameplay.Entities.Soldier
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
+
+            
+            BindTargetsZone();
 
             BindMoveAnimation();
             BindRagdoll();
@@ -49,13 +53,20 @@ namespace Gameplay.Entities.Soldier
 
         private void EnterIdleState() => Container.Resolve<IdleState>().Enter();
 
-        private void BindMoveAnimation() =>
-            Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
+        private void BindMoveAnimation()
+        {
+            Container
+                .BindInterfacesAndSelfTo<PlaneMoveAnimation>()
+                .AsSingle()
+                .WithArguments(_moveAnimationPreferences, _viewTransform);
+        }
 
         private void BindRagdoll()
         {
             Container.Bind<Ragdoll>().AsSingle().WithArguments(_ragdollPreferences);
             Container.Resolve<Ragdoll>().Disable();
         }
+
+        private void BindTargetsZone() { }
     }
 }

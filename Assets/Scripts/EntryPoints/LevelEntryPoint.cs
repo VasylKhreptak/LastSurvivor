@@ -64,10 +64,10 @@ namespace EntryPoints
         {
             _platoon.TargetFollower.Target = _playerHolder.Instance.transform;
             _platoon.TargetFollower.FollowTargetImmediately();
-            SpawnSoldiers();
+            InitializeSoldiers();
         }
 
-        private void SpawnSoldiers()
+        private void InitializeSoldiers()
         {
             int count = Mathf.Min(
                 _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value,

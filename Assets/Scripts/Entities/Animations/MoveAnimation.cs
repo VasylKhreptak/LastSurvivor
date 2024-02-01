@@ -29,12 +29,9 @@ namespace Entities.Animations
             _velocity = _velocityAdapter.Value;
             _velocity.y = 0f;
 
-            _speed01 = Mathf.Lerp(_previousSpeed01, Mathf.Clamp01(_velocity.magnitude / _preferences.MaxSpeed),
-                Time.deltaTime * _preferences.SmoothTime);
+            _speed01 = Mathf.Min(_velocity.magnitude / _preferences.MaxSpeed, 1f);
 
-            _animator.SetFloat(_preferences.SpeedParameterName, _speed01);
-
-            _previousSpeed01 = _speed01;
+            _animator.SetFloat(_preferences.SpeedParameterName, _speed01, _preferences.DampTime, Time.deltaTime);
         }
 
         [Serializable]
@@ -42,11 +39,11 @@ namespace Entities.Animations
         {
             [SerializeField] private float _maxSpeed = 5f;
             [SerializeField] private string _speedParameterName = "Speed";
-            [SerializeField] private float _smoothTime = 5f;
+            [SerializeField] private float _dampTime = 0.05f;
 
             public float MaxSpeed => _maxSpeed;
             public string SpeedParameterName => _speedParameterName;
-            public float SmoothTime => _smoothTime;
+            public float DampTime => _dampTime;
         }
     }
 }
