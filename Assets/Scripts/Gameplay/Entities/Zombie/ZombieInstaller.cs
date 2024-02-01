@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Utilities.GameObjectUtilities;
 using Utilities.PhysicsUtilities;
+using Utilities.PhysicsUtilities.Trigger;
 using Utilities.TransformUtilities;
 using Visitor;
 using Zenject;
@@ -24,9 +25,9 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
-        [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
+        [SerializeField] private AgentFollowTransformState.Preferences _moveStatePreferences;
         [SerializeField] private Collider _targetDetectionCollider;
-        [SerializeField] private ZombieTargetFollower.Preferences _zombieTargetFollowerPreferences;
+        [SerializeField] private ClosestTriggerObserver<IVisitable<ZombieDamage>>.Preferences _closestTriggerObserverPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
 
@@ -53,6 +54,7 @@ namespace Gameplay.Entities.Zombie
             BindRagdoll();
             BindStateMachine();
             BindTargetsZone();
+            BindClosestTriggerObserver();
             BindZombieTargetFollower();
             BindDeathHandler();
             BindZombieAttacker();
@@ -87,7 +89,7 @@ namespace Gameplay.Entities.Zombie
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<MoveState>().AsSingle().WithArguments(_moveStatePreferences);
+            Container.Bind<FollowTransformState>().AsSingle().WithArguments(_moveStatePreferences);
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 
@@ -101,8 +103,7 @@ namespace Gameplay.Entities.Zombie
 
         private void BindZombieTargetFollower() =>
             Container.BindInterfacesAndSelfTo<ZombieTargetFollower>()
-                .AsSingle()
-                .WithArguments(transform, _zombieTargetFollowerPreferences);
+                .AsSingle();
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IZombieState>>().Enter<IdleState>();
 
@@ -116,5 +117,13 @@ namespace Gameplay.Entities.Zombie
         }
 
         private void RegisterZombie() => _zombies.Add(GetComponent<Zombie>());
+
+        private void BindClosestTriggerObserver()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ClosestTriggerObserver<IVisitable<ZombieDamage>>>()
+                .AsSingle()
+                .WithArguments(_closestTriggerObserverPreferences);
+        }
     }
 }

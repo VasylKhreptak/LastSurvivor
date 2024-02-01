@@ -4,9 +4,9 @@ using UnityEngine.AI;
 
 namespace Gameplay.Entities.Zombie.StateMachine.States
 {
-    public class MoveState : AgentMoveState, IZombieState
+    public class FollowTransformState : AgentFollowTransformState, IZombieState
     {
-        public MoveState(NavMeshAgent agent, Preferences preferences)
+        public FollowTransformState(NavMeshAgent agent, Preferences preferences)
             : base(agent, preferences) { }
     }
 }

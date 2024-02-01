@@ -6,7 +6,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-namespace Utilities.PhysicsUtilities
+namespace Utilities.PhysicsUtilities.Trigger
 {
     public class TriggerZone<T> : IInitializable, IFixedTickable, IDisposable
     {
@@ -26,6 +26,8 @@ namespace Utilities.PhysicsUtilities
         private readonly List<TriggerInfo<T>> _disabledTriggersBuffer = new List<TriggerInfo<T>>();
 
         public IReadOnlyReactiveCollection<TriggerInfo<T>> Triggers => _triggers;
+
+        public Vector3 Center => _trigger.transform.position;
 
         public void Initialize()
         {

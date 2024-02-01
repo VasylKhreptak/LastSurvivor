@@ -5,6 +5,7 @@ using Gameplay.Entities.Health.Damages;
 using UniRx;
 using UnityEngine;
 using Utilities.PhysicsUtilities;
+using Utilities.PhysicsUtilities.Trigger;
 using Visitor;
 using Zenject;
 using Random = UnityEngine.Random;
