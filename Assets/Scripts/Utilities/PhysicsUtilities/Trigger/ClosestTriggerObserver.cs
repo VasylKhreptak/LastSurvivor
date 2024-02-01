@@ -16,7 +16,8 @@ namespace Utilities.PhysicsUtilities.Trigger
             _preferences = preferences;
         }
 
-        private readonly CompositeDisposable _subscriptions = new CompositeDisposable();
+        private IDisposable _countChangedSubscription;
+        private IDisposable _intervalSubscription;
 
         private readonly ReactiveProperty<TriggerInfo<T>> _trigger = new ReactiveProperty<TriggerInfo<T>>();
 
@@ -32,19 +33,31 @@ namespace Utilities.PhysicsUtilities.Trigger
 
         private void StartObserving()
         {
-            Observable
-                .Interval(TimeSpan.FromSeconds(_preferences.UpdateInterval))
-                .DoOnSubscribe(UpdateClosestTrigger)
-                .Subscribe(_ => UpdateClosestTrigger())
-                .AddTo(_subscriptions);
-
-            _triggerZone.Triggers
+            _countChangedSubscription = _triggerZone.Triggers
                 .ObserveCountChanged()
-                .Subscribe(_ => UpdateClosestTrigger())
-                .AddTo(_subscriptions);
+                .DoOnSubscribe(() => OnCountChanged(_triggerZone.Triggers.Count))
+                .Subscribe(OnCountChanged);
         }
 
-        private void StopObserving() => _subscriptions.Clear();
+        private void StopObserving()
+        {
+            _countChangedSubscription?.Dispose();
+            _intervalSubscription?.Dispose();
+        }
+
+        private void OnCountChanged(int count)
+        {
+            _intervalSubscription?.Dispose();
+
+            UpdateClosestTrigger();
+
+            if (count < 2)
+                return;
+
+            _intervalSubscription = Observable
+                .Interval(TimeSpan.FromSeconds(_preferences.UpdateInterval))
+                .Subscribe(_ => UpdateClosestTrigger());
+        }
 
         private void UpdateClosestTrigger()
         {
