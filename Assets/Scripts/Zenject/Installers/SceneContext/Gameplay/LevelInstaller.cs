@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Data;
 using Gameplay.Entities.Helicopter;
+using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Waypoints;
@@ -36,6 +37,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
 
         [Header("Entities")]
         [SerializeField] private Helicopter _helicopter;
+        [SerializeField] private Platoon _platoon;
 
         #region MonoBehaviour
 
@@ -44,6 +46,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             _camera ??= FindObjectOfType<Camera>(true);
             _trackpad ??= FindObjectOfType<Trackpad>(true);
             _helicopter ??= FindObjectOfType<Helicopter>(true);
+            _platoon ??= FindObjectOfType<Platoon>(true);
         }
 
         #endregion
@@ -53,6 +56,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.BindInstance(_camera).AsSingle();
             Container.BindInstance(_trackpad).AsSingle();
             Container.BindInstance(_helicopter).AsSingle();
+            Container.BindInstance(_platoon).AsSingle();
 
             BindHolders();
             BindCameraShaker();

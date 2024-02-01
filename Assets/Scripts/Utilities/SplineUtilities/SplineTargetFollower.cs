@@ -12,6 +12,7 @@ namespace Utilities.SplineUtilities
         private readonly Transform _splineRoot;
         private readonly Preferences _preferences;
         private readonly Spline _spline;
+        private readonly float _splineLength;
 
         public SplineTargetFollower(Transform transform, SplineContainer splineContainer, Preferences preferences)
         {
@@ -19,6 +20,7 @@ namespace Utilities.SplineUtilities
             _splineRoot = splineContainer.transform;
             _spline = splineContainer.Spline;
             _preferences = preferences;
+            _splineLength = _spline.GetLength();
         }
 
         private Vector3 _lastTargetPosition;
@@ -46,7 +48,7 @@ namespace Utilities.SplineUtilities
         {
             Vector3 localPoint = _splineRoot.InverseTransformPoint(_lastTargetPosition);
             SplineUtility.GetNearestPoint(_spline, localPoint, out float3 _, out float nearestTime);
-            float targetSplineDistance = nearestTime * _spline.GetLength() + _preferences.DistanceOffset;
+            float targetSplineDistance = nearestTime * _splineLength + _preferences.DistanceOffset;
             Vector3 targetSplinePoint = _spline.GetPointAtLinearDistance(0, targetSplineDistance, out float _);
             _targetPosition = _splineRoot.TransformPoint(targetSplinePoint);
             _targetRotation = Quaternion.LookRotation(_spline.EvaluateTangent(nearestTime));
