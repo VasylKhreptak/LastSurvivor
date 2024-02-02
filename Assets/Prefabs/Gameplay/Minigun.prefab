@@ -172,7 +172,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   _shootParticlePreferences:
-    _particle: 4
+    _poolType: 4
   _shellSpawnerPreferences:
     _shell: 1
     _spawnPoint: {fileID: 2453552113253936444}

@@ -7,6 +7,7 @@ using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Holders.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using ObjectPoolSystem;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.Banks;
 using Plugins.ObjectPoolSystem;
@@ -20,19 +21,20 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
     {
         private readonly Preferences _preferences;
         private readonly IObjectPools<GeneralPool> _generalPools;
-        private readonly ShootParticle _shootParticle;
+        private readonly ObjectSpawner<Particle> _shootParticleSpawner;
         private readonly ShellSpawner _shellSpawner;
         private readonly AudioPlayer _shootAudioPlayer;
         private readonly ClampedIntegerBank _ammo;
         private readonly IStateMachine<IMinigunState> _stateMachine;
 
-        public ShootState(Preferences preferences, IObjectPools<GeneralPool> generalPools, ShootParticle shootParticle,
+        public ShootState(Preferences preferences, IObjectPools<GeneralPool> generalPools,
+            ObjectSpawner<Particle> shootParticleSpawner,
             ShellSpawner shellSpawner, AudioPlayer shootAudioPlayer, ClampedIntegerBank ammo,
             IStateMachine<IMinigunState> stateMachine)
         {
             _preferences = preferences;
             _generalPools = generalPools;
-            _shootParticle = shootParticle;
+            _shootParticleSpawner = shootParticleSpawner;
             _shellSpawner = shellSpawner;
             _shootAudioPlayer = shootAudioPlayer;
             _ammo = ammo;
@@ -44,7 +46,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private InstanceHolder<Action> _reloadStatePayload;
 
         private Vector3 _bulletPosition;
-        private Vector3 _bulletDirection;
+        private Quaternion _bulletRotation;
 
         public void Enter(InstanceHolder<Action> payload = null)
         {
@@ -80,7 +82,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private void Shoot()
         {
             SpawnBullet();
-            _shootParticle.Spawn(_bulletPosition, _bulletDirection);
+            _shootParticleSpawner.Spawn(_bulletPosition, _bulletRotation);
             _shellSpawner.Spawn();
             _shootAudioPlayer.Play(_bulletPosition);
         }
@@ -95,7 +97,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             bulletObject.transform.rotation = GetBulletRotation();
             bullet.Damage.Value = GetDamage();
             _bulletPosition = bulletPosition;
-            _bulletDirection = bulletObject.transform.forward;
+            _bulletRotation = bulletObject.transform.rotation;
             AccelerateBullet(bullet);
         }
 

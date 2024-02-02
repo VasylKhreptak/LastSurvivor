@@ -8,6 +8,8 @@ using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Main.Core;
+using ObjectPoolSystem;
+using ObjectPoolSystem.PoolCategories;
 using Plugins.Banks;
 using UnityEngine;
 using Zenject;
@@ -22,7 +24,7 @@ namespace Gameplay.Weapons.Minigun
         [SerializeField] private ShootState.Preferences _firePreferences;
         [SerializeField] private AudioPlayer.Preferences _fireAudioPreferences;
         [SerializeField] private MinigunSpinAudio.Preferences _spinAudioPreferences;
-        [SerializeField] private ShootParticle.Preferences _shootParticlePreferences;
+        [SerializeField] private ObjectSpawner<Particle>.Preferences _shootParticlePreferences;
         [SerializeField] private ShellSpawner.Preferences _shellSpawnerPreferences;
         [SerializeField] private ReloadState.Preferences _reloadStatePreferences;
 
@@ -84,7 +86,7 @@ namespace Gameplay.Weapons.Minigun
         private void BindBarrelSpinAudio() =>
             Container.BindInterfacesTo<MinigunSpinAudio>().AsSingle().WithArguments(_spinAudioPreferences);
 
-        private void BindShootParticle() => Container.Bind<ShootParticle>().AsSingle().WithArguments(_shootParticlePreferences);
+        private void BindShootParticle() => Container.Bind<ObjectSpawner<Particle>>().AsSingle().WithArguments(_shootParticlePreferences);
 
         private void BindShootAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences);
 
