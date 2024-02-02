@@ -3,9 +3,9 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Entities.Explosive.Barrel
+namespace Utilities.DebugUtilities
 {
-    public class Barrel : MonoBehaviour
+    public class HealthDebugger : MonoBehaviour
     {
         private IHealth _health;
 
@@ -15,10 +15,6 @@ namespace Gameplay.Entities.Explosive.Barrel
             _health = health;
         }
 
-        [Button]
-        public void Explode()
-        {
-            _health.Kill();
-        }
+        [Button] private void Kill() => _health.Kill();
     }
 }

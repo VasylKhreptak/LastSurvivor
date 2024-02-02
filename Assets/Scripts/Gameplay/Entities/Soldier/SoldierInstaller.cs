@@ -56,6 +56,7 @@ namespace Gameplay.Entities.Soldier
             BindShootAudio();
             BindShootParticle();
             BindShooter();
+            BindDeathHandler();
             RegisterSoldier();
             EnterIdleState();
         }
@@ -117,5 +118,7 @@ namespace Gameplay.Entities.Soldier
         private void BindShooter() => Container.BindInterfacesAndSelfTo<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
 
         private void BindShootAudio() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_shootAudioPlayerPreferences);
+
+        private void BindDeathHandler() => Container.BindInterfacesTo<SoldierDeathHandler>().AsSingle();
     }
 }

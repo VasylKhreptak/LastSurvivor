@@ -4768,10 +4768,10 @@ GameObject:
   - component: {fileID: 2393415078791242719}
   - component: {fileID: 5842275132504761259}
   - component: {fileID: 7931056641955493420}
-  - component: {fileID: 9175440646917912870}
   - component: {fileID: 610723449602222007}
   - component: {fileID: 2172087858476347710}
   - component: {fileID: 5001385618804809085}
+  - component: {fileID: -4313771555921790269}
   m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
@@ -5043,18 +5043,6 @@ MonoBehaviour:
     _fireParticle: {fileID: 398295252882507785}
     _healthPercentageThreshold: 0.5
     _damagePerSecond: 5
---- !u!114 &9175440646917912870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4298118525142463062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 020ca83b20594d06ac7b727078751253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!208 &610723449602222007
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -5093,5 +5081,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afdbe338a2024ea09ab9021630d593ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4313771555921790269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298118525142463062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2aceb62b5024089b83c845c6f94bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

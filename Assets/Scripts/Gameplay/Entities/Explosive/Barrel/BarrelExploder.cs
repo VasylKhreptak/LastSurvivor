@@ -7,7 +7,7 @@ using Plugins.ObjectPoolSystem;
 using UnityEngine;
 using Utilities.CameraUtilities.Shaker;
 
-namespace Gameplay.Entities.Explosive.Barrel.DeathHandlers.Core
+namespace Gameplay.Entities.Explosive.Barrel
 {
     public class BarrelExploder : DeathHandler
     {
