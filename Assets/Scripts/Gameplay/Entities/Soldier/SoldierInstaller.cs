@@ -4,6 +4,8 @@ using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Soldier.StateMachine;
 using Gameplay.Entities.Soldier.StateMachine.States;
+using ObjectPoolSystem;
+using ObjectPoolSystem.PoolCategories;
 using Tags.Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,6 +29,7 @@ namespace Gameplay.Entities.Soldier
         [SerializeField] private SoldierAimer.Preferences _soldierAimerPreferences;
         [SerializeField] private SoldierShooter.Preferences _shootPreferences;
         [SerializeField] private AudioPlayer.Preferences _shootAudioPlayerPreferences;
+        [SerializeField] private ObjectSpawner<Particle>.Preferences _shootParticlePreferences;
 
         private Platoon.Platoon _platoon;
 
@@ -51,6 +54,7 @@ namespace Gameplay.Entities.Soldier
             BindRagdoll();
             BindStateMachine();
             BindShootAudio();
+            BindShootParticle();
             BindShooter();
             RegisterSoldier();
             EnterIdleState();
@@ -107,6 +111,8 @@ namespace Gameplay.Entities.Soldier
 
         private void RegisterSoldier() => _platoon.Soldiers.Add(GetComponent<Soldier>());
 
+        private void BindShootParticle() => Container.Bind<ObjectSpawner<Particle>>().AsSingle().WithArguments(_shootParticlePreferences);
+        
         private void BindShooter() => Container.Bind<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
 
         private void BindShootAudio() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_shootAudioPlayerPreferences);

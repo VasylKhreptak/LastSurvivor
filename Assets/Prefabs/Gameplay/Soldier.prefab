@@ -932,6 +932,8 @@ MonoBehaviour:
       RolloffMode: 1
       MinDistance: 1
       MaxDistance: 50
+  _shootParticlePreferences:
+    _poolType: 4
 --- !u!195 &141099724320176329
 NavMeshAgent:
   m_ObjectHideFlags: 0

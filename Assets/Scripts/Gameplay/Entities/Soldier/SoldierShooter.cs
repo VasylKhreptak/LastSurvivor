@@ -2,6 +2,7 @@
 using Audio.Players;
 using Extensions;
 using Gameplay.Weapons.Bullets;
+using ObjectPoolSystem;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UniRx;
@@ -14,22 +15,22 @@ namespace Gameplay.Entities.Soldier
     {
         private readonly SoldierAimer _aimer;
         private readonly IObjectPools<GeneralPool> _generalPools;
+        private readonly ObjectSpawner<Particle> _shootParticleSpawner;
         private readonly AudioPlayer _shootAudioPlayer;
         private readonly Preferences _preferences;
 
-        public SoldierShooter(SoldierAimer aimer, IObjectPools<GeneralPool> generalPools, AudioPlayer shootAudioPlayer,
-            Preferences preferences)
+        public SoldierShooter(SoldierAimer aimer, IObjectPools<GeneralPool> generalPools, ObjectSpawner<Particle> shootParticleSpawner,
+            AudioPlayer shootAudioPlayer, Preferences preferences)
         {
             _aimer = aimer;
             _generalPools = generalPools;
+            _shootParticleSpawner = shootParticleSpawner;
             _shootAudioPlayer = shootAudioPlayer;
             _preferences = preferences;
         }
 
         private IDisposable _isAimedSubscription;
         private IDisposable _shootSubscription;
-
-        private Vector3 _bulletDirection;
 
         public void Enable()
         {
@@ -69,6 +70,7 @@ namespace Gameplay.Entities.Soldier
         {
             SpawnBullet();
             _shootAudioPlayer.Play(_preferences.SpawnPoint.position);
+            _shootParticleSpawner.Spawn(_preferences.SpawnPoint.position, _preferences.SpawnPoint.rotation);
         }
 
         private void SpawnBullet()
@@ -79,7 +81,6 @@ namespace Gameplay.Entities.Soldier
             bulletObject.transform.position = _preferences.SpawnPoint.position;
             bulletObject.transform.rotation = GetBulletRotation();
             bullet.Damage.Value = GetDamage();
-            _bulletDirection = bulletObject.transform.forward;
             AccelerateBullet(bullet);
         }
 
