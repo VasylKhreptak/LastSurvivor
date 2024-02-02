@@ -10,6 +10,8 @@ using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Utilities.PhysicsUtilities.Trigger;
 using Zenject;
+using Zenject.SpaceFighter;
+using AudioPlayer = Audio.Players.AudioPlayer;
 
 namespace Gameplay.Entities.Soldier
 {
@@ -24,6 +26,7 @@ namespace Gameplay.Entities.Soldier
         [SerializeField] private ClosestTriggerObserver<SoldierTarget>.Preferences _closestTargetObserverPreferences;
         [SerializeField] private SoldierAimer.Preferences _soldierAimerPreferences;
         [SerializeField] private SoldierShooter.Preferences _shootPreferences;
+        [SerializeField] private AudioPlayer.Preferences _shootAudioPlayerPreferences;
 
         private Platoon.Platoon _platoon;
 
@@ -47,7 +50,7 @@ namespace Gameplay.Entities.Soldier
             BindMoveAnimation();
             BindRagdoll();
             BindStateMachine();
-            
+            BindShootAudio();
             BindShooter();
             RegisterSoldier();
             EnterIdleState();
@@ -104,7 +107,8 @@ namespace Gameplay.Entities.Soldier
 
         private void RegisterSoldier() => _platoon.Soldiers.Add(GetComponent<Soldier>());
 
-        private void BindShooter() =>
-            Container.Bind<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
+        private void BindShooter() => Container.Bind<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
+
+        private void BindShootAudio() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_shootAudioPlayerPreferences);
     }
 }

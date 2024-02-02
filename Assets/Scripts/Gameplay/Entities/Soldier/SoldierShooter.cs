@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio.Players;
 using Extensions;
 using Gameplay.Weapons.Bullets;
 using ObjectPoolSystem.PoolCategories;
@@ -13,12 +14,15 @@ namespace Gameplay.Entities.Soldier
     {
         private readonly SoldierAimer _aimer;
         private readonly IObjectPools<GeneralPool> _generalPools;
+        private readonly AudioPlayer _shootAudioPlayer;
         private readonly Preferences _preferences;
 
-        public SoldierShooter(SoldierAimer aimer, IObjectPools<GeneralPool> generalPools, Preferences preferences)
+        public SoldierShooter(SoldierAimer aimer, IObjectPools<GeneralPool> generalPools, AudioPlayer shootAudioPlayer,
+            Preferences preferences)
         {
             _aimer = aimer;
             _generalPools = generalPools;
+            _shootAudioPlayer = shootAudioPlayer;
             _preferences = preferences;
         }
 
@@ -64,6 +68,7 @@ namespace Gameplay.Entities.Soldier
         private void Shoot()
         {
             SpawnBullet();
+            _shootAudioPlayer.Play(_preferences.SpawnPoint.position);
         }
 
         private void SpawnBullet()

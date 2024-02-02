@@ -898,18 +898,40 @@ MonoBehaviour:
   _closestTargetObserverPreferences:
     _updateInterval: 0.2
   _soldierAimerPreferences:
-    _speed: 10
+    _speed: 7
     _maxAngleThreshold: 5
   _shootPreferences:
     _spawnPoint: {fileID: 4978168838215678566}
-    _fireInterval: 0.1
+    _fireInterval: 0.15
     _minScatterAngle: 0.1
     _maxScatterAngle: 1
     _minDamage: 3
     _maxDamage: 9
-    _velocity: 200
+    _velocity: 100
     _minShootDelay: 0.1
     _maxShootDelay: 0.4
+  _shootAudioPlayerPreferences:
+    _clips:
+    - {fileID: 8300000, guid: 0cdcaabc652dccf468109678dab99077, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 135
+      Volume: 0.3
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 50
 --- !u!195 &141099724320176329
 NavMeshAgent:
   m_ObjectHideFlags: 0

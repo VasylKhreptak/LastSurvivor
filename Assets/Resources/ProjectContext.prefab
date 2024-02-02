@@ -82,7 +82,7 @@ MonoBehaviour:
     type: 3}
   _audioServicePreferences:
     InitialSize: 10
-    MaxSize: 50
+    MaxSize: 100
     DefaultSettings:
       AudioMixerGroup: {fileID: 24300002, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}
