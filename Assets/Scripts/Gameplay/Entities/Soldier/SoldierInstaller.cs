@@ -4,9 +4,11 @@ using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Soldier.StateMachine;
 using Gameplay.Entities.Soldier.StateMachine.States;
+using Tags.Gameplay;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
+using Utilities.PhysicsUtilities.Trigger;
 using Zenject;
 
 namespace Gameplay.Entities.Soldier
@@ -19,6 +21,16 @@ namespace Gameplay.Entities.Soldier
         [SerializeField] private PlaneMoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private Collider _targetDetectionCollider;
+        [SerializeField] private ClosestTriggerObserver<SoldierTarget>.Preferences _closestTargetObserverPreferences;
+        [SerializeField] private SoldierAimer.Preferences _soldierAimerPreferences;
+
+        private Platoon.Platoon _platoon;
+
+        [Inject]
+        private void Constructor(Platoon.Platoon platoon)
+        {
+            _platoon = platoon;
+        }
 
         public override void InstallBindings()
         {
@@ -29,10 +41,12 @@ namespace Gameplay.Entities.Soldier
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
             BindTargetsZone();
-
+            BindClosestTargetObserver();
+            BindSoldierAimer();
             BindMoveAnimation();
             BindRagdoll();
             BindStateMachine();
+            RegisterSoldier();
             EnterIdleState();
         }
 
@@ -66,6 +80,25 @@ namespace Gameplay.Entities.Soldier
             Container.Resolve<Ragdoll>().Disable();
         }
 
-        private void BindTargetsZone() { }
+        private void BindTargetsZone()
+        {
+            Container
+                .BindInterfacesAndSelfTo<TriggerZone<SoldierTarget>>()
+                .AsSingle()
+                .WithArguments(_targetDetectionCollider);
+        }
+
+        private void BindClosestTargetObserver()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ClosestTriggerObserver<SoldierTarget>>()
+                .AsSingle()
+                .WithArguments(_closestTargetObserverPreferences);
+        }
+
+        private void BindSoldierAimer() =>
+            Container.BindInterfacesAndSelfTo<SoldierAimer>().AsSingle().WithArguments(_viewTransform, _soldierAimerPreferences);
+
+        private void RegisterSoldier() => _platoon.Soldiers.Add(GetComponent<Soldier>());
     }
 }

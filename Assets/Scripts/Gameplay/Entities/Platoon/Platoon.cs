@@ -18,5 +18,7 @@ namespace Gameplay.Entities.Platoon
 
         public IReadOnlyList<Transform> SoldierPoints => _soldierPoints;
         public SplineTargetFollower TargetFollower { get; private set; }
+
+        public readonly List<Soldier.Soldier> Soldiers = new List<Soldier.Soldier>();
     }
 }

@@ -108,7 +108,7 @@ namespace Gameplay.Entities.Zombie
         private void EnterIdleState() => Container.Resolve<IStateMachine<IZombieState>>().Enter<IdleState>();
 
         private void BindZombieAttacker() =>
-            Container.BindInterfacesTo<ZombieAttacker>().AsSingle().WithArguments(_zombieAttackPreferences);
+            Container.BindInterfacesAndSelfTo<ZombieAttacker>().AsSingle().WithArguments(_zombieAttackPreferences);
 
         private void BindRagdoll()
         {

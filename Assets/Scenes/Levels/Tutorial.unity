@@ -12658,6 +12658,11 @@ MonoBehaviour:
     Prefab: {fileID: 137434, guid: 1895c7f6f9bfb4a4f81cae7409bf1554, type: 3}
     InitialSize: 40
     MaxSize: 150
+  - Key: 2
+    Prefab: {fileID: 2347811216486613142, guid: 3671cbc683e46914499dac36b0ee2695,
+      type: 3}
+    InitialSize: 10
+    MaxSize: 500
   _weaponAimPreferences:
     _aimLayerMask:
       serializedVersion: 2

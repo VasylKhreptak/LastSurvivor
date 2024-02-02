@@ -7276,6 +7276,7 @@ GameObject:
   - component: {fileID: 1083174825511434709}
   - component: {fileID: 9117447350832549679}
   - component: {fileID: 3968817868999791393}
+  - component: {fileID: 6665138327150845942}
   m_Layer: 7
   m_Name: Zombie
   m_TagString: Untagged
@@ -7381,7 +7382,7 @@ MonoBehaviour:
   _moveAnimationPreferences:
     _maxSpeed: 1
     _speedParameterName: Speed
-    _smoothTime: 15
+    _dampTime: 0.05
   _skinRandomizerPreferences:
     _gameObjects:
     - {fileID: 8073144373189409675}
@@ -7438,11 +7439,11 @@ MonoBehaviour:
     _minAngle: {x: 0, y: 0, z: 0}
     _maxAngle: {x: 0, y: 360, z: 0}
   _moveStatePreferences:
-    _stoppingDistance: 0.3
-    _destinationCheckInterval: 0.2
+    _positionThreshold: 0.1
+    _updateInterval: 0.1
   _targetDetectionCollider: {fileID: 433508265812897089}
-  _zombieTargetFollowerPreferences:
-    _updateInterval: 0.3
+  _closestTriggerObserverPreferences:
+    _updateInterval: 0.2
   _zombieAttackPreferences:
     _attackTrigger: {fileID: 6476738792470765270}
     _minDamage: 10
@@ -7557,6 +7558,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626d966b84a545a6bca4f15f6cf736e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6665138327150845942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6613462932983406862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926b29558f7c4d1599f664651a26e24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6847477969841304833

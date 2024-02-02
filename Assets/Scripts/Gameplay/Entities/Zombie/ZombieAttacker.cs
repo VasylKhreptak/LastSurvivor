@@ -15,13 +15,14 @@ namespace Gameplay.Entities.Zombie
     {
         private readonly Animator _animator;
         private readonly Preferences _preferences;
-
+        private readonly TickableManager _tickableManager;
         private readonly TriggerZone<IVisitable<ZombieDamage>> _damageZone;
 
-        public ZombieAttacker(Animator animator, Preferences preferences)
+        public ZombieAttacker(Animator animator, Preferences preferences, TickableManager tickableManager)
         {
             _animator = animator;
             _preferences = preferences;
+            _tickableManager = tickableManager;
             _damageZone = new TriggerZone<IVisitable<ZombieDamage>>(_preferences.AttackTrigger);
         }
 
@@ -32,16 +33,16 @@ namespace Gameplay.Entities.Zombie
 
         private Tween _layerTween;
 
-        public void Initialize()
+        public void Start()
         {
             StartObserving();
             _damageZone.Initialize();
+            _tickableManager.AddFixed(this);
         }
 
-        public void FixedTick() => _damageZone.FixedTick();
-
-        public void Dispose()
+        public void Stop()
         {
+            _tickableManager.RemoveFixed(this);
             StopObserving();
             _damageZone.Dispose();
             _damageDelaySubscription?.Dispose();
@@ -51,8 +52,15 @@ namespace Gameplay.Entities.Zombie
             _animator.SetLayerWeight(_preferences.AttackLayerIndex, 0f);
         }
 
+        public void Initialize() => _tickableManager.RemoveFixed(this);
+
+        public void FixedTick() => _damageZone.FixedTick();
+
+        public void Dispose() => Stop();
+
         private void StartObserving()
         {
+            OnCountChanged(_damageZone.Triggers.Count);
             _damageZoneSubscription = _damageZone.Triggers
                 .ObserveCountChanged()
                 .Subscribe(OnCountChanged);
