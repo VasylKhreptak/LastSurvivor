@@ -1,30 +1,25 @@
 ﻿using Gameplay.Entities.Health.Damages;
-using Gameplay.Weapons.Bullets.Core;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Weapons.Bullets
 {
-    public class Bullet : MonoBehaviour, IBullet
+    public class Bullet : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] private Transform _transform;
-        [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private float _defaultDamage = 10f;
+        private Transform _transform;
+        private Rigidbody _rigidbody;
+        private BulletDamage _damage;
 
-        #region MonoBehaviour
-
-        private void Awake() => Damage = new BulletDamage(_defaultDamage);
-
-        private void OnValidate()
+        [Inject]
+        private void Constructor(Transform transform, Rigidbody rigidbody, BulletDamage damage)
         {
-            _transform ??= GetComponent<Transform>();
-            _rigidbody ??= GetComponent<Rigidbody>();
+            _transform = transform;
+            _rigidbody = rigidbody;
+            _damage = damage;
         }
-
-        #endregion
 
         public Transform Transform => _transform;
         public Rigidbody Rigidbody => _rigidbody;
-        public BulletDamage Damage { get; private set; }
+        public BulletDamage Damage => _damage;
     }
 }

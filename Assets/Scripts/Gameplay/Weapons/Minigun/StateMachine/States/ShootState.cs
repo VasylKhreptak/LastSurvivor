@@ -1,7 +1,7 @@
 ﻿using System;
 using Audio.Players;
 using Extensions;
-using Gameplay.Weapons.Bullets.Core;
+using Gameplay.Weapons.Bullets;
 using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Holders.Core;
@@ -89,7 +89,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private void SpawnBullet()
         {
             GameObject bulletObject = _generalPools.GetPool(GeneralPool.Bullet).Get();
-            IBullet bullet = bulletObject.GetComponent<IBullet>();
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
 
             Vector3 bulletPosition = GetBulletPosition();
             bulletObject.transform.position = bulletPosition;
@@ -124,7 +124,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
         private float GetDamage() => Random.Range(_preferences.MinDamage, _preferences.MaxDamage);
 
-        private void AccelerateBullet(IBullet bullet)
+        private void AccelerateBullet(Bullet bullet)
         {
             bullet.Rigidbody.angularVelocity = Vector3.zero;
             bullet.Rigidbody.velocity = bullet.Transform.forward * _preferences.Velocity;

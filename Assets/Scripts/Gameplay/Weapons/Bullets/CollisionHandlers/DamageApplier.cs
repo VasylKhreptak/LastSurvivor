@@ -1,5 +1,4 @@
 ﻿using Gameplay.Entities.Health.Damages;
-using Gameplay.Weapons.Bullets.Core;
 using UnityEngine;
 using Visitor;
 
@@ -7,17 +6,14 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
 {
     public class DamageApplier
     {
-        private readonly IBullet _bullet;
+        private readonly BulletDamage _bulletDamage;
 
-        public DamageApplier(IBullet bullet)
-        {
-            _bullet = bullet;
-        }
+        public DamageApplier(BulletDamage bulletDamage) => _bulletDamage = bulletDamage;
 
         public void TryApply(GameObject gameObject)
         {
             if (gameObject.TryGetComponent(out IVisitable<BulletDamage> visitable))
-                visitable.Accept(_bullet.Damage);
+                visitable.Accept(_bulletDamage);
         }
     }
 }
