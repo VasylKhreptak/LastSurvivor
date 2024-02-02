@@ -25,7 +25,7 @@ namespace Entities.Animations
         private Vector3 _normalizedVelocity;
         private float _speed01;
         private Quaternion _rotationDifference;
-        private Vector2 _planeInput;
+        private Vector3 _planeInput;
 
         public void Tick() => Animate();
 
@@ -40,7 +40,7 @@ namespace Entities.Animations
             _planeInput = _rotationDifference * _normalizedVelocity;
 
             _animator.SetFloat(_preferences.HorizontalParameterName, _planeInput.x, _preferences.DampTime, Time.deltaTime);
-            _animator.SetFloat(_preferences.VerticalParameterName, _planeInput.y, _preferences.DampTime, Time.deltaTime);
+            _animator.SetFloat(_preferences.VerticalParameterName, _planeInput.z, _preferences.DampTime, Time.deltaTime);
         }
 
         [Serializable]

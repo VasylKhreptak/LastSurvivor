@@ -42,7 +42,6 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         private IDisposable _shootSubscription;
 
         private InstanceHolder<Action> _reloadStatePayload;
-        private readonly InstanceHolder<Action> _spinDownStatePayload = new InstanceHolder<Action>();
 
         private Vector3 _bulletPosition;
         private Vector3 _bulletDirection;
