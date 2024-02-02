@@ -33,7 +33,7 @@ namespace Gameplay.Entities.Soldier
         {
             UpdateTargetRotation();
             Aim();
-            UpdateIsAimerProperty();
+            UpdateIsAimedProperty();
         }
 
         private void UpdateTargetRotation()
@@ -52,9 +52,9 @@ namespace Gameplay.Entities.Soldier
         private void Aim() =>
             _transform.rotation = Quaternion.Lerp(_transform.rotation, _targetRotation, _preferences.Speed * Time.deltaTime);
 
-        private void UpdateIsAimerProperty()
+        private void UpdateIsAimedProperty()
         {
-            if (Enabled == false)
+            if (_closestTargetObserver.Trigger.Value == null || Enabled == false)
             {
                 _isAimed.Value = false;
                 return;
