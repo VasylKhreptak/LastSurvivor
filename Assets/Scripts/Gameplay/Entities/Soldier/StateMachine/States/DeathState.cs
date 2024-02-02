@@ -1,4 +1,5 @@
 ﻿using Gameplay.Entities.Soldier.StateMachine.States.Core;
+using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,14 +15,17 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
         private readonly Animator _animator;
         private readonly Collider _collider;
         private readonly NavMeshAgent _agent;
+        private readonly IPersistentDataService _persistentDataService;
 
-        public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, NavMeshAgent agent)
+        public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, NavMeshAgent agent,
+            IPersistentDataService persistentDataService)
         {
             _kernel = kernel;
             _ragdoll = ragdoll;
             _animator = animator;
             _collider = collider;
             _agent = agent;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()
@@ -31,6 +35,7 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
             _collider.enabled = false;
             _agent.enabled = false;
             _ragdoll.Enable();
+            _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Spend(1);
         }
     }
 }

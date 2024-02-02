@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Entities.Soldier
 {
-    public class SoldierShooter
+    public class SoldierShooter : IDisposable
     {
         private readonly SoldierAimer _aimer;
         private readonly IObjectPools<GeneralPool> _generalPools;
@@ -42,6 +42,8 @@ namespace Gameplay.Entities.Soldier
             StopObservingAim();
             StopShooting();
         }
+
+        public void Dispose() => Disable();
 
         private void StartObservingAim() => _isAimedSubscription = _aimer.IsAimed.Subscribe(OnIsAimedChanged);
 

@@ -111,9 +111,10 @@ namespace Gameplay.Entities.Soldier
 
         private void RegisterSoldier() => _platoon.Soldiers.Add(GetComponent<Soldier>());
 
-        private void BindShootParticle() => Container.Bind<ObjectSpawner<Particle>>().AsSingle().WithArguments(_shootParticlePreferences);
-        
-        private void BindShooter() => Container.Bind<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
+        private void BindShootParticle() =>
+            Container.Bind<ObjectSpawner<Particle>>().AsSingle().WithArguments(_shootParticlePreferences);
+
+        private void BindShooter() => Container.BindInterfacesAndSelfTo<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
 
         private void BindShootAudio() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_shootAudioPlayerPreferences);
     }
