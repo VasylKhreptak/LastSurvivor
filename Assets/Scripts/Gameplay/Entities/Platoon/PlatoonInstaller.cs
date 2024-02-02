@@ -21,6 +21,7 @@ namespace Gameplay.Entities.Platoon
             BindMovement();
         }
 
-        private void BindMovement() => Container.BindInterfacesAndSelfTo<SplineTargetFollower>().AsSingle().WithArguments(_movePreferences);
+        private void BindMovement() =>
+            Container.BindInterfacesAndSelfTo<SplineTargetFollower>().AsSingle().WithArguments(_movePreferences);
     }
 }

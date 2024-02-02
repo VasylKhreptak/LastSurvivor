@@ -7,14 +7,12 @@ namespace Gameplay.Entities.Soldier
 {
     public class Soldier : MonoBehaviour
     {
-        private IStateMachine<ISoldierState> _stateMachine;
-
         [Inject]
         private void Constructor(IStateMachine<ISoldierState> stateMachine)
         {
-            _stateMachine = stateMachine;
+            StateMachine = stateMachine;
         }
 
-        public IStateMachine<ISoldierState> StateMachine => _stateMachine;
+        public IStateMachine<ISoldierState> StateMachine { get; private set; }
     }
 }

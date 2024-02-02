@@ -8,7 +8,10 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
     {
         private readonly BulletDamage _bulletDamage;
 
-        public DamageApplier(BulletDamage bulletDamage) => _bulletDamage = bulletDamage;
+        public DamageApplier(BulletDamage bulletDamage)
+        {
+            _bulletDamage = bulletDamage;
+        }
 
         public void TryApply(GameObject gameObject)
         {

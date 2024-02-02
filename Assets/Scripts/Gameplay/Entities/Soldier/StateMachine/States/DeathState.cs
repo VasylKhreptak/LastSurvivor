@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Gameplay.Entities.Soldier.StateMachine.States.Core;
+﻿using Gameplay.Entities.Soldier.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using UnityEngine;
 using UnityEngine.AI;

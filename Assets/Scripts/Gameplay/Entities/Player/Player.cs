@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Gameplay.Entities.Health.Core;
+﻿using Gameplay.Entities.Health.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;

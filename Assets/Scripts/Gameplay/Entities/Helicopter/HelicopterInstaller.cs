@@ -1,6 +1,4 @@
-﻿using Gameplay.Entities.Player;
-using Noise;
-using UniRx;
+﻿using Noise;
 using UnityEngine;
 using UnityEngine.Splines;
 using Utilities.SplineUtilities;

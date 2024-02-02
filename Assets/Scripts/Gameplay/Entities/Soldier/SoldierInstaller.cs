@@ -28,7 +28,6 @@ namespace Gameplay.Entities.Soldier
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
-            
             BindTargetsZone();
 
             BindMoveAnimation();

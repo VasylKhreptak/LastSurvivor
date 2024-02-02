@@ -5,9 +5,6 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
 {
     public class IdleState : ISoldierState, IState
     {
-        public void Enter()
-        {
-            
-        }
+        public void Enter() { }
     }
 }

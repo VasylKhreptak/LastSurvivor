@@ -6,20 +6,18 @@ namespace Gameplay.Weapons.Bullets
 {
     public class Bullet : MonoBehaviour
     {
-        private Transform _transform;
-        private Rigidbody _rigidbody;
-        private BulletDamage _damage;
-
         [Inject]
         private void Constructor(Transform transform, Rigidbody rigidbody, BulletDamage damage)
         {
-            _transform = transform;
-            _rigidbody = rigidbody;
-            _damage = damage;
+            Transform = transform;
+            Rigidbody = rigidbody;
+            Damage = damage;
         }
 
-        public Transform Transform => _transform;
-        public Rigidbody Rigidbody => _rigidbody;
-        public BulletDamage Damage => _damage;
+        public Transform Transform { get; private set; }
+
+        public Rigidbody Rigidbody { get; private set; }
+
+        public BulletDamage Damage { get; private set; }
     }
 }
