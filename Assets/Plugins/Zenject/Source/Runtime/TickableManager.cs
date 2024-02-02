@@ -68,6 +68,11 @@ namespace Zenject
             get { return _tickables; }
         }
 
+        public IEnumerable<IFixedTickable> FixedTickables
+        {
+            get { return _fixedTickables; }
+        }
+        
         public bool IsPaused
         {
             get { return _isPaused; }

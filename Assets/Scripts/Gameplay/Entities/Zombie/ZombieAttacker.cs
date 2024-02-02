@@ -11,18 +11,16 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Entities.Zombie
 {
-    public class ZombieAttacker : IInitializable, IFixedTickable, IDisposable
+    public class ZombieAttacker : IFixedTickable, IDisposable
     {
         private readonly Animator _animator;
         private readonly Preferences _preferences;
-        private readonly TickableManager _tickableManager;
         private readonly TriggerZone<IVisitable<ZombieDamage>> _damageZone;
 
         public ZombieAttacker(Animator animator, Preferences preferences, TickableManager tickableManager)
         {
             _animator = animator;
             _preferences = preferences;
-            _tickableManager = tickableManager;
             _damageZone = new TriggerZone<IVisitable<ZombieDamage>>(_preferences.AttackTrigger);
         }
 
@@ -37,12 +35,10 @@ namespace Gameplay.Entities.Zombie
         {
             StartObserving();
             _damageZone.Initialize();
-            _tickableManager.AddFixed(this);
         }
 
         public void Stop()
         {
-            _tickableManager.RemoveFixed(this);
             StopObserving();
             _damageZone.Dispose();
             _damageDelaySubscription?.Dispose();
@@ -51,8 +47,6 @@ namespace Gameplay.Entities.Zombie
             _layerTween?.Kill();
             _animator.SetLayerWeight(_preferences.AttackLayerIndex, 0f);
         }
-
-        public void Initialize() => _tickableManager.RemoveFixed(this);
 
         public void FixedTick() => _damageZone.FixedTick();
 
