@@ -33,6 +33,7 @@ namespace Gameplay.Entities.Soldier
         {
             UpdateTargetRotation();
             Aim();
+            UpdateIsAimerProperty();
         }
 
         private void UpdateTargetRotation()
@@ -48,9 +49,17 @@ namespace Gameplay.Entities.Soldier
             _targetRotation = Quaternion.LookRotation(_lookPoint - _transform.position);
         }
 
-        private void Aim()
-        {
+        private void Aim() =>
             _transform.rotation = Quaternion.Lerp(_transform.rotation, _targetRotation, _preferences.Speed * Time.deltaTime);
+
+        private void UpdateIsAimerProperty()
+        {
+            if (Enabled == false)
+            {
+                _isAimed.Value = false;
+                return;
+            }
+
             _isAimed.Value = Quaternion.Angle(_transform.rotation, _targetRotation) < _preferences.MaxAngleThreshold;
         }
 
