@@ -9,12 +9,14 @@ namespace Gameplay.Entities.Soldier
     {
         public IStateMachine<ISoldierState> StateMachine { get; private set; }
         public SoldierAimer Aimer { get; private set; }
+        public SoldierShooter Shooter { get; private set; }
 
         [Inject]
-        private void Constructor(IStateMachine<ISoldierState> stateMachine, SoldierAimer aimer)
+        private void Constructor(IStateMachine<ISoldierState> stateMachine, SoldierAimer aimer, SoldierShooter shooter)
         {
             StateMachine = stateMachine;
             Aimer = aimer;
+            Shooter = shooter;
         }
     }
 }

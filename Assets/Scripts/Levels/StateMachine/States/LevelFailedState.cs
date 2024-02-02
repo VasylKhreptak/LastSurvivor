@@ -53,7 +53,11 @@ namespace Levels.StateMachine.States
             _levelFailedWindow.Show();
             _hud.Hide();
             _helicopter.TargetFollower.Target = null;
-            _platoon.Soldiers.ForEach(soldier => soldier.Aimer.Enabled = false);
+            _platoon.Soldiers.ForEach(soldier =>
+            {
+                soldier.Aimer.Enabled = false;
+                soldier.Shooter.Disable();
+            });
         }
     }
 }

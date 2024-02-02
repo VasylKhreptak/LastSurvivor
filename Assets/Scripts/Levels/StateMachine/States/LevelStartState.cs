@@ -42,7 +42,11 @@ namespace Levels.StateMachine.States
             _startWindows.Hide();
             _weaponAim.Show();
             _hud.Show();
-            _platoon.Soldiers.ForEach(soldier => soldier.Aimer.Enabled = true);
+            _platoon.Soldiers.ForEach(soldier =>
+            {
+                soldier.Aimer.Enabled = true;
+                soldier.Shooter.Enable();
+            });
         }
     }
 }

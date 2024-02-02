@@ -49,7 +49,11 @@ namespace Levels.StateMachine.States
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
             _hud.Hide();
-            _platoon.Soldiers.ForEach(soldier => soldier.Aimer.Enabled = false);
+            _platoon.Soldiers.ForEach(soldier =>
+            {
+                soldier.Aimer.Enabled = false;
+                soldier.Shooter.Disable();
+            });
         }
     }
 }

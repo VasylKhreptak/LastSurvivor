@@ -23,7 +23,7 @@ namespace Gameplay.Entities.Soldier
         private Quaternion _targetRotation;
         private Vector3 _lookPoint;
 
-        private BoolReactiveProperty _isAimed = new BoolReactiveProperty(false);
+        private readonly BoolReactiveProperty _isAimed = new BoolReactiveProperty(false);
 
         public IReadOnlyReactiveProperty<bool> IsAimed => _isAimed;
 

@@ -23,6 +23,7 @@ namespace Gameplay.Entities.Soldier
         [SerializeField] private Collider _targetDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<SoldierTarget>.Preferences _closestTargetObserverPreferences;
         [SerializeField] private SoldierAimer.Preferences _soldierAimerPreferences;
+        [SerializeField] private SoldierShooter.Preferences _shootPreferences;
 
         private Platoon.Platoon _platoon;
 
@@ -42,10 +43,12 @@ namespace Gameplay.Entities.Soldier
 
             BindTargetsZone();
             BindClosestTargetObserver();
-            BindSoldierAimer();
+            BindAimer();
             BindMoveAnimation();
             BindRagdoll();
             BindStateMachine();
+            
+            BindShooter();
             RegisterSoldier();
             EnterIdleState();
         }
@@ -96,9 +99,12 @@ namespace Gameplay.Entities.Soldier
                 .WithArguments(_closestTargetObserverPreferences);
         }
 
-        private void BindSoldierAimer() =>
+        private void BindAimer() =>
             Container.BindInterfacesAndSelfTo<SoldierAimer>().AsSingle().WithArguments(_viewTransform, _soldierAimerPreferences);
 
         private void RegisterSoldier() => _platoon.Soldiers.Add(GetComponent<Soldier>());
+
+        private void BindShooter() =>
+            Container.Bind<SoldierShooter>().AsSingle().WithArguments(_shootPreferences);
     }
 }
