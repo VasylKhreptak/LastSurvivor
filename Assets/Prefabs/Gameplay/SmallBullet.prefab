@@ -341,7 +341,7 @@ MonoBehaviour:
   _lifetimePreferences:
     _lifetime: 1
   _impulseTransmitterPreferences:
-    _impulseMultiplier: 5
+    _impulseMultiplier: 7
   _hitAudioPlayerPreferences:
     _surfaceAudioPairs:
       _pairs:
