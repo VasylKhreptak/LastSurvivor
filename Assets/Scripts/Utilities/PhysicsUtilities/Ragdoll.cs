@@ -18,6 +18,9 @@ namespace Utilities.PhysicsUtilities
             _preferences = preferences;
         }
 
+        public IReadOnlyList<Collider> Colliders => _preferences.Colliders;
+        public IReadOnlyList<Rigidbody> Rigidbodies => _preferences.Rigidbodies;
+
         public void Enable()
         {
             _preferences.Colliders.ForEach(c => c.enabled = true);
