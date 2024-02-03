@@ -79,7 +79,7 @@ MonoBehaviour:
     _maxScatterAngle: 1.5
     _minDamage: 5
     _maxDamage: 15
-    _velocity: 300
+    _velocity: 200
   _fireAudioPreferences:
     _clips:
     - {fileID: 8300000, guid: a813aad129c9e6045aa1ddcbdb8a508a, type: 3}
