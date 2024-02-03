@@ -7,6 +7,8 @@ using Gameplay.Entities.Health.Damages;
 using Gameplay.Entities.Zombie.StateMachine;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
+using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,7 +23,6 @@ namespace Gameplay.Entities.Zombie
 {
     public class ZombieInstaller : MonoInstaller
     {
-        [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
@@ -32,11 +33,16 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
 
         private List<Zombie> _zombies;
+        private IPersistentDataService _persistentDataService;
+        private IStaticDataService _staticDataService;
 
         [Inject]
-        private void Constructor(List<Zombie> zombies)
+        private void Constructor(List<Zombie> zombies, IPersistentDataService persistentDataService,
+            IStaticDataService staticDataService)
         {
             _zombies = zombies;
+            _persistentDataService = persistentDataService;
+            _staticDataService = staticDataService;
         }
 
         public override void InstallBindings()
@@ -46,7 +52,7 @@ namespace Gameplay.Entities.Zombie
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
             Container.Bind<Zombie>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
-            Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
+            Container.Bind<IHealth>().FromInstance(new Health.Health(GetHealth())).AsSingle();
 
             RandomizeSkin();
             RandomizeRotation();
@@ -61,6 +67,9 @@ namespace Gameplay.Entities.Zombie
             EnterIdleState();
             RegisterZombie();
         }
+
+        private float GetHealth() =>
+            _staticDataService.Balance.ZombieHealth.Get(_persistentDataService.PersistentData.PlayerData.Level);
 
         private void BindMoveAnimation() =>
             Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);

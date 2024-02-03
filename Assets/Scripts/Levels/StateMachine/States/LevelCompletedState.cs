@@ -56,7 +56,7 @@ namespace Levels.StateMachine.States
                 soldier.Aimer.Enabled = false;
                 soldier.Shooter.Disable();
             });
-            _persistentDataService.PersistentData.PlayerData.Level.Value++;
+            _persistentDataService.PersistentData.PlayerData.Level++;
         }
     }
 }

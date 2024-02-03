@@ -2,6 +2,8 @@
 using System.Linq;
 using DG.Tweening;
 using Gameplay.Entities.Health.Damages;
+using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.Services.StaticData.Core;
 using UniRx;
 using UnityEngine;
 using Utilities.PhysicsUtilities.Trigger;
@@ -16,11 +18,16 @@ namespace Gameplay.Entities.Zombie
         private readonly Animator _animator;
         private readonly Preferences _preferences;
         private readonly TriggerZone<IVisitable<ZombieDamage>> _damageZone;
+        private readonly IPersistentDataService _persistentDataService;
+        private readonly IStaticDataService _staticDataService;
 
-        public ZombieAttacker(Animator animator, Preferences preferences, TickableManager tickableManager)
+        public ZombieAttacker(Animator animator, Preferences preferences, IPersistentDataService persistentDataService,
+            IStaticDataService staticDataService)
         {
             _animator = animator;
             _preferences = preferences;
+            _persistentDataService = persistentDataService;
+            _staticDataService = staticDataService;
             _damageZone = new TriggerZone<IVisitable<ZombieDamage>>(_preferences.AttackTrigger);
         }
 
@@ -118,15 +125,16 @@ namespace Gameplay.Entities.Zombie
 
             IVisitable<ZombieDamage> damageable = _damageZone.Triggers.Last().Value;
 
-            damageable.Accept(new ZombieDamage(Random.Range(_preferences.MinDamage, _preferences.MaxDamage)));
+            damageable.Accept(new ZombieDamage(GetDamage()));
         }
+
+        private float GetDamage() =>
+            _staticDataService.Balance.ZombieDamage.Get(_persistentDataService.PersistentData.PlayerData.Level);
 
         [Serializable]
         public class Preferences
         {
             [SerializeField] private Collider _attackTrigger;
-            [SerializeField] private float _minDamage = 10f;
-            [SerializeField] private float _maxDamage = 20f;
             [SerializeField] private float _attackInterval = 1f;
             [SerializeField] private float _damageApplyDelay = 0.5f;
             [SerializeField] private float _layerSwitchDuration = 0.3f;
@@ -135,8 +143,6 @@ namespace Gameplay.Entities.Zombie
             [SerializeField] private int _attackLayerIndex = 1;
 
             public Collider AttackTrigger => _attackTrigger;
-            public float MinDamage => _minDamage;
-            public float MaxDamage => _maxDamage;
             public float AttackInterval => _attackInterval;
             public float DamageApplyDelay => _damageApplyDelay;
             public float LayerSwitchDuration => _layerSwitchDuration;
