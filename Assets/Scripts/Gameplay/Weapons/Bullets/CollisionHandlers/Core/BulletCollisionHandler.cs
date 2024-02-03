@@ -35,9 +35,9 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers.Core
         private void OnCollisionEnter(Collision collision)
         {
             _hitParticle.Spawn(collision);
-            _impulseTransmitter.TryTransmit(collision);
             _hitAudioPlayer.Play(collision);
             _damageApplier.TryApply(collision.gameObject);
+            _impulseTransmitter.TryTransmit(collision);
             _gameObject.SetActive(false);
         }
     }
