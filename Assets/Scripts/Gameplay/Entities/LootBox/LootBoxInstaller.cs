@@ -36,7 +36,7 @@ namespace Gameplay.Entities.LootBox
         private float GetHealth() =>
             _staticDataService.Balance.LootBoxHealth.Get(_persistentDataService.PersistentData.PlayerData.Level);
 
-        private void BIndDeathHandler() => Container.BindInterfacesTo<DeathHandler>().AsSingle();
+        private void BIndDeathHandler() => Container.BindInterfacesTo<LootBoxDeathHandler>().AsSingle();
 
         private void BindHitShakeLayer() =>
             Container.BindInterfacesAndSelfTo<ShakeLayer>().AsSingle().WithArguments(_hitShakePreferences);
