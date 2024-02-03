@@ -43,10 +43,8 @@ namespace Levels.StateMachine.States
                 zombie.TargetFollower.Stop();
                 zombie.Attacker.Stop();
             });
-
             if (_playerHolder.Instance != null)
                 _playerHolder.Instance.WaypointFollower.Stop();
-
             _trackpad.enabled = false;
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;

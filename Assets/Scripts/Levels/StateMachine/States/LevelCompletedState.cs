@@ -4,6 +4,7 @@ using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Weapons;
+using Infrastructure.Services.PersistentData.Core;
 using Levels.StateMachine.States.Core;
 using UI.Gameplay.Windows;
 
@@ -19,9 +20,11 @@ namespace Levels.StateMachine.States
         private readonly WeaponAimer _weaponAimer;
         private readonly HUD _hud;
         private readonly Platoon _platoon;
+        private readonly IPersistentDataService _persistentDataService;
 
         public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad,
-            LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer, HUD hud, Platoon platoon)
+            LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer, HUD hud, Platoon platoon,
+            IPersistentDataService persistentDataService)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -31,6 +34,7 @@ namespace Levels.StateMachine.States
             _weaponAimer = weaponAimer;
             _hud = hud;
             _platoon = platoon;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()
@@ -40,10 +44,8 @@ namespace Levels.StateMachine.States
                 zombie.TargetFollower.Stop();
                 zombie.Attacker.Stop();
             });
-
             if (_playerHolder.Instance != null)
                 _playerHolder.Instance.WaypointFollower.Stop();
-
             _trackpad.enabled = false;
             _levelCompletedWindow.Show();
             _weaponAim.Hide();
@@ -54,6 +56,7 @@ namespace Levels.StateMachine.States
                 soldier.Aimer.Enabled = false;
                 soldier.Shooter.Disable();
             });
+            _persistentDataService.PersistentData.PlayerData.Level.Value++;
         }
     }
 }
