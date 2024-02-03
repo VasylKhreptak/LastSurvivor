@@ -4941,12 +4941,12 @@ MonoBehaviour:
   _rigidbodyAffectorPreferences:
     _layerMask:
       serializedVersion: 2
-      m_Bits: 183
+      m_Bits: 439
     _upwardsModifier: 1
     _minRadius: 0
     _maxRadius: 7
-    _minImpulse: 30
-    _maxImpulse: 90
+    _minImpulse: 20
+    _maxImpulse: 70
     _impulseCurve:
       serializedVersion: 2
       m_Curve:
