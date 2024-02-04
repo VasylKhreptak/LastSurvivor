@@ -1,16 +1,23 @@
-﻿using UnityEngine;
+﻿using Gameplay.Entities.Health.Core;
+using Gameplay.Entities.Health.Damages;
+using UnityEngine;
+using Visitor;
 using Zenject;
 
 namespace Gameplay.Entities.Player
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IVisitable<ZombieDamage>
     {
-        public PlayerWaypointNavigator WaypointNavigator { get; private set; }
+        public PlayerMapNavigator MapNavigator { get; private set; }
+        private IHealth _health;
 
         [Inject]
-        private void Constructor(PlayerWaypointNavigator waypointNavigator)
+        private void Constructor(PlayerMapNavigator mapNavigator, IHealth health)
         {
-            WaypointNavigator = waypointNavigator;
+            MapNavigator = mapNavigator;
+            _health = health;
         }
+
+        public void Accept(ZombieDamage visitor) => _health.TakeDamage(visitor.Value);
     }
 }

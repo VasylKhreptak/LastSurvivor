@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 6000377401163250584}
   - component: {fileID: 1394540081336859478}
   - component: {fileID: 6722120080075699501}
-  - component: {fileID: 528633170250436618}
-  - component: {fileID: 5255135774348046455}
   - component: {fileID: 4518551091382016957}
+  - component: {fileID: -6896186655877854493}
   m_Layer: 0
   m_Name: LootBox
   m_TagString: Untagged
@@ -212,30 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2aceb62b5024089b83c845c6f94bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &528633170250436618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159523093437749476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afdbe338a2024ea09ab9021630d593ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5255135774348046455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159523093437749476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b2c1b2f33a448797da0dbaefc5a433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4518551091382016957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +224,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
+--- !u!114 &-6896186655877854493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159523093437749476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375eddb681924f8ca66d0bee80a58166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4783154555455364950
 PrefabInstance:
   m_ObjectHideFlags: 0

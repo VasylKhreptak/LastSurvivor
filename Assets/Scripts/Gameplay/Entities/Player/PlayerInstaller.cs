@@ -17,7 +17,6 @@ namespace Gameplay.Entities.Player
     public class PlayerInstaller : MonoInstaller
     {
         [SerializeField] private float _maxHealth = 100f;
-        [SerializeField] private Transform _soldiersFollowPointsRoot;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
@@ -29,12 +28,12 @@ namespace Gameplay.Entities.Player
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
-            BindSoldierFollowPoints();
             BindRagdoll();
             BindDeathHandler();
             BindMoveAnimation();
             BindStateMachine();
-            BindPlayerWaypointFollower();
+            BindPlayerWaypointNavigator();
+            BindPlayerMapNavigator();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
@@ -67,8 +66,8 @@ namespace Gameplay.Entities.Player
             Container.Resolve<Ragdoll>().Disable();
         }
 
-        private void BindPlayerWaypointFollower() => Container.BindInterfacesAndSelfTo<PlayerWaypointNavigator>().AsSingle();
+        private void BindPlayerWaypointNavigator() => Container.BindInterfacesAndSelfTo<PlayerWaypointNavigator>().AsSingle();
 
-        private void BindSoldierFollowPoints() { }
+        private void BindPlayerMapNavigator() => Container.BindInterfacesAndSelfTo<PlayerMapNavigator>().AsSingle();
     }
 }

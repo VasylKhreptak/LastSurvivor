@@ -7272,8 +7272,6 @@ GameObject:
   - component: {fileID: 5817691989356136870}
   - component: {fileID: 2835596606626720764}
   - component: {fileID: 937538748053821505}
-  - component: {fileID: 2630486150181374072}
-  - component: {fileID: 1083174825511434709}
   - component: {fileID: 9117447350832549679}
   - component: {fileID: 3968817868999791393}
   - component: {fileID: 6665138327150845942}
@@ -7379,7 +7377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230539f09b364f4f85ce0a4c0001fca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 70
   _moveAnimationPreferences:
     _maxSpeed: 1
     _speedParameterName: Speed
@@ -7447,8 +7444,6 @@ MonoBehaviour:
     _updateInterval: 0.2
   _zombieAttackPreferences:
     _attackTrigger: {fileID: 6476738792470765270}
-    _minDamage: 10
-    _maxDamage: 20
     _attackInterval: 0.9
     _damageApplyDelay: 0.7
     _layerSwitchDuration: 0.2
@@ -7512,30 +7507,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 3
---- !u!114 &2630486150181374072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613462932983406862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b2c1b2f33a448797da0dbaefc5a433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1083174825511434709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613462932983406862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afdbe338a2024ea09ab9021630d593ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9117447350832549679
 MonoBehaviour:
   m_ObjectHideFlags: 0

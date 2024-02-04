@@ -37,7 +37,7 @@ namespace Levels.StateMachine.States
                 zombie.TargetFollower.Start();
                 zombie.Attacker.Start();
             });
-            _playerHolder.Instance.WaypointNavigator.Start();
+            _playerHolder.Instance.MapNavigator.Start();
             _levelStateMachine.Enter<LevelLoopState>();
             _startWindows.Hide();
             _weaponAim.Show();

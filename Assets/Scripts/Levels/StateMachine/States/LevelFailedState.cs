@@ -44,7 +44,7 @@ namespace Levels.StateMachine.States
                 zombie.Attacker.Stop();
             });
             if (_playerHolder.Instance != null)
-                _playerHolder.Instance.WaypointNavigator.Stop();
+                _playerHolder.Instance.MapNavigator.Stop();
             _trackpad.enabled = false;
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
