@@ -1,5 +1,4 @@
 ﻿using Gameplay.Entities.Health.Core;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
@@ -10,15 +9,12 @@ namespace Gameplay.Entities.Player
         private IHealth _health;
 
         [Inject]
-        private void Constructor(IHealth health, PlayerWaypointFollower waypointFollower)
+        private void Constructor(IHealth health, PlayerWaypointNavigator waypointNavigator)
         {
             _health = health;
-            WaypointFollower = waypointFollower;
+            WaypointNavigator = waypointNavigator;
         }
 
-        public PlayerWaypointFollower WaypointFollower { get; private set; }
-
-        [Button]
-        private void Kill() => _health.Kill();
+        public PlayerWaypointNavigator WaypointNavigator { get; private set; }
     }
 }

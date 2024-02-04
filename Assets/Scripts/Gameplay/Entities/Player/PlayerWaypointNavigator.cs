@@ -9,13 +9,13 @@ using Levels.StateMachine.States.Core;
 
 namespace Gameplay.Entities.Player
 {
-    public class PlayerWaypointFollower : IDisposable
+    public class PlayerWaypointNavigator : IDisposable
     {
         private readonly IStateMachine<IPlayerState> _playerStateMachine;
         private readonly PlayerWaypoints _playerWaypoints;
         private readonly IStateMachine<ILevelState> _levelStateMachine;
 
-        public PlayerWaypointFollower(IStateMachine<IPlayerState> playerStateMachine, PlayerWaypoints playerWaypoints,
+        public PlayerWaypointNavigator(IStateMachine<IPlayerState> playerStateMachine, PlayerWaypoints playerWaypoints,
             IStateMachine<ILevelState> levelStateMachine)
         {
             _playerStateMachine = playerStateMachine;

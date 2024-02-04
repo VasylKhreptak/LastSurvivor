@@ -67,7 +67,7 @@ namespace Gameplay.Entities.Player
             Container.Resolve<Ragdoll>().Disable();
         }
 
-        private void BindPlayerWaypointFollower() => Container.BindInterfacesAndSelfTo<PlayerWaypointFollower>().AsSingle();
+        private void BindPlayerWaypointFollower() => Container.BindInterfacesAndSelfTo<PlayerWaypointNavigator>().AsSingle();
 
         private void BindSoldierFollowPoints() { }
     }
