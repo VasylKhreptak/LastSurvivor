@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using Plugins.AudioService.Core;
 using Plugins.AudioService.Facade;
@@ -32,6 +33,16 @@ namespace Plugins.AudioService
             GameObject gameObject = new GameObject("AudioService");
             Object.DontDestroyOnLoad(gameObject);
             _root = gameObject.transform;
+
+            AudioConfiguration audioConfiguration = UnityEngine.AudioSettings.GetConfiguration();
+
+            if (_preferences.MaxSize > audioConfiguration.numVirtualVoices)
+            {
+                Debug.LogWarning("MaxSize is greater than the number of virtual voices. MaxSize will be set to the number of virtual voices.");
+                _preferences.MaxSize = audioConfiguration.numVirtualVoices;
+            }
+            
+            _preferences.InitialSize = Mathf.Min(_preferences.InitialSize, _preferences.MaxSize);
 
             Initialize();
 
@@ -129,7 +140,8 @@ namespace Plugins.AudioService
             return pooledObject.ID;
         }
 
-        public int Play(AudioClip clip, Vector3 position, AudioSettings settings) => Play(clip, position, Quaternion.identity, settings);
+        public int Play(AudioClip clip, Vector3 position, AudioSettings settings) =>
+            Play(clip, position, Quaternion.identity, settings);
 
         public int Play(AudioClip clip, AudioSettings settings) => Play(clip, Vector3.zero, Quaternion.identity, settings);
 
@@ -294,9 +306,7 @@ namespace Plugins.AudioService
         private PooledObject GetFree()
         {
             if (_inactivePool.Count > 0)
-            {
                 return MakeActive(_inactivePool.First());
-            }
 
             if (_totalPool.Count < _preferences.MaxSize)
             {
@@ -315,24 +325,37 @@ namespace Plugins.AudioService
 
         private PooledObject GetLessImportant()
         {
-            int priority = int.MinValue;
+            int minPriority = int.MinValue;
+            float maxPlayTime = float.MinValue;
+            bool allPrioritiesAreEqual = true;
 
+            PooledObject foundPooledObject = null;
             PooledObject lessImportantPooledObject = null;
+            PooledObject longestPlayedPooledObject = null;
 
-            foreach (PooledObject pooledObject in _activePool.Values)
+            ICollection<PooledObject> activePool = _activePool.Values;
+            minPriority = activePool.First().Audio.Priority;
+
+            foreach (PooledObject pooledObject in activePool)
             {
-                if (pooledObject.Audio.Priority > priority)
+                if (pooledObject.Audio.Priority > minPriority)
                 {
-                    priority = pooledObject.Audio.Priority;
+                    minPriority = pooledObject.Audio.Priority;
                     lessImportantPooledObject = pooledObject;
+                    allPrioritiesAreEqual = false;
+                }
+
+                if (pooledObject.Audio.Timer.Time.Value > maxPlayTime)
+                {
+                    maxPlayTime = pooledObject.Audio.Timer.Time.Value;
+                    longestPlayedPooledObject = pooledObject;
                 }
             }
 
-            if (lessImportantPooledObject == null)
-                return null;
+            foundPooledObject = allPrioritiesAreEqual ? longestPlayedPooledObject : lessImportantPooledObject;
 
-            lessImportantPooledObject.Audio.Stop();
-            return lessImportantPooledObject;
+            foundPooledObject?.Audio.Stop();
+            return foundPooledObject;
         }
 
         [Serializable]

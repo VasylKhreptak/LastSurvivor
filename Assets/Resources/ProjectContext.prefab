@@ -81,8 +81,8 @@ MonoBehaviour:
   _transitionScreenPrefab: {fileID: 2892134926150037562, guid: 4e1b09fe7347304418aa3b8265b5eaf4,
     type: 3}
   _audioServicePreferences:
-    InitialSize: 10
-    MaxSize: 100
+    InitialSize: 5
+    MaxSize: 32
     DefaultSettings:
       AudioMixerGroup: {fileID: 24300002, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}
