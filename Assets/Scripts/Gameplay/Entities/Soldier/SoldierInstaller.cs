@@ -12,7 +12,6 @@ using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Utilities.PhysicsUtilities.Trigger;
 using Zenject;
-using Zenject.SpaceFighter;
 using AudioPlayer = Audio.Players.AudioPlayer;
 
 namespace Gameplay.Entities.Soldier

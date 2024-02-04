@@ -86,7 +86,8 @@ namespace Gameplay.Weapons.Minigun
         private void BindBarrelSpinAudio() =>
             Container.BindInterfacesTo<MinigunSpinAudio>().AsSingle().WithArguments(_spinAudioPreferences);
 
-        private void BindShootParticle() => Container.Bind<ObjectSpawner<Particle>>().AsSingle().WithArguments(_shootParticlePreferences);
+        private void BindShootParticle() =>
+            Container.Bind<ObjectSpawner<Particle>>().AsSingle().WithArguments(_shootParticlePreferences);
 
         private void BindShootAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_fireAudioPreferences);
 

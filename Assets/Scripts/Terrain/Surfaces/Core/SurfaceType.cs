@@ -6,6 +6,6 @@
         Metal = 1,
         Body = 2,
         Car = 3,
-        Wood = 4,
+        Wood = 4
     }
 }

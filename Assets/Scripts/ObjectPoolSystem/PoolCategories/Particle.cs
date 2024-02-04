@@ -7,6 +7,6 @@
         BodyImpact = 3,
         Shoot = 4,
         BarrelExplosion = 5,
-        WoodImpact = 6,
+        WoodImpact = 6
     }
 }

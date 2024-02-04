@@ -9,7 +9,6 @@ using UnityEngine;
 using Utilities.PhysicsUtilities.Trigger;
 using Visitor;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Gameplay.Entities.Zombie
 {

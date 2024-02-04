@@ -7,7 +7,7 @@ namespace Gameplay.Entities.Zombie
     {
         public ZombieTargetFollower TargetFollower { get; private set; }
         public ZombieAttacker Attacker { get; private set; }
-        
+
         [Inject]
         private void Constructor(ZombieTargetFollower targetFollower, ZombieAttacker attacker)
         {

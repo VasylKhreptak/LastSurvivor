@@ -4,6 +4,6 @@
     {
         Bullet = 0,
         BulletShell = 1,
-        SmallBullet = 2,
+        SmallBullet = 2
     }
 }
