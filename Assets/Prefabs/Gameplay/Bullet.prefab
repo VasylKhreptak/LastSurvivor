@@ -338,6 +338,8 @@ MonoBehaviour:
         Value: 3
       - Key: 3
         Value: 2
+      - Key: 4
+        Value: 6
   _lifetimePreferences:
     _lifetime: 1
   _impulseTransmitterPreferences:
@@ -370,6 +372,12 @@ MonoBehaviour:
         - {fileID: 8300000, guid: e7236ba9e8105e1498e517aadc4deca9, type: 3}
         - {fileID: 8300000, guid: ed5afd0819b9f5047a7e788c7f1fa1db, type: 3}
         - {fileID: 8300000, guid: 060654694bb4e0f44afb57b526f69640, type: 3}
+      - Key: 4
+        Value:
+        - {fileID: 8300000, guid: 7d6979c482d2f6849a7d4a77ac939831, type: 3}
+        - {fileID: 8300000, guid: a11db2e4f41fb764da20cfdbe42c382e, type: 3}
+        - {fileID: 8300000, guid: d60e186e6e2730a45a32209aba5da90d, type: 3}
+        - {fileID: 8300000, guid: 50aca58c96b12564aae3f1508712ccee, type: 3}
     _audioSettings:
       AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}

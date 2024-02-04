@@ -12654,6 +12654,11 @@ MonoBehaviour:
       type: 3}
     InitialSize: 1
     MaxSize: 10
+  - Key: 6
+    Prefab: {fileID: 1830290776695720477, guid: c98769faed41194458e8857b595b87be,
+      type: 3}
+    InitialSize: 1
+    MaxSize: 10
   _generalPoolsPreferences:
   - Key: 0
     Prefab: {fileID: 2347811216486613142, guid: f36e89a63e5ae2547bf311339449b80d,
