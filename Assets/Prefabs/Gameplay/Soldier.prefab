@@ -898,8 +898,13 @@ MonoBehaviour:
   _closestTargetObserverPreferences:
     _updateInterval: 0.2
   _soldierAimerPreferences:
+    _headTransform: {fileID: 4130712980188444251}
     _speed: 7
     _maxAngleThreshold: 8
+    _viewLayerMask:
+      serializedVersion: 2
+      m_Bits: 499
+    _raycastInterval: 0.25
   _shootPreferences:
     _spawnPoint: {fileID: 4978168838215678566}
     _fireInterval: 0.12
@@ -1055,7 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1706447384332873088}
   - component: {fileID: 1969318012267641732}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: TargetDetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

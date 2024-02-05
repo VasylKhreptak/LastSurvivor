@@ -6410,7 +6410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4468592282072394913}
   - component: {fileID: 433508265812897089}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: TargetDetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7701,7 +7701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5363243188281373602}
   - component: {fileID: 6476738792470765270}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: AttackTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
