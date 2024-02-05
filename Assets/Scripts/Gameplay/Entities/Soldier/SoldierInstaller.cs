@@ -1,7 +1,6 @@
 ﻿using Adapters.Velocity;
 using Entities.AI;
 using Entities.Animations;
-using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Soldier.StateMachine;
 using Gameplay.Entities.Soldier.StateMachine.States;
