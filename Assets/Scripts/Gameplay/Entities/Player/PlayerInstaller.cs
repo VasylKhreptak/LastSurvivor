@@ -1,4 +1,5 @@
 ﻿using Adapters.Velocity;
+using Entities.AI;
 using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
@@ -9,6 +10,7 @@ using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
+using Utilities.PhysicsUtilities.Trigger;
 using Zenject;
 using Zenject.Infrastructure.Toggleable;
 
@@ -18,8 +20,10 @@ namespace Gameplay.Entities.Player
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
-        [SerializeField] private AgentMoveState.Preferences _moveStatePreferences;
+        [SerializeField] private AgentMover.Preferences _moveStatePreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
+        [SerializeField] private Collider _lootBoxDetectionCollider;
+        [SerializeField] private ClosestTriggerObserver<LootBox.LootBox>.Preferences _closestLootBoxObserverPreferences;
 
         public override void InstallBindings()
         {
@@ -34,6 +38,8 @@ namespace Gameplay.Entities.Player
             BindStateMachine();
             BindPlayerWaypointNavigator();
             BindPlayerMapNavigator();
+            // BindLootBoxTriggerZone();
+            // BindClosestLootBoxObserver();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
@@ -69,5 +75,21 @@ namespace Gameplay.Entities.Player
         private void BindPlayerWaypointNavigator() => Container.BindInterfacesAndSelfTo<PlayerWaypointNavigator>().AsSingle();
 
         private void BindPlayerMapNavigator() => Container.BindInterfacesAndSelfTo<PlayerMapNavigator>().AsSingle();
+
+        private void BindLootBoxTriggerZone()
+        {
+            Container
+                .BindInterfacesAndSelfTo<TriggerZone<LootBox.LootBox>>()
+                .AsSingle()
+                .WithArguments(_lootBoxDetectionCollider);
+        }
+
+        private void BindClosestLootBoxObserver()
+        {
+            Container
+                .BindInterfacesAndSelfTo<ClosestTriggerObserver<LootBox.LootBox>>()
+                .AsSingle()
+                .WithArguments(_closestLootBoxObserverPreferences);
+        }
     }
 }

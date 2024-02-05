@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Gameplay.Entities.LootBox
 {
-    public class LootBox : MonoBehaviour, IVisitable<BulletDamage>
+    public class LootBox : MonoBehaviour, IVisitable<BulletDamage>, IVisitable<MeleeDamage>
     {
         private IHealth _health;
 
@@ -17,5 +17,7 @@ namespace Gameplay.Entities.LootBox
         }
 
         public void Accept(BulletDamage visitor) => _health.TakeDamage(visitor.Value);
+
+        public void Accept(MeleeDamage visitor) => _health.TakeDamage(visitor.Value);
     }
 }
