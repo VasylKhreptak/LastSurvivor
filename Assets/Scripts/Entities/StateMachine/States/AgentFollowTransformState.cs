@@ -1,27 +1,22 @@
 ﻿using Entities.AI;
 using Infrastructure.StateMachine.Main.States.Core;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Entities.StateMachine.States
 {
     public class AgentFollowTransformState : IPayloadedState<Transform>, IExitable
     {
-        private readonly NavMeshAgent _agent;
-        private readonly AgentTransformFollower.Preferences _preferences;
-        private readonly AgentTransformFollower _agentTransformFollower;
+        private readonly AgentTransformFollower _transformFollower;
 
-        public AgentFollowTransformState(NavMeshAgent agent, AgentTransformFollower.Preferences preferences)
+        public AgentFollowTransformState(AgentTransformFollower transformFollower)
         {
-            _agent = agent;
-            _preferences = preferences;
-            _agentTransformFollower = new AgentTransformFollower(agent, preferences);
+            _transformFollower = transformFollower;
         }
 
         private Transform _target;
 
-        public void Enter(Transform target) => _agentTransformFollower.Follow(target);
+        public void Enter(Transform target) => _transformFollower.Follow(target);
 
-        public void Exit() => _agentTransformFollower.Stop();
+        public void Exit() => _transformFollower.Stop();
     }
 }

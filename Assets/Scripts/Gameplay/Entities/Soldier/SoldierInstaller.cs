@@ -51,11 +51,12 @@ namespace Gameplay.Entities.Soldier
             BindAimer();
             BindMoveAnimation();
             BindRagdoll();
-            BindStateMachine();
             BindShootAudio();
             BindShootParticle();
             BindShooter();
             BindDeathHandler();
+            BindAgentTransformFollower();
+            BindStateMachine();
             RegisterSoldier();
             EnterIdleState();
         }
@@ -70,7 +71,7 @@ namespace Gameplay.Entities.Soldier
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<FollowTransformState>().AsSingle().WithArguments(_followTransformStatePreferences);
+            Container.Bind<FollowTransformState>().AsSingle();
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 
@@ -119,5 +120,8 @@ namespace Gameplay.Entities.Soldier
         private void BindShootAudio() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_shootAudioPlayerPreferences);
 
         private void BindDeathHandler() => Container.BindInterfacesTo<SoldierDeathHandler>().AsSingle();
+
+        private void BindAgentTransformFollower() =>
+            Container.Bind<AgentTransformFollower>().AsSingle().WithArguments(_followTransformStatePreferences);
     }
 }

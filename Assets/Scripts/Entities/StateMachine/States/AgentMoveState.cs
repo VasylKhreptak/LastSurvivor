@@ -2,21 +2,16 @@
 using Entities.AI;
 using Infrastructure.StateMachine.Main.States.Core;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Entities.StateMachine.States
 {
     public class AgentMoveState : IPayloadedState<AgentMoveState.Payload>, IExitable
     {
-        private readonly NavMeshAgent _agent;
-        private readonly AgentMover.Preferences _preferences;
         private readonly AgentMover _agentMover;
 
-        public AgentMoveState(NavMeshAgent agent, AgentMover.Preferences preferences)
+        public AgentMoveState(AgentMover agentMover)
         {
-            _agent = agent;
-            _preferences = preferences;
-            _agentMover = new AgentMover(agent, preferences);
+            _agentMover = agentMover;
         }
 
         public void Enter(Payload payload) => _agentMover.SetDestination(payload.Position, payload.OnComplete);

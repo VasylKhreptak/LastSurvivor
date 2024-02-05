@@ -64,6 +64,7 @@ namespace Gameplay.Entities.Zombie
             BindZombieTargetFollower();
             BindDeathHandler();
             BindZombieAttacker();
+            BindAgentTransformFollower();
             EnterIdleState();
             RegisterZombie();
         }
@@ -98,7 +99,7 @@ namespace Gameplay.Entities.Zombie
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<FollowTransformState>().AsSingle().WithArguments(_moveStatePreferences);
+            Container.Bind<FollowTransformState>().AsSingle();
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 
@@ -134,5 +135,8 @@ namespace Gameplay.Entities.Zombie
                 .AsSingle()
                 .WithArguments(_closestTriggerObserverPreferences);
         }
+
+        private void BindAgentTransformFollower() =>
+            Container.Bind<AgentTransformFollower>().AsSingle().WithArguments(_moveStatePreferences);
     }
 }
