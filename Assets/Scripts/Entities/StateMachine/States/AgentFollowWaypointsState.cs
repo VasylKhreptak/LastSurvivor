@@ -1,8 +1,6 @@
 ﻿using System;
 using Entities.AI;
-using Gameplay.Waypoints;
 using Infrastructure.StateMachine.Main.States.Core;
-using UnityEngine.AI;
 
 namespace Entities.StateMachine.States
 {
@@ -10,9 +8,9 @@ namespace Entities.StateMachine.States
     {
         private readonly AgentWaypointsFollower _waypointsFollower;
 
-        public AgentFollowWaypointsState(NavMeshAgent agent, Waypoints waypoints, AgentMover.Preferences preferences)
+        public AgentFollowWaypointsState(AgentWaypointsFollower waypointsFollower)
         {
-            _waypointsFollower = new AgentWaypointsFollower(agent, waypoints, preferences);
+            _waypointsFollower = waypointsFollower;
         }
 
         public void Enter(Action onComplete) => _waypointsFollower.Start(onComplete);

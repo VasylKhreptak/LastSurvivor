@@ -26,7 +26,7 @@ namespace Entities.AI
         public void Follow(Transform target)
         {
             Stop();
-            
+
             _target = target;
             _lastDestinationPosition = _target.position;
 

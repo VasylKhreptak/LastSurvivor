@@ -1,6 +1,5 @@
 ﻿using System;
 using Gameplay.Waypoints;
-using UnityEngine.AI;
 
 namespace Entities.AI
 {
@@ -9,10 +8,10 @@ namespace Entities.AI
         private readonly Waypoints _waypoints;
         private readonly AgentMover _agentMover;
 
-        public AgentWaypointsFollower(NavMeshAgent agent, Waypoints waypoints, AgentMover.Preferences preferences)
+        public AgentWaypointsFollower(Waypoints waypoints, AgentMover agentMover)
         {
             _waypoints = waypoints;
-            _agentMover = new AgentMover(agent, preferences);
+            _agentMover = agentMover;
         }
 
         public void Start(Action onCompleted = null)

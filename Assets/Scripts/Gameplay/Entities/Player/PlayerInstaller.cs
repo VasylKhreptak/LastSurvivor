@@ -40,6 +40,8 @@ namespace Gameplay.Entities.Player
             BindRagdoll();
             BindDeathHandler();
             BindMoveAnimation();
+            BindAgentMover();
+            BindAgentWaypointsFollower();
             BindStateMachine();
             // BindLootBoxTriggerZone();
             // BindClosestLootBoxObserver();
@@ -51,6 +53,10 @@ namespace Gameplay.Entities.Player
         private void BindMoveAnimation() =>
             Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);
 
+        private void BindAgentMover() => Container.Bind<AgentMover>().AsSingle().WithArguments(_movePreferences);
+
+        private void BindAgentWaypointsFollower() => Container.Bind<AgentWaypointsFollower>().AsSingle();
+
         private void BindStateMachine()
         {
             BindStates();
@@ -61,7 +67,7 @@ namespace Gameplay.Entities.Player
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<MapNavigationState>().AsSingle().WithArguments(_movePreferences);
+            Container.Bind<MapNavigationState>().AsSingle();
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 

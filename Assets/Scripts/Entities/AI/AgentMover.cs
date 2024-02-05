@@ -24,7 +24,7 @@ namespace Entities.AI
         public void SetDestination(Vector3 position, Action onComplete)
         {
             Stop();
-            
+
             _targetPosition = position;
             _onComplete = onComplete;
 

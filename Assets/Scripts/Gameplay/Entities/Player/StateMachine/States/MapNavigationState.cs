@@ -4,7 +4,6 @@ using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Levels.StateMachine.States;
 using Levels.StateMachine.States.Core;
-using UnityEngine.AI;
 
 namespace Gameplay.Entities.Player.StateMachine.States
 {
@@ -15,11 +14,11 @@ namespace Gameplay.Entities.Player.StateMachine.States
         private readonly AgentWaypointsFollower _waypointsFollower;
 
         public MapNavigationState(IStateMachine<ILevelState> levelStateMachine, IStateMachine<IPlayerState> playerStateMachine,
-            NavMeshAgent agent, Waypoints.Waypoints waypoints, AgentMover.Preferences movePreferences)
+            AgentWaypointsFollower waypointsFollower)
         {
             _levelStateMachine = levelStateMachine;
             _playerStateMachine = playerStateMachine;
-            _waypointsFollower = new AgentWaypointsFollower(agent, waypoints, movePreferences);
+            _waypointsFollower = waypointsFollower;
         }
 
         public void Enter() =>
