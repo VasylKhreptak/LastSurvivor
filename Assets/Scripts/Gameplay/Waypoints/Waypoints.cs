@@ -2,11 +2,11 @@
 
 namespace Gameplay.Waypoints
 {
-    public class PlayerWaypoints
+    public class Waypoints
     {
         private readonly Waypoint[] _waypoints;
 
-        public PlayerWaypoints(Transform[] transforms)
+        public Waypoints(Transform[] transforms)
         {
             _waypoints = new Waypoint[transforms.Length];
 

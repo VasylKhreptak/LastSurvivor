@@ -3,6 +3,7 @@ using Gameplay.Aim;
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
+using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Zombie;
 using Gameplay.Weapons;
 using Levels.StateMachine.States.Core;
@@ -43,14 +44,17 @@ namespace Levels.StateMachine.States
                 zombie.TargetFollower.Stop();
                 zombie.Attacker.Stop();
             });
+
             if (_playerHolder.Instance != null)
-                _playerHolder.Instance.MapNavigator.Stop();
+                _playerHolder.Instance.StateMachine.Enter<IdleState>();
+
             _trackpad.enabled = false;
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
             _levelFailedWindow.Show();
             _hud.Hide();
             _helicopter.TargetFollower.Target = null;
+
             _platoon.Soldiers.ForEach(soldier =>
             {
                 soldier.Aimer.Enabled = false;

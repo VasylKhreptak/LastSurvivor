@@ -19,13 +19,19 @@ namespace Gameplay.Entities.Player
     {
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
-        [SerializeField] private AgentMover.Preferences _moveStatePreferences;
+        [SerializeField] private AgentMover.Preferences _movePreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private Collider _lootBoxDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<LootBox.LootBox>.Preferences _closestLootBoxObserverPreferences;
 
+        private Waypoints.Waypoints _waypoints;
+
+        [Inject]
+        private void Constructor(Waypoints.Waypoints waypoints) => _waypoints = waypoints;
+
         public override void InstallBindings()
         {
+            Container.BindInstance(_waypoints).AsSingle();
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
@@ -35,8 +41,6 @@ namespace Gameplay.Entities.Player
             BindDeathHandler();
             BindMoveAnimation();
             BindStateMachine();
-            BindPlayerWaypointNavigator();
-            BindPlayerMapNavigator();
             // BindLootBoxTriggerZone();
             // BindClosestLootBoxObserver();
             EnterIdleState();
@@ -57,7 +61,7 @@ namespace Gameplay.Entities.Player
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<MoveState>().AsSingle().WithArguments(_moveStatePreferences);
+            Container.Bind<MapNavigationState>().AsSingle().WithArguments(_movePreferences);
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 
@@ -70,10 +74,6 @@ namespace Gameplay.Entities.Player
             Container.Bind<Ragdoll>().AsSingle().WithArguments(_ragdollPreferences);
             Container.Resolve<Ragdoll>().Disable();
         }
-
-        private void BindPlayerWaypointNavigator() => Container.BindInterfacesAndSelfTo<PlayerWaypointNavigator>().AsSingle();
-
-        private void BindPlayerMapNavigator() => Container.BindInterfacesAndSelfTo<PlayerMapNavigator>().AsSingle();
 
         private void BindLootBoxTriggerZone()
         {

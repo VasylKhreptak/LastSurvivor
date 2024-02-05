@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
+using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Zombie;
 using Infrastructure.StateMachine.Main.Core;
 using Levels.StateMachine.States.Core;
@@ -37,11 +38,14 @@ namespace Levels.StateMachine.States
                 zombie.TargetFollower.Start();
                 zombie.Attacker.Start();
             });
-            _playerHolder.Instance.MapNavigator.Start();
+
+            _playerHolder.Instance.StateMachine.Enter<MapNavigationState>();
+
             _levelStateMachine.Enter<LevelLoopState>();
             _startWindows.Hide();
             _weaponAim.Show();
             _hud.Show();
+
             _platoon.Soldiers.ForEach(soldier =>
             {
                 soldier.Aimer.Enabled = true;

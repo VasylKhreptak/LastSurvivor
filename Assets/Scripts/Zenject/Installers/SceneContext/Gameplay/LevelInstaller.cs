@@ -80,7 +80,14 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.BindInterfacesAndSelfTo<CameraShaker>().AsSingle().WithArguments(_cameraShakerPreferences);
         }
 
-        private void BindPlayerWaypoints() => Container.Bind<PlayerWaypoints>().AsSingle().WithArguments(_playerWaypoints);
+        private void BindPlayerWaypoints()
+        {
+            Container
+                .Bind<Waypoints>()
+                .AsSingle()
+                .WithArguments(_playerWaypoints)
+                .WhenInjectedInto<PlayerInstaller>();
+        }
 
         private void BindObjectPools()
         {

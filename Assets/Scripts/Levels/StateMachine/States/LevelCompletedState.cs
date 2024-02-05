@@ -2,6 +2,7 @@
 using Gameplay.Aim;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
+using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Zombie;
 using Gameplay.Weapons;
 using Infrastructure.Services.PersistentData.Core;
@@ -44,18 +45,22 @@ namespace Levels.StateMachine.States
                 zombie.TargetFollower.Stop();
                 zombie.Attacker.Stop();
             });
+
             if (_playerHolder.Instance != null)
-                _playerHolder.Instance.MapNavigator.Stop();
+                _playerHolder.Instance.StateMachine.Enter<IdleState>();
+
             _trackpad.enabled = false;
             _levelCompletedWindow.Show();
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
             _hud.Hide();
+
             _platoon.Soldiers.ForEach(soldier =>
             {
                 soldier.Aimer.Enabled = false;
                 soldier.Shooter.Disable();
             });
+
             _persistentDataService.PersistentData.PlayerData.Level++;
         }
     }

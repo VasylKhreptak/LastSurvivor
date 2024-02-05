@@ -14,7 +14,7 @@ namespace Gameplay.Entities.Player.StateMachine.States.Core
             new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(IdleState)] = _container.Resolve<IdleState>,
-                [typeof(MoveState)] = _container.Resolve<MoveState>,
+                [typeof(MapNavigationState)] = _container.Resolve<MapNavigationState>,
                 [typeof(DeathState)] = _container.Resolve<DeathState>
             };
     }
