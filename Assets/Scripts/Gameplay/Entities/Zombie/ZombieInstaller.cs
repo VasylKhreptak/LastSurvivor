@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Adapters.Velocity;
+using Entities.AI;
 using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
@@ -26,7 +27,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
-        [SerializeField] private AgentFollowTransformState.Preferences _moveStatePreferences;
+        [SerializeField] private AgentTransformFollower.Preferences _moveStatePreferences;
         [SerializeField] private Collider _targetDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<IVisitable<ZombieDamage>>.Preferences _closestTriggerObserverPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;

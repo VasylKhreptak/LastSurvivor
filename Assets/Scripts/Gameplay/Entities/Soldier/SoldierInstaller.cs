@@ -1,4 +1,5 @@
 ﻿using Adapters.Velocity;
+using Entities.AI;
 using Entities.Animations;
 using Entities.StateMachine.States;
 using Gameplay.Entities.Health.Core;
@@ -20,7 +21,7 @@ namespace Gameplay.Entities.Soldier
     {
         [SerializeField] private Transform _viewTransform;
         [SerializeField] private float _maxHealth = 100f;
-        [SerializeField] private AgentFollowTransformState.Preferences _followTransformStatePreferences;
+        [SerializeField] private AgentTransformFollower.Preferences _followTransformStatePreferences;
         [SerializeField] private PlaneMoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private Collider _targetDetectionCollider;
