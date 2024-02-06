@@ -75,7 +75,11 @@ namespace Entities.AI
         private bool IsDestinationReached() =>
             Vector3.Distance(_agent.transform.position, _destination) <= _preferences.StoppingDistance;
 
-        private void OnReachedDestination() => _onComplete?.Invoke();
+        private void OnReachedDestination()
+        {
+            Stop();
+            _onComplete?.Invoke();
+        }
 
         [Serializable]
         public class Preferences

@@ -1,4 +1,5 @@
 ﻿using System;
+using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Health.Damages;
 using UniRx;
 using UnityEngine;
@@ -22,42 +23,44 @@ namespace Entities.AI
         }
 
         private IDisposable _lookSubscription;
-        private IDisposable _attackSubscription;
-        private IDisposable _damageApplySubscription;
 
         private Transform _target;
+        private IHealth _health;
         private IVisitable<MeleeDamage> _visitableTarget;
 
-        public void Start(Transform target, IVisitable<MeleeDamage> visitableTarget)
+        public void Start(Transform target, IHealth health, IVisitable<MeleeDamage> visitableTarget)
         {
             Stop();
 
             _target = target;
+            _health = health;
             _visitableTarget = visitableTarget;
 
-            _agentMover.SetDestination(target.position, true, () => LookAt(_target,  StartAttacking));
+            _agentMover.SetDestination(target.position, true, () =>
+            {
+                StartLooking(_target);
+                StartAttacking();
+            });
         }
 
         public void Stop()
         {
             _lookSubscription?.Dispose();
-            _attackSubscription?.Dispose();
-            _damageApplySubscription?.Dispose();
-            _animator.ResetTrigger(_preferences.AttackTrigger);
+            StopAttacking();
         }
 
         public void Dispose() => Stop();
-        
-        private void LookAt(Transform target, Action onComplete)
+
+        private void StartLooking(Transform target)
         {
             _lookSubscription?.Dispose();
             _lookSubscription = Observable
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (target == null)
+                    if (_health.IsDeath.Value)
                     {
-                        Stop();
+                        _lookSubscription.Dispose();
                         return;
                     }
 
@@ -67,63 +70,31 @@ namespace Entities.AI
                     Vector3 direction = (targetPosition - currentPosition);
                     Quaternion rotation = Quaternion.LookRotation(direction);
                     _transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, Time.deltaTime * _preferences.LookSpeed);
-                    
-                    if (Quaternion.Angle(_transform.rotation, rotation) > 1f)
-                        return;
-
-                    Debug.Log("Dispose");
-                    _lookSubscription?.Dispose();
-                    onComplete?.Invoke();
                 });
         }
 
-        private void StartAttacking()
-        {
-            if (_target == null)
-            {
-                Stop();
-                return;
-            }
+        private void StartAttacking() => _animator.SetBool(_preferences.IsAttackingProperty, true);
 
-            _attackSubscription?.Dispose();
-            _attackSubscription = Observable
-                .Interval(TimeSpan.FromSeconds(_preferences.AttackInterval))
-                .DoOnSubscribe(PlayAttackAnimation)
-                .Subscribe(_ => PlayAttackAnimation());
-        }
+        private void StopAttacking() => _animator.SetBool(_preferences.IsAttackingProperty, false);
 
-        private void PlayAttackAnimation()
-        {
-            _animator.SetTrigger(_preferences.AttackTrigger);
-
-            _damageApplySubscription?.Dispose();
-            _damageApplySubscription = Observable
-                .Timer(TimeSpan.FromSeconds(_preferences.DamageApplyDelay))
-                .Subscribe(_ => ApplyDamage());
-        }
-
-        private void ApplyDamage()
+        public void ApplyDamage()
         {
             _visitableTarget.Accept(new MeleeDamage(_preferences.Damage));
 
-            if (_visitableTarget == null)
+            if (_health.IsDeath.Value)
                 Stop();
         }
 
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private string _attackTrigger = "Attack";
+            [SerializeField] private string _isAttackingProperty = "IsAttacking";
             [SerializeField] private float _damage = 20f;
             [SerializeField] private float _lookSpeed = 10f;
-            [SerializeField] private float _attackInterval = 1f;
-            [SerializeField] private float _damageApplyDelay = 0.5f;
 
-            public string AttackTrigger => _attackTrigger;
+            public string IsAttackingProperty => _isAttackingProperty;
             public float Damage => _damage;
             public float LookSpeed => _lookSpeed;
-            public float AttackInterval => _attackInterval;
-            public float DamageApplyDelay => _damageApplyDelay;
         }
     }
 }

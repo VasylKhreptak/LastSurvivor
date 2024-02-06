@@ -46,11 +46,11 @@ namespace Levels.StateMachine.States
             _weaponAim.Show();
             _hud.Show();
 
-            _platoon.Soldiers.ForEach(soldier =>
-            {
-                soldier.Aimer.Enabled = true;
-                soldier.Shooter.Enable();
-            });
+            // _platoon.Soldiers.ForEach(soldier =>
+            // {
+            //     soldier.Aimer.Enabled = true;
+            //     soldier.Shooter.Enable();
+            // });
         }
     }
 }

@@ -8,16 +8,16 @@ namespace Gameplay.Entities.LootBox
 {
     public class LootBox : MonoBehaviour, IVisitable<BulletDamage>, IVisitable<MeleeDamage>
     {
-        private IHealth _health;
+        public IHealth Health { get; private set; }
 
         [Inject]
         private void Constructor(IHealth health)
         {
-            _health = health;
+            Health = health;
         }
 
-        public void Accept(BulletDamage visitor) => _health.TakeDamage(visitor.Value);
+        public void Accept(BulletDamage visitor) => Health.TakeDamage(visitor.Value);
 
-        public void Accept(MeleeDamage visitor) => _health.TakeDamage(visitor.Value);
+        public void Accept(MeleeDamage visitor) => Health.TakeDamage(visitor.Value);
     }
 }

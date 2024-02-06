@@ -33,7 +33,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             // });
 
             LootBox.LootBox lootBox = Object.FindObjectOfType<LootBox.LootBox>();
-            _meleeAttacker.Start(lootBox.transform, lootBox);
+            _meleeAttacker.Start(lootBox.transform, lootBox.Health, lootBox);
         }
 
         public void Exit() => _waypointsFollower.Stop();
