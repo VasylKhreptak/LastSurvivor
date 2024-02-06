@@ -2,8 +2,9 @@
 using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
-using Levels.StateMachine.States;
 using Levels.StateMachine.States.Core;
+using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Entities.Player.StateMachine.States
 {
@@ -21,12 +22,19 @@ namespace Gameplay.Entities.Player.StateMachine.States
             _waypointsFollower = waypointsFollower;
         }
 
-        public void Enter() =>
-            _waypointsFollower.Start(() =>
-            {
-                _playerStateMachine.Enter<IdleState>();
-                _levelStateMachine.Enter<LevelCompletedState>();
-            });
+        [Inject] private MeleeAttacker _meleeAttacker;
+
+        public void Enter()
+        {
+            // _waypointsFollower.Start(() =>
+            // {
+            //     _playerStateMachine.Enter<IdleState>();
+            //     _levelStateMachine.Enter<LevelCompletedState>();
+            // });
+
+            LootBox.LootBox lootBox = Object.FindObjectOfType<LootBox.LootBox>();
+            _meleeAttacker.Start(lootBox.transform, lootBox);
+        }
 
         public void Exit() => _waypointsFollower.Stop();
     }

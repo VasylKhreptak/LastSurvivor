@@ -72,7 +72,7 @@ namespace Utilities.PhysicsUtilities.Trigger
         {
             foreach (TriggerInfo<T> trigger in _triggers)
             {
-                if (trigger.Collider.enabled == false || trigger.Collider.gameObject.activeSelf == false)
+                if (trigger.Collider == null || trigger.Collider.enabled == false || trigger.Collider.gameObject.activeSelf == false)
                     _disabledTriggersBuffer.Add(trigger);
             }
 

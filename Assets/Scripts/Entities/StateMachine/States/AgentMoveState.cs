@@ -14,7 +14,7 @@ namespace Entities.StateMachine.States
             _agentMover = agentMover;
         }
 
-        public void Enter(Payload payload) => _agentMover.SetDestination(payload.Position, payload.OnComplete);
+        public void Enter(Payload payload) => _agentMover.SetDestination(payload.Position, onComplete: payload.OnComplete);
 
         public void Exit() => _agentMover.Stop();
 

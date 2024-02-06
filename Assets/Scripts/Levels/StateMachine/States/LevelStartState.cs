@@ -33,11 +33,11 @@ namespace Levels.StateMachine.States
 
         public void Enter()
         {
-            _zombies.ForEach(zombie =>
-            {
-                zombie.TargetFollower.Start();
-                zombie.Attacker.Start();
-            });
+            // _zombies.ForEach(zombie =>
+            // {
+            //     zombie.TargetFollower.Start();
+            //     zombie.Attacker.Start();
+            // });
 
             _playerHolder.Instance.StateMachine.Enter<MapNavigationState>();
 

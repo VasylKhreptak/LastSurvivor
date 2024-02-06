@@ -23,6 +23,7 @@ namespace Gameplay.Entities.Player
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private Collider _lootBoxDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<LootBox.LootBox>.Preferences _closestLootBoxObserverPreferences;
+        [SerializeField] private MeleeAttacker.Preferences _meleeAttackerPreferences;
 
         private Waypoints.Waypoints _waypoints;
 
@@ -43,8 +44,9 @@ namespace Gameplay.Entities.Player
             BindAgentMover();
             BindAgentWaypointsFollower();
             BindStateMachine();
-            // BindLootBoxTriggerZone();
-            // BindClosestLootBoxObserver();
+            BindMeleeAttacker();
+            BindLootBoxTriggerZone();
+            BindClosestLootBoxObserver();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
@@ -96,5 +98,8 @@ namespace Gameplay.Entities.Player
                 .AsSingle()
                 .WithArguments(_closestLootBoxObserverPreferences);
         }
+
+        private void BindMeleeAttacker() =>
+            Container.BindInterfacesAndSelfTo<MeleeAttacker>().AsSingle().WithArguments(transform, _meleeAttackerPreferences);
     }
 }

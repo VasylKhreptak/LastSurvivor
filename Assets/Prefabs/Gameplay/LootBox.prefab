@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 6722120080075699501}
   - component: {fileID: 4518551091382016957}
   - component: {fileID: -6896186655877854493}
-  m_Layer: 0
+  - component: {fileID: -3254389568658177384}
+  m_Layer: 7
   m_Name: LootBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,6 +237,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375eddb681924f8ca66d0bee80a58166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &-3254389568658177384
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159523093437749476}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.503, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &4783154555455364950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -244,6 +261,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5157151082828475035}
     m_Modifications:
+    - target: {fileID: 233675388948230999, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 840412295266424226, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1111893678836410958, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -349,6 +376,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 1529492921281164300, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799861311129643815, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807956395168477812, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256139616683730035, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5089679786972803351, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -358,6 +405,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092531147105344769, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6941338819564603977, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107909486592637378, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8807504038705178564, guid: bdcf6bf2d9ad6ff4ea2d037317e282e9,
         type: 3}

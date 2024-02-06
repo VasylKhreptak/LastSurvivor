@@ -26,7 +26,7 @@ namespace Entities.AI
                 return;
             }
 
-            _agentMover.SetDestination(waypoint.Position, () =>
+            _agentMover.SetDestination(waypoint.Position, onComplete: () =>
             {
                 waypoint.MarkAsFinished();
                 Start(onCompleted);

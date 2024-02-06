@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,14 +19,16 @@ namespace Entities.AI
 
         private IDisposable _destinationCheckSubscription;
 
-        private Vector3 _targetPosition;
+        private Vector3 _destination;
+        private bool _maxPossibleDestination;
         private Action _onComplete;
 
-        public void SetDestination(Vector3 position, Action onComplete)
+        public void SetDestination(Vector3 position, bool maxPossibleDestination = false, Action onComplete = null)
         {
             Stop();
 
-            _targetPosition = position;
+            _destination = position;
+            _maxPossibleDestination = maxPossibleDestination;
             _onComplete = onComplete;
 
             if (IsDestinationReached())
@@ -36,7 +39,7 @@ namespace Entities.AI
 
             _agent.isStopped = false;
 
-            _agent.SetDestination(_targetPosition);
+            _agent.SetDestination(_destination);
             StartObservingDestination();
         }
 
@@ -52,7 +55,13 @@ namespace Entities.AI
         {
             _destinationCheckSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_preferences.DestinationCheckInterval))
-                .Subscribe(_ => CheckDestination());
+                .Subscribe(_ =>
+                {
+                    if (_maxPossibleDestination && _agent.hasPath)
+                        _destination = _agent.path.corners.Last();
+
+                    CheckDestination();
+                });
         }
 
         private void StopObservingDestination() => _destinationCheckSubscription?.Dispose();
@@ -64,7 +73,7 @@ namespace Entities.AI
         }
 
         private bool IsDestinationReached() =>
-            Vector3.Distance(_agent.transform.position, _targetPosition) <= _preferences.StoppingDistance;
+            Vector3.Distance(_agent.transform.position, _destination) <= _preferences.StoppingDistance;
 
         private void OnReachedDestination() => _onComplete?.Invoke();
 
