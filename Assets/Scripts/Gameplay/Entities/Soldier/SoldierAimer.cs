@@ -63,7 +63,8 @@ namespace Gameplay.Entities.Soldier
             Vector3 direction = targetPosition - headPosition;
             Ray ray = new Ray(headPosition, direction);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, _preferences.ViewLayerMask) == false)
+            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, _preferences.ViewLayerMask, QueryTriggerInteraction.Ignore) ==
+                false)
                 return;
 
             _isTargetVisible = hit.transform == _closestTargetObserver.Trigger.Value.Transform;

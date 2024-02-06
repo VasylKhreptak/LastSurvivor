@@ -1,13 +1,15 @@
 ﻿using System;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Health.Damages;
+using Plugins.Animations;
 using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 using Visitor;
 
 namespace Entities.AI
 {
-    public class MeleeAttacker : IDisposable
+    public class MeleeAttacker : IInitializable, IDisposable
     {
         private readonly Transform _transform;
         private readonly AgentMover _agentMover;
@@ -38,6 +40,8 @@ namespace Entities.AI
 
             _agentMover.SetDestination(target.position, true, () =>
             {
+                _preferences.Weapon.SetActive(true);
+                _preferences.WeaponShowAnimation.PlayForward();
                 StartLooking(_target);
                 StartAttacking();
             });
@@ -47,6 +51,13 @@ namespace Entities.AI
         {
             _lookSubscription?.Dispose();
             StopAttacking();
+            _preferences.WeaponShowAnimation.PlayBackward(() => _preferences.Weapon.SetActive(false));
+        }
+
+        public void Initialize()
+        {
+            _preferences.Weapon.SetActive(false);
+            _preferences.WeaponShowAnimation.SetStartState();
         }
 
         public void Dispose() => Stop();
@@ -88,10 +99,14 @@ namespace Entities.AI
         [Serializable]
         public class Preferences
         {
+            [SerializeField] private GameObject _weapon;
+            [SerializeField] private ScaleAnimation _weaponShowAnimation;
             [SerializeField] private string _isAttackingProperty = "IsAttacking";
             [SerializeField] private float _damage = 20f;
             [SerializeField] private float _lookSpeed = 10f;
 
+            public GameObject Weapon => _weapon;
+            public ScaleAnimation WeaponShowAnimation => _weaponShowAnimation;
             public string IsAttackingProperty => _isAttackingProperty;
             public float Damage => _damage;
             public float LookSpeed => _lookSpeed;

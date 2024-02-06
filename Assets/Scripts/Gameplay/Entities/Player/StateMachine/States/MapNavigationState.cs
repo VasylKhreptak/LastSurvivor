@@ -1,10 +1,12 @@
-﻿using Entities.AI;
+﻿using System;
+using Entities.AI;
 using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using Levels.StateMachine.States;
 using Levels.StateMachine.States.Core;
-using UnityEngine;
-using Zenject;
+using UniRx;
+using Utilities.PhysicsUtilities.Trigger;
 
 namespace Gameplay.Entities.Player.StateMachine.States
 {
@@ -13,29 +15,50 @@ namespace Gameplay.Entities.Player.StateMachine.States
         private readonly IStateMachine<ILevelState> _levelStateMachine;
         private readonly IStateMachine<IPlayerState> _playerStateMachine;
         private readonly AgentWaypointsFollower _waypointsFollower;
+        private readonly MeleeAttacker _meleeAttacker;
+        private readonly ClosestTriggerObserver<LootBox.LootBox> _lootBoxObserver;
 
         public MapNavigationState(IStateMachine<ILevelState> levelStateMachine, IStateMachine<IPlayerState> playerStateMachine,
-            AgentWaypointsFollower waypointsFollower)
+            AgentWaypointsFollower waypointsFollower, MeleeAttacker meleeAttacker,
+            ClosestTriggerObserver<LootBox.LootBox> lootBoxObserver)
         {
             _levelStateMachine = levelStateMachine;
             _playerStateMachine = playerStateMachine;
             _waypointsFollower = waypointsFollower;
+            _meleeAttacker = meleeAttacker;
+            _lootBoxObserver = lootBoxObserver;
         }
 
-        [Inject] private MeleeAttacker _meleeAttacker;
+        private IDisposable _lootBoxObserverSubscription;
 
-        public void Enter()
+        public void Enter() => StartObserving();
+
+        public void Exit()
         {
-            // _waypointsFollower.Start(() =>
-            // {
-            //     _playerStateMachine.Enter<IdleState>();
-            //     _levelStateMachine.Enter<LevelCompletedState>();
-            // });
+            StopObserving();
+            _meleeAttacker.Stop();
+            _waypointsFollower.Stop();
+        }
 
-            LootBox.LootBox lootBox = Object.FindObjectOfType<LootBox.LootBox>();
+        private void StartObserving()
+        {
+            StopObserving();
+            _lootBoxObserverSubscription = _lootBoxObserver.Trigger.Select(x => x?.Value).Subscribe(OnClosestLootBoxChanged);
+        }
+
+        private void StopObserving() => _lootBoxObserverSubscription?.Dispose();
+
+        private void OnClosestLootBoxChanged(LootBox.LootBox lootBox)
+        {
+            if (lootBox == null)
+            {
+                _meleeAttacker.Stop();
+                _waypointsFollower.Start(() => _levelStateMachine.Enter<LevelCompletedState>());
+                return;
+            }
+
+            _waypointsFollower.Stop();
             _meleeAttacker.Start(lootBox.transform, lootBox.Health, lootBox);
         }
-
-        public void Exit() => _waypointsFollower.Stop();
     }
 }

@@ -33,11 +33,11 @@ namespace Levels.StateMachine.States
 
         public void Enter()
         {
-            // _zombies.ForEach(zombie =>
-            // {
-            //     zombie.TargetFollower.Start();
-            //     zombie.Attacker.Start();
-            // });
+            _zombies.ForEach(zombie =>
+            {
+                zombie.TargetFollower.Start();
+                zombie.Attacker.Start();
+            });
 
             _playerHolder.Instance.StateMachine.Enter<MapNavigationState>();
 
@@ -46,11 +46,11 @@ namespace Levels.StateMachine.States
             _weaponAim.Show();
             _hud.Show();
 
-            // _platoon.Soldiers.ForEach(soldier =>
-            // {
-            //     soldier.Aimer.Enabled = true;
-            //     soldier.Shooter.Enable();
-            // });
+            _platoon.Soldiers.ForEach(soldier =>
+            {
+                soldier.Aimer.Enabled = true;
+                soldier.Shooter.Enable();
+            });
         }
     }
 }
