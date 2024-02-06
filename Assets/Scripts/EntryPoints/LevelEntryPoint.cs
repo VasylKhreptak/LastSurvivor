@@ -1,4 +1,5 @@
 ﻿using EntryPoints.Core;
+using Gameplay.Entities.Collector;
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
@@ -44,6 +45,7 @@ namespace EntryPoints
         {
             InitializePlayer();
             InitializePlatoon();
+            InitializeCollectors();
             InitializeHelicopterMovement();
         }
 
@@ -80,6 +82,20 @@ namespace EntryPoints
                 soldierObject.transform.rotation = _platoon.SoldierPoints[i].rotation;
                 Soldier soldier = soldierObject.GetComponent<Soldier>();
                 soldier.StateMachine.Enter<FollowTransformState, Transform>(_platoon.SoldierPoints[i]);
+            }
+        }
+
+        private void InitializeCollectors()
+        {
+            int count = Mathf.Min(
+                _persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Value.Value,
+                _playerHolder.Instance.CollectorFollowPoints.Count);
+
+            for (int i = 0; i < count; i++)
+            {
+                GameObject collectorObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayCollector]);
+                collectorObject.transform.position = _playerHolder.Instance.CollectorFollowPoints[i].position;
+                collectorObject.transform.rotation = _playerHolder.Instance.CollectorFollowPoints[i].rotation;
             }
         }
     }

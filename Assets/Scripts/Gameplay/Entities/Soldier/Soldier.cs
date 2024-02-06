@@ -8,6 +8,7 @@ using Zenject;
 
 namespace Gameplay.Entities.Soldier
 {
+    [DisallowMultipleComponent]
     public class Soldier : MonoBehaviour, IVisitable<ZombieDamage>
     {
         public IStateMachine<ISoldierState> StateMachine { get; private set; }

@@ -17,6 +17,7 @@
         CollectorsPlatform = 12,
         CollectorsBuyZone = 13,
         GameplayPlayer = 14,
-        GameplaySoldier = 15
+        GameplaySoldier = 15,
+        GameplayCollector = 16
     }
 }

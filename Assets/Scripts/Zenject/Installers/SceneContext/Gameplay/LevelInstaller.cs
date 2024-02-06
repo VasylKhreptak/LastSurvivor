@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Data;
+using Gameplay.Entities.Collector;
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
@@ -62,7 +63,8 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindCameraShaker();
             BindPlayerWaypoints();
             BindObjectPools();
-            BindZombieList();
+            BindZombiesList();
+            BindCollectorsList();
             BindLevelData();
             BindWeaponAimer();
             BindWeaponShooter();
@@ -122,7 +124,9 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.Bind<LevelLoopState>().AsSingle();
         }
 
-        private void BindZombieList() => Container.Bind<List<Zombie>>().AsSingle();
+        private void BindZombiesList() => Container.Bind<List<Zombie>>().AsSingle();
+
+        private void BindCollectorsList() => Container.Bind<List<Collector>>().AsSingle();
 
         private void BindLevelData() => Container.Bind<LevelData>().AsSingle();
 

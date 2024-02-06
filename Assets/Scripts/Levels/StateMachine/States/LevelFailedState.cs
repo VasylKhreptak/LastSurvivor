@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Aim;
+using Gameplay.Entities.Collector;
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
@@ -22,9 +23,11 @@ namespace Levels.StateMachine.States
         private readonly HUD _hud;
         private readonly Helicopter _helicopter;
         private readonly Platoon _platoon;
+        private readonly List<Collector> _collectors;
 
         public LevelFailedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
-            WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow, HUD hud, Helicopter helicopter, Platoon platoon)
+            WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow, HUD hud, Helicopter helicopter, Platoon platoon,
+            List<Collector> collectors)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -35,6 +38,7 @@ namespace Levels.StateMachine.States
             _hud = hud;
             _helicopter = helicopter;
             _platoon = platoon;
+            _collectors = collectors;
         }
 
         public void Enter()
@@ -54,6 +58,9 @@ namespace Levels.StateMachine.States
             _levelFailedWindow.Show();
             _hud.Hide();
             _helicopter.TargetFollower.Target = null;
+
+            _collectors.ForEach(collector =>
+                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.IdleState>());
 
             _platoon.Soldiers.ForEach(soldier =>
             {

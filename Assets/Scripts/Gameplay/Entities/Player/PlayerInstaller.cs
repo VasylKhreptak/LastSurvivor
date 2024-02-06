@@ -1,4 +1,5 @@
-﻿using Adapters.Velocity;
+﻿using System.Collections.Generic;
+using Adapters.Velocity;
 using Entities.AI;
 using Entities.Animations;
 using Gameplay.Entities.Health.Core;
@@ -24,6 +25,7 @@ namespace Gameplay.Entities.Player
         [SerializeField] private Collider _lootBoxDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<LootBox.LootBox>.Preferences _closestLootBoxObserverPreferences;
         [SerializeField] private MeleeAttacker.Preferences _meleeAttackerPreferences;
+        [SerializeField] private List<Transform> _collectorFollowPoints;
 
         private Waypoints.Waypoints _waypoints;
 
@@ -37,6 +39,7 @@ namespace Gameplay.Entities.Player
             Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
+            Container.BindInstance(_collectorFollowPoints).AsSingle().WhenInjectedInto<Player>();
 
             BindRagdoll();
             BindDeathHandler();

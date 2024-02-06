@@ -13,17 +13,14 @@ namespace Gameplay.Entities.Player.StateMachine.States
     public class MapNavigationState : IPlayerState, IState, IExitable
     {
         private readonly IStateMachine<ILevelState> _levelStateMachine;
-        private readonly IStateMachine<IPlayerState> _playerStateMachine;
         private readonly AgentWaypointsFollower _waypointsFollower;
         private readonly MeleeAttacker _meleeAttacker;
         private readonly ClosestTriggerObserver<LootBox.LootBox> _lootBoxObserver;
 
-        public MapNavigationState(IStateMachine<ILevelState> levelStateMachine, IStateMachine<IPlayerState> playerStateMachine,
-            AgentWaypointsFollower waypointsFollower, MeleeAttacker meleeAttacker,
-            ClosestTriggerObserver<LootBox.LootBox> lootBoxObserver)
+        public MapNavigationState(IStateMachine<ILevelState> levelStateMachine, AgentWaypointsFollower waypointsFollower,
+            MeleeAttacker meleeAttacker, ClosestTriggerObserver<LootBox.LootBox> lootBoxObserver)
         {
             _levelStateMachine = levelStateMachine;
-            _playerStateMachine = playerStateMachine;
             _waypointsFollower = waypointsFollower;
             _meleeAttacker = meleeAttacker;
             _lootBoxObserver = lootBoxObserver;

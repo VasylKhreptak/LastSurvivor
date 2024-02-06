@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gameplay.Entities.Collector;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Player.StateMachine.States;
@@ -18,9 +19,10 @@ namespace Levels.StateMachine.States
         private readonly WeaponAim _weaponAim;
         private readonly HUD _hud;
         private readonly Platoon _platoon;
+        private readonly List<Collector> _collectors;
 
         public LevelStartState(IStateMachine<ILevelState> levelStateMachine, PlayerHolder playerHolder, List<Zombie> zombies,
-            StartWindow startWindow, WeaponAim weaponAim, HUD hud, Platoon platoon)
+            StartWindow startWindow, WeaponAim weaponAim, HUD hud, Platoon platoon, List<Collector> collectors)
         {
             _levelStateMachine = levelStateMachine;
             _playerHolder = playerHolder;
@@ -29,6 +31,7 @@ namespace Levels.StateMachine.States
             _weaponAim = weaponAim;
             _hud = hud;
             _platoon = platoon;
+            _collectors = collectors;
         }
 
         public void Enter()
@@ -45,6 +48,8 @@ namespace Levels.StateMachine.States
             _startWindows.Hide();
             _weaponAim.Show();
             _hud.Show();
+
+            _collectors.ForEach(collector => collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.MapNavigationState>());
 
             _platoon.Soldiers.ForEach(soldier =>
             {

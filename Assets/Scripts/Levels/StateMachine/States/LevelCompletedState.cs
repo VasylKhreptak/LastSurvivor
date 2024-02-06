@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Aim;
+using Gameplay.Entities.Collector;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Player.StateMachine.States;
@@ -22,10 +23,11 @@ namespace Levels.StateMachine.States
         private readonly HUD _hud;
         private readonly Platoon _platoon;
         private readonly IPersistentDataService _persistentDataService;
+        private readonly List<Collector> _collectors;
 
         public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad,
             LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer, HUD hud, Platoon platoon,
-            IPersistentDataService persistentDataService)
+            IPersistentDataService persistentDataService, List<Collector> collectors)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -36,6 +38,7 @@ namespace Levels.StateMachine.States
             _hud = hud;
             _platoon = platoon;
             _persistentDataService = persistentDataService;
+            _collectors = collectors;
         }
 
         public void Enter()
@@ -54,6 +57,9 @@ namespace Levels.StateMachine.States
             _weaponAim.Hide();
             _weaponAimer.Enabled = false;
             _hud.Hide();
+
+            _collectors.ForEach(collector =>
+                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.IdleState>());
 
             _platoon.Soldiers.ForEach(soldier =>
             {

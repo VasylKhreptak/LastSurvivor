@@ -6,6 +6,7 @@ using Zenject;
 
 namespace Gameplay.Entities.Zombie
 {
+    [DisallowMultipleComponent]
     public class Zombie : MonoBehaviour, IVisitable<BulletDamage>, IVisitable<ExplosionDamage>
     {
         public ZombieTargetFollower TargetFollower { get; private set; }
