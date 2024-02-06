@@ -6800,7 +6800,7 @@ NavMeshAgent:
   m_Speed: 4
   m_Acceleration: 12
   avoidancePriority: 50
-  m_AngularSpeed: 150
+  m_AngularSpeed: 300
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

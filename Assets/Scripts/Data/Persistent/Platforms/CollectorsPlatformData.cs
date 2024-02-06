@@ -4,7 +4,7 @@ namespace Data.Persistent.Platforms
 {
     public class CollectorsPlatformData
     {
-        public readonly ClampedIntegerBank CollectorsBank = new ClampedIntegerBank(3, 5);
+        public readonly ClampedIntegerBank CollectorsBank = new ClampedIntegerBank(0, 5);
         public readonly ClampedIntegerBank HireCollectorBank = new ClampedIntegerBank(0, 100);
         public readonly ClampedIntegerBank BuyContainer = new ClampedIntegerBank(0, 200);
     }
