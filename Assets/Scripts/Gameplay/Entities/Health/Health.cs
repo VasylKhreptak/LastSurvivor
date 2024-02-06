@@ -26,6 +26,12 @@ namespace Gameplay.Entities.Health
 
         public IReadOnlyReactiveProperty<bool> IsDeath => _health.IsEmpty;
 
+        public IReadOnlyReactiveProperty<float> OnDamaged =>
+            _health.Value.Pairwise()
+                .Where(pair => pair.Previous > pair.Current)
+                .Select(pair => pair.Previous - pair.Current)
+                .ToReactiveProperty();
+
         public void SetValue(float health) => _health.SetValue(health);
 
         public void SetMaxValue(float maxValue) => _health.SetMaxValue(maxValue);

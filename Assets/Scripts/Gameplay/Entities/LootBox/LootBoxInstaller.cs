@@ -1,5 +1,4 @@
-﻿using Gameplay.Entities.Health;
-using Gameplay.Entities.Health.Core;
+﻿using Gameplay.Entities.Health.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
@@ -28,8 +27,7 @@ namespace Gameplay.Entities.LootBox
             Container.BindInstance(gameObject).AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(GetHealth())).AsSingle();
 
-            BindHitShakeLayer();
-            BindDamageShaker();
+            BindShakeLayer();
             BIndDeathHandler();
         }
 
@@ -38,9 +36,7 @@ namespace Gameplay.Entities.LootBox
 
         private void BIndDeathHandler() => Container.BindInterfacesTo<LootBoxDeathHandler>().AsSingle();
 
-        private void BindHitShakeLayer() =>
+        private void BindShakeLayer() =>
             Container.BindInterfacesAndSelfTo<ShakeLayer>().AsSingle().WithArguments(_hitShakePreferences);
-
-        private void BindDamageShaker() => Container.BindInterfacesTo<DamageShaker>().AsSingle();
     }
 }

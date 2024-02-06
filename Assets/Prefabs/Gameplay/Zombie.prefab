@@ -7485,6 +7485,10 @@ MonoBehaviour:
     - {fileID: 3955250366819444805}
     - {fileID: 5008600500244119178}
     - {fileID: 3715971114534268286}
+  _enemyDetectionTriggerAwakenerPreferences:
+    _awakenedRadius: 30
+    _baseRadius: 15
+    _sleepTime: 5
 --- !u!195 &937538748053821505
 NavMeshAgent:
   m_ObjectHideFlags: 0

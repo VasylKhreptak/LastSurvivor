@@ -31,6 +31,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private ClosestTriggerObserver<IVisitable<ZombieDamage>>.Preferences _closestTriggerObserverPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
+        [SerializeField] private EnemyDetectionTriggerAwakener.Preferences _enemyDetectionTriggerAwakenerPreferences;
 
         private List<Zombie> _zombies;
         private IPersistentDataService _persistentDataService;
@@ -62,6 +63,7 @@ namespace Gameplay.Entities.Zombie
             BindTargetsZone();
             BindClosestTriggerObserver();
             BindZombieTargetFollower();
+            BindEnemyDetectionTriggerAwakener();
             BindDeathHandler();
             BindZombieAttacker();
             BindAgentTransformFollower();
@@ -138,5 +140,13 @@ namespace Gameplay.Entities.Zombie
 
         private void BindAgentTransformFollower() =>
             Container.Bind<AgentTransformFollower>().AsSingle().WithArguments(_moveStatePreferences);
+
+        private void BindEnemyDetectionTriggerAwakener()
+        {
+            Container
+                .BindInterfacesTo<EnemyDetectionTriggerAwakener>()
+                .AsSingle()
+                .WithArguments(_targetDetectionCollider, _enemyDetectionTriggerAwakenerPreferences);
+        }
     }
 }
