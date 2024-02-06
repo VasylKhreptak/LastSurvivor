@@ -1,5 +1,4 @@
 ﻿using EntryPoints.Core;
-using Gameplay.Entities.Collector;
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;

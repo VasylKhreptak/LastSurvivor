@@ -78,7 +78,7 @@ namespace Entities.AI
                     Vector3 targetPosition = target.position;
                     Vector3 currentPosition = _transform.position;
                     targetPosition.y = currentPosition.y;
-                    Vector3 direction = (targetPosition - currentPosition);
+                    Vector3 direction = targetPosition - currentPosition;
                     Quaternion rotation = Quaternion.LookRotation(direction);
                     _transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, Time.deltaTime * _preferences.LookSpeed);
                 });

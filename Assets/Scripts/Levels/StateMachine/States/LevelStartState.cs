@@ -49,7 +49,8 @@ namespace Levels.StateMachine.States
             _weaponAim.Show();
             _hud.Show();
 
-            _collectors.ForEach(collector => collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.MapNavigationState>());
+            _collectors.ForEach(collector =>
+                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.MapNavigationState>());
 
             _platoon.Soldiers.ForEach(soldier =>
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Adapters.Velocity;
 using Entities.AI;
 using Entities.Animations;

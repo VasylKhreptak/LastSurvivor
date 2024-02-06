@@ -12,17 +12,16 @@ namespace Gameplay.Entities.Collector
     public class Collector : MonoBehaviour, IVisitable<ZombieDamage>
     {
         private IHealth _health;
-        private IStateMachine<ICollectorState> _stateMachine;
 
         [Inject]
         private void Constructor(IHealth health, IStateMachine<ICollectorState> stateMachine)
         {
             _health = health;
-            _stateMachine = stateMachine;
+            StateMachine = stateMachine;
         }
 
         public void Accept(ZombieDamage zombieDamage) => _health.TakeDamage(zombieDamage.Value);
 
-        public IStateMachine<ICollectorState> StateMachine => _stateMachine;
+        public IStateMachine<ICollectorState> StateMachine { get; private set; }
     }
 }

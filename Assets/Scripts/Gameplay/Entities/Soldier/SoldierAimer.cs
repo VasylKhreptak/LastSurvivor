@@ -26,7 +26,7 @@ namespace Gameplay.Entities.Soldier
 
         private bool _isTargetVisible;
 
-        private float _timeFromLastRaycast = 0f;
+        private float _timeFromLastRaycast;
 
         private readonly BoolReactiveProperty _isAimed = new BoolReactiveProperty(false);
 

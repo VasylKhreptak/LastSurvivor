@@ -13,7 +13,7 @@ namespace Gameplay.Entities.Health.Core
         public IReadOnlyReactiveProperty<bool> IsFull { get; }
 
         public IReadOnlyReactiveProperty<bool> IsDeath { get; }
-        
+
         public IReadOnlyReactiveProperty<float> OnDamaged { get; }
 
         public void SetValue(float health);
