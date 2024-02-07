@@ -13,13 +13,11 @@ namespace Plugins.Animations
             _animations = animations;
         }
 
-        private float _delay;
-
         private Tween _tween;
 
         public float Duration => CreateForwardTween().Duration();
 
-        public float Delay => _delay;
+        public float Delay { get; private set; }
 
         public bool IsPlaying => _tween != null && _tween.IsPlaying();
 
@@ -41,7 +39,7 @@ namespace Plugins.Animations
         {
             Stop();
 
-            foreach (var animation in _animations)
+            foreach (IAnimation animation in _animations)
             {
                 animation.SetStartState();
             }
@@ -51,7 +49,7 @@ namespace Plugins.Animations
         {
             Stop();
 
-            foreach (var animation in _animations)
+            foreach (IAnimation animation in _animations)
             {
                 animation.SetEndState();
             }
@@ -61,7 +59,7 @@ namespace Plugins.Animations
         {
             Sequence sequence = DOTween.Sequence();
 
-            sequence.AppendInterval(_delay);
+            sequence.AppendInterval(Delay);
 
             foreach (IAnimation animation in _animations)
             {
@@ -75,18 +73,14 @@ namespace Plugins.Animations
         {
             Sequence sequence = DOTween.Sequence();
 
-            sequence.AppendInterval(_delay);
+            sequence.AppendInterval(Delay);
 
             for (int i = 0; i < _animations.Length; i++)
             {
                 if (i == 0)
-                {
                     sequence.Append(_animations[i].CreateBackwardTween());
-                }
                 else
-                {
                     sequence.Join(_animations[i].CreateBackwardTween());
-                }
             }
 
             return sequence;
@@ -94,7 +88,7 @@ namespace Plugins.Animations
 
         public IAnimation SetDelay(float delay)
         {
-            _delay = delay;
+            Delay = delay;
 
             return this;
         }

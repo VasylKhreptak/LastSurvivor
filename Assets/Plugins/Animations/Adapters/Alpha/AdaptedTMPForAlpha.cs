@@ -19,10 +19,6 @@ namespace Plugins.Animations.Adapters.Alpha
 
         #endregion
 
-        public override float Value
-        {
-            get => _tmp.color.a;
-            set => _tmp.color.WithAlpha(value);
-        }
+        public override float Value { get => _tmp.color.a; set => _tmp.color.WithAlpha(value); }
     }
 }

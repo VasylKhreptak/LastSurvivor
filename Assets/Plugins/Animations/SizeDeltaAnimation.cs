@@ -59,13 +59,11 @@ namespace Plugins.Animations
 
         public Tween CreateBackwardTween() => CreateSizeDeltaTween(_startSizeDelta);
 
-        private Tween CreateSizeDeltaTween(Vector2 targetSizeDelta)
-        {
-            return _rectTransform
+        private Tween CreateSizeDeltaTween(Vector2 targetSizeDelta) =>
+            _rectTransform
                 .DOSizeDelta(targetSizeDelta, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartSizeDelta() => _startSizeDelta = _rectTransform.sizeDelta;

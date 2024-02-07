@@ -59,13 +59,11 @@ namespace Plugins.Animations.Move
 
         public Tween CreateBackwardTween() => CreateMoveTween(_startPosition);
 
-        private Tween CreateMoveTween(Vector3 targetPosition)
-        {
-            return _transform
+        private Tween CreateMoveTween(Vector3 targetPosition) =>
+            _transform
                 .DOMove(targetPosition, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartPosition() => _startPosition = _transform.position;

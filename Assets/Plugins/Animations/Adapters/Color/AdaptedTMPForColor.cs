@@ -18,10 +18,6 @@ namespace Plugins.Animations.Adapters.Color
 
         #endregion
 
-        public override UnityEngine.Color Value
-        {
-            get => _tmp.color;
-            set => _tmp.color = value;
-        }
+        public override UnityEngine.Color Value { get => _tmp.color; set => _tmp.color = value; }
     }
 }

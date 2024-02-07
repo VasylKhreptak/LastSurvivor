@@ -63,13 +63,11 @@ namespace Plugins.Animations.Shake
 
         public Tween CreateBackwardTween() => CreateShakeScaleTween(-_force);
 
-        private Tween CreateShakeScaleTween(float force)
-        {
-            return _transform
+        private Tween CreateShakeScaleTween(float force) =>
+            _transform
                 .DOShakeScale(_duration, force, _vibrato, _randomness, _fadeOut, _randomnessMode)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignBaseLocalScale()

@@ -62,13 +62,11 @@ namespace Plugins.Animations.Punch
 
         public Tween CreateBackwardTween() => CreatePunchScaleTween(-_direction * _force);
 
-        private Tween CreatePunchScaleTween(Vector3 punch)
-        {
-            return _transform
+        private Tween CreatePunchScaleTween(Vector3 punch) =>
+            _transform
                 .DOPunchScale(punch, _duration, _vibrato, _elasticity)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignBaseLocalScale()

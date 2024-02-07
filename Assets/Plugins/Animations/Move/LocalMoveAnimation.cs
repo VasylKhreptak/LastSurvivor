@@ -22,7 +22,7 @@ namespace Plugins.Animations.Move
         private Tween _tween;
 
         public float Duration => _duration;
-        
+
         public float Delay => _delay;
 
         public bool IsPlaying => _tween != null && _tween.IsPlaying();
@@ -59,13 +59,11 @@ namespace Plugins.Animations.Move
 
         public Tween CreateBackwardTween() => CreateLocalMoveTween(_startLocalPosition);
 
-        private Tween CreateLocalMoveTween(Vector3 targetLocalPosition)
-        {
-            return _transform
+        private Tween CreateLocalMoveTween(Vector3 targetLocalPosition) =>
+            _transform
                 .DOLocalMove(targetLocalPosition, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartLocalPosition() => _startLocalPosition = _transform.localPosition;

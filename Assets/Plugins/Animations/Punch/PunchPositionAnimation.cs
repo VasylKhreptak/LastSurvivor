@@ -62,13 +62,11 @@ namespace Plugins.Animations.Punch
 
         public Tween CreateBackwardTween() => CreatePunchPositionTween(-_direction * _force);
 
-        private Tween CreatePunchPositionTween(Vector3 punch)
-        {
-            return _transform
+        private Tween CreatePunchPositionTween(Vector3 punch) =>
+            _transform
                 .DOPunchPosition(punch, _duration, _vibrato, _elasticity)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignBaseLocalPosition()

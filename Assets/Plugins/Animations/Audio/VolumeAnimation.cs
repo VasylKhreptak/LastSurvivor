@@ -1,25 +1,23 @@
 ﻿using System;
 using DG.Tweening;
+using Plugins.Animations.Adapters.Volume.Core;
 using Plugins.Animations.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.Animations.Punch
+namespace Plugins.Animations.Audio
 {
     [Serializable]
-    public class PunchRotationAnimation : IAnimation
+    public class VolumeAnimation : IAnimation
     {
         [Header("References")]
-        [SerializeField] private Transform _transform;
+        [SerializeField] private VolumeAdapter _volumeAdapter;
 
         [Header("Preferences")]
         [SerializeField] private float _duration = 1f;
         [SerializeField] private float _delay;
-        [SerializeField] private Vector3 _baseLocalRotation;
-        [SerializeField] private float _force = 1f;
-        [SerializeField] private Vector3 _direction = Vector3.up;
-        [SerializeField] private int _vibrato = 10;
-        [SerializeField] private float _elasticity = 1f;
+        [SerializeField] private float _startVolume;
+        [SerializeField] private float _endVolume;
         [SerializeField] private AnimationCurve _curve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
         private Tween _tween;
@@ -48,30 +46,32 @@ namespace Plugins.Animations.Punch
         {
             Stop();
 
-            _transform.localEulerAngles = _baseLocalRotation;
+            _volumeAdapter.Value = _startVolume;
         }
 
         public void SetEndState()
         {
             Stop();
 
-            _transform.localEulerAngles = _baseLocalRotation;
+            _volumeAdapter.Value = _endVolume;
         }
 
-        public Tween CreateForwardTween() => CreatePunchRotationTween(_direction * _force);
+        public Tween CreateForwardTween() => CreateVolumeTween(_endVolume);
 
-        public Tween CreateBackwardTween() => CreatePunchRotationTween(-_direction * _force);
+        public Tween CreateBackwardTween() => CreateVolumeTween(_startVolume);
 
-        private Tween CreatePunchRotationTween(Vector3 punch) =>
-            _transform
-                .DOPunchRotation(punch, _duration, _vibrato, _elasticity)
+        private Tween CreateVolumeTween(float alpha)
+        {
+            return DOTween
+                .To(() => _volumeAdapter.Value, x => _volumeAdapter.Value = x, alpha, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
+        }
 
         [Button]
-        private void AssignBaseLocalRotation()
-        {
-            _baseLocalRotation = _transform.localEulerAngles;
-        }
+        private void AssignStartVolume() => _startVolume = _volumeAdapter.Value;
+
+        [Button]
+        private void AssignEndVolume() => _endVolume = _volumeAdapter.Value;
     }
 }

@@ -61,13 +61,11 @@ namespace Plugins.Animations.Jump
 
         public Tween CreateBackwardTween() => CreateAnchorJumpTween(_startAnchoredPosition);
 
-        private Tween CreateAnchorJumpTween(Vector2 targetPosition)
-        {
-            return _rectTransform
+        private Tween CreateAnchorJumpTween(Vector2 targetPosition) =>
+            _rectTransform
                 .DOJumpAnchorPos(targetPosition, _jumpPower, _jumpCount, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartAnchoredPosition() => _startAnchoredPosition = _rectTransform.anchoredPosition;

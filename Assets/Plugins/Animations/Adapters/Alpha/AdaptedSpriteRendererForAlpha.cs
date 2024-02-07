@@ -18,10 +18,6 @@ namespace Plugins.Animations.Adapters.Alpha
 
         #endregion
 
-        public override float Value
-        {
-            get => _spriteRenderer.color.a;
-            set => _spriteRenderer.color.WithAlpha(value);
-        }
+        public override float Value { get => _spriteRenderer.color.a; set => _spriteRenderer.color.WithAlpha(value); }
     }
 }

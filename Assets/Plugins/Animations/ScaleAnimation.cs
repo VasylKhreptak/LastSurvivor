@@ -59,13 +59,11 @@ namespace Plugins.Animations
 
         public Tween CreateBackwardTween() => CreateScaleTween(_startScale);
 
-        private Tween CreateScaleTween(Vector3 targetScale)
-        {
-            return _transform
+        private Tween CreateScaleTween(Vector3 targetScale) =>
+            _transform
                 .DOScale(targetScale, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartScale() => _endScale = _transform.localScale;

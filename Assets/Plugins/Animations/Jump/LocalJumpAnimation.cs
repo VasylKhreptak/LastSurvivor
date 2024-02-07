@@ -61,13 +61,11 @@ namespace Plugins.Animations.Jump
 
         public Tween CreateBackwardTween() => CreateLocalJumpTween(_startLocalPosition);
 
-        private Tween CreateLocalJumpTween(Vector3 targetPosition)
-        {
-            return _transform
+        private Tween CreateLocalJumpTween(Vector3 targetPosition) =>
+            _transform
                 .DOLocalJump(targetPosition, _jumpPower, _jumpCount, _duration)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartLocalPosition() => _startLocalPosition = _transform.localPosition;

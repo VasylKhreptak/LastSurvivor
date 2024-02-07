@@ -19,7 +19,7 @@ namespace Plugins.Animations.Rotate
         [SerializeField] private Vector3 _endRotation;
         [SerializeField] private RotateMode _rotateMode = RotateMode.Fast;
         [SerializeField] private AnimationCurve _curve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
-        
+
         private Tween _tween;
 
         public float Duration => _duration;
@@ -60,13 +60,11 @@ namespace Plugins.Animations.Rotate
 
         public Tween CreateBackwardTween() => CreateRotateTween(_startRotation);
 
-        private Tween CreateRotateTween(Vector3 targetRotation)
-        {
-            return _transform
+        private Tween CreateRotateTween(Vector3 targetRotation) =>
+            _transform
                 .DORotate(targetRotation, _duration, _rotateMode)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartRotation() => _startRotation = _transform.eulerAngles;

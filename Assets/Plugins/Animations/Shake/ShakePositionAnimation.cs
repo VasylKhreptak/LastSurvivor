@@ -64,13 +64,11 @@ namespace Plugins.Animations.Shake
 
         public Tween CreateBackwardTween() => CreateShakePositionTween(-_direction * _force);
 
-        private Tween CreateShakePositionTween(Vector3 punch)
-        {
-            return _transform
+        private Tween CreateShakePositionTween(Vector3 punch) =>
+            _transform
                 .DOShakePosition(_duration, punch, _vibrato, _randomness, false, _fadeOut, _randomnessMode)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignBaseLocalPosition()

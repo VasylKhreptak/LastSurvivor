@@ -60,13 +60,11 @@ namespace Plugins.Animations.Rotate
 
         public Tween CreateBackwardTween() => CreateLocalRotateTween(_startLocalRotation);
 
-        private Tween CreateLocalRotateTween(Vector3 targetRotation)
-        {
-            return _transform
+        private Tween CreateLocalRotateTween(Vector3 targetRotation) =>
+            _transform
                 .DOLocalRotate(targetRotation, _duration, _rotateMode)
                 .SetDelay(_delay)
                 .SetEase(_curve);
-        }
 
         [Button]
         private void AssignStartRotation() => _startLocalRotation = _transform.localEulerAngles;
