@@ -286,6 +286,8 @@ MonoBehaviour:
     _updateInterval: 0.2
   _lootAttractorPreferences:
     _delay: 0.5
+    _minAttractDelay: 0.05
+    _maxAttractDelay: 0.3
     _attractDuration: 0.5
     _targetScale: {x: 0.2, y: 0.2, z: 0.2}
     _curve:

@@ -26,6 +26,7 @@ namespace Gameplay.Entities.Loot
 
         private IDisposable _closestCollectorObserverSubscription;
         private IDisposable _delaySubscription;
+        private IDisposable _attractDelaySubscription;
 
         private Tween _tween;
 
@@ -39,6 +40,7 @@ namespace Gameplay.Entities.Loot
         public void Disable()
         {
             _delaySubscription?.Dispose();
+            _attractDelaySubscription?.Dispose();
             StopObserving();
             Stop();
         }
@@ -55,10 +57,14 @@ namespace Gameplay.Entities.Loot
 
         private void OnClosestCollectorChanged(LootCollector collector)
         {
+            _attractDelaySubscription?.Dispose();
+
             if (collector == null)
                 return;
 
-            Attract(collector.Target);
+            _attractDelaySubscription = Observable
+                .Timer(TimeSpan.FromSeconds(UnityEngine.Random.Range(_preferences.MinAttractDelay, _preferences.MaxAttractDelay)))
+                .Subscribe(_ => Attract(collector.Target));
         }
 
         private void Attract(Transform transform)
@@ -84,11 +90,15 @@ namespace Gameplay.Entities.Loot
         public class Preferences
         {
             [SerializeField] private float _delay = 0.5f;
+            [SerializeField] private float _minAttractDelay = 0.1f;
+            [SerializeField] private float _maxAttractDelay = 0.5f;
             [SerializeField] private float _attractDuration = 0.5f;
             [SerializeField] private Vector3 _targetScale = Vector3.one * 0.2f;
             [SerializeField] private AnimationCurve _curve;
 
             public float Delay => _delay;
+            public float MinAttractDelay => _minAttractDelay;
+            public float MaxAttractDelay => _maxAttractDelay;
             public float AttractDuration => _attractDuration;
             public Vector3 TargetScale => _targetScale;
             public AnimationCurve Curve => _curve;

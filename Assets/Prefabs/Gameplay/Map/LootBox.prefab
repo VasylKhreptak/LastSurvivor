@@ -214,9 +214,9 @@ MonoBehaviour:
     _minStartAngle: {x: 0, y: 0, z: 0}
     _maxStartAngle: {x: 0, y: 360, z: 0}
     _minAngleDeviation: 0
-    _maxAngleDeviation: 30
-    _minVelocity: 2
-    _maxVelocity: 5
+    _maxAngleDeviation: 50
+    _minVelocity: 3
+    _maxVelocity: 4
 --- !u!114 &6722120080075699501
 MonoBehaviour:
   m_ObjectHideFlags: 0
