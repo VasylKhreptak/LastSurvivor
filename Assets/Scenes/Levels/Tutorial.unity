@@ -12724,17 +12724,22 @@ MonoBehaviour:
   - Key: 0
     Prefab: {fileID: 2347811216486613142, guid: f36e89a63e5ae2547bf311339449b80d,
       type: 3}
-    InitialSize: 40
-    MaxSize: 150
+    InitialSize: 10
+    MaxSize: 100
   - Key: 1
     Prefab: {fileID: 137434, guid: 1895c7f6f9bfb4a4f81cae7409bf1554, type: 3}
-    InitialSize: 40
-    MaxSize: 150
+    InitialSize: 10
+    MaxSize: 100
   - Key: 2
     Prefab: {fileID: 2347811216486613142, guid: 3671cbc683e46914499dac36b0ee2695,
       type: 3}
-    InitialSize: 10
+    InitialSize: 0
     MaxSize: 500
+  - Key: 3
+    Prefab: {fileID: 1711373200842162009, guid: 2a294becf3e07d9418c3879287509031,
+      type: 3}
+    InitialSize: 0
+    MaxSize: 9999
   _weaponAimPreferences:
     _aimLayerMask:
       serializedVersion: 2
@@ -60591,6 +60596,7 @@ GameObject:
   - component: {fileID: 1803727000}
   - component: {fileID: 1803726999}
   - component: {fileID: 1803727002}
+  - component: {fileID: 1803727003}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -60653,7 +60659,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -60716,6 +60722,31 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1803727003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803726998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb42831ee5422f409e7f24f9e7488ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage: 1
+  renderingStrategy: 0
+  renderingMode: 0
+  outlineLayerMask: -1
+  primaryBufferSizeMode: 0
+  primaryRendererScale: 0.75
+  primarySizeReference: 800
+  blurShift: 1
+  dilateShift: 1
+  dilateIterations: 1
+  dilateQuality: 0
+  blurIterations: 1
+  blurType: 1
 --- !u!1 &1809263973
 GameObject:
   m_ObjectHideFlags: 0
@@ -67601,8 +67632,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 5183883730816400550}
-  _speed: 1000
-  _axis: {x: 0, y: 1, z: 0}
+  _preferences:
+    _speed: 2000
+    _axis: {x: 0, y: 1, z: 0}
 --- !u!4 &5183883730816464598
 Transform:
   m_ObjectHideFlags: 0
@@ -67631,8 +67663,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 5183883730816464598}
-  _speed: 2000
-  _axis: {x: 1, y: 0, z: 0}
+  _preferences:
+    _speed: 2000
+    _axis: {x: 1, y: 0, z: 0}
 --- !u!1001 &5796799738881974240
 PrefabInstance:
   m_ObjectHideFlags: 0

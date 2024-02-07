@@ -39,6 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5552675356424451352}
+  - {fileID: 4864093291080687546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4533166792589125423
@@ -200,6 +201,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  _lootSpawnerPreferences:
+    _origin: {fileID: 4864093291080687546}
+    _lootPreferences:
+    - _pool: 3
+      _minInstanceCount: 15
+      _maxInstanceCount: 25
+      _minCount: 1
+      _maxCount: 3
+    _spawnRadius: 0.3
+    _direction: {x: 0, y: 1, z: 0}
+    _minStartAngle: {x: 0, y: 0, z: 0}
+    _maxStartAngle: {x: 0, y: 360, z: 0}
+    _minAngleDeviation: 0
+    _maxAngleDeviation: 30
+    _minVelocity: 2
+    _maxVelocity: 5
 --- !u!114 &6722120080075699501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +270,53 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0.503, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &6028895358554933317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4864093291080687546}
+  - component: {fileID: 2783744777277569545}
+  m_Layer: 7
+  m_Name: LootSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4864093291080687546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028895358554933317}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.699, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5157151082828475035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2783744777277569545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028895358554933317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7319b7750c4506afa1f380a4e7db21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: {r: 1, g: 0, b: 0, a: 1}
+  _range: 0.2
+  _drawOnlyWhenSelected: 0
 --- !u!1001 &4783154555455364950
 PrefabInstance:
   m_ObjectHideFlags: 0

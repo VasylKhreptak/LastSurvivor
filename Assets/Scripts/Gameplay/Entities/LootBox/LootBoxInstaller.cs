@@ -10,6 +10,7 @@ namespace Gameplay.Entities.LootBox
     public class LootBoxInstaller : MonoInstaller
     {
         [SerializeField] private ShakeLayer.Preferences _hitShakePreferences;
+        [SerializeField] private LootSpawner.Preferences _lootSpawnerPreferences;
 
         private IPersistentDataService _persistentDataService;
         private IStaticDataService _staticDataService;
@@ -27,16 +28,19 @@ namespace Gameplay.Entities.LootBox
             Container.BindInstance(gameObject).AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(GetHealth())).AsSingle();
 
+            BindLootSpawner();
             BindShakeLayer();
-            BIndDeathHandler();
+            BindDeathHandler();
         }
 
         private float GetHealth() =>
             _staticDataService.Balance.LootBoxHealth.Get(_persistentDataService.PersistentData.PlayerData.Level);
 
-        private void BIndDeathHandler() => Container.BindInterfacesTo<LootBoxDeathHandler>().AsSingle();
+        private void BindLootSpawner() => Container.Bind<LootSpawner>().AsSingle().WithArguments(_lootSpawnerPreferences);
 
         private void BindShakeLayer() =>
             Container.BindInterfacesAndSelfTo<ShakeLayer>().AsSingle().WithArguments(_hitShakePreferences);
+
+        private void BindDeathHandler() => Container.BindInterfacesTo<LootBoxDeathHandler>().AsSingle();
     }
 }
