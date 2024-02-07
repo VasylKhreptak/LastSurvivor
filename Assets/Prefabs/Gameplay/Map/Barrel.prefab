@@ -4940,7 +4940,7 @@ MonoBehaviour:
   _rigidbodyAffectorPreferences:
     _layerMask:
       serializedVersion: 2
-      m_Bits: 439
+      m_Bits: 2455
     _upwardsModifier: 1
     _minRadius: 0
     _maxRadius: 7
@@ -4973,7 +4973,7 @@ MonoBehaviour:
   _explosionDamageApplierPreferences:
     _layerMask:
       serializedVersion: 2
-      m_Bits: 183
+      m_Bits: 4087
     _minRadius: 0
     _maxRadius: 10
     _minDamage: 10

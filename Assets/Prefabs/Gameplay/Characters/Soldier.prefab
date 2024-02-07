@@ -903,7 +903,7 @@ MonoBehaviour:
     _maxAngleThreshold: 8
     _viewLayerMask:
       serializedVersion: 2
-      m_Bits: 243
+      m_Bits: 2177
     _raycastInterval: 0.25
   _shootPreferences:
     _spawnPoint: {fileID: 4978168838215678566}

@@ -15,8 +15,8 @@ TagManager:
   - IgnoreNavMesh
   - IgnoreBullet
   - Loot
-  - 
-  - 
+  - Player
+  - Zombie
   - 
   - 
   - 
