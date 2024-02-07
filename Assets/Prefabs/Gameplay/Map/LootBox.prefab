@@ -207,8 +207,8 @@ MonoBehaviour:
     - _pool: 3
       _minInstanceCount: 15
       _maxInstanceCount: 25
-      _minCount: 1
-      _maxCount: 3
+      _minCount: 3
+      _maxCount: 6
     _spawnRadius: 0.3
     _direction: {x: 0, y: 1, z: 0}
     _minStartAngle: {x: 0, y: 0, z: 0}
