@@ -6,5 +6,6 @@ namespace Gameplay.Data
     {
         public readonly IntReactiveProperty CollectedGears = new IntReactiveProperty();
         public readonly IntReactiveProperty CollectedMoney = new IntReactiveProperty();
+        public readonly IntReactiveProperty KilledZombiesCount = new IntReactiveProperty();
     }
 }
