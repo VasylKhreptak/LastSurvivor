@@ -1,48 +1,76 @@
 ﻿using System;
+using DG.Tweening;
 using Infrastructure.Transition.Core;
-using Plugins.Animations;
+using UniRx;
 using UnityEngine;
 
 namespace Infrastructure.Transition
 {
     public class TransitionScreen : MonoBehaviour, ITransitionScreen
     {
+        [Header("References")]
+        [SerializeField] private CanvasGroup _canvasGroup;
+
         [Header("Preferences")]
-        [SerializeField] private FadeAnimation _showAnimation;
+        [SerializeField] private float _duration = 0.5f;
+        [SerializeField] private AnimationCurve _curve;
+
+        private Tween _tween;
+
+        private readonly FloatReactiveProperty _fadeProgress = new FloatReactiveProperty(1f);
+
+        public IReadOnlyReactiveProperty<float> FadeProgress => _fadeProgress;
 
         #region MonoBehaviour
 
-        private void OnDestroy()
-        {
-            _showAnimation.Stop();
-        }
+        private void OnDestroy() => _tween?.Kill();
 
         #endregion
 
         public void Show(Action onComplete = null)
         {
             gameObject.SetActive(true);
-            _showAnimation.PlayForward(() => { onComplete?.Invoke(); });
+
+            _tween?.Kill();
+            _tween = _canvasGroup
+                .DOFade(1f, _duration)
+                .SetEase(_curve)
+                .OnUpdate(() => _fadeProgress.Value = 1 - _canvasGroup.alpha)
+                .OnComplete(() =>
+                {
+                    _fadeProgress.Value = 0f;
+                    onComplete?.Invoke();
+                })
+                .Play();
         }
 
         public void Hide(Action onComplete = null)
         {
-            _showAnimation.PlayBackward(() =>
-            {
-                onComplete?.Invoke();
-                gameObject.SetActive(false);
-            });
+            _tween?.Kill();
+            _tween = _canvasGroup
+                .DOFade(0f, _duration)
+                .SetEase(_curve)
+                .OnUpdate(() => _fadeProgress.Value = 1 - _canvasGroup.alpha)
+                .OnComplete(() =>
+                {
+                    _fadeProgress.Value = 1;
+                    gameObject.SetActive(false);
+                    onComplete?.Invoke();
+                })
+                .Play();
         }
 
         public void ShowImmediately()
         {
+            _tween?.Kill();
+            _canvasGroup.alpha = 1f;
             gameObject.SetActive(true);
-            _showAnimation.SetEndState();
         }
 
         public void HideImmediately()
         {
-            _showAnimation.SetStartState();
+            _tween?.Kill();
+            _canvasGroup.alpha = 0f;
             gameObject.SetActive(false);
         }
     }
