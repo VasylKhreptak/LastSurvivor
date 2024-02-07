@@ -2,7 +2,6 @@
 using Infrastructure.Graphics.UI.Windows.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
-using UniRx;
 using UnityEngine;
 
 namespace UI.Gameplay.Windows
@@ -18,10 +17,6 @@ namespace UI.Gameplay.Windows
 
         private IAnimation _showAnimation;
 
-        private readonly BoolReactiveProperty _isActive = new BoolReactiveProperty(false);
-
-        public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
-
         #region MonoBehaviour
 
         private void Awake()
@@ -29,7 +24,6 @@ namespace UI.Gameplay.Windows
             _showAnimation = new AnimationGroup(_scaleAnimation, _canvasFadeAnimation);
             _showAnimation.SetStartState();
             _gameObject.SetActive(false);
-            _isActive.Value = false;
         }
 
         #endregion
@@ -37,11 +31,7 @@ namespace UI.Gameplay.Windows
         public void Show(Action onComplete = null)
         {
             _gameObject.SetActive(true);
-            _showAnimation.PlayForward(() =>
-            {
-                _isActive.Value = true;
-                onComplete?.Invoke();
-            });
+            _showAnimation.PlayForward(() => onComplete?.Invoke());
         }
 
         public void Hide(Action onComplete = null)
@@ -49,7 +39,6 @@ namespace UI.Gameplay.Windows
             _showAnimation.PlayBackward(() =>
             {
                 _gameObject.SetActive(false);
-                _isActive.Value = false;
                 onComplete?.Invoke();
             });
         }

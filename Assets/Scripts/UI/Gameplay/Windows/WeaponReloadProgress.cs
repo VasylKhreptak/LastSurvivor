@@ -34,10 +34,6 @@ namespace UI.Gameplay.Windows
         private IDisposable _weaponSubscription;
         private IDisposable _isWeaponReloadingSubscription;
 
-        private readonly BoolReactiveProperty _isActive = new BoolReactiveProperty(false);
-
-        public IReadOnlyReactiveProperty<bool> IsActive => _isActive;
-
         #region MonoBehaviour
 
         private void Awake()
@@ -47,7 +43,6 @@ namespace UI.Gameplay.Windows
             _showAnimation.SetStartState();
             _aim.gameObject.SetActive(true);
             _reloadProgress.gameObject.SetActive(false);
-            _isActive.Value = false;
         }
 
         private void OnEnable() => StartObserving();
@@ -59,7 +54,6 @@ namespace UI.Gameplay.Windows
         public void Show(Action onComplete = null)
         {
             _reloadProgress.SetActive(true);
-            _isActive.Value = true;
             _showAnimation.PlayForward(() =>
             {
                 _aim.SetActive(false);
@@ -73,7 +67,6 @@ namespace UI.Gameplay.Windows
             _showAnimation.PlayBackward(() =>
             {
                 _reloadProgress.SetActive(false);
-                _isActive.Value = false;
                 onComplete?.Invoke();
             });
         }
