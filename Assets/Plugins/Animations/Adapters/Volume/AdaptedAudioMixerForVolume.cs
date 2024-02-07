@@ -17,14 +17,10 @@ namespace Plugins.Animations.Adapters.Volume
         {
             get
             {
-                Debug.Log(_audioMixerGroup.audioMixer.GetFloat(_exposedParameter, out float dbVolume));
+                _audioMixerGroup.audioMixer.GetFloat(_exposedParameter, out float dbVolume);
                 return AudioExtensions.To01(dbVolume);
             }
-            set
-            {
-                Debug.Log(_audioMixerGroup.audioMixer.SetFloat(_exposedParameter, AudioExtensions.ToDB(value)));
-                Debug.Log(AudioExtensions.ToDB(value));
-            }
+            set => _audioMixerGroup.audioMixer.SetFloat(_exposedParameter, AudioExtensions.ToDB(value));
         }
     }
 }
