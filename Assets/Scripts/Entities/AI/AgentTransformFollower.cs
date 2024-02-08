@@ -1,18 +1,17 @@
 ﻿using System;
 using UniRx;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Entities.AI
 {
     public class AgentTransformFollower
     {
-        private readonly NavMeshAgent _agent;
+        private readonly AgentMover _agentMover;
         private readonly Preferences _preferences;
 
-        public AgentTransformFollower(NavMeshAgent agent, Preferences preferences)
+        public AgentTransformFollower(AgentMover agentMover, Preferences preferences)
         {
-            _agent = agent;
+            _agentMover = agentMover;
             _preferences = preferences;
         }
 
@@ -30,21 +29,14 @@ namespace Entities.AI
             _target = target;
             _lastDestinationPosition = _target.position;
 
-            _agent.isStopped = false;
-            _agent.ResetPath();
-            _agent.SetDestination(_lastDestinationPosition);
+            _agentMover.SetDestination(_lastDestinationPosition);
             StartUpdatingDestination();
         }
 
         public void Stop()
         {
-            if (_agent.isActiveAndEnabled)
-            {
-                _agent.isStopped = true;
-                _agent.ResetPath();
-            }
-
             StopUpdatingDestination();
+            _agentMover.Stop();
         }
 
         private void StartUpdatingDestination()
@@ -62,7 +54,7 @@ namespace Entities.AI
 
             if (Vector3.Distance(_targetPosition, _lastDestinationPosition) > _preferences.PositionThreshold)
             {
-                _agent.SetDestination(_targetPosition);
+                _agentMover.SetDestination(_targetPosition);
                 _lastDestinationPosition = _targetPosition;
             }
         }

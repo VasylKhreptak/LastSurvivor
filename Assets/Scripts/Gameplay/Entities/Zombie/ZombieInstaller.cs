@@ -10,7 +10,6 @@ using Gameplay.Entities.Zombie.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Main.Core;
-using Inspector;
 using Inspector.MinMax;
 using Inspector.MinMax.Core;
 using UnityEngine;
@@ -29,6 +28,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
+        [SerializeField] private AgentMover.Preferences _agentMoverPreferences;
         [SerializeField] private AgentTransformFollower.Preferences _moveStatePreferences;
         [SerializeField] private Collider _targetDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<IVisitable<ZombieDamage>>.Preferences _closestTriggerObserverPreferences;
@@ -70,6 +70,7 @@ namespace Gameplay.Entities.Zombie
             BindEnemyDetectionTriggerAwakener();
             BindDeathHandler();
             BindZombieAttacker();
+            BindAgentMover();
             BindAgentTransformFollower();
             EnterIdleState();
             RegisterZombie();
@@ -141,6 +142,9 @@ namespace Gameplay.Entities.Zombie
                 .AsSingle()
                 .WithArguments(_closestTriggerObserverPreferences);
         }
+
+        private void BindAgentMover() =>
+            Container.BindInterfacesAndSelfTo<AgentMover>().AsSingle().WithArguments(_agentMoverPreferences);
 
         private void BindAgentTransformFollower() =>
             Container.Bind<AgentTransformFollower>().AsSingle().WithArguments(_moveStatePreferences);

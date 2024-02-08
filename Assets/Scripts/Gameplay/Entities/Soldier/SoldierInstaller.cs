@@ -20,6 +20,7 @@ namespace Gameplay.Entities.Soldier
     {
         [SerializeField] private Transform _viewTransform;
         [SerializeField] private float _maxHealth = 100f;
+        [SerializeField] private AgentMover.Preferences _agentMoverPreferences;
         [SerializeField] private AgentTransformFollower.Preferences _followTransformStatePreferences;
         [SerializeField] private PlaneMoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
@@ -55,6 +56,7 @@ namespace Gameplay.Entities.Soldier
             BindShootParticle();
             BindShooter();
             BindDeathHandler();
+            BindAgentMover();
             BindAgentTransformFollower();
             BindStateMachine();
             RegisterSoldier();
@@ -120,6 +122,9 @@ namespace Gameplay.Entities.Soldier
         private void BindShootAudio() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_shootAudioPlayerPreferences);
 
         private void BindDeathHandler() => Container.BindInterfacesTo<SoldierDeathHandler>().AsSingle();
+
+        private void BindAgentMover() =>
+            Container.BindInterfacesAndSelfTo<AgentMover>().AsSingle().WithArguments(_agentMoverPreferences);
 
         private void BindAgentTransformFollower() =>
             Container.Bind<AgentTransformFollower>().AsSingle().WithArguments(_followTransformStatePreferences);
