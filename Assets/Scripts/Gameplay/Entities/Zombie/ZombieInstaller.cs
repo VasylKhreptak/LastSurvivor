@@ -10,6 +10,9 @@ using Gameplay.Entities.Zombie.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Main.Core;
+using Inspector;
+using Inspector.MinMax;
+using Inspector.MinMax.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.GameObjectUtilities;
@@ -32,6 +35,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private EnemyDetectionTriggerAwakener.Preferences _enemyDetectionTriggerAwakenerPreferences;
+        [SerializeField] private MinMaxValue<int> _priceForKill = new IntMinMaxValue(10, 30);
 
         private List<Zombie> _zombies;
         private IPersistentDataService _persistentDataService;
@@ -102,7 +106,7 @@ namespace Gameplay.Entities.Zombie
         {
             Container.Bind<IdleState>().AsSingle();
             Container.Bind<FollowTransformState>().AsSingle();
-            Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
+            Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>(), _priceForKill);
         }
 
         private void BindTargetsZone()

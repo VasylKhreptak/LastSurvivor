@@ -2,6 +2,7 @@
 using Gameplay.Data;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using Inspector.MinMax.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
@@ -19,9 +20,10 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
         private readonly List<Zombie> _zombies;
         private readonly Zombie _zombie;
         private readonly LevelData _levelData;
+        private readonly MinMaxValue<int> _priceForKill;
 
         public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, NavMeshAgent agent,
-            List<Zombie> zombies, Zombie zombie, LevelData levelData)
+            List<Zombie> zombies, Zombie zombie, LevelData levelData, MinMaxValue<int> priceForKill)
         {
             _kernel = kernel;
             _ragdoll = ragdoll;
@@ -31,6 +33,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _zombies = zombies;
             _zombie = zombie;
             _levelData = levelData;
+            _priceForKill = priceForKill;
         }
 
         public void Enter()
@@ -41,7 +44,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _collider.enabled = false;
             _agent.enabled = false;
             _ragdoll.Enable();
-            _levelData.KilledZombiesCount.Value++;
+            _levelData.CollectedMoney.Value += _priceForKill.GetRandom();
         }
     }
 }
