@@ -37,7 +37,6 @@ namespace Entities.AI
                 return;
             }
 
-            _agent.ResetPath();
             _agent.isStopped = false;
 
             _agent.SetDestination(_destination);
@@ -49,10 +48,7 @@ namespace Entities.AI
             StopObservingDestination();
 
             if (_agent.isActiveAndEnabled)
-            {
                 _agent.isStopped = true;
-                _agent.ResetPath();
-            }
         }
 
         private void StartObservingDestination()
