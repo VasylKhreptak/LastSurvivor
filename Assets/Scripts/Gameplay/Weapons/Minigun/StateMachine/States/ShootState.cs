@@ -7,6 +7,7 @@ using Gameplay.Weapons.Minigun.StateMachine.States.Core;
 using Holders.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using Inspector.MinMax;
 using ObjectPoolSystem;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.Banks;
@@ -95,7 +96,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             Vector3 bulletPosition = GetBulletPosition();
             bulletObject.transform.position = bulletPosition;
             bulletObject.transform.rotation = GetBulletRotation();
-            bullet.Damage.Value = GetDamage();
+            bullet.Damage.Value = _preferences.Damage.GetRandom();
             _bulletPosition = bulletPosition;
             _bulletRotation = bulletObject.transform.rotation;
             AccelerateBullet(bullet);
@@ -117,13 +118,11 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
         {
             Quaternion rotation = _preferences.SpawnPoint.rotation;
 
-            rotation *= Quaternion.Euler(RandomExtensions.Range(Vector3.one * _preferences.MinScatterAngle,
-                Vector3.one * _preferences.MaxScatterAngle));
+            rotation *= Quaternion.Euler(RandomExtensions.Range(Vector3.one * _preferences.ScatterAngle.Min,
+                Vector3.one * _preferences.ScatterAngle.Max));
 
             return rotation;
         }
-
-        private float GetDamage() => Random.Range(_preferences.MinDamage, _preferences.MaxDamage);
 
         private void AccelerateBullet(Bullet bullet)
         {
@@ -137,19 +136,15 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             [SerializeField] private Transform _spawnPoint;
             [SerializeField] private float _fireInterval = 0.09f;
             [SerializeField] private Vector3 _maxLocalSpawnOffset;
-            [SerializeField] private float _minScatterAngle = 1;
-            [SerializeField] private float _maxScatterAngle = 5;
-            [SerializeField] private float _minDamage = 5f;
-            [SerializeField] private float _maxDamage = 20f;
+            [SerializeField] private FloatMinMaxValue _scatterAngle = new FloatMinMaxValue(0.1f, 1.5f);
+            [SerializeField] private FloatMinMaxValue _damage = new FloatMinMaxValue(5f, 15f);
             [SerializeField] private float _velocity = 20f;
 
             public Transform SpawnPoint => _spawnPoint;
             public float FireInterval => _fireInterval;
             public Vector3 MaxLocalSpawnOffset => _maxLocalSpawnOffset;
-            public float MinScatterAngle => _minScatterAngle;
-            public float MaxScatterAngle => _maxScatterAngle;
-            public float MinDamage => _minDamage;
-            public float MaxDamage => _maxDamage;
+            public FloatMinMaxValue ScatterAngle => _scatterAngle;
+            public FloatMinMaxValue Damage => _damage;
             public float Velocity => _velocity;
         }
     }

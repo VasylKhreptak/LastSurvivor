@@ -4942,10 +4942,12 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 2455
     _upwardsModifier: 1
-    _minRadius: 0
-    _maxRadius: 7
-    _minImpulse: 20
-    _maxImpulse: 70
+    _radius:
+      _min: 0
+      _max: 7
+    _impulse:
+      _min: 20
+      _max: 70
     _impulseCurve:
       serializedVersion: 2
       m_Curve:
@@ -4974,10 +4976,12 @@ MonoBehaviour:
     _layerMask:
       serializedVersion: 2
       m_Bits: 4087
-    _minRadius: 0
-    _maxRadius: 10
-    _minDamage: 10
-    _maxDamage: 300
+    _radius:
+      _min: 0
+      _max: 10
+    _damage:
+      _min: 10
+      _max: 300
     _damageCurve:
       serializedVersion: 2
       m_Curve:

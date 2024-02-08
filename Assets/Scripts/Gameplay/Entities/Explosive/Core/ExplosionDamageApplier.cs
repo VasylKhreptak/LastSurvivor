@@ -1,6 +1,7 @@
 ﻿using System;
 using Extensions;
 using Gameplay.Entities.Health.Damages;
+using Inspector.MinMax;
 using UnityEngine;
 using Visitor;
 
@@ -17,7 +18,7 @@ namespace Gameplay.Entities.Explosive.Core
 
         public void Apply(Vector3 position)
         {
-            Collider[] colliders = Physics.OverlapSphere(position, _preferences.MaxRadius, _preferences.LayerMask);
+            Collider[] colliders = Physics.OverlapSphere(position, _preferences.Radius.Max, _preferences.LayerMask);
 
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -28,8 +29,8 @@ namespace Gameplay.Entities.Explosive.Core
 
                 float distance = Vector3.Distance(position, gameObject.transform.position);
 
-                float damage = _preferences.DamageCurve.Evaluate(_preferences.MinRadius, _preferences.MaxRadius, distance,
-                    _preferences.MaxDamage, _preferences.MinDamage);
+                float damage = _preferences.DamageCurve.Evaluate(_preferences.Radius.Min, _preferences.Radius.Max, distance,
+                    _preferences.Damage.Max, _preferences.Damage.Min);
 
                 ExplosionDamage explosionDamage = new ExplosionDamage(damage);
 
@@ -41,17 +42,13 @@ namespace Gameplay.Entities.Explosive.Core
         public class Preferences
         {
             [SerializeField] private LayerMask _layerMask;
-            [SerializeField] private float _minRadius;
-            [SerializeField] private float _maxRadius = 15f;
-            [SerializeField] private float _minDamage = 10f;
-            [SerializeField] private float _maxDamage = 300f;
+            [SerializeField] private FloatMinMaxValue _radius = new FloatMinMaxValue(0f, 10f);
+            [SerializeField] private FloatMinMaxValue _damage = new FloatMinMaxValue(10f, 300f);
             [SerializeField] private AnimationCurve _damageCurve;
 
             public LayerMask LayerMask => _layerMask;
-            public float MinRadius => _minRadius;
-            public float MaxRadius => _maxRadius;
-            public float MinDamage => _minDamage;
-            public float MaxDamage => _maxDamage;
+            public FloatMinMaxValue Radius => _radius;
+            public FloatMinMaxValue Damage => _damage;
             public AnimationCurve DamageCurve => _damageCurve;
         }
     }
