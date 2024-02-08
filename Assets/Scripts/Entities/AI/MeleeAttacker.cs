@@ -50,6 +50,7 @@ namespace Entities.AI
         public void Stop()
         {
             _lookSubscription?.Dispose();
+            _agentMover.Stop();
             StopAttacking();
             _preferences.WeaponShowAnimation.PlayBackward(() => _preferences.Weapon.SetActive(false));
         }

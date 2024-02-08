@@ -49,8 +49,8 @@ namespace Gameplay.Entities.Collector.StateMachine.States
         {
             if (lootBox == null)
             {
-                _agentTransformFollower.Follow(_followPoint);
                 _meleeAttacker.Stop();
+                _agentTransformFollower.Follow(_followPoint);
                 return;
             }
 

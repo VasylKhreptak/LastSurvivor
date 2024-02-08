@@ -31,6 +31,7 @@ namespace Entities.AI
             _lastDestinationPosition = _target.position;
 
             _agent.isStopped = false;
+            _agent.ResetPath();
             _agent.SetDestination(_lastDestinationPosition);
             StartUpdatingDestination();
         }
@@ -38,7 +39,10 @@ namespace Entities.AI
         public void Stop()
         {
             if (_agent.isActiveAndEnabled)
+            {
                 _agent.isStopped = true;
+                _agent.ResetPath();
+            }
 
             StopUpdatingDestination();
         }

@@ -6,6 +6,7 @@ using Infrastructure.StateMachine.Main.States.Core;
 using Levels.StateMachine.States;
 using Levels.StateMachine.States.Core;
 using UniRx;
+using UnityEngine;
 using Utilities.PhysicsUtilities.Trigger;
 
 namespace Gameplay.Entities.Player.StateMachine.States
@@ -47,6 +48,8 @@ namespace Gameplay.Entities.Player.StateMachine.States
 
         private void OnClosestLootBoxChanged(LootBox.LootBox lootBox)
         {
+            Debug.Log($"Closest loot box changed to {lootBox}");
+            
             if (lootBox == null)
             {
                 _meleeAttacker.Stop();
