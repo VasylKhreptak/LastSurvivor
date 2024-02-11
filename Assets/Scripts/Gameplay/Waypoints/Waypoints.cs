@@ -12,7 +12,7 @@ namespace Gameplay.Waypoints
 
             for (int i = 0; i < transforms.Length; i++)
             {
-                _waypoints[i] = new Waypoint(transforms[i].position);
+                _waypoints[i] = new Waypoint(transforms[i].position, i == transforms.Length - 1);
             }
         }
 

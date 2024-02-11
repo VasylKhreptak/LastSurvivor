@@ -13,10 +13,10 @@ TagManager:
   - UI
   - Bullet
   - IgnoreNavMesh
-  - IgnoreBullet
+  - Enemy
+  - Ally
   - Loot
-  - Player
-  - Zombie
+  - 
   - 
   - 
   - 

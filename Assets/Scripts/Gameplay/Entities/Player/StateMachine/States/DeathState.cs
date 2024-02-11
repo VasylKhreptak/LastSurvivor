@@ -3,8 +3,8 @@ using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Levels.StateMachine.States;
 using Levels.StateMachine.States.Core;
+using Pathfinding;
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Zenject;
 
@@ -15,18 +15,18 @@ namespace Gameplay.Entities.Player.StateMachine.States
         private readonly MonoKernel _kernel;
         private readonly PlayerHolder _playerHolder;
         private readonly Animator _animator;
-        private readonly NavMeshAgent _agent;
+        private readonly IAstarAI _ai;
         private readonly Ragdoll _ragdoll;
         private readonly Collider _collider;
         private readonly IStateMachine<ILevelState> _levelStateMachine;
 
-        public DeathState(MonoKernel kernel, PlayerHolder playerHolder, Animator animator, NavMeshAgent agent,
+        public DeathState(MonoKernel kernel, PlayerHolder playerHolder, Animator animator, IAstarAI ai,
             Ragdoll ragdoll, Collider collider, IStateMachine<ILevelState> levelStateMachine)
         {
             _kernel = kernel;
             _playerHolder = playerHolder;
             _animator = animator;
-            _agent = agent;
+            _ai = ai;
             _ragdoll = ragdoll;
             _collider = collider;
             _levelStateMachine = levelStateMachine;
@@ -37,7 +37,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             _playerHolder.Instance = null;
             Object.Destroy(_kernel);
             _animator.enabled = false;
-            _agent.enabled = false;
+            _ai.isStopped = true;
             _collider.enabled = false;
             _ragdoll.Enable();
             _levelStateMachine.Enter<LevelFailedState>();

@@ -1,67 +1,50 @@
 ﻿using System;
-using System.Linq;
+using Pathfinding;
 using UniRx;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Entities.AI
 {
     public class AgentMover
     {
-        private readonly NavMeshAgent _agent;
+        private readonly IAstarAI _ai;
         private readonly Preferences _preferences;
 
-        public AgentMover(NavMeshAgent agent, Preferences preferences)
+        public AgentMover(IAstarAI ai, Preferences preferences)
         {
-            _agent = agent;
+            _ai = ai;
             _preferences = preferences;
         }
 
         private IDisposable _destinationCheckSubscription;
 
         private Vector3 _destination;
-        private bool _maxPossibleDestination;
         private Action _onComplete;
 
-        public void SetDestination(Vector3 position, bool maxPossibleDestination = false, Action onComplete = null)
+        public void SetDestination(Vector3 position, Action onComplete = null)
         {
             Stop();
 
             _destination = position;
-            _maxPossibleDestination = maxPossibleDestination;
             _onComplete = onComplete;
 
-            if (IsDestinationReached())
-            {
-                OnReachedDestination();
-                return;
-            }
-
-            _agent.isStopped = false;
-
-            _agent.SetDestination(_destination);
+            _ai.isStopped = false;
+            _ai.destination = _destination;
             StartObservingDestination();
         }
 
         public void Stop()
         {
             StopObservingDestination();
-
-            if (_agent.isActiveAndEnabled)
-                _agent.isStopped = true;
+            _ai.isStopped = true;
         }
 
         private void StartObservingDestination()
         {
             _destinationCheckSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_preferences.DestinationCheckInterval))
-                .Subscribe(_ =>
-                {
-                    if (_maxPossibleDestination && _agent.hasPath)
-                        _destination = _agent.path.corners.Last();
-
-                    CheckDestination();
-                });
+                .DelayFrame(1)
+                .Subscribe(_ => CheckDestination());
         }
 
         private void StopObservingDestination() => _destinationCheckSubscription?.Dispose();
@@ -72,8 +55,7 @@ namespace Entities.AI
                 OnReachedDestination();
         }
 
-        private bool IsDestinationReached() =>
-            Vector3.Distance(_agent.transform.position, _destination) <= _preferences.StoppingDistance;
+        private bool IsDestinationReached() => _ai.reachedEndOfPath;
 
         private void OnReachedDestination()
         {
@@ -84,10 +66,8 @@ namespace Entities.AI
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private float _stoppingDistance = 0.3f;
             [SerializeField] private float _destinationCheckInterval = 0.1f;
 
-            public float StoppingDistance => _stoppingDistance;
             public float DestinationCheckInterval => _destinationCheckInterval;
         }
     }

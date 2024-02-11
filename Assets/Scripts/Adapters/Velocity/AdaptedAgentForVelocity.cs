@@ -1,18 +1,15 @@
 ﻿using Adapters.Velocity.Core;
+using Pathfinding;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Adapters.Velocity
 {
     public class AdaptedAgentForVelocity : IVelocityAdapter
     {
-        private readonly NavMeshAgent _agent;
+        private readonly IAstarAI _ai;
 
-        public AdaptedAgentForVelocity(NavMeshAgent agent)
-        {
-            _agent = agent;
-        }
+        public AdaptedAgentForVelocity(IAstarAI ai) => _ai = ai;
 
-        public Vector3 Value => _agent.velocity;
+        public Vector3 Value => _ai.velocity;
     }
 }

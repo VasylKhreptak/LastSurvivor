@@ -7,6 +7,7 @@ using Gameplay.Entities.Player.StateMachine;
 using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
@@ -21,6 +22,7 @@ namespace Gameplay.Entities.Player
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
         [SerializeField] private AgentMover.Preferences _movePreferences;
+        [SerializeField] private AgentWaypointsFollower.Preferences _waypointsFollowerPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private Collider _lootBoxDetectionCollider;
         [SerializeField] private ClosestTriggerObserver<LootBox.LootBox>.Preferences _closestLootBoxObserverPreferences;
@@ -36,7 +38,7 @@ namespace Gameplay.Entities.Player
         {
             Container.BindInstance(_waypoints).AsSingle();
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
-            Container.Bind<NavMeshAgent>().FromComponentOnRoot().AsSingle();
+            Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
             Container.BindInstance(_collectorFollowPoints).AsSingle().WhenInjectedInto<Player>();
@@ -60,7 +62,8 @@ namespace Gameplay.Entities.Player
 
         private void BindAgentMover() => Container.Bind<AgentMover>().AsSingle().WithArguments(_movePreferences);
 
-        private void BindAgentWaypointsFollower() => Container.Bind<AgentWaypointsFollower>().AsSingle();
+        private void BindAgentWaypointsFollower() =>
+            Container.Bind<AgentWaypointsFollower>().AsSingle().WithArguments(_waypointsFollowerPreferences);
 
         private void BindStateMachine()
         {

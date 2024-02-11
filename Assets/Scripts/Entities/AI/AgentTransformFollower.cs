@@ -1,4 +1,5 @@
 ﻿using System;
+using Pathfinding;
 using UniRx;
 using UnityEngine;
 
@@ -6,66 +7,51 @@ namespace Entities.AI
 {
     public class AgentTransformFollower
     {
-        private readonly AgentMover _agentMover;
+        private readonly IAstarAI _ai;
         private readonly Preferences _preferences;
 
-        public AgentTransformFollower(AgentMover agentMover, Preferences preferences)
+        public AgentTransformFollower(IAstarAI ai, Preferences preferences)
         {
-            _agentMover = agentMover;
+            _ai = ai;
             _preferences = preferences;
         }
 
-        private IDisposable _destinationUpdateSubscription;
-
         private Transform _target;
 
-        private Vector3 _targetPosition;
-        private Vector3 _lastDestinationPosition;
+        private IDisposable _updateSubscription;
 
         public void Follow(Transform target)
         {
             Stop();
 
             _target = target;
-            _lastDestinationPosition = _target.position;
 
-            _agentMover.SetDestination(_lastDestinationPosition);
+            _ai.isStopped = false;
             StartUpdatingDestination();
         }
 
         public void Stop()
         {
             StopUpdatingDestination();
-            _agentMover.Stop();
+            _ai.isStopped = true;
         }
 
         private void StartUpdatingDestination()
         {
-            _destinationUpdateSubscription = Observable
+            _updateSubscription = Observable
                 .Interval(TimeSpan.FromSeconds(_preferences.UpdateInterval))
-                .Subscribe(_ => TryUpdateDestination());
+                .Subscribe(_ => UpdateDestination());
         }
 
-        private void StopUpdatingDestination() => _destinationUpdateSubscription?.Dispose();
+        private void StopUpdatingDestination() => _updateSubscription?.Dispose();
 
-        private void TryUpdateDestination()
-        {
-            _targetPosition = _target.position;
-
-            if (Vector3.Distance(_targetPosition, _lastDestinationPosition) > _preferences.PositionThreshold)
-            {
-                _agentMover.SetDestination(_targetPosition);
-                _lastDestinationPosition = _targetPosition;
-            }
-        }
+        private void UpdateDestination() => _ai.destination = _target.position;
 
         [Serializable]
         public class Preferences
         {
-            [SerializeField] private float _positionThreshold = 0.1f;
             [SerializeField] private float _updateInterval = 0.1f;
 
-            public float PositionThreshold => _positionThreshold;
             public float UpdateInterval => _updateInterval;
         }
     }

@@ -38,7 +38,7 @@ namespace Entities.AI
             _health = health;
             _visitableTarget = visitableTarget;
 
-            _agentMover.SetDestination(target.position, true, () =>
+            _agentMover.SetDestination(target.position, () =>
             {
                 _preferences.Weapon.SetActive(true);
                 _preferences.WeaponShowAnimation.PlayForward();

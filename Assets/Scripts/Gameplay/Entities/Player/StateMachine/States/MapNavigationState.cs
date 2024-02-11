@@ -48,8 +48,6 @@ namespace Gameplay.Entities.Player.StateMachine.States
 
         private void OnClosestLootBoxChanged(LootBox.LootBox lootBox)
         {
-            Debug.Log($"Closest loot box changed to {lootBox}");
-            
             if (lootBox == null)
             {
                 _meleeAttacker.Stop();
