@@ -6,7 +6,6 @@ using Infrastructure.StateMachine.Main.States.Core;
 using Levels.StateMachine.States;
 using Levels.StateMachine.States.Core;
 using UniRx;
-using UnityEngine;
 using Utilities.PhysicsUtilities.Trigger;
 
 namespace Gameplay.Entities.Player.StateMachine.States
@@ -56,7 +55,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             }
 
             _waypointsFollower.Stop();
-            _meleeAttacker.Start(lootBox.transform, lootBox.Health, lootBox);
+            _meleeAttacker.Start(lootBox.CollectPoints[0].position, lootBox.transform, lootBox.Health, lootBox);
         }
     }
 }

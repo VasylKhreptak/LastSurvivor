@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entities.AI;
 using Gameplay.Entities.Collector.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
@@ -14,14 +15,19 @@ namespace Gameplay.Entities.Collector.StateMachine.States
         private readonly AgentTransformFollower _agentTransformFollower;
         private readonly ClosestTriggerObserver<LootBox.LootBox> _closestLootBoxObserver;
         private readonly MeleeAttacker _meleeAttacker;
+        private readonly List<Collector> _collectors;
+        private readonly Collector _collector;
 
         public MapNavigationState(Transform followPoint, AgentTransformFollower agentTransformFollower,
-            ClosestTriggerObserver<LootBox.LootBox> closestTriggerObserver, MeleeAttacker meleeAttacker)
+            ClosestTriggerObserver<LootBox.LootBox> closestTriggerObserver, MeleeAttacker meleeAttacker, List<Collector> collectors,
+            Collector collector)
         {
             _followPoint = followPoint;
             _agentTransformFollower = agentTransformFollower;
             _closestLootBoxObserver = closestTriggerObserver;
             _meleeAttacker = meleeAttacker;
+            _collectors = collectors;
+            _collector = collector;
         }
 
         private IDisposable _closestLootBoxSubscription;
@@ -55,7 +61,8 @@ namespace Gameplay.Entities.Collector.StateMachine.States
             }
 
             _agentTransformFollower.Stop();
-            _meleeAttacker.Start(lootBox.transform, lootBox.Health, lootBox);
+            _meleeAttacker.Start(lootBox.CollectPoints[_collectors.IndexOf(_collector) + 1].position, lootBox.transform,
+                lootBox.Health, lootBox);
         }
     }
 }

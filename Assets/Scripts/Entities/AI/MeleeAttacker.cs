@@ -30,7 +30,7 @@ namespace Entities.AI
         private IHealth _health;
         private IVisitable<MeleeDamage> _visitableTarget;
 
-        public void Start(Transform target, IHealth health, IVisitable<MeleeDamage> visitableTarget)
+        public void Start(Vector3 position, Transform target, IHealth health, IVisitable<MeleeDamage> visitableTarget)
         {
             Stop();
 
@@ -38,7 +38,7 @@ namespace Entities.AI
             _health = health;
             _visitableTarget = visitableTarget;
 
-            _agentMover.SetDestination(target.position, () =>
+            _agentMover.SetDestination(position, () =>
             {
                 _preferences.Weapon.SetActive(true);
                 _preferences.WeaponShowAnimation.PlayForward();

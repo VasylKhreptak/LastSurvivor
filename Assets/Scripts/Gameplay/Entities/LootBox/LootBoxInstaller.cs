@@ -1,4 +1,5 @@
-﻿using Gameplay.Entities.Health.Core;
+﻿using System.Collections.Generic;
+using Gameplay.Entities.Health.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Gameplay.Entities.LootBox
 {
     public class LootBoxInstaller : MonoInstaller
     {
+        [SerializeField] private List<Transform> _collectPoints;
         [SerializeField] private ShakeLayer.Preferences _hitShakePreferences;
         [SerializeField] private LootSpawner.Preferences _lootSpawnerPreferences;
 
@@ -27,6 +29,7 @@ namespace Gameplay.Entities.LootBox
             Container.BindInstance(transform).AsSingle();
             Container.BindInstance(gameObject).AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(GetHealth())).AsSingle();
+            Container.BindInstance(_collectPoints).AsSingle();
 
             BindLootSpawner();
             BindShakeLayer();
