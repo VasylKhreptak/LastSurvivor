@@ -874,6 +874,7 @@ MonoBehaviour:
     - {fileID: 5051677256083650249}
     - {fileID: 1699447799333211466}
     - {fileID: 2315782604184007031}
+    - {fileID: 6728194912038059333}
     _rigidbodies:
     - {fileID: 194110472046067373}
     - {fileID: 7670565510874562042}
@@ -906,7 +907,7 @@ MonoBehaviour:
     _viewLayerMask:
       serializedVersion: 2
       m_Bits: 129
-    _raycastInterval: 0.25
+    _raycastInterval: 0.15
   _shootPreferences:
     _spawnPoint: {fileID: 4978168838215678566}
     _fireInterval: 0.12
@@ -3132,7 +3133,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.08345085, y: 0.2855304, z: 0.7609276}
   m_Center: {x: -0.0016395231, y: 0.023356006, z: 0.159068}
