@@ -46,6 +46,7 @@ namespace Gameplay.Entities.Soldier
             Container.BindInstance(gameObject).AsSingle();
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
+            Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 

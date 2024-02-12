@@ -21,9 +21,10 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
         private readonly Zombie _zombie;
         private readonly LevelData _levelData;
         private readonly MinMaxValue<int> _priceForKill;
+        private readonly Rigidbody _rigidbody;
 
         public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, IAstarAI ai,
-            List<Zombie> zombies, Zombie zombie, LevelData levelData, MinMaxValue<int> priceForKill)
+            List<Zombie> zombies, Zombie zombie, LevelData levelData, MinMaxValue<int> priceForKill, Rigidbody rigidbody)
         {
             _kernel = kernel;
             _ragdoll = ragdoll;
@@ -34,6 +35,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _zombie = zombie;
             _levelData = levelData;
             _priceForKill = priceForKill;
+            _rigidbody = rigidbody;
         }
 
         public void Enter()
@@ -43,6 +45,8 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _animator.enabled = false;
             _collider.enabled = false;
             _ai.isStopped = true;
+            _ai.canMove = false;
+            _rigidbody.isKinematic = true;
             _ragdoll.Enable();
             _levelData.CollectedMoney.Value += _priceForKill.GetRandom();
         }

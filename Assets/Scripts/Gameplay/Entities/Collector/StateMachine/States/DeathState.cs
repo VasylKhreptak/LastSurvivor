@@ -19,9 +19,10 @@ namespace Gameplay.Entities.Collector.StateMachine.States
         private readonly IPersistentDataService _persistentDataService;
         private readonly List<Collector> _collectors;
         private readonly Collector _collector;
+        private readonly Rigidbody _rigidbody;
 
         public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, IAstarAI ai,
-            IPersistentDataService persistentDataService, List<Collector> collectors, Collector collector)
+            IPersistentDataService persistentDataService, List<Collector> collectors, Collector collector, Rigidbody rigidbody)
         {
             _kernel = kernel;
             _ragdoll = ragdoll;
@@ -31,6 +32,7 @@ namespace Gameplay.Entities.Collector.StateMachine.States
             _persistentDataService = persistentDataService;
             _collectors = collectors;
             _collector = collector;
+            _rigidbody = rigidbody;
         }
 
         public void Enter()
@@ -39,6 +41,8 @@ namespace Gameplay.Entities.Collector.StateMachine.States
             _animator.enabled = false;
             _collider.enabled = false;
             _ai.isStopped = true;
+            _ai.canMove = false;
+            _rigidbody.isKinematic = true;
             _ragdoll.Enable();
             _persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Spend(1);
             _collectors.Remove(_collector);

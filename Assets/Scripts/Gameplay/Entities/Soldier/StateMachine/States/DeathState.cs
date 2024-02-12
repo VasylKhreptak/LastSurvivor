@@ -3,7 +3,6 @@ using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Pathfinding;
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Zenject;
 
@@ -17,9 +16,10 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
         private readonly Collider _collider;
         private readonly IAstarAI _ai;
         private readonly IPersistentDataService _persistentDataService;
+        private readonly Rigidbody _rigidbody;
 
         public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, IAstarAI ai,
-            IPersistentDataService persistentDataService)
+            IPersistentDataService persistentDataService, Rigidbody rigidbody)
         {
             _kernel = kernel;
             _ragdoll = ragdoll;
@@ -27,6 +27,7 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
             _collider = collider;
             _ai = ai;
             _persistentDataService = persistentDataService;
+            _rigidbody = rigidbody;
         }
 
         public void Enter()
@@ -35,6 +36,8 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
             _animator.enabled = false;
             _collider.enabled = false;
             _ai.isStopped = true;
+            _ai.canMove = false;
+            _rigidbody.isKinematic = true;
             _ragdoll.Enable();
             _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Spend(1);
         }

@@ -9,7 +9,6 @@ using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Pathfinding;
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Utilities.PhysicsUtilities.Trigger;
 using Zenject;
@@ -39,6 +38,7 @@ namespace Gameplay.Entities.Player
             Container.BindInstance(_waypoints).AsSingle();
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
+            Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
             Container.BindInstance(_collectorFollowPoints).AsSingle().WhenInjectedInto<Player>();

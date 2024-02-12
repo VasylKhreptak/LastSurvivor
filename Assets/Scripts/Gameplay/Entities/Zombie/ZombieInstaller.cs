@@ -56,6 +56,7 @@ namespace Gameplay.Entities.Zombie
             Container.BindInstance(gameObject).AsSingle();
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
+            Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
             Container.Bind<Zombie>().FromComponentOnRoot().AsSingle();
             Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(GetHealth())).AsSingle();
