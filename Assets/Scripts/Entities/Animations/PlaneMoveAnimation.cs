@@ -34,8 +34,6 @@ namespace Entities.Animations
             _velocity = _velocityAdapter.Value;
             _velocity.y = 0f;
             _viewDirection = _transform.forward;
-            Debug.DrawRay(_transform.position, _viewDirection * 5f, Color.blue);
-            Debug.DrawRay(_transform.position, _velocity.normalized * 5f, Color.red);
             _speed01 = Mathf.Min(_velocity.magnitude / _preferences.MaxSpeed, 1f);
             _normalizedVelocity = _velocity.normalized * _speed01;
             _rotationDifference = Quaternion.FromToRotation(_viewDirection, _normalizedVelocity);
