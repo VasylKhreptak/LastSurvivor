@@ -7,6 +7,7 @@ using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Weapons;
+using Infrastructure.Services.PersistentData.Core;
 using Levels.StateMachine.States.Core;
 using UI.Gameplay.Windows;
 
@@ -24,10 +25,11 @@ namespace Levels.StateMachine.States
         private readonly Helicopter _helicopter;
         private readonly Platoon _platoon;
         private readonly List<Collector> _collectors;
+        private readonly IPersistentDataService _persistentDataService;
 
         public LevelFailedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
             WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow, HUD hud, Helicopter helicopter, Platoon platoon,
-            List<Collector> collectors)
+            List<Collector> collectors, IPersistentDataService persistentDataService)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -39,6 +41,7 @@ namespace Levels.StateMachine.States
             _helicopter = helicopter;
             _platoon = platoon;
             _collectors = collectors;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()
@@ -60,6 +63,9 @@ namespace Levels.StateMachine.States
 
             _platoon.Soldiers.ForEach(soldier =>
                 soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.IdleState>());
+
+            _persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
+            _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
         }
     }
 }
