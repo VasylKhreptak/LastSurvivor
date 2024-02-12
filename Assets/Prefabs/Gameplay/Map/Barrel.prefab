@@ -5000,7 +5000,7 @@ MonoBehaviour:
   _rigidbodyAffectorPreferences:
     _layerMask:
       serializedVersion: 2
-      m_Bits: 407
+      m_Bits: 2455
     _upwardsModifier: 1
     _radius:
       _min: 0
@@ -5035,7 +5035,7 @@ MonoBehaviour:
   _explosionDamageApplierPreferences:
     _layerMask:
       serializedVersion: 2
-      m_Bits: 2039
+      m_Bits: 4023
     _radius:
       _min: 0
       _max: 10
