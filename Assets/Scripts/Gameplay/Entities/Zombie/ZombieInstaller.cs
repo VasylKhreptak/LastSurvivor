@@ -36,7 +36,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
         [SerializeField] private EnemyDetectionTriggerAwakener.Preferences _enemyDetectionTriggerAwakenerPreferences;
-        [SerializeField] private MinMaxValue<int> _priceForKill = new IntMinMaxValue(10, 30);
+        [SerializeField] private IntMinMaxValue _priceForKill = new IntMinMaxValue(10, 30);
 
         private List<Zombie> _zombies;
         private IPersistentDataService _persistentDataService;
@@ -64,15 +64,14 @@ namespace Gameplay.Entities.Zombie
             RandomizeRotation();
             BindMoveAnimation();
             BindRagdoll();
-            BindStateMachine();
             BindTargetsZone();
             BindClosestTriggerObserver();
-            BindZombieTargetFollower();
             BindEnemyDetectionTriggerAwakener();
             BindDeathHandler();
             BindZombieAttacker();
             BindAgentMover();
             BindAgentTransformFollower();
+            BindStateMachine();
             EnterIdleState();
             RegisterZombie();
         }
@@ -107,7 +106,7 @@ namespace Gameplay.Entities.Zombie
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<FollowTransformState>().AsSingle();
+            Container.Bind<NavigationState>().AsSingle();
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>(), _priceForKill);
         }
 
@@ -118,10 +117,6 @@ namespace Gameplay.Entities.Zombie
                 .AsSingle()
                 .WithArguments(_targetDetectionCollider);
         }
-
-        private void BindZombieTargetFollower() =>
-            Container.BindInterfacesAndSelfTo<ZombieTargetFollower>()
-                .AsSingle();
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IZombieState>>().Enter<IdleState>();
 

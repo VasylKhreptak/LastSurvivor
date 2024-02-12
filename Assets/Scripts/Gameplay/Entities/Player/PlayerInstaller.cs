@@ -75,7 +75,7 @@ namespace Gameplay.Entities.Player
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<MapNavigationState>().AsSingle();
+            Container.Bind<NavigationState>().AsSingle();
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 

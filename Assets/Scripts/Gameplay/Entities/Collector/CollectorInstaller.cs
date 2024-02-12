@@ -111,7 +111,7 @@ namespace Gameplay.Entities.Collector
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<MapNavigationState>().AsSingle().WithArguments(_followPoint);
+            Container.Bind<NavigationState>().AsSingle().WithArguments(_followPoint);
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 

@@ -14,7 +14,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States.Core
             new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(IdleState)] = _container.Resolve<IdleState>,
-                [typeof(FollowTransformState)] = _container.Resolve<FollowTransformState>,
+                [typeof(NavigationState)] = _container.Resolve<NavigationState>,
                 [typeof(DeathState)] = _container.Resolve<DeathState>
             };
     }

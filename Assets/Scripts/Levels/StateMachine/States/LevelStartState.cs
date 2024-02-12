@@ -2,8 +2,8 @@
 using Gameplay.Entities.Collector;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
-using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Zombie;
+using Gameplay.Entities.Zombie.StateMachine.States;
 using Infrastructure.StateMachine.Main.Core;
 using Levels.StateMachine.States.Core;
 using UI.Gameplay.Windows;
@@ -36,13 +36,9 @@ namespace Levels.StateMachine.States
 
         public void Enter()
         {
-            _zombies.ForEach(zombie =>
-            {
-                zombie.TargetFollower.Start();
-                zombie.Attacker.Start();
-            });
+            _zombies.ForEach(zombie => zombie.StateMachine.Enter<NavigationState>());
 
-            _playerHolder.Instance.StateMachine.Enter<MapNavigationState>();
+            _playerHolder.Instance.StateMachine.Enter<Gameplay.Entities.Player.StateMachine.States.NavigationState>();
 
             _levelStateMachine.Enter<LevelLoopState>();
             _startWindows.Hide();
@@ -50,7 +46,7 @@ namespace Levels.StateMachine.States
             _hud.Show();
 
             _collectors.ForEach(collector =>
-                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.MapNavigationState>());
+                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.NavigationState>());
 
             _platoon.Soldiers.ForEach(soldier =>
             {

@@ -20,7 +20,7 @@ namespace Entities.AI
 
         private IDisposable _updateSubscription;
 
-        public void Follow(Transform target)
+        public void Start(Transform target)
         {
             Stop();
 

@@ -9,7 +9,7 @@ using Utilities.PhysicsUtilities.Trigger;
 
 namespace Gameplay.Entities.Collector.StateMachine.States
 {
-    public class MapNavigationState : ICollectorState, IState, IExitable
+    public class NavigationState : ICollectorState, IState, IExitable
     {
         private readonly Transform _followPoint;
         private readonly AgentTransformFollower _agentTransformFollower;
@@ -18,7 +18,7 @@ namespace Gameplay.Entities.Collector.StateMachine.States
         private readonly List<Collector> _collectors;
         private readonly Collector _collector;
 
-        public MapNavigationState(Transform followPoint, AgentTransformFollower agentTransformFollower,
+        public NavigationState(Transform followPoint, AgentTransformFollower agentTransformFollower,
             ClosestTriggerObserver<LootBox.LootBox> closestTriggerObserver, MeleeAttacker meleeAttacker, List<Collector> collectors,
             Collector collector)
         {
@@ -56,7 +56,7 @@ namespace Gameplay.Entities.Collector.StateMachine.States
             if (lootBox == null)
             {
                 _meleeAttacker.Stop();
-                _agentTransformFollower.Follow(_followPoint);
+                _agentTransformFollower.Start(_followPoint);
                 return;
             }
 

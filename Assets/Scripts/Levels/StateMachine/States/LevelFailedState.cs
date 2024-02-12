@@ -4,8 +4,8 @@ using Gameplay.Entities.Collector;
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
-using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Entities.Zombie;
+using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Weapons;
 using Levels.StateMachine.States.Core;
 using UI.Gameplay.Windows;
@@ -43,14 +43,10 @@ namespace Levels.StateMachine.States
 
         public void Enter()
         {
-            _zombies.ForEach(zombie =>
-            {
-                zombie.TargetFollower.Stop();
-                zombie.Attacker.Stop();
-            });
+            _zombies.ForEach(zombie => zombie.StateMachine.Enter<IdleState>());
 
             if (_playerHolder.Instance != null)
-                _playerHolder.Instance.StateMachine.Enter<IdleState>();
+                _playerHolder.Instance.StateMachine.Enter<Gameplay.Entities.Player.StateMachine.States.IdleState>();
 
             _trackpad.enabled = false;
             _weaponAim.Hide();

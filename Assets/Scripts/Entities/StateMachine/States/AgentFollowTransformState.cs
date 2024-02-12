@@ -15,7 +15,7 @@ namespace Entities.StateMachine.States
 
         private Transform _target;
 
-        public void Enter(Transform target) => _transformFollower.Follow(target);
+        public void Enter(Transform target) => _transformFollower.Start(target);
 
         public void Exit() => _transformFollower.Stop();
     }

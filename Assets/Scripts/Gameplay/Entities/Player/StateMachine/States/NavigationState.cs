@@ -10,14 +10,14 @@ using Utilities.PhysicsUtilities.Trigger;
 
 namespace Gameplay.Entities.Player.StateMachine.States
 {
-    public class MapNavigationState : IPlayerState, IState, IExitable
+    public class NavigationState : IPlayerState, IState, IExitable
     {
         private readonly IStateMachine<ILevelState> _levelStateMachine;
         private readonly AgentWaypointsFollower _waypointsFollower;
         private readonly MeleeAttacker _meleeAttacker;
         private readonly ClosestTriggerObserver<LootBox.LootBox> _lootBoxObserver;
 
-        public MapNavigationState(IStateMachine<ILevelState> levelStateMachine, AgentWaypointsFollower waypointsFollower,
+        public NavigationState(IStateMachine<ILevelState> levelStateMachine, AgentWaypointsFollower waypointsFollower,
             MeleeAttacker meleeAttacker, ClosestTriggerObserver<LootBox.LootBox> lootBoxObserver)
         {
             _levelStateMachine = levelStateMachine;
