@@ -60,6 +60,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881947052305358890, guid: cb05de71f74786e47b3e0a9235482c36,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7881947052305358890, guid: cb05de71f74786e47b3e0a9235482c36,
+        type: 3}
       propertyPath: outlineTargets.Array.data[0].IsVisible
       value: 1
       objectReference: {fileID: 0}
