@@ -41,7 +41,8 @@ namespace Entities.AI
                 .Subscribe(_ =>
                 {
                     bool canMoveToNextWaypoint = _ai.reachedEndOfPath ||
-                                                 _ai.position.IsCloseTo(_ai.destination, _preferences.WaypointThreshold) ||
+                                                 (waypoint.IsLast == false &&
+                                                  _ai.position.IsCloseTo(_ai.destination, _preferences.WaypointThreshold)) ||
                                                  (waypoint.IsLast && _ai.reachedEndOfPath);
 
                     if (canMoveToNextWaypoint)

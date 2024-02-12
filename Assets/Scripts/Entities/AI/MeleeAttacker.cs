@@ -30,6 +30,8 @@ namespace Entities.AI
         private IHealth _health;
         private IVisitable<MeleeDamage> _visitableTarget;
 
+        private bool _active;
+
         public void Start(Vector3 position, Transform target, IHealth health, IVisitable<MeleeDamage> visitableTarget)
         {
             Stop();
@@ -37,6 +39,8 @@ namespace Entities.AI
             _target = target;
             _health = health;
             _visitableTarget = visitableTarget;
+
+            _active = true;
 
             _agentMover.SetDestination(position, () =>
             {
@@ -49,6 +53,7 @@ namespace Entities.AI
 
         public void Stop()
         {
+            _active = false;
             _lookSubscription?.Dispose();
             _agentMover.Stop();
             StopAttacking();
@@ -91,6 +96,9 @@ namespace Entities.AI
 
         public void ApplyDamage()
         {
+            if (_active == false)
+                return;
+
             _visitableTarget.Accept(new MeleeDamage(_preferences.Damage));
 
             if (_health.IsDeath.Value)
