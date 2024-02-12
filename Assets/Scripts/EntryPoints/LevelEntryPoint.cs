@@ -2,8 +2,6 @@
 using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
-using Gameplay.Entities.Soldier;
-using Gameplay.Entities.Soldier.StateMachine.States;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
@@ -79,8 +77,6 @@ namespace EntryPoints
                 GameObject soldierObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplaySoldier]);
                 soldierObject.transform.position = _platoon.SoldierPoints[i].position;
                 soldierObject.transform.rotation = _platoon.SoldierPoints[i].rotation;
-                Soldier soldier = soldierObject.GetComponent<Soldier>();
-                soldier.StateMachine.Enter<FollowTransformState, Transform>(_platoon.SoldierPoints[i]);
             }
         }
 

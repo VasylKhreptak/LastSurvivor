@@ -9,7 +9,6 @@ using ObjectPoolSystem.PoolCategories;
 using Pathfinding;
 using Tags.Gameplay;
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities.PhysicsUtilities;
 using Utilities.PhysicsUtilities.Trigger;
 using Zenject;
@@ -33,11 +32,13 @@ namespace Gameplay.Entities.Soldier
         [SerializeField] private ObjectSpawner<Particle>.Preferences _shootParticlePreferences;
 
         private Platoon.Platoon _platoon;
+        private Transform _placeInPlatoon;
 
         [Inject]
         private void Constructor(Platoon.Platoon platoon)
         {
             _platoon = platoon;
+            _placeInPlatoon = platoon.SoldierPoints[platoon.Soldiers.Count];
         }
 
         public override void InstallBindings()
@@ -74,7 +75,7 @@ namespace Gameplay.Entities.Soldier
         private void BindStates()
         {
             Container.Bind<IdleState>().AsSingle();
-            Container.Bind<FollowTransformState>().AsSingle();
+            Container.Bind<NavigationState>().AsSingle().WithArguments(_placeInPlatoon);
             Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
         }
 

@@ -12,16 +12,12 @@ namespace Gameplay.Entities.Soldier
     public class Soldier : MonoBehaviour, IVisitable<ZombieDamage>
     {
         public IStateMachine<ISoldierState> StateMachine { get; private set; }
-        public SoldierAimer Aimer { get; private set; }
-        public SoldierShooter Shooter { get; private set; }
         private IHealth _health;
 
         [Inject]
-        private void Constructor(IStateMachine<ISoldierState> stateMachine, SoldierAimer aimer, SoldierShooter shooter, IHealth health)
+        private void Constructor(IStateMachine<ISoldierState> stateMachine, IHealth health)
         {
             StateMachine = stateMachine;
-            Aimer = aimer;
-            Shooter = shooter;
             _health = health;
         }
 

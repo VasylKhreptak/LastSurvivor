@@ -58,10 +58,7 @@ namespace Levels.StateMachine.States
                 collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.IdleState>());
 
             _platoon.Soldiers.ForEach(soldier =>
-            {
-                soldier.Aimer.Enabled = false;
-                soldier.Shooter.Disable();
-            });
+                soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.IdleState>());
 
             _persistentDataService.PersistentData.PlayerData.Level++;
         }

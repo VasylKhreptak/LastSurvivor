@@ -49,10 +49,7 @@ namespace Levels.StateMachine.States
                 collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.NavigationState>());
 
             _platoon.Soldiers.ForEach(soldier =>
-            {
-                soldier.Aimer.Enabled = true;
-                soldier.Shooter.Enable();
-            });
+                soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.NavigationState>());
         }
     }
 }
