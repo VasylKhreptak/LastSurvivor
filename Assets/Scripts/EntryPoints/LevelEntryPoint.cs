@@ -75,8 +75,9 @@ namespace EntryPoints
             for (int i = 0; i < count; i++)
             {
                 GameObject soldierObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplaySoldier]);
-                soldierObject.transform.position = _platoon.SoldierPoints[i].position;
-                soldierObject.transform.rotation = _platoon.SoldierPoints[i].rotation;
+                Rigidbody rigidbody = soldierObject.GetComponent<Rigidbody>();
+                rigidbody.position = _platoon.SoldierPoints[i].position;
+                rigidbody.rotation = _platoon.SoldierPoints[i].rotation;
             }
         }
 
@@ -89,8 +90,9 @@ namespace EntryPoints
             for (int i = 0; i < count; i++)
             {
                 GameObject collectorObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayCollector]);
-                collectorObject.transform.position = _playerHolder.Instance.CollectorFollowPoints[i].position;
-                collectorObject.transform.rotation = _playerHolder.Instance.CollectorFollowPoints[i].rotation;
+                Rigidbody rigidbody = collectorObject.GetComponent<Rigidbody>();
+                rigidbody.position = _playerHolder.Instance.CollectorFollowPoints[i].position;
+                rigidbody.rotation = _playerHolder.Instance.CollectorFollowPoints[i].rotation;
             }
         }
     }
