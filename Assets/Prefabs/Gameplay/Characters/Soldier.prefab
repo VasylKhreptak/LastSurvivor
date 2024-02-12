@@ -907,7 +907,7 @@ MonoBehaviour:
     _viewLayerMask:
       serializedVersion: 2
       m_Bits: 385
-    _raycastInterval: 0.15
+    _raycastInterval: 0.3
   _shootPreferences:
     _spawnPoint: {fileID: 4978168838215678566}
     _fireInterval: 0.12
