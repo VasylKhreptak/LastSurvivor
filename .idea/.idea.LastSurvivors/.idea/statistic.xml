@@ -33,6 +33,7 @@
         <option value="$PROJECT_DIR$/Assets/Plugins/Zenject" />
         <option value="$PROJECT_DIR$/Assets/Plugins/RootMotion" />
         <option value="$PROJECT_DIR$/Assets/Plugins/Udar" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/AstarPathfindingProject" />
       </list>
     </option>
   </component>

@@ -13,12 +13,13 @@ using Infrastructure.StateMachine.Main.Core;
 using Inspector.MinMax;
 using Inspector.MinMax.Core;
 using Pathfinding;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities.GameObjectUtilities;
 using Utilities.PhysicsUtilities;
+using Utilities.PhysicsUtilities.RigidbodyUtilities;
 using Utilities.PhysicsUtilities.Trigger;
-using Utilities.TransformUtilities;
 using Visitor;
 using Zenject;
 
@@ -93,8 +94,8 @@ namespace Gameplay.Entities.Zombie
 
         private void RandomizeRotation()
         {
-            RotationRandomizer randomizer = new RotationRandomizer(transform, _rotationRandomizerPreferences);
-            randomizer.Randomize();
+            Container.Bind<RotationRandomizer>().AsSingle().WithArguments(_rotationRandomizerPreferences);
+            Container.Resolve<RotationRandomizer>().Randomize();
         }
 
         private void BindStateMachine()
