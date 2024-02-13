@@ -5000,7 +5000,7 @@ MonoBehaviour:
   _rigidbodyAffectorPreferences:
     _layerMask:
       serializedVersion: 2
-      m_Bits: 2455
+      m_Bits: 4087
     _upwardsModifier: 1
     _radius:
       _min: 0
