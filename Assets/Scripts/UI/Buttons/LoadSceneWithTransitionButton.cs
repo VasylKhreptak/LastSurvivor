@@ -43,12 +43,15 @@ namespace UI.Buttons
 
         private void LoadScene()
         {
-            LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
+            LoadSceneWithTransitionAsyncState.Payload payload = new LoadSceneWithTransitionAsyncState.Payload
             {
-                Name = _scene.Name
+                LoadScenePayload = new LoadSceneAsyncState.Payload
+                {
+                    Name = _scene.Name,
+                }
             };
 
-            _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneAsyncState.Payload>(payload);
+            _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneWithTransitionAsyncState.Payload>(payload);
         }
     }
 }

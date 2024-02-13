@@ -25,13 +25,16 @@ namespace Infrastructure.StateMachine.Game.States
         {
             string sceneName = _staticDataService.Config.TutorialScene.Name;
 
-            LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
+            LoadSceneWithTransitionAsyncState.Payload payload = new LoadSceneWithTransitionAsyncState.Payload
             {
-                Name = sceneName,
-                OnComplete = onComplete
+                LoadScenePayload = new LoadSceneAsyncState.Payload
+                {
+                    Name = sceneName,
+                    OnComplete = onComplete
+                }
             };
 
-            _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneAsyncState.Payload>(payload);
+            _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneWithTransitionAsyncState.Payload>(payload);
         }
     }
 }
