@@ -46,6 +46,7 @@ namespace Main.Platforms.HelicopterPlatform
             Container.BindInstance(_oilBarrelReceiver).AsSingle();
 
             BindUpgradeLogic();
+            BindReceiveZoneVibration();
         }
 
         private void BindUpgradeLogic()
@@ -59,5 +60,7 @@ namespace Main.Platforms.HelicopterPlatform
             Container.BindInstance(_helicopterPlatformPreferences).WhenInjectedInto<HelicopterPlatformUpgrader>();
             Container.BindInterfacesTo<HelicopterPlatformUpgrader>().AsSingle();
         }
+
+        private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
     }
 }

@@ -52,8 +52,10 @@ namespace Main.Platforms.OilPlatform
         {
             Container.BindInstance(_platformData).AsSingle();
             Container.BindInstance(_fuelSpawner).AsSingle();
+
             BindFuelGrid();
             BindUpgradeLogic();
+            BindReceiveZoneVibration();
         }
 
         private void BindFuelGrid()
@@ -73,5 +75,7 @@ namespace Main.Platforms.OilPlatform
             Container.BindInstance(_preferences).WhenInjectedInto<OilPlatformUpgrader>();
             Container.BindInterfacesTo<OilPlatformUpgrader>().AsSingle();
         }
+
+        private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
     }
 }

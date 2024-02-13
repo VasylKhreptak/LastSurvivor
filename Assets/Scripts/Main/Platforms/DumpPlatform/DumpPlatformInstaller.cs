@@ -56,6 +56,7 @@ namespace Main.Platforms.DumpPlatform
             BindWorkersCountText();
             BindWorkersRecruiter();
             BindWorkerPriceUpdater();
+            BindReceiveZoneVibration();
         }
 
         private void BindHireWorkerZone()
@@ -67,10 +68,8 @@ namespace Main.Platforms.DumpPlatform
             Container.BindInstance(_hireWorkerZone).AsSingle();
         }
 
-        private void BindWorkersCountText()
-        {
+        private void BindWorkersCountText() =>
             Container.BindInstance(_platformData.WorkersBank).WhenInjectedInto<ClampedBankValuesText>();
-        }
 
         private void BindWorkersRecruiter()
         {
@@ -95,5 +94,7 @@ namespace Main.Platforms.DumpPlatform
             Container.BindInstance(_bank).WhenInjectedInto<CollectZone>();
             Container.BindInstance(_platformData.GearsBank).WhenInjectedInto<ClampedBankMaxSign>();
         }
+
+        private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
     }
 }

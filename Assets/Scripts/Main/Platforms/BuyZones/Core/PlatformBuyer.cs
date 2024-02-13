@@ -2,6 +2,7 @@
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.StaticData.Core;
+using Infrastructure.Services.Vibration.Core;
 using Main.Platforms.Zones;
 using UnityEngine;
 using Zenject;
@@ -17,7 +18,7 @@ namespace Main.Platforms.BuyZones.Core
 
         [Inject]
         public PlatformBuyer(Prefab prefabType, ReceiveZone receiveZone, IInstantiator instantiator,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService, IVibrationService vibrationService)
         {
             _prefabType = prefabType;
             _receiveZone = receiveZone;

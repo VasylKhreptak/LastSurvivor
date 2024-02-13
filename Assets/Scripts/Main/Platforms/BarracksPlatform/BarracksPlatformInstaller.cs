@@ -46,6 +46,7 @@ namespace Main.Platforms.BarracksPlatform
             BindSoldiersCountText();
             BindSoldiersRecruiter();
             BindSoldierPriceUpdater();
+            BindReceiveZoneVibration();
         }
 
         private void BindSoldierHireZone()
@@ -77,5 +78,7 @@ namespace Main.Platforms.BarracksPlatform
                     _platformData.HireSoldierBank,
                     _platformPreferences.SoldierHirePricePreferences);
         }
+
+        private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
     }
 }

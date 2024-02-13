@@ -46,6 +46,7 @@ namespace Main.Platforms.CollectorsPlatform
             BindCollectorsCountText();
             BindCollectorsRecruiter();
             BindCollectorPriceUpdater();
+            BindReceiveZoneVibration();
         }
 
         private void BindCollectorHireZone()
@@ -77,5 +78,7 @@ namespace Main.Platforms.CollectorsPlatform
                     _platformData.HireCollectorBank,
                     _platformPreferences.CollectorsHirePreferences);
         }
+        
+        private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
     }
 }
