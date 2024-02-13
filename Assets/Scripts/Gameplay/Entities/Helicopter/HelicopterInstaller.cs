@@ -34,7 +34,7 @@ namespace Gameplay.Entities.Helicopter
         }
 
         private void BindPlayerFollower() =>
-            Container.BindInterfacesAndSelfTo<LateSplineTargetFollower>().AsSingle().WithArguments(_helicopterMovementPreferences);
+            Container.BindInterfacesAndSelfTo<FixedSplineTargetFollower>().AsSingle().WithArguments(_helicopterMovementPreferences);
 
         private void BindNoiseMovement()
         {
