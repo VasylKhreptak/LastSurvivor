@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Data;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
+using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Inspector.MinMax.Core;
 using Pathfinding;
@@ -22,9 +23,11 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
         private readonly LevelData _levelData;
         private readonly MinMaxValue<int> _priceForKill;
         private readonly Rigidbody _rigidbody;
+        private readonly IPersistentDataService _persistentDataService;
 
         public DeathState(MonoKernel kernel, Ragdoll ragdoll, Animator animator, Collider collider, IAstarAI ai,
-            List<Zombie> zombies, Zombie zombie, LevelData levelData, MinMaxValue<int> priceForKill, Rigidbody rigidbody)
+            List<Zombie> zombies, Zombie zombie, LevelData levelData, MinMaxValue<int> priceForKill, Rigidbody rigidbody,
+            IPersistentDataService persistentDataService)
         {
             _kernel = kernel;
             _ragdoll = ragdoll;
@@ -36,6 +39,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _levelData = levelData;
             _priceForKill = priceForKill;
             _rigidbody = rigidbody;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()
@@ -48,7 +52,10 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _ai.canMove = false;
             _rigidbody.isKinematic = true;
             _ragdoll.Enable();
-            _levelData.CollectedMoney.Value += _priceForKill.GetRandom();
+            _levelData.CollectedMoney.Value += (int)(_priceForKill.GetRandom() *
+                                                     _persistentDataService.PersistentData.PlayerData.PlatformsData
+                                                         .HelicopterPlatformData
+                                                         .IncomeMultiplier.Value);
         }
     }
 }
