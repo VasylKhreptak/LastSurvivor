@@ -6,6 +6,6 @@ namespace Infrastructure.Services.ID
     {
         private long _value;
 
-        public long Get() => _value++;
+        public long Value => _value++;
     }
 }

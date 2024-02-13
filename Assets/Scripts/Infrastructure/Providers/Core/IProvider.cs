@@ -2,6 +2,6 @@
 {
     public interface IProvider<out T>
     {
-        public T Get();
+        public T Value { get; }
     }
 }

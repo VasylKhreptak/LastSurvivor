@@ -1,5 +1,5 @@
 ﻿using System;
-using Adapters.Velocity.Core;
+using Providers.Velocity.Core;
 using UnityEngine;
 using Zenject;
 
@@ -10,14 +10,14 @@ namespace Entities.Animations
         private readonly Transform _transform;
         private readonly Animator _animator;
         private readonly Preferences _preferences;
-        private readonly IVelocityAdapter _velocityAdapter;
+        private readonly IVelocityProvider _velocityProvider;
 
-        public PlaneMoveAnimation(Transform transform, Animator animator, Preferences preferences, IVelocityAdapter velocityAdapter)
+        public PlaneMoveAnimation(Transform transform, Animator animator, Preferences preferences, IVelocityProvider velocityProvider)
         {
             _transform = transform;
             _animator = animator;
             _preferences = preferences;
-            _velocityAdapter = velocityAdapter;
+            _velocityProvider = velocityProvider;
         }
 
         private Vector3 _velocity;
@@ -31,7 +31,7 @@ namespace Entities.Animations
 
         private void Animate()
         {
-            _velocity = _velocityAdapter.Value;
+            _velocity = _velocityProvider.Value;
             _velocity.y = 0f;
             _viewDirection = _transform.forward;
             _speed01 = Mathf.Min(_velocity.magnitude / _preferences.MaxSpeed, 1f);

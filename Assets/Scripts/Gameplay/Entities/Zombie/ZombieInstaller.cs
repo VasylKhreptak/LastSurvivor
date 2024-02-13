@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Adapters.Velocity;
 using Entities.AI;
 using Entities.Animations;
 using Gameplay.Entities.Health.Core;
@@ -12,6 +11,7 @@ using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Inspector.MinMax;
 using Pathfinding;
+using Providers.Velocity;
 using UnityEngine;
 using Utilities.GameObjectUtilities;
 using Utilities.PhysicsUtilities;
@@ -56,7 +56,7 @@ namespace Gameplay.Entities.Zombie
             Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
             Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
             Container.Bind<Zombie>().FromComponentOnRoot().AsSingle();
-            Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
+            Container.BindInterfacesTo<AgentVelocityProvider>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(GetHealth())).AsSingle();
 
             RandomizeSkin();

@@ -1,8 +1,8 @@
 ﻿using System;
-using Adapters.Velocity.Core;
 using Extensions;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
+using Providers.Velocity.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,14 +11,14 @@ namespace Gameplay.Weapons.Core.Fire
     public class ShellSpawner
     {
         private readonly IObjectPools<GeneralPool> _generalPools;
-        private readonly IVelocityAdapter _velocityAdapter;
+        private readonly IVelocityProvider _velocityProvider;
         private readonly Preferences _preferences;
 
-        public ShellSpawner(IObjectPools<GeneralPool> generalPools, IVelocityAdapter velocityAdapter,
+        public ShellSpawner(IObjectPools<GeneralPool> generalPools, IVelocityProvider velocityProvider,
             Preferences preferences)
         {
             _generalPools = generalPools;
-            _velocityAdapter = velocityAdapter;
+            _velocityProvider = velocityProvider;
             _preferences = preferences;
         }
 
@@ -39,7 +39,7 @@ namespace Gameplay.Weapons.Core.Fire
                                         Random.Range(_preferences.MinTorque, _preferences.MaxTorque));
             rigidbody.velocity = shellObject.transform.right *
                                  Random.Range(_preferences.MinVelocity, _preferences.MaxVelocity) +
-                                 _velocityAdapter.Value;
+                                 _velocityProvider.Value;
         }
 
         [Serializable]

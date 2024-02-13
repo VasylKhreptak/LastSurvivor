@@ -1,5 +1,4 @@
-﻿using Adapters.Velocity;
-using Entities.AI;
+﻿using Entities.AI;
 using Entities.Animations;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Soldier.StateMachine;
@@ -7,6 +6,7 @@ using Gameplay.Entities.Soldier.StateMachine.States;
 using ObjectPoolSystem;
 using ObjectPoolSystem.PoolCategories;
 using Pathfinding;
+using Providers.Velocity;
 using Tags.Gameplay;
 using UnityEngine;
 using Utilities.PhysicsUtilities;
@@ -47,7 +47,7 @@ namespace Gameplay.Entities.Soldier
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
             Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
-            Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
+            Container.BindInterfacesTo<AgentVelocityProvider>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
             BindTargetsZone();

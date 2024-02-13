@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Adapters.Velocity;
 using Entities.AI;
 using Entities.Animations;
 using Gameplay.Entities.Collector.StateMachine;
@@ -9,6 +8,7 @@ using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Player;
 using Infrastructure.StateMachine.Main.Core;
 using Pathfinding;
+using Providers.Velocity;
 using UnityEngine;
 using Utilities.GameObjectUtilities;
 using Utilities.PhysicsUtilities;
@@ -46,7 +46,7 @@ namespace Gameplay.Entities.Collector
             Container.Bind<Animator>().FromComponentOnRoot().AsSingle();
             Container.Bind<IAstarAI>().FromInstance(GetComponent<IAstarAI>()).AsSingle();
             Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
-            Container.BindInterfacesTo<AdaptedAgentForVelocity>().AsSingle();
+            Container.BindInterfacesTo<AgentVelocityProvider>().AsSingle();
             Container.Bind<IHealth>().FromInstance(new Health.Health(_health)).AsSingle();
             Container.Bind<Collector>().FromComponentOnRoot().AsSingle();
 

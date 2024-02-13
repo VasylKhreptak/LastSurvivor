@@ -1,5 +1,4 @@
-﻿using Adapters.Velocity;
-using Audio.Players;
+﻿using Audio.Players;
 using Data.Persistent.Platforms;
 using Gameplay.Weapons.Core;
 using Gameplay.Weapons.Core.Fire;
@@ -11,6 +10,7 @@ using Infrastructure.StateMachine.Main.Core;
 using ObjectPoolSystem;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.Banks;
+using Providers.Velocity;
 using UnityEngine;
 using Zenject;
 using Zenject.Infrastructure.Toggleable;
@@ -40,7 +40,7 @@ namespace Gameplay.Weapons.Minigun
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<AdaptedTransformForVelocity>().AsSingle().WithArguments(transform);
+            Container.BindInterfacesTo<TransformVelocityProvider>().AsSingle().WithArguments(transform);
 
             BindMinigunAmmo();
             BindBarrelSpiner();
