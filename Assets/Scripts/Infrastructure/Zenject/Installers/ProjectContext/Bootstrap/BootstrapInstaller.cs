@@ -17,6 +17,7 @@ using Infrastructure.Services.SaveLoadHandler;
 using Infrastructure.Services.Screen;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.StaticData.Core;
+using Infrastructure.Services.Vibration;
 using Infrastructure.StateMachine.Game;
 using Infrastructure.StateMachine.Game.Factory;
 using Infrastructure.StateMachine.Game.States;
@@ -77,6 +78,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<ScreenService>().AsSingle();
 
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
+            Container.BindInterfacesTo<VibrationService>().AsSingle();
 
             BindSaveLoadHandlerService();
         }

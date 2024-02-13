@@ -2,6 +2,8 @@
 using Gameplay.Entities.Explosive.Core;
 using Gameplay.Entities.Health;
 using Gameplay.Entities.Health.Core;
+using Infrastructure.Services.Vibration.Core;
+using Lofelt.NiceVibrations;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using UnityEngine;
@@ -17,10 +19,11 @@ namespace Gameplay.Entities.Explosive.Barrel
         private readonly IObjectPools<Particle> _particlePools;
         private readonly ExplosionDamageApplier _explosionDamageApplier;
         private readonly AudioPlayer _explosionAudioPlayer;
+        private readonly IVibrationService _vibrationService;
 
         public BarrelExploder(IHealth health, GameObject gameObject, ExplosionRigidbodyAffector rigidbodyAffector,
             CameraShaker cameraShaker, IObjectPools<Particle> particlePools, ExplosionDamageApplier explosionDamageApplier,
-            AudioPlayer explosionAudioPlayer) : base(health)
+            AudioPlayer explosionAudioPlayer, IVibrationService vibrationService) : base(health)
         {
             _gameObject = gameObject;
             _rigidbodyAffector = rigidbodyAffector;
@@ -28,6 +31,7 @@ namespace Gameplay.Entities.Explosive.Barrel
             _particlePools = particlePools;
             _explosionDamageApplier = explosionDamageApplier;
             _explosionAudioPlayer = explosionAudioPlayer;
+            _vibrationService = vibrationService;
         }
 
         protected override void OnDied()
@@ -39,6 +43,7 @@ namespace Gameplay.Entities.Explosive.Barrel
             _cameraShaker.DoExplosionShake();
             _explosionAudioPlayer.Play(position);
             SpawnExplosionParticle();
+            _vibrationService.Vibrate(HapticPatterns.PresetType.HeavyImpact);
             Object.Destroy(_gameObject);
         }
 
