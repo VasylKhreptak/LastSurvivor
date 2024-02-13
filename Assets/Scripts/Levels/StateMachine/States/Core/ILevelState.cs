@@ -2,5 +2,5 @@
 
 namespace Levels.StateMachine.States.Core
 {
-    public interface ILevelState : IState { }
+    public interface ILevelState { }
 }

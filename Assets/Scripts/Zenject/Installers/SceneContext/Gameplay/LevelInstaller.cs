@@ -122,6 +122,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.Bind<LevelCompletedState>().AsSingle();
             Container.Bind<LevelFailedState>().AsSingle();
             Container.Bind<LevelLoopState>().AsSingle();
+            Container.Bind<FinalizeProgressAndLoadMenuState>().AsSingle();
         }
 
         private void BindZombiesList() => Container.Bind<List<Zombie>>().AsSingle();

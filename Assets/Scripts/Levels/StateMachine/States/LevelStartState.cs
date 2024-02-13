@@ -5,12 +5,13 @@ using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Infrastructure.StateMachine.Main.Core;
+using Infrastructure.StateMachine.Main.States.Core;
 using Levels.StateMachine.States.Core;
 using UI.Gameplay.Windows;
 
 namespace Levels.StateMachine.States
 {
-    public class LevelStartState : ILevelState
+    public class LevelStartState : ILevelState, IState
     {
         private readonly IStateMachine<ILevelState> _levelStateMachine;
         private readonly PlayerHolder _playerHolder;
