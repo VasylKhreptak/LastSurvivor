@@ -12,6 +12,7 @@ namespace Gameplay.Entities.Collector
     public class Collector : MonoBehaviour, IVisitable<ZombieDamage>
     {
         private IHealth _health;
+        public IStateMachine<ICollectorState> StateMachine { get; private set; }
 
         [Inject]
         private void Constructor(IHealth health, IStateMachine<ICollectorState> stateMachine)
@@ -21,7 +22,5 @@ namespace Gameplay.Entities.Collector
         }
 
         public void Accept(ZombieDamage zombieDamage) => _health.TakeDamage(zombieDamage.Value);
-
-        public IStateMachine<ICollectorState> StateMachine { get; private set; }
     }
 }
