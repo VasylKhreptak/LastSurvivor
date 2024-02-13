@@ -1,4 +1,5 @@
 ﻿using System;
+using Tags.Gameplay;
 using UnityEngine;
 
 namespace Gameplay.Weapons.Bullets.CollisionHandlers
@@ -16,7 +17,7 @@ namespace Gameplay.Weapons.Bullets.CollisionHandlers
 
         public void TryTransmit(Collision collision)
         {
-            if (collision.rigidbody == null)
+            if (collision.rigidbody == null || collision.gameObject.TryGetComponent(out IgnoreBulletImpulse _))
                 return;
 
             _impulse = collision.impulse;
