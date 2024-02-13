@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Noise
+namespace Utilities.Noise
 {
     public class NoiseRotator : ITickable
     {

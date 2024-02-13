@@ -1,7 +1,7 @@
-﻿using Noise;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Splines;
-using Utilities.SplineUtilities;
+using Utilities.Noise;
+using Utilities.SplineUtilities.TargetFollower;
 using Zenject;
 
 namespace Gameplay.Entities.Helicopter
@@ -34,7 +34,7 @@ namespace Gameplay.Entities.Helicopter
         }
 
         private void BindPlayerFollower() =>
-            Container.BindInterfacesAndSelfTo<SplineTargetFollower>().AsSingle().WithArguments(_helicopterMovementPreferences);
+            Container.BindInterfacesAndSelfTo<LateSplineTargetFollower>().AsSingle().WithArguments(_helicopterMovementPreferences);
 
         private void BindNoiseMovement()
         {

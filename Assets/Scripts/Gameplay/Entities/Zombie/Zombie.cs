@@ -11,17 +11,16 @@ namespace Gameplay.Entities.Zombie
     [DisallowMultipleComponent]
     public class Zombie : MonoBehaviour, IVisitable<BulletDamage>, IVisitable<ExplosionDamage>
     {
-        private IStateMachine<IZombieState> _stateMachine;
         private IHealth _health;
 
         [Inject]
         private void Constructor(IStateMachine<IZombieState> stateMachine, IHealth health)
         {
-            _stateMachine = stateMachine;
+            StateMachine = stateMachine;
             _health = health;
         }
 
-        public IStateMachine<IZombieState> StateMachine => _stateMachine;
+        public IStateMachine<IZombieState> StateMachine { get; private set; }
 
         public void Accept(BulletDamage visitor) => _health.TakeDamage(visitor.Value);
 

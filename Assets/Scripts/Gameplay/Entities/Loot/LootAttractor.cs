@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine;
 using Utilities.PhysicsUtilities.Trigger;
 using Zenject.Infrastructure.Toggleable.Core;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.Entities.Loot
 {
@@ -63,7 +64,7 @@ namespace Gameplay.Entities.Loot
                 return;
 
             _attractDelaySubscription = Observable
-                .Timer(TimeSpan.FromSeconds(UnityEngine.Random.Range(_preferences.MinAttractDelay, _preferences.MaxAttractDelay)))
+                .Timer(TimeSpan.FromSeconds(Random.Range(_preferences.MinAttractDelay, _preferences.MaxAttractDelay)))
                 .Subscribe(_ => Attract(collector.Target));
         }
 

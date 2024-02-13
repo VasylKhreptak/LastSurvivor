@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
-using Utilities.SplineUtilities;
+using Utilities.SplineUtilities.TargetFollower;
 using Zenject;
 
 namespace Gameplay.Entities.Platoon

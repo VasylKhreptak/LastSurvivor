@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Utilities.SplineUtilities;
+using Utilities.SplineUtilities.TargetFollower;
 using Zenject;
 
 namespace Gameplay.Entities.Platoon

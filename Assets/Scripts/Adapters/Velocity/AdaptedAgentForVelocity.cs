@@ -8,7 +8,10 @@ namespace Adapters.Velocity
     {
         private readonly IAstarAI _ai;
 
-        public AdaptedAgentForVelocity(IAstarAI ai) => _ai = ai;
+        public AdaptedAgentForVelocity(IAstarAI ai)
+        {
+            _ai = ai;
+        }
 
         public Vector3 Value => _ai.velocity;
     }

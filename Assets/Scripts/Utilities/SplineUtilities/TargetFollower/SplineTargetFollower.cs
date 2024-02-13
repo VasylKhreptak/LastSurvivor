@@ -2,11 +2,12 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
+using Utilities.SplineUtilities.TargetFollower.Core;
 using Zenject;
 
-namespace Utilities.SplineUtilities
+namespace Utilities.SplineUtilities.TargetFollower
 {
-    public class SplineTargetFollower : ITickable
+    public class SplineTargetFollower : ISplineTargetFollower, ITickable
     {
         private readonly Transform _transform;
         private readonly Transform _splineRoot;
@@ -27,7 +28,7 @@ namespace Utilities.SplineUtilities
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
 
-        public Transform Target;
+        public Transform Target { get; set; }
 
         public void Tick()
         {

@@ -5,6 +5,6 @@
         Bullet = 0,
         BulletShell = 1,
         SmallBullet = 2,
-        GearLoot = 3,
+        GearLoot = 3
     }
 }

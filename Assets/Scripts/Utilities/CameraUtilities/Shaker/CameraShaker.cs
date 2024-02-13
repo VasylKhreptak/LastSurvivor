@@ -1,7 +1,7 @@
 ﻿using System;
 using Extensions;
-using Noise;
 using UnityEngine;
+using Utilities.Noise;
 using Zenject;
 
 namespace Utilities.CameraUtilities.Shaker
