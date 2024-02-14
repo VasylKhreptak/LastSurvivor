@@ -102,3 +102,25 @@ MonoBehaviour:
       RolloffMode: 1
       MinDistance: 1
       MaxDistance: 100
+  _backgroundMusicPreferences:
+    _clip: {fileID: 8300000, guid: 9829f492e45154b45ae57fc64bae2064, type: 3}
+    _volumeUpDuration: 3
+    _audioSettings:
+      AudioMixerGroup: {fileID: 6256812465944879583, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 1
+      Priority: 120
+      Volume: 0.2
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 0
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 500

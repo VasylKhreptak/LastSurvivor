@@ -128,7 +128,10 @@ namespace Plugins.AudioService.Facade
                 if (Loop == false)
                     Stop();
                 else
-                    Play();
+                {
+                    _timer.Start(Clip.length);
+                    _timer.SetTimeScale(Pitch);
+                }
             });
         }
     }

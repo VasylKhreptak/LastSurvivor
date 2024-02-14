@@ -1,4 +1,5 @@
-﻿using DebuggerOptions;
+﻿using Audio;
+using DebuggerOptions;
 using Infrastructure.Coroutines.Runner;
 using Infrastructure.Coroutines.Runner.Core;
 using Infrastructure.LoadingScreen.Core;
@@ -40,12 +41,14 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
         [Header("Preferences")]
         [SerializeField] private AudioService.Preferences _audioServicePreferences;
+        [SerializeField] private BackgroundMusicPlayer.Preferences _backgroundMusicPreferences;
 
         public override void InstallBindings()
         {
             BindMonoServices();
             BindSceneLoader();
             BindServices();
+            BindBackgroundMusic();
             BindGameStateMachine();
             InitializeDebugger();
             MakeInitializable();
@@ -82,6 +85,9 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
             BindSaveLoadHandlerService();
         }
+
+        private void BindBackgroundMusic() =>
+            Container.BindInterfacesTo<BackgroundMusicPlayer>().AsSingle().WithArguments(_backgroundMusicPreferences);
 
         private void BindSaveLoadHandlerService()
         {
