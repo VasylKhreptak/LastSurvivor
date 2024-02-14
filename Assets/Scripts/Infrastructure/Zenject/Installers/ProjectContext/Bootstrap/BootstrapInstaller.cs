@@ -5,6 +5,7 @@ using Infrastructure.Coroutines.Runner.Core;
 using Infrastructure.LoadingScreen.Core;
 using Infrastructure.SceneManagement;
 using Infrastructure.SceneManagement.Core;
+using Infrastructure.Services.Advertisement;
 using Infrastructure.Services.Framerate;
 using Infrastructure.Services.ID;
 using Infrastructure.Services.ID.Core;
@@ -79,7 +80,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
             Container.BindInterfacesTo<FramerateService>().AsSingle();
             Container.BindInterfacesTo<ScreenService>().AsSingle();
-
+            Container.BindInterfacesTo<AdvertisementService>().AsSingle();
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
 
