@@ -1,4 +1,5 @@
-﻿using Data.Persistent.Platforms;
+﻿using Audio.Players;
+using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
 using Flexalon;
 using Grid;
@@ -21,6 +22,7 @@ namespace Main.Platforms.DumpPlatform
         [SerializeField] private ReceiveZone _hireWorkerZone;
         [SerializeField] private EntityRecruiter _workerRecruiter;
         [SerializeField] private FlexalonGridLayout _collectZone;
+        [SerializeField] private AudioPlayer.Preferences _hireAudioPreferences;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _hireWorkerContainer;
@@ -57,6 +59,7 @@ namespace Main.Platforms.DumpPlatform
             BindWorkersRecruiter();
             BindWorkerPriceUpdater();
             BindReceiveZoneVibration();
+            BindHireAudioPlayer();
         }
 
         private void BindHireWorkerZone()
@@ -96,5 +99,8 @@ namespace Main.Platforms.DumpPlatform
         }
 
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
+
+        private void BindHireAudioPlayer() =>
+            Container.BindInterfacesTo<HireAudioPlayer>().AsSingle().WithArguments(_hireAudioPreferences);
     }
 }

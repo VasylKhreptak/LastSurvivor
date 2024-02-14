@@ -875,7 +875,7 @@ MonoBehaviour:
       Spread: 0
       RolloffMode: 1
       MinDistance: 1
-      MaxDistance: 5
+      MaxDistance: 10
 --- !u!1001 &113636265390891453
 PrefabInstance:
   m_ObjectHideFlags: 0

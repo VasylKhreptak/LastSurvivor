@@ -1273,6 +1273,28 @@ MonoBehaviour:
   _hireWorkerZone: {fileID: 9153889667896275892}
   _workerRecruiter: {fileID: 3063024013110793054}
   _collectZone: {fileID: 4568120416187364163}
+  _hireAudioPreferences:
+    _clips:
+    - {fileID: 8300000, guid: 864a77302b6a527429efab34da93c5a8, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 130
+      Volume: 0.5
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 15
 --- !u!1 &5954921622154856570
 GameObject:
   m_ObjectHideFlags: 0

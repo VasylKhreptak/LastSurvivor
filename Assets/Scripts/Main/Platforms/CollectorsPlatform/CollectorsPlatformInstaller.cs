@@ -1,4 +1,5 @@
-﻿using Data.Persistent.Platforms;
+﻿using Audio.Players;
+using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -16,6 +17,7 @@ namespace Main.Platforms.CollectorsPlatform
         [Header("References")]
         [SerializeField] private ReceiveZone _hireCollectorZone;
         [SerializeField] private EntityRecruiter _collectorRecruiter;
+        [SerializeField] private AudioPlayer.Preferences _hireAudioPreferences;
 
         private IntegerBank _bank;
         private CollectorsPlatformData _platformData;
@@ -47,6 +49,7 @@ namespace Main.Platforms.CollectorsPlatform
             BindCollectorsRecruiter();
             BindCollectorPriceUpdater();
             BindReceiveZoneVibration();
+            BindHireAudioPlayer();
         }
 
         private void BindCollectorHireZone()
@@ -78,7 +81,10 @@ namespace Main.Platforms.CollectorsPlatform
                     _platformData.HireCollectorBank,
                     _platformPreferences.CollectorsHirePreferences);
         }
-        
+
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
+
+        private void BindHireAudioPlayer() =>
+            Container.BindInterfacesTo<HireAudioPlayer>().AsSingle().WithArguments(_hireAudioPreferences);
     }
 }
