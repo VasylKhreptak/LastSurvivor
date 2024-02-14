@@ -1,4 +1,5 @@
-﻿using Data.Persistent.Platforms;
+﻿using Audio.Players;
+using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
 using Flexalon;
 using Grid;
@@ -20,6 +21,7 @@ namespace Main.Platforms.OilPlatform
         [SerializeField] private FlexalonGridLayout _grid;
         [SerializeField] private ReceiveZone _receiveZone;
         [SerializeField] private FuelSpawner _fuelSpawner;
+        [SerializeField] private AudioPlayer.Preferences _barrelTransferAudioPreferences;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
@@ -56,6 +58,7 @@ namespace Main.Platforms.OilPlatform
             BindFuelGrid();
             BindUpgradeLogic();
             BindReceiveZoneVibration();
+            BindBarrelTransferAudioPlayer();
         }
 
         private void BindFuelGrid()
@@ -77,5 +80,7 @@ namespace Main.Platforms.OilPlatform
         }
 
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
+        
+        private void BindBarrelTransferAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_barrelTransferAudioPreferences);
     }
 }

@@ -980,6 +980,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oilBarrelReceiver: {fileID: 4812053623003846431}
   _receiveZone: {fileID: 503174035211732560}
+  _barrelPopAudioPreferences:
+    _clips:
+    - {fileID: 8300000, guid: e57e461a4ea4be142adbed4f6950a190, type: 3}
+    - {fileID: 8300000, guid: 1d88c311c8008cf4e9c90c5e7ef8d78c, type: 3}
+    - {fileID: 8300000, guid: cd1b9001abcdfbd40ba7204b54325469, type: 3}
+    - {fileID: 8300000, guid: 2a5b694eece64f746a8607e23300ec30, type: 3}
+    - {fileID: 8300000, guid: 040f95f24eb79a64b90f541852c547e9, type: 3}
+    - {fileID: 8300000, guid: 2c7880fdb8d0c47428ef153aa59384d7, type: 3}
+    - {fileID: 8300000, guid: c78d6614f600d3447b02a27c5867146a, type: 3}
+    - {fileID: 8300000, guid: fa0aacd25cdfce24aab23f2c60ef4ce7, type: 3}
+    - {fileID: 8300000, guid: 0292a495b7907b24587abea12740868a, type: 3}
+    - {fileID: 8300000, guid: f4069e8bf6c2c174d9fa364165cb8b18, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 129
+      Volume: 0.4
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 20
 --- !u!65 &9105572580215393425
 BoxCollider:
   m_ObjectHideFlags: 0

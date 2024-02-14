@@ -1,7 +1,7 @@
 ﻿using System;
+using Audio.Players;
 using Data.Persistent.Platforms;
 using DG.Tweening;
-using Grid;
 using Main.Entities.Player;
 using UniRx;
 using UnityEngine;
@@ -25,14 +25,16 @@ namespace Main.Platforms.HelicopterPlatform
         [Header("Rotate Preferences")]
         [SerializeField] private AnimationCurve _rotateCurve;
 
-        private GridStack _playerGrid;
+        private Player _player;
         private HelicopterPlatformData _platformData;
+        private AudioPlayer _barrelPopAudioPlayer;
 
         [Inject]
-        private void Constructor(Player player, HelicopterPlatformData platformData)
+        private void Constructor(Player player, HelicopterPlatformData platformData, AudioPlayer barelPopAudioPlayer)
         {
-            _playerGrid = player.BarrelGridStack;
+            _player = player;
             _platformData = platformData;
+            _barrelPopAudioPlayer = barelPopAudioPlayer;
         }
 
         private IDisposable _subscription;
@@ -73,7 +75,7 @@ namespace Main.Platforms.HelicopterPlatform
 
         private void ReceiveBarrel()
         {
-            if (_playerGrid.TryPop(out GameObject barrel) == false)
+            if (_player.BarrelGridStack.TryPop(out GameObject barrel) == false)
                 return;
 
             Tween jumpTween = barrel.transform
@@ -94,6 +96,8 @@ namespace Main.Platforms.HelicopterPlatform
                     Destroy(barrel);
                 })
                 .Play();
+
+            _barrelPopAudioPlayer.Play(_player.transform.position);
         }
 
         private void OnReceived()

@@ -1,4 +1,5 @@
 ﻿using System;
+using Audio.Players;
 using Grid;
 using Main.Entities.Player;
 using UniRx;
@@ -14,12 +15,14 @@ namespace Main.Platforms.OilPlatform
 
         private GridStack _gridStack;
         private GridStack _playerGridStack;
+        private AudioPlayer _transferAudioPlayer;
 
         [Inject]
-        private void Constructor(GridStack gridStack, Player player)
+        private void Constructor(GridStack gridStack, Player player, AudioPlayer transferAudioPlayer)
         {
             _gridStack = gridStack;
             _playerGridStack = player.BarrelGridStack;
+            _transferAudioPlayer = transferAudioPlayer;
         }
 
         private IDisposable _transferSubscription;
@@ -66,6 +69,8 @@ namespace Main.Platforms.OilPlatform
             }
 
             _playerGridStack.TryPush(barrelGameObject);
+
+            _transferAudioPlayer.Play(barrelGameObject.transform.position);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Data.Persistent.Platforms;
+﻿using Audio.Players;
+using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -15,6 +16,7 @@ namespace Main.Platforms.HelicopterPlatform
         [Header("References")]
         [SerializeField] private OilBarrelReceiver _oilBarrelReceiver;
         [SerializeField] private ReceiveZone _receiveZone;
+        [SerializeField] private AudioPlayer.Preferences _barrelPopAudioPreferences;
 
         private IntegerBank _bank;
         private ClampedIntegerBank _upgradeContainer;
@@ -47,6 +49,7 @@ namespace Main.Platforms.HelicopterPlatform
 
             BindUpgradeLogic();
             BindReceiveZoneVibration();
+            BindBarrelPopAudioPlayer();
         }
 
         private void BindUpgradeLogic()
@@ -62,5 +65,7 @@ namespace Main.Platforms.HelicopterPlatform
         }
 
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
+
+        private void BindBarrelPopAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_barrelPopAudioPreferences);
     }
 }
