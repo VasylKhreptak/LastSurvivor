@@ -8,7 +8,7 @@ namespace Plugins.Animations.Adapters.Volume
     public class AdaptedAudioMixerForVolume : VolumeAdapter
     {
         [Header("References")]
-        [SerializeField] private AudioMixerGroup _audioMixerGroup;
+        [SerializeField] private AudioMixer _audioMixer;
 
         [Header("Preferences")]
         [SerializeField] private string _exposedParameter = "Volume";
@@ -17,10 +17,10 @@ namespace Plugins.Animations.Adapters.Volume
         {
             get
             {
-                _audioMixerGroup.audioMixer.GetFloat(_exposedParameter, out float dbVolume);
+                _audioMixer.GetFloat(_exposedParameter, out float dbVolume);
                 return AudioExtensions.To01(dbVolume);
             }
-            set => _audioMixerGroup.audioMixer.SetFloat(_exposedParameter, AudioExtensions.ToDB(value));
+            set => _audioMixer.SetFloat(_exposedParameter, AudioExtensions.ToDB(value));
         }
     }
 }
