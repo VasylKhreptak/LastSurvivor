@@ -31,10 +31,10 @@ namespace Levels.StateMachine.States
             {
                 LoadScenePayload = new LoadSceneAsyncState.Payload
                 {
-                    Name = _staticDataService.Config.MainScene.Name,
+                    Name = _staticDataService.Config.MainScene.Name
                 },
 
-                OnTransitionShown = FinalizeProgress,
+                OnTransitionShown = FinalizeProgress
             };
 
             _gameStateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneWithTransitionAsyncState.Payload>(payload);

@@ -80,7 +80,8 @@ namespace Main.Platforms.OilPlatform
         }
 
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
-        
-        private void BindBarrelTransferAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_barrelTransferAudioPreferences);
+
+        private void BindBarrelTransferAudioPlayer() =>
+            Container.Bind<AudioPlayer>().AsSingle().WithArguments(_barrelTransferAudioPreferences);
     }
 }

@@ -16,14 +16,13 @@ namespace Providers.Velocity
 
         private Vector3 _position;
         private Vector3 _previousPosition;
-        private Vector3 _velocity;
 
-        public Vector3 Value => _velocity;
+        public Vector3 Value { get; private set; }
 
         public void Tick()
         {
             _position = _transform.position;
-            _velocity = (_position - _previousPosition) / Time.deltaTime;
+            Value = (_position - _previousPosition) / Time.deltaTime;
             _previousPosition = _position;
         }
     }

@@ -9,6 +9,6 @@
         Wood = 4,
         Stone = 5,
         Sand = 6,
-        Grass = 7,
+        Grass = 7
     }
 }

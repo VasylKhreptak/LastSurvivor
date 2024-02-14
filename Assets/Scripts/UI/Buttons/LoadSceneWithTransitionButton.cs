@@ -47,7 +47,7 @@ namespace UI.Buttons
             {
                 LoadScenePayload = new LoadSceneAsyncState.Payload
                 {
-                    Name = _scene.Name,
+                    Name = _scene.Name
                 }
             };
 

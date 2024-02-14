@@ -17,7 +17,7 @@ namespace Levels.StateMachine.States.Core
                 [typeof(LevelFailedState)] = _container.Resolve<LevelFailedState>,
                 [typeof(LevelCompletedState)] = _container.Resolve<LevelCompletedState>,
                 [typeof(LevelLoopState)] = _container.Resolve<LevelLoopState>,
-                [typeof(FinalizeProgressAndLoadMenuState)] = _container.Resolve<FinalizeProgressAndLoadMenuState>,
+                [typeof(FinalizeProgressAndLoadMenuState)] = _container.Resolve<FinalizeProgressAndLoadMenuState>
             };
     }
 }

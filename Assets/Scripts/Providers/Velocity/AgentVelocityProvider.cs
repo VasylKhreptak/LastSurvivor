@@ -8,7 +8,10 @@ namespace Providers.Velocity
     {
         private readonly IAstarAI _ai;
 
-        public AgentVelocityProvider(IAstarAI ai) => _ai = ai;
+        public AgentVelocityProvider(IAstarAI ai)
+        {
+            _ai = ai;
+        }
 
         public Vector3 Value => _ai.velocity;
     }
