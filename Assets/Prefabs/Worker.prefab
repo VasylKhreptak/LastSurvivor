@@ -2489,6 +2489,7 @@ GameObject:
   - component: {fileID: 5211399366321680198}
   - component: {fileID: 4701770299404530730}
   - component: {fileID: 8160744831382326141}
+  - component: {fileID: 5440941350661099099}
   m_Layer: 0
   m_Name: Worker
   m_TagString: Untagged
@@ -2620,6 +2621,48 @@ MonoBehaviour:
   _workerReferences:
     _gearSpawnPoint: {fileID: 6662832305247741259}
     _toolTransform: {fileID: 7368361150111653544}
+--- !u!114 &5440941350661099099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6483603148830324187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655f6243b0814c818b722625bf662a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioPreferences:
+    _clips:
+    - {fileID: 8300000, guid: dadac6d92a138df4ea3140d79afa8749, type: 3}
+    - {fileID: 8300000, guid: 8a632d746b8114847b15490105ac61ec, type: 3}
+    - {fileID: 8300000, guid: 6fc4cd5963877084d91f3cfa6003c7b9, type: 3}
+    - {fileID: 8300000, guid: d7529307ff174e74f8beeb23aa3d8a7e, type: 3}
+    - {fileID: 8300000, guid: 44b620c6b5419f64c8ec5d64ebb4b85d, type: 3}
+    - {fileID: 8300000, guid: b87d9ee628c550441991a24d2f6ed326, type: 3}
+    - {fileID: 8300000, guid: 33547a591ea62fd4aa608ab461f5703d, type: 3}
+    - {fileID: 8300000, guid: e73955791a454ae439d48d9b7539985b, type: 3}
+    - {fileID: 8300000, guid: 3b781f6425e149f4ab951d57b03a49f1, type: 3}
+    _audioSettings:
+      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+        type: 2}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      Priority: 130
+      Volume: 0.4
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 1
+      ReverbZoneMix: 1
+      DopplerLevel: 1
+      Spread: 0
+      RolloffMode: 1
+      MinDistance: 1
+      MaxDistance: 5
 --- !u!1 &6483616983409381333
 GameObject:
   m_ObjectHideFlags: 0
