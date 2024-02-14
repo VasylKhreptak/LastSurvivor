@@ -1,4 +1,5 @@
-﻿using Data.Persistent.Platforms;
+﻿using Audio.Players;
+using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -16,6 +17,7 @@ namespace Main.Platforms.BarracksPlatform
         [Header("References")]
         [SerializeField] private ReceiveZone _hireSoldierZone;
         [SerializeField] private EntityRecruiter _soldiersRecruiter;
+        [SerializeField] private AudioPlayer.Preferences _hireSoldierAudioPreferences;
 
         private IntegerBank _bank;
         private BarracksPlatformData _platformData;
@@ -47,6 +49,7 @@ namespace Main.Platforms.BarracksPlatform
             BindSoldiersRecruiter();
             BindSoldierPriceUpdater();
             BindReceiveZoneVibration();
+            BindHireAudioPlayer();
         }
 
         private void BindSoldierHireZone()
@@ -80,5 +83,8 @@ namespace Main.Platforms.BarracksPlatform
         }
 
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
+
+        private void BindHireAudioPlayer() =>
+            Container.BindInterfacesTo<HireAudioPlayer>().AsSingle().WithArguments(_hireSoldierAudioPreferences);
     }
 }
