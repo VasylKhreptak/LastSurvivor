@@ -342,7 +342,7 @@ MonoBehaviour:
     _rayDistance: 0.2
     _minSpeed: 0.2
     _maxSpeed: 4
-    _generalVolume: 0.04
+    _generalVolume: 0.1
     _surfaceAudioPreferencesPairs:
       _pairs:
       - Key: 7
@@ -357,7 +357,7 @@ MonoBehaviour:
           _minPitch: 0.8
           _maxPitch: 1.2
           _minVolume: 0.1
-          _maxVolume: 1
+          _maxVolume: 0.3
           _audioSettings:
             AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
               type: 2}
