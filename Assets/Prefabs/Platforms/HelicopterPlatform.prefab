@@ -869,6 +869,8 @@ GameObject:
   - component: {fileID: 884515303428015127}
   - component: {fileID: 9006625821797771349}
   - component: {fileID: 6049512134499636252}
+  - component: {fileID: 9105572580215393425}
+  - component: {fileID: 6878809874659327099}
   m_Layer: 0
   m_Name: HelicopterPlatform
   m_TagString: Untagged
@@ -978,6 +980,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _oilBarrelReceiver: {fileID: 4812053623003846431}
   _receiveZone: {fileID: 503174035211732560}
+--- !u!65 &9105572580215393425
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6399390264546074170}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9, y: 1.45436, z: 9}
+  m_Center: {x: 0, y: 0.72718, z: 0}
+--- !u!114 &6878809874659327099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6399390264546074170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 5
 --- !u!1 &7483964880424602202
 GameObject:
   m_ObjectHideFlags: 0

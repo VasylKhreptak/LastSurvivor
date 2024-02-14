@@ -14,7 +14,7 @@ namespace Main.Entities.Player
     {
         [Header("References")]
         [SerializeField] private FlexalonGridLayout _barrelLayout;
-        [SerializeField] private StepAudioPlayer.Preferences _stepAudioPreferences;
+        [SerializeField] private FootstepAudioPlayer.Preferences _stepAudioPreferences;
 
         private IStaticDataService _staticDataService;
 
@@ -46,6 +46,6 @@ namespace Main.Entities.Player
             Container.BindInstance(gridStack).AsSingle();
         }
 
-        private void BindStepAudioPlayer() => Container.Bind<StepAudioPlayer>().AsSingle().WithArguments(_stepAudioPreferences);
+        private void BindStepAudioPlayer() => Container.Bind<FootstepAudioPlayer>().AsSingle().WithArguments(_stepAudioPreferences);
     }
 }

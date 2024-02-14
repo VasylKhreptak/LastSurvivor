@@ -334,33 +334,259 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _barrelLayout: {fileID: 1287019156548980214}
   _stepAudioPreferences:
-    _leftFoot: {fileID: 3711194514950995277}
-    _rightFoot: {fileID: 726549996888676712}
+    _leftFoot: {fileID: 3313570571995886585}
+    _rightFoot: {fileID: 2053391284757649019}
     _layerMask:
       serializedVersion: 2
       m_Bits: 4083
     _rayDistance: 0.2
-    _surfaceClipsPairs:
-      _pairs: []
-    _audioSettings:
-      AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
-        type: 2}
-      Mute: 0
-      BypassEffects: 0
-      BypassListenerEffects: 0
-      BypassReverbZones: 0
-      Loop: 0
-      Priority: 130
-      Volume: 0.3
-      Pitch: 1
-      StereoPan: 0
-      SpatialBlend: 1
-      ReverbZoneMix: 1
-      DopplerLevel: 1
-      Spread: 0
-      RolloffMode: 1
-      MinDistance: 1
-      MaxDistance: 20
+    _minSpeed: 0.2
+    _maxSpeed: 4
+    _generalVolume: 0.04
+    _surfaceAudioPreferencesPairs:
+      _pairs:
+      - Key: 7
+        Value:
+          _clips:
+          - {fileID: 8300000, guid: 2c1589d988d93a04790f9af897281ad0, type: 3}
+          - {fileID: 8300000, guid: 99d6d4e3f814f6245b9b465f578ddee6, type: 3}
+          - {fileID: 8300000, guid: f1fd1485118c35849ad03f2a16a6a97c, type: 3}
+          - {fileID: 8300000, guid: 0f66f8644acd52c48a474d615f77be36, type: 3}
+          - {fileID: 8300000, guid: 87a1fef37e18e494ea499bb3f0c27215, type: 3}
+          - {fileID: 8300000, guid: 24dd9e1e6c7b356448a63416c146cb50, type: 3}
+          _minPitch: 0.8
+          _maxPitch: 1.2
+          _minVolume: 0.1
+          _maxVolume: 1
+          _audioSettings:
+            AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+              type: 2}
+            Mute: 0
+            BypassEffects: 0
+            BypassListenerEffects: 0
+            BypassReverbZones: 0
+            Loop: 0
+            Priority: 130
+            Volume: 1
+            Pitch: 1
+            StereoPan: 0
+            SpatialBlend: 1
+            ReverbZoneMix: 1
+            DopplerLevel: 1
+            Spread: 0
+            RolloffMode: 1
+            MinDistance: 1
+            MaxDistance: 20
+          _pitchCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          _volumeCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      - Key: 6
+        Value:
+          _clips:
+          - {fileID: 8300000, guid: 0927ac26b41989248805722f7c72ade2, type: 3}
+          - {fileID: 8300000, guid: b17dd364951e64047b11a0eb4fa9aadf, type: 3}
+          - {fileID: 8300000, guid: 83c8c6ab0771ed641883c3bd0186aa3c, type: 3}
+          - {fileID: 8300000, guid: 24a49ed8171821b4ab24c6f3af56d510, type: 3}
+          - {fileID: 8300000, guid: d994bbe82c696054ebec9886fd01c6d3, type: 3}
+          - {fileID: 8300000, guid: fe0afbbefd75eb74aa9cde0fda949784, type: 3}
+          - {fileID: 8300000, guid: 83f2b5d63ff3ad74da6b809f0a8d84fc, type: 3}
+          - {fileID: 8300000, guid: 3b00abd6f65f3c5498baf91c5088c113, type: 3}
+          _minPitch: 0.8
+          _maxPitch: 1.2
+          _minVolume: 0.1
+          _maxVolume: 1
+          _audioSettings:
+            AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+              type: 2}
+            Mute: 0
+            BypassEffects: 0
+            BypassListenerEffects: 0
+            BypassReverbZones: 0
+            Loop: 0
+            Priority: 130
+            Volume: 1
+            Pitch: 1
+            StereoPan: 0
+            SpatialBlend: 1
+            ReverbZoneMix: 1
+            DopplerLevel: 1
+            Spread: 0
+            RolloffMode: 1
+            MinDistance: 1
+            MaxDistance: 20
+          _pitchCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          _volumeCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+      - Key: 5
+        Value:
+          _clips:
+          - {fileID: 8300000, guid: 86bfb3e1d6076514eb59006ec9d573f7, type: 3}
+          - {fileID: 8300000, guid: 93c861e244eb50f4eada6711a33b68c5, type: 3}
+          - {fileID: 8300000, guid: ab5dbc9e39d82644e8e49b32d032fdc2, type: 3}
+          - {fileID: 8300000, guid: d22a8e936275d0c4286389adbe9eebb1, type: 3}
+          - {fileID: 8300000, guid: fcf4e6c6d7f987a4bab1aa77cd8166d9, type: 3}
+          - {fileID: 8300000, guid: 9a196626f99dc45428bf6af237af306a, type: 3}
+          _minPitch: 0.8
+          _maxPitch: 1.2
+          _minVolume: 0.1
+          _maxVolume: 1
+          _audioSettings:
+            AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
+              type: 2}
+            Mute: 0
+            BypassEffects: 0
+            BypassListenerEffects: 0
+            BypassReverbZones: 0
+            Loop: 0
+            Priority: 130
+            Volume: 1
+            Pitch: 1
+            StereoPan: 0
+            SpatialBlend: 1
+            ReverbZoneMix: 1
+            DopplerLevel: 1
+            Spread: 0
+            RolloffMode: 1
+            MinDistance: 1
+            MaxDistance: 20
+          _pitchCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          _volumeCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
 --- !u!114 &1435389377488316266
 MonoBehaviour:
   m_ObjectHideFlags: 0

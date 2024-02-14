@@ -5,13 +5,13 @@ namespace Audio.Players.Step
 {
     public class AnimatorFootCallbackReceiver : MonoBehaviour
     {
-        private StepAudioPlayer _audioPlayer;
+        private FootstepAudioPlayer _audioPlayer;
 
         [Inject]
-        private void Constructor(StepAudioPlayer audioPlayer) => _audioPlayer = audioPlayer;
+        private void Constructor(FootstepAudioPlayer audioPlayer) => _audioPlayer = audioPlayer;
 
-        private void PlayLeftStepSound() => _audioPlayer.PlayLeft();
+        private void PlayLeftStepSound() => _audioPlayer.TryPlayLeft();
 
-        private void PlayRightStepSound() => _audioPlayer.PlayRight();
+        private void PlayRightStepSound() => _audioPlayer.TryPlayRight();
     }
 }
