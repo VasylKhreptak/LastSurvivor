@@ -34,6 +34,10 @@
         <option value="$PROJECT_DIR$/Assets/Plugins/RootMotion" />
         <option value="$PROJECT_DIR$/Assets/Plugins/Udar" />
         <option value="$PROJECT_DIR$/Assets/Plugins/AstarPathfindingProject" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Android" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/ExternalDependencyManager" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/IronSource" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/Udar" />
       </list>
     </option>
   </component>
