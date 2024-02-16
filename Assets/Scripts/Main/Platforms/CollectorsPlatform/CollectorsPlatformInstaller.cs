@@ -26,8 +26,8 @@ namespace Main.Platforms.CollectorsPlatform
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
-            _bank = persistentDataService.PersistentData.PlayerData.Resources.Money;
-            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData;
+            _bank = persistentDataService.Data.PlayerData.Resources.Money;
+            _platformData = persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData;
             _platformPreferences = staticDataService.Balance.CollectorsPlatformPreferences;
         }
 

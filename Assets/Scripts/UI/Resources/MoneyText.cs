@@ -17,7 +17,7 @@ namespace UI.Resources
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService)
         {
-            _resources = persistentDataService.PersistentData.PlayerData.Resources;
+            _resources = persistentDataService.Data.PlayerData.Resources;
         }
 
         private IDisposable _subscription;

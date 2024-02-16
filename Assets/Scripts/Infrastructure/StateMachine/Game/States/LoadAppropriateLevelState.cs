@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Gameplay.Levels;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States.Core;
@@ -25,7 +24,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter(Action onComplete)
         {
-            string sceneName = GetAppropriateLevel().Scene.Name;
+            string sceneName = GetAppropriateScene();
 
             LoadSceneWithTransitionAsyncState.Payload payload = new LoadSceneWithTransitionAsyncState.Payload
             {
@@ -39,17 +38,17 @@ namespace Infrastructure.StateMachine.Game.States
             _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneWithTransitionAsyncState.Payload>(payload);
         }
 
-        private Level GetAppropriateLevel()
+        private string GetAppropriateScene()
         {
-            int completedLevels = _persistentDataService.PersistentData.PlayerData.CompletedLevels;
+            int completedLevels = _persistentDataService.Data.PlayerData.CompletedLevels;
 
             if (completedLevels < _staticDataService.Config.Levels.Count)
-                return _staticDataService.Config.Levels[completedLevels];
+                return _staticDataService.Config.Levels[completedLevels].Name;
 
             if (_staticDataService.Config.LoopedLevels.Count == 0)
-                return _staticDataService.Config.Levels.Last();
+                return _staticDataService.Config.Levels.Last().Name;
 
-            return _staticDataService.Config.LoopedLevels[completedLevels % _staticDataService.Config.LoopedLevels.Count];
+            return _staticDataService.Config.LoopedLevels[completedLevels % _staticDataService.Config.LoopedLevels.Count].Name;
         }
     }
 }

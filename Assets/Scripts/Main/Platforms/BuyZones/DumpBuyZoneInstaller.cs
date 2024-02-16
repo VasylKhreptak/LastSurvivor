@@ -20,8 +20,8 @@ namespace Main.Platforms.BuyZones
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService)
         {
-            _buyContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData.BuyContainer;
-            _bank = persistentDataService.PersistentData.PlayerData.Resources.Money;
+            _buyContainer = persistentDataService.Data.PlayerData.PlatformsData.DumpPlatformData.BuyContainer;
+            _bank = persistentDataService.Data.PlayerData.Resources.Money;
         }
 
         #region MonoBehaviour

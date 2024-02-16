@@ -4,6 +4,6 @@ namespace Infrastructure.Services.PersistentData.Core
 {
     public interface IPersistentDataService : ISaveLoadHandler
     {
-        public Data.Persistent.PersistentData PersistentData { get; set; }
+        public Data.Persistent.PersistentData Data { get; set; }
     }
 }

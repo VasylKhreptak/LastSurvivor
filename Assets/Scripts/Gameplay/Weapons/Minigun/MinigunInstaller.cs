@@ -34,7 +34,7 @@ namespace Gameplay.Weapons.Minigun
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, WeaponHolder weaponHolder)
         {
-            _helicopterPlatformData = persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData;
+            _helicopterPlatformData = persistentDataService.Data.PlayerData.PlatformsData.HelicopterPlatformData;
             _weaponHolder = weaponHolder;
         }
 

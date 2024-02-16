@@ -23,7 +23,7 @@ namespace EntryPoints
         {
             _container = container;
             _prefabs = staticDataService.Prefabs;
-            _platformsData = persistentDataService.PersistentData.PlayerData.PlatformsData;
+            _platformsData = persistentDataService.Data.PlayerData.PlatformsData;
         }
 
         #region MonoBehaviour

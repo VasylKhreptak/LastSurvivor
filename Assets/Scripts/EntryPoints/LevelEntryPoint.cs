@@ -69,7 +69,7 @@ namespace EntryPoints
         private void InitializeSoldiers()
         {
             int count = Mathf.Min(
-                _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value,
+                _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value,
                 _platoon.SoldierPoints.Count);
 
             for (int i = 0; i < count; i++)
@@ -84,7 +84,7 @@ namespace EntryPoints
         private void InitializeCollectors()
         {
             int count = Mathf.Min(
-                _persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Value.Value,
+                _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Value.Value,
                 _playerHolder.Instance.CollectorFollowPoints.Count);
 
             for (int i = 0; i < count; i++)

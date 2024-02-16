@@ -8,7 +8,7 @@ namespace Infrastructure.Services.PersistentData
     {
         private ISaveLoadService _saveLoadService;
 
-        public Data.Persistent.PersistentData PersistentData { get; set; }
+        public Data.Persistent.PersistentData Data { get; set; }
 
         [Inject]
         private void Constructor(ISaveLoadService saveLoadService)
@@ -18,12 +18,12 @@ namespace Infrastructure.Services.PersistentData
 
         public void Save()
         {
-            _saveLoadService.Save(PersistentData, nameof(Data.Persistent.PersistentData));
+            _saveLoadService.Save(Data, nameof(Infrastructure.Data.Persistent.PersistentData));
         }
 
         public void Load()
         {
-            PersistentData = _saveLoadService.Load(nameof(PersistentData), new Data.Persistent.PersistentData());
+            Data = _saveLoadService.Load(nameof(Data), new Data.Persistent.PersistentData());
         }
     }
 }

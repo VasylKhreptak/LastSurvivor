@@ -65,8 +65,8 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon.Soldiers.ForEach(soldier =>
                 soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.IdleState>());
 
-            _persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
-            _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
+            _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
+            _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Gameplay.Levels;
 using Udar.SceneManager;
 using UnityEngine;
 using LogType = Infrastructure.Services.Log.Core.LogType;
@@ -15,8 +14,8 @@ namespace Infrastructure.Data.Static
         [Header("Scenes")]
         [SerializeField] private SceneField _bootstrapScene;
         [SerializeField] private SceneField _mainScene;
-        [SerializeField] private List<Level> _levels;
-        [SerializeField] private List<Level> _loopedLevels;
+        [SerializeField] private List<SceneField> _levels;
+        [SerializeField] private List<SceneField> _loopedLevels;
 
         [Header("Log Preferences")]
         [SerializeField] private LogType _editorLogType = LogType.Info;
@@ -26,8 +25,8 @@ namespace Infrastructure.Data.Static
 
         public SceneField BootstrapScene => _bootstrapScene;
         public SceneField MainScene => _mainScene;
-        public IReadOnlyList<Level> Levels => _levels;
-        public IReadOnlyList<Level> LoopedLevels => _loopedLevels;
+        public IReadOnlyList<SceneField> Levels => _levels;
+        public IReadOnlyList<SceneField> LoopedLevels => _loopedLevels;
         public LogType LogType => Application.isEditor ? _editorLogType : _buildLogType;
     }
 }

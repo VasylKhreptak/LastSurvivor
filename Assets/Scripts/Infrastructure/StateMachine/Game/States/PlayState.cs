@@ -29,6 +29,6 @@ namespace Infrastructure.StateMachine.Game.States
         }
 
         private void ClearHelicopterFuelTank() =>
-            _persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData.FuelTank.Clear();
+            _persistentDataService.Data.PlayerData.PlatformsData.HelicopterPlatformData.FuelTank.Clear();
     }
 }

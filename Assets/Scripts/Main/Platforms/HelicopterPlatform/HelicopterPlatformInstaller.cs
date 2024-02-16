@@ -26,9 +26,9 @@ namespace Main.Platforms.HelicopterPlatform
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
-            _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
-            _upgradeContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData.UpgradeContainer;
-            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.HelicopterPlatformData;
+            _bank = persistentDataService.Data.PlayerData.Resources.Gears;
+            _upgradeContainer = persistentDataService.Data.PlayerData.PlatformsData.HelicopterPlatformData.UpgradeContainer;
+            _platformData = persistentDataService.Data.PlayerData.PlatformsData.HelicopterPlatformData;
             _helicopterPlatformPreferences = staticDataService.Balance.HelicopterPlatformPreferences;
         }
 

@@ -76,7 +76,7 @@ namespace Gameplay.Entities.Zombie
         }
 
         private float GetHealth() =>
-            _staticDataService.Balance.ZombieHealth.Get(_persistentDataService.PersistentData.PlayerData.CompletedLevels);
+            _staticDataService.Balance.ZombieHealth.Get(_persistentDataService.Data.PlayerData.CompletedLevels);
 
         private void BindMoveAnimation() =>
             Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);

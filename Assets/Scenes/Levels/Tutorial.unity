@@ -31793,7 +31793,7 @@ GameObject:
   - component: {fileID: 1206728197}
   - component: {fileID: 1206728199}
   m_Layer: 5
-  m_Name: ScaneNameText
+  m_Name: LevelNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31925,10 +31925,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1206728195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd6592e586d46bd9a467db3397b13e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 66a4bd75be674f7a95eca42ba719a512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tmp: {fileID: 1206728197}
+  _format: Level {0}
 --- !u!1001 &1212806044
 PrefabInstance:
   m_ObjectHideFlags: 0

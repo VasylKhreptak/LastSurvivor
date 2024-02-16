@@ -39,7 +39,7 @@ namespace Gameplay.Entities.Soldier.StateMachine.States
             _ai.canMove = false;
             _rigidbody.isKinematic = true;
             _ragdoll.Enable();
-            _persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Spend(1);
+            _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Spend(1);
         }
     }
 }

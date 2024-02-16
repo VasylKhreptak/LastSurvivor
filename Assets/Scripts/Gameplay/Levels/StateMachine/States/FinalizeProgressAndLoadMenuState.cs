@@ -42,8 +42,8 @@ namespace Gameplay.Levels.StateMachine.States
 
         private void FinalizeProgress()
         {
-            _persistentDataService.PersistentData.PlayerData.Resources.Money.Add(_levelData.CollectedMoney.Value);
-            _persistentDataService.PersistentData.PlayerData.Resources.Gears.Add(_levelData.CollectedGears.Value);
+            _persistentDataService.Data.PlayerData.Resources.Money.Add(_levelData.CollectedMoney.Value);
+            _persistentDataService.Data.PlayerData.Resources.Gears.Add(_levelData.CollectedGears.Value);
         }
     }
 }

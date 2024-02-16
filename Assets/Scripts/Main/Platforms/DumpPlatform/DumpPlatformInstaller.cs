@@ -33,9 +33,9 @@ namespace Main.Platforms.DumpPlatform
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
-            _bank = persistentDataService.PersistentData.PlayerData.Resources.Gears;
-            _hireWorkerContainer = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData.HireWorkerContainer;
-            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.DumpPlatformData;
+            _bank = persistentDataService.Data.PlayerData.Resources.Gears;
+            _hireWorkerContainer = persistentDataService.Data.PlayerData.PlatformsData.DumpPlatformData.HireWorkerContainer;
+            _platformData = persistentDataService.Data.PlayerData.PlatformsData.DumpPlatformData;
             _prefabs = staticDataService.Prefabs;
             _platformPreferences = staticDataService.Balance.DumpPlatformPreferences;
         }

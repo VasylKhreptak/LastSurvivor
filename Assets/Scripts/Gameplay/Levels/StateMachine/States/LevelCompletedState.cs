@@ -61,7 +61,7 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon.Soldiers.ForEach(soldier =>
                 soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.IdleState>());
 
-            _persistentDataService.PersistentData.PlayerData.CompletedLevels++;
+            _persistentDataService.Data.PlayerData.CompletedLevels++;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Gameplay.Entities.Collector.StateMachine.States
             _ai.canMove = false;
             _rigidbody.isKinematic = true;
             _ragdoll.Enable();
-            _persistentDataService.PersistentData.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Spend(1);
+            _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Spend(1);
             _collectors.Remove(_collector);
         }
     }

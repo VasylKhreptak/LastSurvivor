@@ -18,7 +18,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter()
         {
-            _persistentDataService.PersistentData.AnalyticsData.SessionsCount++;
+            _persistentDataService.Data.AnalyticsData.SessionsCount++;
             _gameStateMachine.Enter<FinalizeBootstrapState>();
         }
     }

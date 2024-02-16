@@ -53,7 +53,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _rigidbody.isKinematic = true;
             _ragdoll.Enable();
             _levelData.CollectedMoney.Value += (int)(_priceForKill.GetRandom() *
-                                                     _persistentDataService.PersistentData.PlayerData.PlatformsData
+                                                     _persistentDataService.Data.PlayerData.PlatformsData
                                                          .HelicopterPlatformData
                                                          .IncomeMultiplier.Value);
         }

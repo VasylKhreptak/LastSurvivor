@@ -26,8 +26,8 @@ namespace Main.Platforms.BarracksPlatform
         [Inject]
         private void Constructor(IPersistentDataService persistentDataService, IStaticDataService staticDataService)
         {
-            _bank = persistentDataService.PersistentData.PlayerData.Resources.Money;
-            _platformData = persistentDataService.PersistentData.PlayerData.PlatformsData.BarracksPlatformData;
+            _bank = persistentDataService.Data.PlayerData.Resources.Money;
+            _platformData = persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData;
             _platformPreferences = staticDataService.Balance.BarracksPlatformPreferences;
         }
 
