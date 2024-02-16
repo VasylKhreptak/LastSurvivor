@@ -37,7 +37,7 @@ namespace Gameplay.Entities.LootBox
         }
 
         private float GetHealth() =>
-            _staticDataService.Balance.LootBoxHealth.Get(_persistentDataService.PersistentData.PlayerData.Level);
+            _staticDataService.Balance.LootBoxHealth.Get(_persistentDataService.PersistentData.PlayerData.CompletedLevels);
 
         private void BindLootSpawner() => Container.Bind<LootSpawner>().AsSingle().WithArguments(_lootSpawnerPreferences);
 

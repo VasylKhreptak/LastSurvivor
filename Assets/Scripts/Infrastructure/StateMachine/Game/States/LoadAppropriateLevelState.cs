@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Gameplay.Levels;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States.Core;
@@ -23,7 +25,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter(Action onComplete)
         {
-            string sceneName = _staticDataService.Config.TutorialScene.Name;
+            string sceneName = GetAppropriateLevel().Scene.Name;
 
             LoadSceneWithTransitionAsyncState.Payload payload = new LoadSceneWithTransitionAsyncState.Payload
             {
@@ -35,6 +37,19 @@ namespace Infrastructure.StateMachine.Game.States
             };
 
             _stateMachine.Enter<LoadSceneWithTransitionAsyncState, LoadSceneWithTransitionAsyncState.Payload>(payload);
+        }
+
+        private Level GetAppropriateLevel()
+        {
+            int completedLevels = _persistentDataService.PersistentData.PlayerData.CompletedLevels;
+
+            if (completedLevels < _staticDataService.Config.Levels.Count)
+                return _staticDataService.Config.Levels[completedLevels];
+
+            if (_staticDataService.Config.LoopedLevels.Count == 0)
+                return _staticDataService.Config.Levels.Last();
+
+            return _staticDataService.Config.LoopedLevels[completedLevels % _staticDataService.Config.LoopedLevels.Count];
         }
     }
 }
