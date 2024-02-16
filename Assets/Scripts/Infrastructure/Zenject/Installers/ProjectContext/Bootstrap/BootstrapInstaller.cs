@@ -128,7 +128,8 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         private void InitializeDebugger()
         {
             SRDebug.Init();
-            SRDebug.Instance.AddOptionContainer(Container.Instantiate<SROptionsContainer>());
+            SRDebug.Instance.AddOptionContainer(Container.Instantiate<GameStateMachineOprionsContainer>());
+            SRDebug.Instance.AddOptionContainer(Container.Instantiate<AdvertisementOptionsContainer>());
         }
 
         private void MakeInitializable()

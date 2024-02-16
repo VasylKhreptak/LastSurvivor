@@ -9,7 +9,6 @@ namespace Infrastructure.Data.Static
     {
         [Header("Application")]
         [SerializeField] private string _androidAppKey;
-        [SerializeField] private string _iosAppKey;
 
         [Header("Scenes")]
         [SerializeField] private SceneField _bootstrapScene;
@@ -20,7 +19,7 @@ namespace Infrastructure.Data.Static
         [SerializeField] private LogType _editorLogType = LogType.Info;
         [SerializeField] private LogType _buildLogType = LogType.Info;
 
-        public string AppKey => Application.platform == RuntimePlatform.Android ? _androidAppKey : _iosAppKey;
+        public string AppKey => _androidAppKey;
 
         public SceneField BootstrapScene => _bootstrapScene;
         public SceneField MainScene => _mainScene;

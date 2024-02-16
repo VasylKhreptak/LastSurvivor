@@ -24,9 +24,10 @@ namespace Infrastructure.Services.Advertisement
         {
             StartObserving();
 
-            IronSource.Agent.validateIntegration();
             _logService.Log("IronSource Initialization");
             IronSource.Agent.init(_staticDataService.Config.AppKey);
+
+            IronSource.Agent.validateIntegration();
         }
 
         public void Dispose()

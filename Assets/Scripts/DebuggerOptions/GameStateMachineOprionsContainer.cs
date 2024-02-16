@@ -5,16 +5,18 @@ using JetBrains.Annotations;
 
 namespace DebuggerOptions
 {
-    public class SROptionsContainer
+    public class GameStateMachineOprionsContainer
     {
         private readonly IStateMachine<IGameState> _stateMachine;
 
-        public SROptionsContainer(IStateMachine<IGameState> stateMachine)
+        public GameStateMachineOprionsContainer(IStateMachine<IGameState> stateMachine)
         {
             _stateMachine = stateMachine;
         }
 
         [UsedImplicitly]
         public void EnterBootstrapState() => _stateMachine.Enter<BootstrapState>();
+        
+        
     }
 }
