@@ -4,7 +4,7 @@ using Infrastructure.StateMachine.Main.States.Core;
 using Infrastructure.StateMachine.Main.States.Factory;
 using Zenject;
 
-namespace Levels.StateMachine.States.Core
+namespace Gameplay.Levels.StateMachine.States.Core
 {
     public class LevelStateFactory : StateFactory
     {

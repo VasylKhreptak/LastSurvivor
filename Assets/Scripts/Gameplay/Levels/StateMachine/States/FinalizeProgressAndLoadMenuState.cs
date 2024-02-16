@@ -1,13 +1,13 @@
 ﻿using Gameplay.Data;
+using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
-using Levels.StateMachine.States.Core;
 
-namespace Levels.StateMachine.States
+namespace Gameplay.Levels.StateMachine.States
 {
     public class FinalizeProgressAndLoadMenuState : ILevelState, IState
     {

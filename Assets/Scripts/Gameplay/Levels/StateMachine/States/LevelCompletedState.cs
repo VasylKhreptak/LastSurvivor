@@ -5,13 +5,13 @@ using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Entities.Zombie.StateMachine.States;
+using Gameplay.Levels.StateMachine.States.Core;
 using Gameplay.Weapons;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Main.States.Core;
-using Levels.StateMachine.States.Core;
 using UI.Gameplay.Windows;
 
-namespace Levels.StateMachine.States
+namespace Gameplay.Levels.StateMachine.States
 {
     public class LevelCompletedState : ILevelState, IState
     {

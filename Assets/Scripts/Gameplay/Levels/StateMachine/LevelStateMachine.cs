@@ -1,7 +1,7 @@
-﻿using Infrastructure.StateMachine.Main;
-using Levels.StateMachine.States.Core;
+﻿using Gameplay.Levels.StateMachine.States.Core;
+using Infrastructure.StateMachine.Main;
 
-namespace Levels.StateMachine
+namespace Gameplay.Levels.StateMachine
 {
     public class LevelStateMachine : StateMachine<ILevelState>
     {

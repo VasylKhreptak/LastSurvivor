@@ -1,6 +1,6 @@
-﻿using Infrastructure.StateMachine.Main.Core;
-using Levels.StateMachine.States;
-using Levels.StateMachine.States.Core;
+﻿using Gameplay.Levels.StateMachine.States;
+using Gameplay.Levels.StateMachine.States.Core;
+using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

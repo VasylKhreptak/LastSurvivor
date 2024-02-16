@@ -1,12 +1,12 @@
 ﻿using Gameplay.Entities.Player;
+using Gameplay.Levels.StateMachine.States;
+using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
-using Levels.StateMachine.States;
-using Levels.StateMachine.States.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Levels
+namespace Gameplay.Levels
 {
     public class LevelRunner : MonoBehaviour, IPointerDownHandler
     {

@@ -1,8 +1,8 @@
 ﻿using Gameplay.Entities.Player.StateMachine.States.Core;
+using Gameplay.Levels.StateMachine.States;
+using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
-using Levels.StateMachine.States;
-using Levels.StateMachine.States.Core;
 using Pathfinding;
 using UnityEngine;
 using Utilities.PhysicsUtilities;
