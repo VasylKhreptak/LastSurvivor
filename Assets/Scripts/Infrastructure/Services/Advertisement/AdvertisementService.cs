@@ -2,7 +2,6 @@
 using Infrastructure.Services.Advertisement.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.StaticData.Core;
-using UniRx;
 using Zenject;
 
 namespace Infrastructure.Services.Advertisement
@@ -18,69 +17,24 @@ namespace Infrastructure.Services.Advertisement
             _logService = logService;
         }
 
-        private IDisposable _applicationPauseSubscription;
+        public void Initialize() { }
 
-        public void Initialize()
-        {
-            StartObserving();
+        public void Dispose() { }
 
-            _logService.Log("IronSource Initialization");
-            IronSource.Agent.init(_staticDataService.Config.AppKey);
+        private void OnApplicationPause(bool pauseStatus) { }
 
-            IronSource.Agent.validateIntegration();
-        }
+        public void LoadBanner() { }
 
-        public void Dispose()
-        {
-            StopObserving();
-        }
+        public void ShowBanner() { }
 
-        private void StartObserving()
-        {
-            IronSourceEvents.onSdkInitializationCompletedEvent += OnSDKInitialized;
-            _applicationPauseSubscription = Observable.EveryApplicationPause().Subscribe(OnApplicationPause);
-        }
+        public void DestroyBanner() { }
 
-        private void StopObserving()
-        {
-            IronSourceEvents.onSdkInitializationCompletedEvent -= OnSDKInitialized;
-            _applicationPauseSubscription.Dispose();
-        }
+        public void LoadInterstitial() { }
 
-        private void OnSDKInitialized() => _logService.Log("IronSource SDK Initialized");
+        public void ShowInterstitial() { }
 
-        private void OnApplicationPause(bool pauseStatus) => IronSource.Agent.onApplicationPause(pauseStatus);
+        public void LoadRewardedVideo() { }
 
-        public void LoadBanner() => IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
-
-        public void ShowBanner() => IronSource.Agent.displayBanner();
-
-        public void DestroyBanner() => IronSource.Agent.destroyBanner();
-
-        public void LoadInterstitial() => IronSource.Agent.loadInterstitial();
-
-        public void ShowInterstitial()
-        {
-            if (IronSource.Agent.isInterstitialReady())
-            {
-                IronSource.Agent.showInterstitial();
-                return;
-            }
-
-            _logService.LogWarning("Interstitial is not ready");
-        }
-
-        public void LoadRewardedVideo() => IronSource.Agent.loadRewardedVideo();
-
-        public void ShowRewardedVideo()
-        {
-            if (IronSource.Agent.isRewardedVideoAvailable())
-            {
-                IronSource.Agent.showRewardedVideo();
-                return;
-            }
-
-            _logService.LogWarning("Rewarded Video is not ready");
-        }
+        public void ShowRewardedVideo() { }
     }
 }
