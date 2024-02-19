@@ -69,10 +69,10 @@ MonoBehaviour:
   _noiseLayer: {fileID: 7569575966004068094}
   _splineContainer: {fileID: 0}
   _helicopterMovementPreferences:
-    _followSpeed: 3
-    _rotateSpeed: 3
+    _followSpeed: 1.7
+    _rotateSpeed: 0.7
     _distanceOffset: -10
-    _rotationDistanceOffset: -4
+    _rotationDistanceOffset: -3
     _rotationOffset: {x: 0, y: -90, z: 0}
     _updateRotation: 1
   _noiseRotatorPreferences:
