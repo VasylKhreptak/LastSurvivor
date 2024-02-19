@@ -72,7 +72,9 @@ MonoBehaviour:
     _followSpeed: 3
     _rotateSpeed: 3
     _distanceOffset: -10
+    _rotationDistanceOffset: -4
     _rotationOffset: {x: 0, y: -90, z: 0}
+    _updateRotation: 1
   _noiseRotatorPreferences:
     Speed: 0.2
     Strength: {x: 1, y: 1, z: 1}
