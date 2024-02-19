@@ -25,10 +25,11 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly Platoon _platoon;
         private readonly IPersistentDataService _persistentDataService;
         private readonly List<Collector> _collectors;
+        private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
 
         public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad,
             LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer, HUD hud, Platoon platoon,
-            IPersistentDataService persistentDataService, List<Collector> collectors)
+            IPersistentDataService persistentDataService, List<Collector> collectors, List<ZombieSpawner.ZombieSpawner> zombieSpawners)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -40,14 +41,16 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon = platoon;
             _persistentDataService = persistentDataService;
             _collectors = collectors;
+            _zombieSpawners = zombieSpawners;
         }
 
         public void Enter()
         {
+            _zombieSpawners.ForEach(spawner => spawner.Disable());
             _zombies.ForEach(zombie => zombie.StateMachine.Enter<IdleState>());
 
             if (_playerHolder.Instance != null)
-                _playerHolder.Instance.StateMachine.Enter<Gameplay.Entities.Player.StateMachine.States.IdleState>();
+                _playerHolder.Instance.StateMachine.Enter<Entities.Player.StateMachine.States.IdleState>();
 
             _trackpad.enabled = false;
             _levelCompletedWindow.Show();
@@ -56,10 +59,10 @@ namespace Gameplay.Levels.StateMachine.States
             _hud.Hide();
 
             _collectors.ForEach(collector =>
-                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.IdleState>());
+                collector.StateMachine.Enter<Entities.Collector.StateMachine.States.IdleState>());
 
             _platoon.Soldiers.ForEach(soldier =>
-                soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.IdleState>());
+                soldier.StateMachine.Enter<Entities.Soldier.StateMachine.States.IdleState>());
 
             _persistentDataService.Data.PlayerData.CompletedLevels++;
         }

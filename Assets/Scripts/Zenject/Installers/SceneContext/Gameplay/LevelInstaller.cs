@@ -10,6 +10,7 @@ using Gameplay.Entities.Zombie;
 using Gameplay.Levels.StateMachine;
 using Gameplay.Levels.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
+using Gameplay.Levels.ZombieSpawner;
 using Gameplay.Waypoints;
 using Gameplay.Weapons;
 using ObjectPoolSystem.PoolCategories;
@@ -65,6 +66,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindObjectPools();
             BindZombiesList();
             BindCollectorsList();
+            BindZombieSpawnerList();
             BindLevelData();
             BindWeaponAimer();
             BindWeaponShooter();
@@ -128,6 +130,8 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindZombiesList() => Container.Bind<List<Zombie>>().AsSingle();
 
         private void BindCollectorsList() => Container.Bind<List<Collector>>().AsSingle();
+
+        private void BindZombieSpawnerList() => Container.Bind<List<ZombieSpawner>>().AsSingle();
 
         private void BindLevelData() => Container.Bind<LevelData>().AsSingle();
 

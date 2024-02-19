@@ -27,10 +27,11 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly Platoon _platoon;
         private readonly List<Collector> _collectors;
         private readonly IPersistentDataService _persistentDataService;
+        private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
 
         public LevelFailedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
             WeaponAimer weaponAimer, LevelFailedWindow levelFailedWindow, HUD hud, Helicopter helicopter, Platoon platoon,
-            List<Collector> collectors, IPersistentDataService persistentDataService)
+            List<Collector> collectors, IPersistentDataService persistentDataService, List<ZombieSpawner.ZombieSpawner> zombieSpawners)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -43,10 +44,12 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon = platoon;
             _collectors = collectors;
             _persistentDataService = persistentDataService;
+            _zombieSpawners = zombieSpawners;
         }
 
         public void Enter()
         {
+            _zombieSpawners.ForEach(spawner => spawner.Disable());
             _zombies.ForEach(zombie => zombie.StateMachine.Enter<IdleState>());
 
             if (_playerHolder.Instance != null)

@@ -9,14 +9,14 @@ using Zenject;
 
 namespace Gameplay.Entities.Zombie
 {
-    public class EnemyDetectionTriggerAwakener : IInitializable, IDisposable
+    public class ZombieTriggerAwakener : IInitializable, IDisposable
     {
         private readonly SphereCollider _trigger;
         private readonly IHealth _health;
         private readonly TriggerZone<IVisitable<ZombieDamage>> _targetsZone;
         private readonly Preferences _preferences;
 
-        public EnemyDetectionTriggerAwakener(SphereCollider trigger, IHealth health, TriggerZone<IVisitable<ZombieDamage>> targetsZone,
+        public ZombieTriggerAwakener(SphereCollider trigger, IHealth health, TriggerZone<IVisitable<ZombieDamage>> targetsZone,
             Preferences preferences)
         {
             _trigger = trigger;
@@ -57,7 +57,7 @@ namespace Gameplay.Entities.Zombie
         {
             StopObservingDamage();
             _sleepDelaySubscription = _health.OnDamaged
-                .Subscribe(_ => Awaken());
+                .Subscribe(_ => Awake());
         }
 
         private void StopObservingDamage() => _sleepDelaySubscription?.Dispose();
@@ -72,10 +72,10 @@ namespace Gameplay.Entities.Zombie
                 return;
             }
 
-            Awaken();
+            Awake();
         }
 
-        private void Awaken()
+        public void Awake()
         {
             _trigger.radius = _preferences.AwakenedRadius;
             _delaySubscription?.Dispose();

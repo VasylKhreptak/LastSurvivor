@@ -21,9 +21,11 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly HUD _hud;
         private readonly Platoon _platoon;
         private readonly List<Collector> _collectors;
+        private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
 
         public LevelStartState(IStateMachine<ILevelState> levelStateMachine, PlayerHolder playerHolder, List<Zombie> zombies,
-            StartWindow startWindow, WeaponAim weaponAim, HUD hud, Platoon platoon, List<Collector> collectors)
+            StartWindow startWindow, WeaponAim weaponAim, HUD hud, Platoon platoon, List<Collector> collectors,
+            List<ZombieSpawner.ZombieSpawner> zombieSpawners)
         {
             _levelStateMachine = levelStateMachine;
             _playerHolder = playerHolder;
@@ -33,13 +35,15 @@ namespace Gameplay.Levels.StateMachine.States
             _hud = hud;
             _platoon = platoon;
             _collectors = collectors;
+            _zombieSpawners = zombieSpawners;
         }
 
         public void Enter()
         {
+            _zombieSpawners.ForEach(spawner => spawner.Enable());
             _zombies.ForEach(zombie => zombie.StateMachine.Enter<NavigationState>());
 
-            _playerHolder.Instance.StateMachine.Enter<Gameplay.Entities.Player.StateMachine.States.NavigationState>();
+            _playerHolder.Instance.StateMachine.Enter<Entities.Player.StateMachine.States.NavigationState>();
 
             _levelStateMachine.Enter<LevelLoopState>();
             _startWindows.Hide();
@@ -47,10 +51,10 @@ namespace Gameplay.Levels.StateMachine.States
             _hud.Show();
 
             _collectors.ForEach(collector =>
-                collector.StateMachine.Enter<Gameplay.Entities.Collector.StateMachine.States.NavigationState>());
+                collector.StateMachine.Enter<Entities.Collector.StateMachine.States.NavigationState>());
 
             _platoon.Soldiers.ForEach(soldier =>
-                soldier.StateMachine.Enter<Gameplay.Entities.Soldier.StateMachine.States.NavigationState>());
+                soldier.StateMachine.Enter<Entities.Soldier.StateMachine.States.NavigationState>());
         }
     }
 }

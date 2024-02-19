@@ -14,13 +14,16 @@ namespace Gameplay.Entities.Zombie
         private IHealth _health;
 
         [Inject]
-        private void Constructor(IStateMachine<IZombieState> stateMachine, IHealth health)
+        private void Constructor(IStateMachine<IZombieState> stateMachine, IHealth health, ZombieTriggerAwakener awakener)
         {
             StateMachine = stateMachine;
             _health = health;
+            Awakener = awakener;
         }
 
         public IStateMachine<IZombieState> StateMachine { get; private set; }
+
+        public ZombieTriggerAwakener Awakener { get; private set; }
 
         public void Accept(BulletDamage visitor) => _health.TakeDamage(visitor.Value);
 

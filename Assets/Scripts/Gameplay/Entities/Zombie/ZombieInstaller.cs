@@ -33,7 +33,7 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private ClosestTriggerObserver<IVisitable<ZombieDamage>>.Preferences _closestTriggerObserverPreferences;
         [SerializeField] private ZombieAttacker.Preferences _zombieAttackPreferences;
         [SerializeField] private Ragdoll.Preferences _ragdollPreferences;
-        [SerializeField] private EnemyDetectionTriggerAwakener.Preferences _enemyDetectionTriggerAwakenerPreferences;
+        [SerializeField] private ZombieTriggerAwakener.Preferences _enemyDetectionTriggerAwakenerPreferences;
         [SerializeField] private IntMinMaxValue _priceForKill = new IntMinMaxValue(10, 30);
 
         private List<Zombie> _zombies;
@@ -147,7 +147,7 @@ namespace Gameplay.Entities.Zombie
         private void BindEnemyDetectionTriggerAwakener()
         {
             Container
-                .BindInterfacesTo<EnemyDetectionTriggerAwakener>()
+                .BindInterfacesAndSelfTo<ZombieTriggerAwakener>()
                 .AsSingle()
                 .WithArguments(_targetDetectionCollider, _enemyDetectionTriggerAwakenerPreferences);
         }

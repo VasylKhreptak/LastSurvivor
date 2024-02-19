@@ -16,6 +16,8 @@ namespace Infrastructure.Data.Static
         [SerializeField] private DumpPlatformPreferences _dumpPlatformPreferences;
         [SerializeField] private BarracksPlatformPreferences _barracksPlatformPreferences;
         [SerializeField] private CollectorsPlatformPreferences _collectorsPlatformPreferences;
+
+        [Header("Level Depended Values")]
         [SerializeField] private RangeDependentValue _zombieHealth;
         [SerializeField] private RangeDependentValue _zombieDamage;
         [SerializeField] private RangeDependentValue _lootBoxHealth;
@@ -27,6 +29,7 @@ namespace Infrastructure.Data.Static
         public DumpPlatformPreferences DumpPlatformPreferences => _dumpPlatformPreferences;
         public BarracksPlatformPreferences BarracksPlatformPreferences => _barracksPlatformPreferences;
         public CollectorsPlatformPreferences CollectorsPlatformPreferences => _collectorsPlatformPreferences;
+
         public RangeDependentValue ZombieHealth => _zombieHealth;
         public RangeDependentValue ZombieDamage => _zombieDamage;
         public RangeDependentValue LootBoxHealth => _lootBoxHealth;
