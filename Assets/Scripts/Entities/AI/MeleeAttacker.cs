@@ -1,6 +1,7 @@
 ﻿using System;
 using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Health.Damages;
+using Pathfinding;
 using Plugins.Animations;
 using UniRx;
 using Unity.VisualScripting;
@@ -15,13 +16,15 @@ namespace Entities.AI
         private readonly AgentMover _agentMover;
         private readonly Animator _animator;
         private readonly Preferences _preferences;
+        private readonly IAstarAI _ai;
 
-        public MeleeAttacker(Transform transform, AgentMover agentMover, Animator animator, Preferences preferences)
+        public MeleeAttacker(Transform transform, AgentMover agentMover, Animator animator, Preferences preferences, IAstarAI ai)
         {
             _transform = transform;
             _agentMover = agentMover;
             _animator = animator;
             _preferences = preferences;
+            _ai = ai;
         }
 
         private IDisposable _lookSubscription;
@@ -48,6 +51,7 @@ namespace Entities.AI
                 _preferences.WeaponShowAnimation.PlayForward();
                 StartLooking(_target);
                 StartAttacking();
+                _ai.canMove = false;
             });
         }
 
@@ -58,6 +62,7 @@ namespace Entities.AI
             _agentMover.Stop();
             StopAttacking();
             _preferences.WeaponShowAnimation.PlayBackward(() => _preferences.Weapon.SetActive(false));
+            _ai.canMove = true;
         }
 
         public void Initialize()
