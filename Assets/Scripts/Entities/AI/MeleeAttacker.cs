@@ -80,12 +80,6 @@ namespace Entities.AI
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (_health.IsDeath.Value)
-                    {
-                        _lookSubscription.Dispose();
-                        return;
-                    }
-
                     Vector3 targetPosition = target.position;
                     Vector3 currentPosition = _transform.position;
                     targetPosition.y = currentPosition.y;
