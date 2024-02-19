@@ -36,7 +36,8 @@ namespace Entities.Animations
             _viewDirection = _transform.forward;
             _speed01 = Mathf.Min(_velocity.magnitude / _preferences.MaxSpeed, 1f);
             _normalizedVelocity = _velocity.normalized * _speed01;
-            _rotationDifference = Quaternion.FromToRotation(_viewDirection, _normalizedVelocity);
+            _rotationDifference = Quaternion.FromToRotation(_viewDirection, _normalizedVelocity) *
+                                  Quaternion.FromToRotation(_normalizedVelocity, Vector3.forward);
             _planeInput = _rotationDifference * _normalizedVelocity;
 
             _animator.SetFloat(_preferences.HorizontalParameterName, _planeInput.x, _preferences.DampTime, Time.deltaTime);
