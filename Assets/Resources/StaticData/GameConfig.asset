@@ -25,9 +25,13 @@ MonoBehaviour:
     _buildIndex: 1
   _levels:
   - _sceneOB: {fileID: 102900000, guid: a29350d66a505d44d946408e2168e108, type: 3}
-    _name: TUTORIAL
-    _path: Assets/Scenes/Levels/TUTORIAL.unity
+    _name: Level 1
+    _path: Assets/Scenes/Levels/Level 1.unity
     _buildIndex: 2
+  - _sceneOB: {fileID: 102900000, guid: ab5dc660ed6306040b0b5b26b9ee3c03, type: 3}
+    _name: Level 2
+    _path: 
+    _buildIndex: -1
   _loopedLevels: []
   _editorLogType: 21
-  _buildLogType: 21
+  _buildLogType: 0

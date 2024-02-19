@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33020207123463702}
   - component: {fileID: 23618809842118942}
   - component: {fileID: 6076024492084737292}
+  - component: {fileID: 5695228109766666866}
   m_Layer: 0
   m_Name: SM_Generic_Ground_Flat_01
   m_TagString: Untagged
@@ -103,6 +104,19 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b2d062926b481da4ea46a42fb103f646, type: 3}
+--- !u!114 &5695228109766666866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065642127680108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 7

@@ -7,6 +7,9 @@
         BodyImpact = 3,
         Shoot = 4,
         BarrelExplosion = 5,
-        WoodImpact = 6
+        WoodImpact = 6,
+        GrassImpact = 7,    
+        DirtImpact = 8,
+        WaterImpact = 9
     }
 }

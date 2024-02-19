@@ -15,6 +15,7 @@ using Gameplay.Waypoints;
 using Gameplay.Weapons;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Utilities.CameraUtilities.Shaker;
 
@@ -43,6 +44,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
 
         #region MonoBehaviour
 
+        [Button("Validate")]
         private void OnValidate()
         {
             _camera ??= FindObjectOfType<Camera>(true);

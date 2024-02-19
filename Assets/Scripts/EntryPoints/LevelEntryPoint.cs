@@ -6,6 +6,7 @@ using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,9 @@ namespace EntryPoints
 {
     public class LevelEntryPoint : MonoBehaviour, IEntryPoint
     {
+        [Header("References")]
+        [SerializeField] private Transform _playerSpawnPoint;
+
         private DiContainer _container;
         private PlayerHolder _playerHolder;
         private GamePrefabs _gamePrefabs;
@@ -48,7 +52,9 @@ namespace EntryPoints
 
         private void InitializePlayer()
         {
-            GameObject playerObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayPlayer]);
+            GameObject playerObject = _container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayPlayer], _playerSpawnPoint.position,
+                _playerSpawnPoint.rotation, null);
+            playerObject.transform.SetParent(null, true);
             Player player = playerObject.GetComponent<Player>();
             _playerHolder.Instance = player;
         }
@@ -68,8 +74,7 @@ namespace EntryPoints
 
         private void InitializeSoldiers()
         {
-            int count = Mathf.Min(
-                _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value,
+            int count = Mathf.Min(_persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value,
                 _platoon.SoldierPoints.Count);
 
             for (int i = 0; i < count; i++)

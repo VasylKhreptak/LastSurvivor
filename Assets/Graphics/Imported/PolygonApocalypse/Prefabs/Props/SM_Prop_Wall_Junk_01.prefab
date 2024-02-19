@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33202162058507950}
   - component: {fileID: 23144246493065246}
   - component: {fileID: 3743207563889966878}
+  - component: {fileID: 4300502913623719832}
   m_Layer: 0
   m_Name: SM_Prop_Wall_Junk_01
   m_TagString: Untagged
@@ -106,3 +107,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.268647, y: 3.3444204, z: 0.6766739}
   m_Center: {x: -0.00000095355455, y: 1.132966, z: -0.0046014497}
+--- !u!114 &4300502913623719832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022004951223104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0ca579064af4867320c1a4539223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 1
