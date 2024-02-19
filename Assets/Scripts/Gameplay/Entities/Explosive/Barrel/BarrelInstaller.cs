@@ -1,7 +1,9 @@
 ﻿using Audio.Players;
 using Gameplay.Entities.Explosive.Core;
 using Gameplay.Entities.Health.Core;
+using Gameplay.Entities.Health.Damages;
 using UnityEngine;
+using Visitor;
 using Zenject;
 
 namespace Gameplay.Entities.Explosive.Barrel
@@ -16,8 +18,10 @@ namespace Gameplay.Entities.Explosive.Barrel
 
         public override void InstallBindings()
         {
-            Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
             Container.BindInstance(gameObject).AsSingle();
+            Container.Bind<Rigidbody>().FromComponentOnRoot().AsSingle();
+            Container.BindInstance(GetComponent<IVisitable<ExplosionDamage>>()).AsSingle();
+            Container.Bind<IHealth>().FromInstance(new Health.Health(_maxHealth)).AsSingle();
 
             Container.BindInterfacesTo<BarrelFireBehaviour>().AsSingle().WithArguments(_barrelFirePreferences);
 

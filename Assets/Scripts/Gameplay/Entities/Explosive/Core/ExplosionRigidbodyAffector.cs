@@ -7,10 +7,12 @@ namespace Gameplay.Entities.Explosive.Core
 {
     public class ExplosionRigidbodyAffector
     {
+        private readonly Rigidbody _rigidbody;
         private readonly Preferences _preferences;
 
-        public ExplosionRigidbodyAffector(Preferences preferences)
+        public ExplosionRigidbodyAffector(Rigidbody rigidbody, Preferences preferences)
         {
+            _rigidbody = rigidbody;
             _preferences = preferences;
         }
 
@@ -21,6 +23,9 @@ namespace Gameplay.Entities.Explosive.Core
             for (int i = 0; i < colliders.Length; i++)
             {
                 Rigidbody rigidbody = colliders[i].attachedRigidbody;
+
+                if (_rigidbody == rigidbody)
+                    continue;
 
                 if (rigidbody == null)
                     continue;

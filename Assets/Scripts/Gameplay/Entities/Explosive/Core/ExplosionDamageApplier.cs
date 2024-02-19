@@ -9,10 +9,12 @@ namespace Gameplay.Entities.Explosive.Core
 {
     public class ExplosionDamageApplier
     {
+        private readonly IVisitable<ExplosionDamage> _visitable;
         private readonly Preferences _preferences;
 
-        public ExplosionDamageApplier(Preferences preferences)
+        public ExplosionDamageApplier(IVisitable<ExplosionDamage> visitable, Preferences preferences)
         {
+            _visitable = visitable;
             _preferences = preferences;
         }
 
@@ -25,6 +27,9 @@ namespace Gameplay.Entities.Explosive.Core
                 GameObject gameObject = colliders[i].gameObject;
 
                 if (gameObject.TryGetComponent(out IVisitable<ExplosionDamage> visitable) == false)
+                    continue;
+
+                if (_visitable == visitable)
                     continue;
 
                 float distance = Vector3.Distance(position, gameObject.transform.position);
