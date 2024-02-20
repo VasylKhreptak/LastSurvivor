@@ -23,7 +23,7 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(LoadSceneWithTransitionAsyncState)] = _container.Resolve<LoadSceneWithTransitionAsyncState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
                 [typeof(PlayState)] = _container.Resolve<PlayState>,
-                [typeof(LoadNextLevelState)] = _container.Resolve<LoadNextLevelState>
+                [typeof(LoadLevelState)] = _container.Resolve<LoadLevelState>
             };
     }
 }

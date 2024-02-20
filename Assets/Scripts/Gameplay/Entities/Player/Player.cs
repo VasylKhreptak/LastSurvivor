@@ -14,16 +14,17 @@ namespace Gameplay.Entities.Player
     [DisallowMultipleComponent]
     public class Player : MonoBehaviour, IVisitable<ZombieDamage>
     {
-        private IHealth _health;
         private List<Transform> _collectorFollowPoints;
-        public IStateMachine<IPlayerState> StateMachine { get; private set; }
         private IVibrationService _vibrationService;
+        public IStateMachine<IPlayerState> StateMachine { get; private set; }
+
+        public IHealth Health { get; private set; }
 
         [Inject]
-        private void Constructor(IHealth health, List<Transform> collectorFollowPoints, IStateMachine<IPlayerState> stateMachine,
-            IVibrationService vibrationService)
+        private void Constructor(List<Transform> collectorFollowPoints, IVibrationService vibrationService,
+            IStateMachine<IPlayerState> stateMachine, IHealth health)
         {
-            _health = health;
+            Health = health;
             _collectorFollowPoints = collectorFollowPoints;
             StateMachine = stateMachine;
             _vibrationService = vibrationService;
@@ -31,7 +32,7 @@ namespace Gameplay.Entities.Player
 
         public void Accept(ZombieDamage visitor)
         {
-            _health.TakeDamage(visitor.Value);
+            Health.TakeDamage(visitor.Value);
             _vibrationService.Vibrate(HapticPatterns.PresetType.RigidImpact);
         }
 

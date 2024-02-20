@@ -11,16 +11,16 @@ namespace Gameplay.Entities.Collector
     [DisallowMultipleComponent]
     public class Collector : MonoBehaviour, IVisitable<ZombieDamage>
     {
-        private IHealth _health;
+        public IHealth Health { get; private set; }
         public IStateMachine<ICollectorState> StateMachine { get; private set; }
 
         [Inject]
         private void Constructor(IHealth health, IStateMachine<ICollectorState> stateMachine)
         {
-            _health = health;
+            Health = health;
             StateMachine = stateMachine;
         }
 
-        public void Accept(ZombieDamage zombieDamage) => _health.TakeDamage(zombieDamage.Value);
+        public void Accept(ZombieDamage zombieDamage) => Health.TakeDamage(zombieDamage.Value);
     }
 }

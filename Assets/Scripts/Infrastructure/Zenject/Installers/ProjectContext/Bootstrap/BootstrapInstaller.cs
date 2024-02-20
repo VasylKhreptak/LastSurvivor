@@ -122,14 +122,16 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<LoadSceneWithTransitionAsyncState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
             Container.Bind<PlayState>().AsSingle();
-            Container.Bind<LoadNextLevelState>().AsSingle();
+            Container.Bind<LoadLevelState>().AsSingle();
         }
 
         private void InitializeDebugger()
         {
             SRDebug.Init();
-            SRDebug.Instance.AddOptionContainer(Container.Instantiate<GameStateMachineOprionsContainer>());
-            SRDebug.Instance.AddOptionContainer(Container.Instantiate<AdvertisementOptionsContainer>());
+            SRDebug.Instance.AddOptionContainer(Container.Instantiate<GameOptions>());
+            SRDebug.Instance.AddOptionContainer(Container.Instantiate<ResourcesOptions>());
+            SRDebug.Instance.AddOptionContainer(Container.Instantiate<GameplayOptions>());
+            SRDebug.Instance.AddOptionContainer(Container.Instantiate<AdvertisementOptions>());
         }
 
         private void MakeInitializable()

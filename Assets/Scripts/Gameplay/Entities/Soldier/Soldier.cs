@@ -12,15 +12,15 @@ namespace Gameplay.Entities.Soldier
     public class Soldier : MonoBehaviour, IVisitable<ZombieDamage>
     {
         public IStateMachine<ISoldierState> StateMachine { get; private set; }
-        private IHealth _health;
+        public IHealth Health { get; private set; }
 
         [Inject]
         private void Constructor(IStateMachine<ISoldierState> stateMachine, IHealth health)
         {
             StateMachine = stateMachine;
-            _health = health;
+            Health = health;
         }
 
-        public void Accept(ZombieDamage visitor) => _health.TakeDamage(visitor.Value);
+        public void Accept(ZombieDamage visitor) => Health.TakeDamage(visitor.Value);
     }
 }
