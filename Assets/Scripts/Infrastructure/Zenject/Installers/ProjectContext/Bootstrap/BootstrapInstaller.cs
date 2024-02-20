@@ -122,7 +122,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<LoadSceneWithTransitionAsyncState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
             Container.Bind<PlayState>().AsSingle();
-            Container.Bind<LoadAppropriateLevelState>().AsSingle();
+            Container.Bind<LoadNextLevelState>().AsSingle();
         }
 
         private void InitializeDebugger()

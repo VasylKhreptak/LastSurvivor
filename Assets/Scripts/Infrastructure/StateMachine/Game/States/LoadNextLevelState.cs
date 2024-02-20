@@ -8,13 +8,13 @@ using Infrastructure.StateMachine.Main.States.Core;
 
 namespace Infrastructure.StateMachine.Game.States
 {
-    public class LoadAppropriateLevelState : IPayloadedState<Action>, IGameState
+    public class LoadNextLevelState : IPayloadedState<Action>, IGameState
     {
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly IStaticDataService _staticDataService;
         private readonly IPersistentDataService _persistentDataService;
 
-        public LoadAppropriateLevelState(IStateMachine<IGameState> stateMachine, IStaticDataService staticDataService,
+        public LoadNextLevelState(IStateMachine<IGameState> stateMachine, IStaticDataService staticDataService,
             IPersistentDataService persistentDataService)
         {
             _stateMachine = stateMachine;
@@ -48,7 +48,10 @@ namespace Infrastructure.StateMachine.Game.States
             if (_staticDataService.Config.LoopedLevels.Count == 0)
                 return _staticDataService.Config.Levels.Last().Name;
 
-            return _staticDataService.Config.LoopedLevels[completedLevels % _staticDataService.Config.LoopedLevels.Count].Name;
+            int loopedLevelIndex = (completedLevels - _staticDataService.Config.Levels.Count) %
+                                   _staticDataService.Config.LoopedLevels.Count;
+
+            return _staticDataService.Config.LoopedLevels[loopedLevelIndex].Name;
         }
     }
 }

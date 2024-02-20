@@ -7,6 +7,6 @@ namespace Infrastructure.Data.Persistent
     {
         public readonly Resources Resources = new Resources();
         public readonly PlatformsData PlatformsData = new PlatformsData();
-        public int CompletedLevels = 5;
+        public int CompletedLevels = 26;
     }
 }

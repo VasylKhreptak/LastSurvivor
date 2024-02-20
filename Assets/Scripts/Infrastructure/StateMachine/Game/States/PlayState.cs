@@ -25,7 +25,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void LoadAppropriateLevel()
         {
-            _stateMachine.Enter<LoadAppropriateLevelState, Action>(ClearHelicopterFuelTank);
+            _stateMachine.Enter<LoadNextLevelState, Action>(ClearHelicopterFuelTank);
         }
 
         private void ClearHelicopterFuelTank() =>
