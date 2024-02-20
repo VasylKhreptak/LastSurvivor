@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Looped/Looped Level 2.unity
     guid: 7d4da604264e58246be04c054cd6fb6c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Looped/Looped Level 3.unity
+    guid: de9ef4dc8ebbcd94b89cd15a6466301c
   m_configObjects: {}
