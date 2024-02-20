@@ -7360,7 +7360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveAnimationPreferences:
-    _maxSpeed: 1
+    _maxSpeed: 1.5
     _speedParameterName: Speed
     _dampTime: 0.05
   _skinRandomizerPreferences:
@@ -7568,7 +7568,7 @@ MonoBehaviour:
   radius: 0.3
   height: 2
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 1.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
