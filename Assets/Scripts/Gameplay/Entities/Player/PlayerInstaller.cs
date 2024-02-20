@@ -11,6 +11,7 @@ using Providers.Velocity;
 using UnityEngine;
 using Utilities.PhysicsUtilities;
 using Utilities.PhysicsUtilities.Trigger;
+using Vibration;
 using Zenject;
 using Zenject.Infrastructure.Toggleable;
 
@@ -27,6 +28,7 @@ namespace Gameplay.Entities.Player
         [SerializeField] private ClosestTriggerObserver<LootBox.LootBox>.Preferences _closestLootBoxObserverPreferences;
         [SerializeField] private MeleeAttacker.Preferences _meleeAttackerPreferences;
         [SerializeField] private List<Transform> _collectorFollowPoints;
+        [SerializeField] private DamageVibration.Preferences _damageVibrationPreferences;
 
         private Waypoints.Waypoints _waypoints;
 
@@ -52,6 +54,7 @@ namespace Gameplay.Entities.Player
             BindMeleeAttacker();
             BindLootBoxTriggerZone();
             BindClosestLootBoxObserver();
+            BindDamageVibration();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
@@ -107,5 +110,8 @@ namespace Gameplay.Entities.Player
 
         private void BindMeleeAttacker() =>
             Container.BindInterfacesAndSelfTo<MeleeAttacker>().AsSingle().WithArguments(_meleeAttackerPreferences);
+
+        private void BindDamageVibration() =>
+            Container.BindInterfacesTo<DamageVibration>().AsSingle().WithArguments(_damageVibrationPreferences);
     }
 }
