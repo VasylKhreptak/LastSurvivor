@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Gameplay.Entities.Collector;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Soldier;
@@ -20,20 +19,7 @@ namespace DebuggerOptions
             _persistentDataService = persistentDataService;
         }
 
-        private IDisposable _godModeSubscription;
-
-        [Category("Gameplay")]
-        public bool GodMode
-        {
-            get => _godModeSubscription != null;
-            set
-            {
-                if (value)
-                    EnterGodMode();
-                else
-                    ExitGodMode();
-            }
-        }
+        private readonly CompositeDisposable _godModeSubscriptions = new CompositeDisposable();
 
         [Category("Gameplay")]
         public int Soldiers
@@ -49,37 +35,30 @@ namespace DebuggerOptions
             set => _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.SetValue(value);
         }
 
-        private void EnterGodMode()
+        [Category("Gameplay")]
+        public void EnterGodMode()
         {
             ExitGodMode();
 
-            _godModeSubscription = Observable.EveryUpdate().Subscribe(_ => GodModeUpdate());
-        }
-
-        private void ExitGodMode()
-        {
-            _godModeSubscription?.Dispose();
-            _godModeSubscription = null;
-        }
-
-        private void GodModeUpdate()
-        {
             MonoBehaviour[] behaviours = Object.FindObjectsOfType<MonoBehaviour>();
 
             foreach (MonoBehaviour behaviour in behaviours)
             {
                 if (behaviour is Player player)
-                    player.Health.Restore();
+                    player.Health.Value.Subscribe(_ => player.Health.Restore()).AddTo(_godModeSubscriptions);
 
                 if (behaviour is Soldier soldier)
-                    soldier.Health.Restore();
+                    soldier.Health.Value.Subscribe(_ => soldier.Health.Restore()).AddTo(_godModeSubscriptions);
 
                 if (behaviour is Collector collector)
-                    collector.Health.Restore();
+                    collector.Health.Value.Subscribe(_ => collector.Health.Restore()).AddTo(_godModeSubscriptions);
 
                 if (behaviour.gameObject.TryGetComponent(out IWeapon weapon))
-                    weapon.Ammo.Fill();
+                    weapon.Ammo.Value.Subscribe(_ => weapon.Ammo.Fill()).AddTo(_godModeSubscriptions);
             }
         }
+
+        [Category("Gameplay")]
+        public void ExitGodMode() => _godModeSubscriptions.Clear();
     }
 }
