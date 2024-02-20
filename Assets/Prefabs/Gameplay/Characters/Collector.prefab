@@ -6712,7 +6712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70eb9aad2b294411b1abe3393b40585b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 60
   _moveAnimationPreferences:
     _maxSpeed: 4
     _speedParameterName: Speed
