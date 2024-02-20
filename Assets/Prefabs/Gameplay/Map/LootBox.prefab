@@ -439,7 +439,7 @@ MonoBehaviour:
   height: 1.5
   meshScale: 1
   center: {x: 0, y: 0, z: 0}
-  updateDistance: 0.3
+  updateDistance: 0.1
   isDual: 0
   cutsAddedGeom: 1
   updateRotationDistance: 10

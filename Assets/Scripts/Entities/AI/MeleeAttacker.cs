@@ -12,19 +12,19 @@ namespace Entities.AI
 {
     public class MeleeAttacker : IInitializable, IDisposable
     {
-        private readonly Transform _transform;
+        private readonly Rigidbody _rigidbody;
         private readonly AgentMover _agentMover;
         private readonly Animator _animator;
-        private readonly Preferences _preferences;
         private readonly IAstarAI _ai;
+        private readonly Preferences _preferences;
 
-        public MeleeAttacker(Transform transform, AgentMover agentMover, Animator animator, Preferences preferences, IAstarAI ai)
+        public MeleeAttacker(Rigidbody rigidbody, AgentMover agentMover, Animator animator, IAstarAI ai, Preferences preferences)
         {
-            _transform = transform;
+            _rigidbody = rigidbody;
             _agentMover = agentMover;
             _animator = animator;
-            _preferences = preferences;
             _ai = ai;
+            _preferences = preferences;
         }
 
         private IDisposable _lookSubscription;
@@ -47,22 +47,22 @@ namespace Entities.AI
 
             _agentMover.SetDestination(position, () =>
             {
+                _ai.canMove = false;
                 _preferences.Weapon.SetActive(true);
                 _preferences.WeaponShowAnimation.PlayForward();
                 StartLooking(_target);
                 StartAttacking();
-                _ai.canMove = false;
             });
         }
 
         public void Stop()
         {
             _active = false;
-            _lookSubscription?.Dispose();
+            StopLooking();
             _agentMover.Stop();
             StopAttacking();
-            _preferences.WeaponShowAnimation.PlayBackward(() => _preferences.Weapon.SetActive(false));
             _ai.canMove = true;
+            _preferences.WeaponShowAnimation.PlayBackward(() => _preferences.Weapon.SetActive(false));
         }
 
         public void Initialize()
@@ -75,19 +75,21 @@ namespace Entities.AI
 
         private void StartLooking(Transform target)
         {
-            _lookSubscription?.Dispose();
+            StopLooking();
             _lookSubscription = Observable
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
                     Vector3 targetPosition = target.position;
-                    Vector3 currentPosition = _transform.position;
+                    Vector3 currentPosition = _rigidbody.position;
                     targetPosition.y = currentPosition.y;
                     Vector3 direction = targetPosition - currentPosition;
                     Quaternion rotation = Quaternion.LookRotation(direction);
-                    _transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, Time.deltaTime * _preferences.LookSpeed);
+                    _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, rotation, Time.deltaTime * _preferences.LookSpeed);
                 });
         }
+
+        private void StopLooking() => _lookSubscription?.Dispose();
 
         private void StartAttacking() => _animator.SetBool(_preferences.IsAttackingProperty, true);
 

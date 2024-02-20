@@ -106,6 +106,6 @@ namespace Gameplay.Entities.Player
         }
 
         private void BindMeleeAttacker() =>
-            Container.BindInterfacesAndSelfTo<MeleeAttacker>().AsSingle().WithArguments(transform, _meleeAttackerPreferences);
+            Container.BindInterfacesAndSelfTo<MeleeAttacker>().AsSingle().WithArguments(_meleeAttackerPreferences);
     }
 }

@@ -6758,7 +6758,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     _isAttackingProperty: IsAttacking
     _damage: 20
-    _lookSpeed: 10
+    _lookSpeed: 5
   _ragdollPreferences:
     _root: {fileID: 8904302179980700905}
     _colliders:

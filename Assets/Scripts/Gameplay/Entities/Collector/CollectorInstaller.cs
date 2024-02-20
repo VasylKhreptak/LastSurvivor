@@ -99,7 +99,7 @@ namespace Gameplay.Entities.Collector
             Container.BindInterfacesAndSelfTo<AgentTransformFollower>().AsSingle().WithArguments(_agentTransformFollowerPreferences);
 
         private void BindMeleeAttacker() =>
-            Container.BindInterfacesAndSelfTo<MeleeAttacker>().AsSingle().WithArguments(transform, _meleeAttackerPreferences);
+            Container.BindInterfacesAndSelfTo<MeleeAttacker>().AsSingle().WithArguments(_meleeAttackerPreferences);
 
         private void BindStateMachine()
         {
