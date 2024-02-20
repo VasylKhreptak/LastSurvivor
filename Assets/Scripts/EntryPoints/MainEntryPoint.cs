@@ -40,8 +40,6 @@ namespace EntryPoints
             Transform playerTransform = InitializePlayer();
             InitializeCamera(playerTransform);
             SpawnPlatforms();
-
-            _container.Resolve<IStateMachine<IGameState>>().Enter<PlayState>();
         }
 
         private Transform InitializePlayer()
