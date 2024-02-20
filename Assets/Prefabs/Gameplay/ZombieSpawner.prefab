@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _asset: {fileID: 1934113780122826516}
-  _requiredLevel: 4
+  _requiredLevel: 7
 --- !u!114 &6099283959702691844
 MonoBehaviour:
   m_ObjectHideFlags: 0

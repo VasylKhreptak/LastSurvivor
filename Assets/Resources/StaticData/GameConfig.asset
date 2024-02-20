@@ -36,22 +36,22 @@ MonoBehaviour:
     _name: Level 3
     _path: Assets/Scenes/Levels/Level 3.unity
     _buildIndex: 4
-  - _sceneOB: {fileID: 102900000, guid: 0c66512b87b6284498bd7273e794d108, type: 3}
-    _name: Level 4
-    _path: Assets/Scenes/Levels/Level 4.unity
-    _buildIndex: 5
   _loopedLevels:
   - _sceneOB: {fileID: 102900000, guid: 168e1d660d174024d949f9848ce3ebf4, type: 3}
     _name: Looped Level 1
     _path: Assets/Scenes/Levels/Looped/Looped Level 1.unity
-    _buildIndex: 6
+    _buildIndex: 5
   - _sceneOB: {fileID: 102900000, guid: 7d4da604264e58246be04c054cd6fb6c, type: 3}
     _name: Looped Level 2
     _path: Assets/Scenes/Levels/Looped/Looped Level 2.unity
-    _buildIndex: 7
+    _buildIndex: 6
   - _sceneOB: {fileID: 102900000, guid: de9ef4dc8ebbcd94b89cd15a6466301c, type: 3}
     _name: Looped Level 3
     _path: Assets/Scenes/Levels/Looped/Looped Level 3.unity
+    _buildIndex: 7
+  - _sceneOB: {fileID: 102900000, guid: 0c66512b87b6284498bd7273e794d108, type: 3}
+    _name: Looped Level 4
+    _path: Assets/Scenes/Levels/Looped/Looped Level 4.unity
     _buildIndex: 8
   _editorLogType: 21
   _buildLogType: 0
