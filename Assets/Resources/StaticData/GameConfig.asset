@@ -40,6 +40,10 @@ MonoBehaviour:
     _name: Level 4
     _path: Assets/Scenes/Levels/Level 4.unity
     _buildIndex: 5
-  _loopedLevels: []
+  _loopedLevels:
+  - _sceneOB: {fileID: 102900000, guid: 168e1d660d174024d949f9848ce3ebf4, type: 3}
+    _name: Looped Level 1
+    _path: 
+    _buildIndex: -1
   _editorLogType: 21
   _buildLogType: 0
