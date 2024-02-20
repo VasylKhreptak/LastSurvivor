@@ -911,14 +911,14 @@ MonoBehaviour:
     _raycastInterval: 0.3
   _shootPreferences:
     _spawnPoint: {fileID: 4978168838215678566}
-    _fireInterval: 0.12
+    _fireInterval: 0.15
     _minScatterAngle: 0.1
     _maxScatterAngle: 1
-    _minDamage: 5
-    _maxDamage: 10
+    _minDamage: 3
+    _maxDamage: 6
     _velocity: 100
-    _minShootDelay: 0.1
-    _maxShootDelay: 0.3
+    _minShootDelay: 0.3
+    _maxShootDelay: 0.6
   _shootAudioPlayerPreferences:
     _clips:
     - {fileID: 8300000, guid: 0cdcaabc652dccf468109678dab99077, type: 3}
