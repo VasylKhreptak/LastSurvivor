@@ -14,7 +14,6 @@ namespace Gameplay.Entities.Player
     {
         private List<Transform> _collectorFollowPoints;
         public IStateMachine<IPlayerState> StateMachine { get; private set; }
-
         public IHealth Health { get; private set; }
 
         [Inject]

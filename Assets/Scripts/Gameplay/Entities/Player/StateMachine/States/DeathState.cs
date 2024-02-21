@@ -13,7 +13,6 @@ namespace Gameplay.Entities.Player.StateMachine.States
     public class DeathState : IPlayerState, IState
     {
         private readonly MonoKernel _kernel;
-        private readonly PlayerHolder _playerHolder;
         private readonly Animator _animator;
         private readonly IAstarAI _ai;
         private readonly Ragdoll _ragdoll;
@@ -21,11 +20,10 @@ namespace Gameplay.Entities.Player.StateMachine.States
         private readonly IStateMachine<ILevelState> _levelStateMachine;
         private readonly Rigidbody _rigidbody;
 
-        public DeathState(MonoKernel kernel, PlayerHolder playerHolder, Animator animator, IAstarAI ai,
+        public DeathState(MonoKernel kernel, Animator animator, IAstarAI ai,
             Ragdoll ragdoll, Collider collider, IStateMachine<ILevelState> levelStateMachine, Rigidbody rigidbody)
         {
             _kernel = kernel;
-            _playerHolder = playerHolder;
             _animator = animator;
             _ai = ai;
             _ragdoll = ragdoll;
@@ -36,8 +34,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
 
         public void Enter()
         {
-            _playerHolder.Instance = null;
-            Object.Destroy(_kernel);
+            _kernel.enabled = false;
             _animator.enabled = false;
             _ai.isStopped = true;
             _ai.canMove = false;

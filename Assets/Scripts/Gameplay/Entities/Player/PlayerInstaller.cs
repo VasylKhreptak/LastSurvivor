@@ -50,11 +50,11 @@ namespace Gameplay.Entities.Player
             BindMoveAnimation();
             BindAgentMover();
             BindAgentWaypointsFollower();
-            BindStateMachine();
             BindMeleeAttacker();
             BindLootBoxTriggerZone();
             BindClosestLootBoxObserver();
             BindDamageVibration();
+            BindStateMachine();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
@@ -77,9 +77,11 @@ namespace Gameplay.Entities.Player
 
         private void BindStates()
         {
+            Collider collider = GetComponent<Collider>();
             Container.Bind<IdleState>().AsSingle();
             Container.Bind<NavigationState>().AsSingle();
-            Container.Bind<DeathState>().AsSingle().WithArguments(GetComponent<Collider>());
+            Container.Bind<DeathState>().AsSingle().WithArguments(collider);
+            Container.Bind<ReviveState>().AsSingle().WithArguments(collider);
         }
 
         private void BindDeathHandler() => Container.BindInterfacesTo<PlayerDeathHandler>().AsSingle();

@@ -78,13 +78,22 @@ namespace DebuggerOptions
             foreach (MonoBehaviour behaviour in behaviours)
             {
                 if (behaviour is Player player)
+                {
                     player.Health.Value.Subscribe(_ => player.Health.Restore()).AddTo(_godModeSubscriptions);
+                    return;
+                }
 
                 if (behaviour is Soldier soldier)
+                {
                     soldier.Health.Value.Subscribe(_ => soldier.Health.Restore()).AddTo(_godModeSubscriptions);
+                    return;
+                }
 
                 if (behaviour is Collector collector)
+                {
                     collector.Health.Value.Subscribe(_ => collector.Health.Restore()).AddTo(_godModeSubscriptions);
+                    return;
+                }
 
                 if (behaviour.gameObject.TryGetComponent(out IWeapon weapon))
                     weapon.Ammo.Value.Subscribe(_ => weapon.Ammo.Fill()).AddTo(_godModeSubscriptions);

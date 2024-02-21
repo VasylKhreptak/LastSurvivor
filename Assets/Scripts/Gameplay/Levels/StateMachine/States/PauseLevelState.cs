@@ -47,7 +47,7 @@ namespace Gameplay.Levels.StateMachine.States
             _zombieSpawners.ForEach(spawner => spawner.Disable());
             _zombies.ForEach(zombie => zombie.StateMachine.Enter<IdleState>());
 
-            if (_playerHolder.Instance != null)
+            if (_playerHolder.Instance != null && _playerHolder.Instance.Health.IsDeath.Value == false)
                 _playerHolder.Instance.StateMachine.Enter<Entities.Player.StateMachine.States.IdleState>();
 
             _trackpad.enabled = false;
