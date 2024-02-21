@@ -6,7 +6,6 @@ using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 

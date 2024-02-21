@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infrastructure.Services.Advertisement.Core
+﻿namespace Infrastructure.Services.Advertisement.Core
 {
     public interface IAdvertisementService
     {

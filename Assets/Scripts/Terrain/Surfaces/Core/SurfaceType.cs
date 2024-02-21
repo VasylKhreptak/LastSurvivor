@@ -11,6 +11,6 @@
         Sand = 6,
         Grass = 7,
         Dirt = 8,
-        Water = 9,
+        Water = 9
     }
 }

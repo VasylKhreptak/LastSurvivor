@@ -19,6 +19,6 @@
         GameplayPlayer = 14,
         GameplaySoldier = 15,
         GameplayCollector = 16,
-        Zombie = 17,
+        Zombie = 17
     }
 }

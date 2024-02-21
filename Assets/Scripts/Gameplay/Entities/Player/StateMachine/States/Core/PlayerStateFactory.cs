@@ -16,7 +16,7 @@ namespace Gameplay.Entities.Player.StateMachine.States.Core
                 [typeof(IdleState)] = _container.Resolve<IdleState>,
                 [typeof(NavigationState)] = _container.Resolve<NavigationState>,
                 [typeof(DeathState)] = _container.Resolve<DeathState>,
-                [typeof(ReviveState)] = _container.Resolve<ReviveState>,
+                [typeof(ReviveState)] = _container.Resolve<ReviveState>
             };
     }
 }

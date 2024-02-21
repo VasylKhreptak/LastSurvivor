@@ -95,7 +95,7 @@ namespace Utilities.SplineUtilities.TargetFollower
             [SerializeField] private float _followSpeed = 1f;
             [SerializeField] private float _rotateSpeed = 1f;
             [SerializeField] private float _distanceOffset = -5f;
-            [SerializeField] private float _rotationDistanceOffset = 0f;
+            [SerializeField] private float _rotationDistanceOffset;
             [SerializeField] private Vector3 _rotationOffset = Vector3.zero;
             [SerializeField] private bool _updateRotation = true;
 
