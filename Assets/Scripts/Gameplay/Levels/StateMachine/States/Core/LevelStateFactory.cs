@@ -14,6 +14,8 @@ namespace Gameplay.Levels.StateMachine.States.Core
             new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(LevelStartState)] = _container.Resolve<LevelStartState>,
+                [typeof(PauseLevelState)] = _container.Resolve<PauseLevelState>,
+                [typeof(ResumeLevelState)] = _container.Resolve<ResumeLevelState>,
                 [typeof(LevelFailedState)] = _container.Resolve<LevelFailedState>,
                 [typeof(LevelCompletedState)] = _container.Resolve<LevelCompletedState>,
                 [typeof(LevelLoopState)] = _container.Resolve<LevelLoopState>,

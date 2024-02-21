@@ -130,7 +130,6 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             SRDebug.Init();
             SRDebug.Instance.AddOptionContainer(Container.Instantiate<GameOptions>());
             SRDebug.Instance.AddOptionContainer(Container.Instantiate<ResourcesOptions>());
-            SRDebug.Instance.AddOptionContainer(Container.Instantiate<GameplayOptions>());
             SRDebug.Instance.AddOptionContainer(Container.Instantiate<AdvertisementOptions>());
         }
 

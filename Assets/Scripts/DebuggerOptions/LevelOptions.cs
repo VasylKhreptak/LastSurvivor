@@ -1,41 +1,68 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Gameplay.Entities.Collector;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Soldier;
+using Gameplay.Levels.StateMachine.States;
+using Gameplay.Levels.StateMachine.States.Core;
 using Gameplay.Weapons.Core;
 using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.StateMachine.Main.Core;
 using UniRx;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace DebuggerOptions
 {
-    public class GameplayOptions
+    public class LevelOptions : IInitializable, IDisposable
     {
+        private readonly IStateMachine<ILevelState> _stateMachine;
         private readonly IPersistentDataService _persistentDataService;
 
-        public GameplayOptions(IPersistentDataService persistentDataService)
+        public LevelOptions(IStateMachine<ILevelState> stateMachine, IPersistentDataService persistentDataService)
         {
+            _stateMachine = stateMachine;
             _persistentDataService = persistentDataService;
         }
 
         private readonly CompositeDisposable _godModeSubscriptions = new CompositeDisposable();
 
-        [Category("Gameplay")]
+        public void Initialize() => SRDebug.Instance.AddOptionContainer(this);
+
+        public void Dispose()
+        {
+            SRDebug.Instance.RemoveOptionContainer(this);
+            _godModeSubscriptions.Dispose();
+        }
+
+        [Category("Level")]
+        public void PauseLevel() => _stateMachine.Enter<PauseLevelState>();
+
+        [Category("Level")]
+        public void ResumeLevel() => _stateMachine.Enter<ResumeLevelState>();
+
+        [Category("Level")]
+        public void FailLevel() => _stateMachine.Enter<LevelFailedState>();
+
+        [Category("Level")]
+        public void CompleteLevel() => _stateMachine.Enter<LevelCompletedState>();
+
+        [Category("Level")]
         public int Soldiers
         {
             get => _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value;
             set => _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.SetValue(value);
         }
 
-        [Category("Gameplay")]
+        [Category("Level")]
         public int Collectors
         {
             get => _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Value.Value;
             set => _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.SetValue(value);
         }
 
-        [Category("Gameplay")]
+        [Category("Level")]
         public void EnterGodMode()
         {
             ExitGodMode();
@@ -58,7 +85,7 @@ namespace DebuggerOptions
             }
         }
 
-        [Category("Gameplay")]
+        [Category("Level")]
         public void ExitGodMode() => _godModeSubscriptions.Clear();
     }
 }

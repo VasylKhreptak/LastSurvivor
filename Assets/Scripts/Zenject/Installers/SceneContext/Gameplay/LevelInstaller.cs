@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DebuggerOptions;
 using Gameplay.Aim;
 using Gameplay.Data;
 using Gameplay.Entities.Collector;
@@ -73,6 +74,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindWeaponAimer();
             BindWeaponShooter();
             BindLevelStateMachine();
+            BindLevelDebugger();
         }
 
         private void BindHolders()
@@ -124,6 +126,8 @@ namespace Zenject.Installers.SceneContext.Gameplay
         {
             Container.Bind<LevelStartState>().AsSingle();
             Container.Bind<LevelCompletedState>().AsSingle();
+            Container.Bind<PauseLevelState>().AsSingle();
+            Container.Bind<ResumeLevelState>().AsSingle();
             Container.Bind<LevelFailedState>().AsSingle();
             Container.Bind<LevelLoopState>().AsSingle();
             Container.Bind<FinalizeProgressAndLoadMenuState>().AsSingle();
@@ -141,5 +145,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.BindInterfacesAndSelfTo<WeaponAimer>().AsSingle().WithArguments(_weaponAimPreferences);
 
         private void BindWeaponShooter() => Container.BindInterfacesAndSelfTo<WeaponShooter>().AsSingle();
+
+        private void BindLevelDebugger() => Container.BindInterfacesTo<LevelOptions>().AsSingle();
     }
 }
