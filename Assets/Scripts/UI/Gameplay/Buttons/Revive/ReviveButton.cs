@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UI.Gameplay.Buttons
+namespace UI.Gameplay.Buttons.Revive
 {
     public class ReviveButton : MonoBehaviour, IWindow
     {
