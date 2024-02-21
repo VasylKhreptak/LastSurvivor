@@ -8,7 +8,7 @@
     using UnityEngine;
 
     [Service(typeof (IDebugPanelService))]
-    public class DebugPanelServiceImpl : ScriptableObject, IDebugPanelService
+    public class DebugPanelServiceImpl : ScriptableObject, IDebugPanelService, IDisposable
     {
         private DebugPanelRoot _debugPanelRootObject;
         public event Action<IDebugPanelService, bool> VisibilityChanged;
@@ -148,6 +148,14 @@
             _debugPanelRootObject.CachedTransform.SetParent(Hierarchy.Get("SRDebugger"), true);
 
             SRDebuggerUtil.EnsureEventSystemExists();
+        }
+
+        public void Dispose()
+        {
+            if (_debugPanelRootObject != null)
+            {
+                DestroyImmediate(_debugPanelRootObject.gameObject);
+            }
         }
     }
 }

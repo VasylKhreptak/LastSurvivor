@@ -64,8 +64,22 @@
             _optionCanvas = GetComponent<Canvas>();
 
             Service.Options.OptionsUpdated += OnOptionsUpdated;
-            Service.Options.OptionsValueUpdated += OnOptionsValueChanged;
             Service.PinnedUI.OptionPinStateChanged += OnOptionPinnedStateChanged;
+        }
+
+        protected override void OnDestroy()
+        {
+            if (Service.Options != null)
+            {
+                Service.Options.OptionsUpdated -= OnOptionsUpdated;
+            }
+
+            if (Service.PinnedUI != null)
+            {
+                Service.PinnedUI.OptionPinStateChanged -= OnOptionPinnedStateChanged;
+            }
+
+            base.OnDestroy();
         }
 
         private void OnOptionPinnedStateChanged(OptionDefinition optionDefinition, bool isPinned)
@@ -80,11 +94,6 @@
         {
             Clear();
             Populate();
-        }
-
-        private void OnOptionsValueChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            _queueRefresh = true;
         }
 
         protected override void OnEnable()

@@ -30,6 +30,7 @@
         private bool _hasAuthorised;
         private DefaultTabs? _queuedTab;
         private RectTransform _worldSpaceTransform;
+        private DynamicOptionContainer _looseOptionContainer;
 
         public SRDebugService()
         {
@@ -86,6 +87,10 @@
             // Ensure that root object cannot be destroyed on scene loads
             var srDebuggerParent = Hierarchy.Get("SRDebugger");
             Object.DontDestroyOnLoad(srDebuggerParent.gameObject);
+
+            // Add any options containers that were created on init
+            var internalRegistry = SRServiceManager.GetService<InternalOptionsRegistry>();
+            internalRegistry.SetHandler(_optionsService.AddContainer);
         }
 
         public Settings Settings
@@ -160,6 +165,27 @@
         public void RemoveOptionContainer(object container)
         {
             _optionsService.RemoveContainer(container);
+        }
+
+        public void AddOption(OptionDefinition option)
+        {
+            if(_looseOptionContainer == null)
+            {
+                _looseOptionContainer = new DynamicOptionContainer();
+                _optionsService.AddContainer(_looseOptionContainer);
+            }
+
+            _looseOptionContainer.AddOption(option);
+        }
+
+        public bool RemoveOption(OptionDefinition option)
+        {
+            if (_looseOptionContainer != null)
+            {
+                return _looseOptionContainer.RemoveOption(option);
+            }
+
+            return false;
         }
 
         public void PinAllOptions(string category)

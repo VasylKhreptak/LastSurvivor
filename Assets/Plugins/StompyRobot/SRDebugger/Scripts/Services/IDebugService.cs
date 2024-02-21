@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SRDebugger.Internal;
+using UnityEngine;
 
 namespace SRDebugger
 {
@@ -86,6 +87,17 @@ namespace SRDebugger.Services
         void RemoveOptionContainer(object container);
 
         /// <summary>
+        /// Add an option to the options panel.
+        /// </summary>
+        void AddOption(OptionDefinition option);
+
+        /// <summary>
+        /// Remove an option from the options panel.
+        /// </summary>
+        /// <returns>True if option was successfully removed, otherwise false.</returns>
+        bool RemoveOption(OptionDefinition option);
+
+        /// <summary>
         /// Pin all options in a category.
         /// </summary>
         /// <param name="category"></param>
@@ -112,7 +124,7 @@ namespace SRDebugger.Services
         /// <param name="onComplete">Callback to invoke once the bug report is completed or cancelled. Null to ignore.</param>
         /// <param name="takeScreenshot">
         /// Take a screenshot before opening the report sheet (otherwise a screenshot will be taken as
-        /// the report is sent)
+        /// the report is sent, if enabled in settings)
         /// </param>
         /// <param name="descriptionContent">Initial content of the bug report description</param>
         void ShowBugReportSheet(ActionCompleteCallback onComplete = null, bool takeScreenshot = true,
@@ -128,7 +140,7 @@ namespace SRDebugger.Services
         /// <summary>
         /// ADVANCED FEATURE. This will convert the debug panel to a world space object and return the RectTransform.
         /// This can be used to position the SRDebugger panel somewhere in your scene.
-        /// This feature is for advanced users online who know what they are doing. Only limited support will be provided
+        /// This feature is for advanced users only who know what they are doing. Only limited support will be provided
         /// for this method.
         /// The debug panel will be made visible if it is not already.
         /// </summary>

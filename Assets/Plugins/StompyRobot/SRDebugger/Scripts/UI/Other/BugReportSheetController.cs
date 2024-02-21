@@ -83,7 +83,7 @@ namespace SRDebugger.UI.Other
 
         private IEnumerator SubmitCo()
         {
-            if (BugReportScreenshotUtil.ScreenshotData == null)
+            if (BugReportScreenshotUtil.ScreenshotData == null && Settings.Instance.EnableBugReportScreenshot)
             {
                 if (TakingScreenshot != null)
                 {

@@ -24,6 +24,10 @@
 
         event ConsoleUpdatedEventHandler Error;
 
+        bool LoggingEnabled { get; set; }
+
+        bool LogHandlerIsOverriden { get; }
+
         void Clear();
     }
 

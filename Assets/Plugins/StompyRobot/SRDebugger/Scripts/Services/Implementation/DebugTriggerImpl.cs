@@ -52,29 +52,15 @@
 
             name = "Trigger";
         }
-        protected override void OnEnable()
-        {
-            base.OnEnable();
 
-            if (Settings.Instance.ErrorNotification)
-            {
-                _consoleService = SRServiceManager.GetService<IConsoleService>();
-                _consoleService.Error += OnError;
-            }
-        }
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-
-            if (_consoleService != null)
-            {
-                _consoleService.Error -= OnError;
-            }
-        }
         private void OnError(IConsoleService console)
         {
-            _trigger.ErrorNotifier.ShowErrorWarning();
+            if (_trigger != null)
+            {
+                _trigger.ErrorNotifier.ShowErrorWarning();
+            }
         }
+
         private void CreateTrigger()
         {
             var prefab = Resources.Load<TriggerRoot>(SRDebugPaths.TriggerPrefabPath);
@@ -124,10 +110,22 @@
             SRDebuggerUtil.EnsureEventSystemExists();
 
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
+            if (Settings.Instance.ErrorNotification)
+            {
+                _consoleService = SRServiceManager.GetService<IConsoleService>();
+                _consoleService.Error += OnError;
+            }
         }
         protected override void OnDestroy()
         {
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+
+            if (_consoleService != null)
+            {
+                _consoleService.Error -= OnError;
+            }
+
             base.OnDestroy();
         }
         private static void OnActiveSceneChanged(UnityEngine.SceneManagement.Scene s1, UnityEngine.SceneManagement.Scene s2)

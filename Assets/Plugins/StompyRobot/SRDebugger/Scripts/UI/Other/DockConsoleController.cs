@@ -41,6 +41,9 @@
 
         [RequiredField] public GameObject TopHandle;
 
+        [RequiredField] public GameObject TopSafeAreaSpacer;
+        [RequiredField] public GameObject BottomSafeAreaSpacer;
+
         public bool IsVisible
         {
             get { return CachedGameObject.activeSelf; }
@@ -116,6 +119,8 @@
                     BottomHandle.SetActive(true);
                     transform.SetSiblingIndex(0);
                     DropdownToggleSprite.rectTransform.parent.localRotation = Quaternion.Euler(0, 0, 0f);
+                    TopSafeAreaSpacer.SetActive(true);
+                    BottomSafeAreaSpacer.SetActive(false);
                     break;
                 }
 
@@ -127,6 +132,8 @@
                     BottomHandle.SetActive(false);
                     transform.SetSiblingIndex(1);
                     DropdownToggleSprite.rectTransform.parent.localRotation = Quaternion.Euler(0, 0, 180f);
+                    TopSafeAreaSpacer.SetActive(false);
+                    BottomSafeAreaSpacer.SetActive(true);
                     break;
                 }
             }
