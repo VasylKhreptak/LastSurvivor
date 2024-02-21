@@ -28,12 +28,14 @@ namespace DebuggerOptions
 
         private readonly CompositeDisposable _godModeSubscriptions = new CompositeDisposable();
 
+        [Category("Level"), DisplayName("Initialize Options")]
         public void Initialize()
         {
             SRDebug.Instance.RemoveOptionContainer(this);
             SRDebug.Instance.AddOptionContainer(this);
         }
-
+        
+        [Category("Level"), DisplayName("Dispose Options")]
         public void Dispose()
         {
             SRDebug.Instance.RemoveOptionContainer(this);

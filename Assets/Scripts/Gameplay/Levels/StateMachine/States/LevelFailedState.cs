@@ -22,10 +22,10 @@ namespace Gameplay.Levels.StateMachine.States
 
         public void Enter()
         {
-            _levelStateMachine.Enter<PauseLevelState>();
             _levelFailedWindow.Show();
             _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
             _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
+            _levelStateMachine.Enter<PauseLevelState>();
         }
     }
 }

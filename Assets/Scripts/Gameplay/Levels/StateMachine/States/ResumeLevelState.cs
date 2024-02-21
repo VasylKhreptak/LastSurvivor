@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Entities.Collector;
+using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
 using Gameplay.Weapons;
+using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using UI.Gameplay.Windows;
 
@@ -23,10 +25,12 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly Platoon _platoon;
         private readonly List<Collector> _collectors;
         private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
+        private readonly Helicopter _helicopter;
+        private readonly IStateMachine<ILevelState> _levelStateMachine;
 
         public ResumeLevelState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
             WeaponAimer weaponAimer, HUD hud, Platoon platoon, List<Collector> collectors,
-            List<ZombieSpawner.ZombieSpawner> zombieSpawners)
+            List<ZombieSpawner.ZombieSpawner> zombieSpawners, Helicopter helicopter, IStateMachine<ILevelState> levelStateMachine)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -37,6 +41,8 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon = platoon;
             _collectors = collectors;
             _zombieSpawners = zombieSpawners;
+            _helicopter = helicopter;
+            _levelStateMachine = levelStateMachine;
         }
 
         public void Enter()
@@ -55,8 +61,12 @@ namespace Gameplay.Levels.StateMachine.States
             _collectors.ForEach(collector =>
                 collector.StateMachine.Enter<Entities.Collector.StateMachine.States.NavigationState>());
 
+            _platoon.TargetFollower.Target = _playerHolder.Instance.transform;
             _platoon.Soldiers.ForEach(soldier =>
                 soldier.StateMachine.Enter<Entities.Soldier.StateMachine.States.NavigationState>());
+
+            _helicopter.TargetFollower.Target = _playerHolder.Instance.transform;
+            _levelStateMachine.Enter<LevelLoopState>();
         }
     }
 }

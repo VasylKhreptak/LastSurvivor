@@ -19,8 +19,8 @@ namespace Gameplay.Levels.StateMachine.States
 
         public void Enter()
         {
-            _levelStateMachine.Enter<ResumeLevelState>();
             _startWindows.Hide();
+            _levelStateMachine.Enter<ResumeLevelState>();
         }
     }
 }

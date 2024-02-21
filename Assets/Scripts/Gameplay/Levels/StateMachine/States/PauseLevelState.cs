@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Entities.Collector;
+using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
@@ -23,10 +24,11 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly Platoon _platoon;
         private readonly List<Collector> _collectors;
         private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
+        private readonly Helicopter _helicopter;
 
         public PauseLevelState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad, WeaponAim weaponAim,
             WeaponAimer weaponAimer, HUD hud, Platoon platoon, List<Collector> collectors,
-            List<ZombieSpawner.ZombieSpawner> zombieSpawners)
+            List<ZombieSpawner.ZombieSpawner> zombieSpawners, Helicopter helicopter)
         {
             _zombies = zombies;
             _playerHolder = playerHolder;
@@ -37,6 +39,7 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon = platoon;
             _collectors = collectors;
             _zombieSpawners = zombieSpawners;
+            _helicopter = helicopter;
         }
 
         public void Enter()
@@ -55,8 +58,11 @@ namespace Gameplay.Levels.StateMachine.States
             _collectors.ForEach(collector =>
                 collector.StateMachine.Enter<Entities.Collector.StateMachine.States.IdleState>());
 
+            _platoon.TargetFollower.Target = null;
             _platoon.Soldiers.ForEach(soldier =>
                 soldier.StateMachine.Enter<Entities.Soldier.StateMachine.States.IdleState>());
+
+            _helicopter.TargetFollower.Target = null;
         }
     }
 }
