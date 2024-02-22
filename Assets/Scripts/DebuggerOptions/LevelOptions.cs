@@ -69,6 +69,9 @@ namespace DebuggerOptions
         }
 
         [Category("Level")]
+        public void KillPlayer() => Object.FindObjectOfType<Player>().Health.Kill();
+
+        [Category("Level")]
         public void EnterGodMode()
         {
             ExitGodMode();

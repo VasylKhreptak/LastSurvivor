@@ -8,6 +8,7 @@ using Infrastructure.StateMachine.Main.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Plugins.Animations.Move;
+using Plugins.Timer;
 using UI.Gameplay.Windows;
 using UniRx;
 using UnityEngine;
@@ -23,12 +24,13 @@ namespace UI.Gameplay.Buttons.Revive
         [SerializeField] private Button _button;
         [SerializeField] private ContinueButton _continueButton;
 
+        [Header("Preferences")]
+        [SerializeField] private float _levelResumeDelay = 0.5f;
+        [SerializeField] private float _showDuration = 3f;
+        
         [Header("Show Animations")]
         [SerializeField] private AnchorMoveAnimation _anchorMoveAnimation;
         [SerializeField] private FadeAnimation _fadeAnimation;
-
-        [Header("Preferences")]
-        [SerializeField] private float _levelResumeDelay = 0.5f;
 
         private IWindow _levelFailedWindow;
         private PlayerHolder _playerHolder;
@@ -46,6 +48,9 @@ namespace UI.Gameplay.Buttons.Revive
         private IAnimation _showAnimation;
 
         private IDisposable _levelResumeDelaySubscription;
+        private IDisposable _timerSubscription;
+
+        private readonly ITimer _hideTimer = new Timer();
 
         #region MonoBehaviour
 
@@ -57,11 +62,18 @@ namespace UI.Gameplay.Buttons.Revive
             _showAnimation.SetEndState();
         }
 
-        private void OnEnable() => StartObserving();
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(OnClicked);
+            _timerSubscription = _hideTimer.OnCompleted.Subscribe(_ => OnTimerCompleted());
+            StartHideTimer();
+        }
 
         private void OnDisable()
         {
-            StopObserving();
+            _button.onClick.RemoveListener(OnClicked);
+            _hideTimer.Stop();
+            _timerSubscription?.Dispose();
         }
 
         private void OnDestroy() => _levelResumeDelaySubscription?.Dispose();
@@ -83,10 +95,6 @@ namespace UI.Gameplay.Buttons.Revive
             });
         }
 
-        private void StartObserving() => _button.onClick.AddListener(OnClicked);
-
-        private void StopObserving() => _button.onClick.RemoveListener(OnClicked);
-
         private void OnClicked()
         {
             Hide(() => _levelFailedWindow.Hide(() =>
@@ -103,6 +111,19 @@ namespace UI.Gameplay.Buttons.Revive
             }));
 
             _button.interactable = false;
+        }
+
+        private void StartHideTimer()
+        {
+            _hideTimer.Stop();
+            _hideTimer.Start(_showDuration);
+        }
+
+        private void OnTimerCompleted()
+        {
+            Hide();
+            _button.interactable = false;
+            _continueButton.Show();
         }
     }
 }
