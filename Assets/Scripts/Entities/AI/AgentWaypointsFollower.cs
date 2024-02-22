@@ -55,6 +55,7 @@ namespace Entities.AI
 
         public void Stop()
         {
+            _ai.destination = _ai.position;
             _ai.isStopped = true;
             _updateSubscription?.Dispose();
         }

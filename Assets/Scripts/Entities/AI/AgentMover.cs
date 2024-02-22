@@ -36,6 +36,7 @@ namespace Entities.AI
         public void Stop()
         {
             StopObservingDestination();
+            _ai.destination = _ai.position;
             _ai.isStopped = true;
         }
 

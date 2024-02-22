@@ -9,13 +9,14 @@ using Plugins.Animations;
 using Plugins.Animations.Core;
 using Plugins.Animations.Move;
 using Plugins.Timer;
+using TMPro;
 using UI.Gameplay.Windows;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace UI.Gameplay.Buttons.Revive
+namespace UI.Gameplay.Buttons
 {
     public class ReviveButton : MonoBehaviour, IWindow
     {
@@ -23,11 +24,12 @@ namespace UI.Gameplay.Buttons.Revive
         [SerializeField] private GameObject _gameObject;
         [SerializeField] private Button _button;
         [SerializeField] private ContinueButton _continueButton;
+        [SerializeField] private TMP_Text _leftSecondsText;
 
         [Header("Preferences")]
         [SerializeField] private float _levelResumeDelay = 0.5f;
         [SerializeField] private float _showDuration = 3f;
-        
+
         [Header("Show Animations")]
         [SerializeField] private AnchorMoveAnimation _anchorMoveAnimation;
         [SerializeField] private FadeAnimation _fadeAnimation;
@@ -49,6 +51,7 @@ namespace UI.Gameplay.Buttons.Revive
 
         private IDisposable _levelResumeDelaySubscription;
         private IDisposable _timerSubscription;
+        private IDisposable _leftSecondsSubscription;
 
         private readonly ITimer _hideTimer = new Timer();
 
@@ -64,21 +67,41 @@ namespace UI.Gameplay.Buttons.Revive
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(OnClicked);
-            _timerSubscription = _hideTimer.OnCompleted.Subscribe(_ => OnTimerCompleted());
+            StartObservingButton();
+            StartObservingTimerCompletion();
+            StartObservingLeftSeconds();
             StartHideTimer();
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(OnClicked);
+            StopObservingButton();
+            StopObservingTimerCompletion();
+            StopObservingLeftSeconds();
             _hideTimer.Stop();
-            _timerSubscription?.Dispose();
         }
 
         private void OnDestroy() => _levelResumeDelaySubscription?.Dispose();
 
         #endregion
+
+        private void StartObservingButton() => _button.onClick.AddListener(OnClicked);
+
+        private void StopObservingButton() => _button.onClick.RemoveListener(OnClicked);
+
+        private void StartObservingTimerCompletion() => _timerSubscription = _hideTimer.OnCompleted.Subscribe(_ => OnTimerCompleted());
+
+        private void StopObservingTimerCompletion() => _timerSubscription?.Dispose();
+
+        private void StartObservingLeftSeconds()
+        {
+            _leftSecondsSubscription = _hideTimer.RemainingTime
+                .Select(Mathf.CeilToInt)
+                .DistinctUntilChanged()
+                .Subscribe(OnRemainingSecondsChanged);
+        }
+
+        private void StopObservingLeftSeconds() => _leftSecondsSubscription?.Dispose();
 
         public void Show(Action onComplete = null)
         {
@@ -97,7 +120,7 @@ namespace UI.Gameplay.Buttons.Revive
 
         private void OnClicked()
         {
-            Hide(() => _levelFailedWindow.Hide(() =>
+            _levelFailedWindow.Hide(() =>
             {
                 if (_playerHolder.Instance != null && _playerHolder.Instance.Health.IsDeath.Value)
                     _playerHolder.Instance.StateMachine.Enter<ReviveState>();
@@ -108,16 +131,13 @@ namespace UI.Gameplay.Buttons.Revive
                     .Subscribe(_ => _levelStateMachine.Enter<ResumeLevelState>());
 
                 _continueButton.Show();
-            }));
+                Hide();
+            });
 
             _button.interactable = false;
         }
 
-        private void StartHideTimer()
-        {
-            _hideTimer.Stop();
-            _hideTimer.Start(_showDuration);
-        }
+        private void StartHideTimer() => _hideTimer.Start(_showDuration);
 
         private void OnTimerCompleted()
         {
@@ -125,5 +145,7 @@ namespace UI.Gameplay.Buttons.Revive
             _button.interactable = false;
             _continueButton.Show();
         }
+        
+        private void OnRemainingSecondsChanged(int remainingSeconds) => _leftSecondsText.text = remainingSeconds.ToString();
     }
 }
