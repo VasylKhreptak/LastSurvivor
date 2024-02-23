@@ -1,17 +1,6 @@
-﻿using EntryPoints.Core;
-using Gameplay.Entities.Helicopter;
-using Gameplay.Entities.Platoon;
-using Gameplay.Entities.Player;
-using Infrastructure.Data.Static;
-using Infrastructure.Data.Static.Core;
-using Infrastructure.Services.PersistentData.Core;
-using Infrastructure.Services.StaticData.Core;
-using UnityEngine;
-using Zenject;
-
-namespace EntryPoints
+﻿namespace EntryPoints
 {
-    public class LevelEntryPoint// : IEntryPoint
+    public class LevelEntryPoint // : IEntryPoint
     {
         // private readonly Transform _playerSpawnPoint;
         // private readonly DiContainer _container;

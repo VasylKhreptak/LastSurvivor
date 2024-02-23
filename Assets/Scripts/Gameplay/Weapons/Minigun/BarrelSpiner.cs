@@ -9,7 +9,7 @@ namespace Gameplay.Weapons.Minigun
     public class BarrelSpiner : ITickable, IDisposable
     {
         public readonly Preferences Settings;
-        
+
         public BarrelSpiner(Preferences preferences)
         {
             Settings = preferences;
@@ -18,7 +18,7 @@ namespace Gameplay.Weapons.Minigun
         private IDisposable _accelerationSubscription;
 
         public float RotateSpeed { get; private set; }
-        
+
         public void Tick() => Rotate();
 
         public void Dispose() => _accelerationSubscription?.Dispose();

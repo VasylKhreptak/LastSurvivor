@@ -1,6 +1,5 @@
 ﻿using Audio.Players;
 using Data.Persistent.Platforms;
-using Gameplay.Weapons.Core;
 using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine;
 using Gameplay.Weapons.Minigun.StateMachine.States;

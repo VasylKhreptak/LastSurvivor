@@ -9,7 +9,10 @@ namespace Quests.Main.Core
     {
         private readonly DiContainer _container;
 
-        public MainQuestSequence(DiContainer container) => _container = container;
+        public MainQuestSequence(DiContainer container)
+        {
+            _container = container;
+        }
 
         public void Initialize()
         {
@@ -23,7 +26,7 @@ namespace Quests.Main.Core
         {
             return new IQuest[]
             {
-                _container.Instantiate<CollectBarrelsQuest>(),
+                _container.Instantiate<CollectBarrelsQuest>()
                 // new FuelUpHelicopterQuest(),
                 // new BuyDumPlatformQuest(),
                 // new BuySoldiersPlatformQuest(),

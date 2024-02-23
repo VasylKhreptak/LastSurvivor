@@ -1,5 +1,4 @@
-﻿using System;
-using UniRx;
+﻿using UniRx;
 
 namespace Quests.Core
 {
@@ -21,7 +20,7 @@ namespace Quests.Core
         private bool _isVisualizationEnabled;
 
         private IQuest _currentQuest;
-        
+
         public IReadOnlyReactiveProperty<bool> IsCompleted => _isCompleted;
 
         public void StartObserving()
@@ -46,10 +45,12 @@ namespace Quests.Core
             _questCompletionSubscriptions.Clear();
 
             foreach (IQuest quest in _quests)
+            {
                 quest.StopObserving();
+            }
 
             _completedQuestsCount = 0;
-            
+
             StopVisualization();
         }
 
@@ -77,7 +78,7 @@ namespace Quests.Core
                 return;
             }
 
-            foreach (var quest in _quests)
+            foreach (IQuest quest in _quests)
             {
                 if (quest.IsCompleted.Value == false)
                 {

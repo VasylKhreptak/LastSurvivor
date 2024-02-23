@@ -2,8 +2,5 @@
 
 namespace Main.Platforms.BuyZones
 {
-    public class CollectorsBuyZone : MonoBehaviour
-    {
-        
-    }
+    public class CollectorsBuyZone : MonoBehaviour { }
 }

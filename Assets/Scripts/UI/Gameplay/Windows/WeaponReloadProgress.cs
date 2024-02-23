@@ -56,7 +56,7 @@ namespace UI.Gameplay.Windows
         }
 
         private void StopObserving() => _isWeaponReloadingSubscription?.Dispose();
-        
+
         private void OnWeaponReloadingStateChanged(bool isReloading)
         {
             if (isReloading)
@@ -64,7 +64,7 @@ namespace UI.Gameplay.Windows
             else
                 Hide();
         }
-        
+
         public void Show(Action onComplete = null)
         {
             _reloadProgress.SetActive(true);

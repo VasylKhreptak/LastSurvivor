@@ -2,8 +2,5 @@
 
 namespace Main.Platforms.BuyZones
 {
-    public class DumpBuyZone : MonoBehaviour
-    {
-        
-    }
+    public class DumpBuyZone : MonoBehaviour { }
 }

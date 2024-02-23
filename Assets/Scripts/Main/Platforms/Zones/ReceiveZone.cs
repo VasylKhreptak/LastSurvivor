@@ -4,7 +4,6 @@ using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.Input.Main.Core;
 using Infrastructure.Services.StaticData.Core;
-using Main.Entities.Player;
 using Plugins.Animations.Extensions;
 using Plugins.Banks;
 using UniRx;

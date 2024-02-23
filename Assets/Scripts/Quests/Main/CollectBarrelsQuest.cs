@@ -7,8 +7,6 @@ namespace Quests.Main
 {
     public class CollectBarrelsQuest : IQuest
     {
-        public CollectBarrelsQuest() { }
-
         private readonly BoolReactiveProperty _isCompleted = new BoolReactiveProperty(false);
 
         public QuestType Type => QuestType.CollectBarrels;

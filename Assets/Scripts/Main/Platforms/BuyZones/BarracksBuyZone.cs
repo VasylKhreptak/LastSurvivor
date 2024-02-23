@@ -2,8 +2,5 @@
 
 namespace Main.Platforms.BuyZones
 {
-    public class BarracksBuyZone : MonoBehaviour
-    {
-        
-    }
+    public class BarracksBuyZone : MonoBehaviour { }
 }

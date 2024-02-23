@@ -8,6 +8,6 @@
         BuySoldiersPlatform = 4,
         HireSoldier = 5,
         BuyCollectorsPlatform = 6,
-        HireCollector = 7,
+        HireCollector = 7
     }
 }

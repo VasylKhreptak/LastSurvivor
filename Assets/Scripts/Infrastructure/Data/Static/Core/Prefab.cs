@@ -21,6 +21,6 @@
         GameplayCollector = 16,
         Zombie = 17,
         Platoon = 18,
-        GameplayHelicopter = 19,
+        GameplayHelicopter = 19
     }
 }

@@ -1,9 +1,5 @@
 ﻿using System;
 using Gameplay.Data;
-using Gameplay.Entities.Player.StateMachine.States;
-using Gameplay.Levels.StateMachine.States;
-using Gameplay.Levels.StateMachine.States.Core;
-using Infrastructure.StateMachine.Main.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Plugins.Animations.Move;

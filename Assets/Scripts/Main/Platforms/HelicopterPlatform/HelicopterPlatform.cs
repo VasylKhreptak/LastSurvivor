@@ -2,8 +2,5 @@
 
 namespace Main.Platforms.HelicopterPlatform
 {
-    public class HelicopterPlatform : MonoBehaviour
-    {
-        
-    }
+    public class HelicopterPlatform : MonoBehaviour { }
 }

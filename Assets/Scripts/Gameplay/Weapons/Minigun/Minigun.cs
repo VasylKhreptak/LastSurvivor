@@ -13,18 +13,16 @@ namespace Gameplay.Weapons.Minigun
 {
     public class Minigun : MonoBehaviour, IWeapon
     {
-        private Transform _transform;
         private IStateMachine<IMinigunState> _stateMachine;
-        private ClampedIntegerBank _ammo;
         private ReloadState _reloadState;
 
         [Inject]
         private void Constructor(Transform transform, IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo,
             ReloadState reloadState)
         {
-            _transform = transform;
+            Transform = transform;
             _stateMachine = stateMachine;
-            _ammo = ammo;
+            Ammo = ammo;
             _reloadState = reloadState;
         }
 
@@ -32,9 +30,9 @@ namespace Gameplay.Weapons.Minigun
 
         private bool _isReloading;
 
-        public Transform Transform => _transform;
+        public Transform Transform { get; private set; }
 
-        public ClampedIntegerBank Ammo => _ammo;
+        public ClampedIntegerBank Ammo { get; private set; }
 
         public IReadOnlyReactiveProperty<float> ReloadProgress => _reloadState.ReloadProgress;
 

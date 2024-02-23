@@ -144,7 +144,7 @@ namespace UI.Gameplay.Buttons
             _button.interactable = false;
             _continueButton.Show();
         }
-        
+
         private void OnRemainingSecondsChanged(int remainingSeconds) => _leftSecondsText.text = remainingSeconds.ToString();
     }
 }

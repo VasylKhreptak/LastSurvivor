@@ -5,7 +5,6 @@ using Gameplay.Entities.Collector.StateMachine;
 using Gameplay.Entities.Collector.StateMachine.States;
 using Gameplay.Entities.Collector.StateMachine.States.Core;
 using Gameplay.Entities.Health.Core;
-using Gameplay.Entities.Player;
 using Infrastructure.StateMachine.Main.Core;
 using Pathfinding;
 using Providers.Velocity;

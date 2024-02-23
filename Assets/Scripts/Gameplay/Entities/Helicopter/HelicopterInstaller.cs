@@ -16,15 +16,15 @@ namespace Gameplay.Entities.Helicopter
         [SerializeField] private SplineTargetFollower.Preferences _helicopterMovementPreferences;
         [SerializeField] private NoiseRotator.Preferences _noiseRotatorPreferences;
         [SerializeField] private NoiseMover.Preferences _noiseMoverPreferences;
-        
+
         private SplineContainer _splineContainer;
-        
+
         [Inject]
         private void Constructor(SplineContainer splineContainer)
         {
             _splineContainer = splineContainer;
         }
-        
+
         #region MonoBehaviour
 
         private void OnValidate() => _transform ??= GetComponent<Transform>();
