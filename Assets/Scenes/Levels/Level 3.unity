@@ -12287,7 +12287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ab48ec6fc94a128d38d57025409ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 1803727000}
   _trackpad: {fileID: 1154708855}
   _playerSpawnPoint: {fileID: 1515554545}
   _cameraShakerPreferences:
@@ -12498,8 +12497,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1
     _workingDistance: 200
-  _helicopter: {fileID: 768617217}
-  _platoon: {fileID: 1315320393}
+  _helicopterMovementSpline: {fileID: 1405029103}
+  _platoonMovementSpline: {fileID: 897834983}
 --- !u!1001 &241740374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24559,18 +24558,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5547447209198090584}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &768617217 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7937641786973695095, guid: d3c826fc615a1b14fa9b13d18f9061bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 5547447209198090584}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a16d1c066f411b8426cb0aa0ba9b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &769142802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45315,7 +45302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe62adce42464200be162fd5b330ce03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _splineContainer: {fileID: 897834983}
   _soldierPoints:
   - {fileID: 939124893}
   - {fileID: 33638585}
@@ -59408,12 +59394,6 @@ Transform:
   - {fileID: 792116284}
   m_Father: {fileID: 1315320392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1803727000 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7369013979159944937, guid: d3c826fc615a1b14fa9b13d18f9061bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 5547447209198090584}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1805284732
 PrefabInstance:
   m_ObjectHideFlags: 0
