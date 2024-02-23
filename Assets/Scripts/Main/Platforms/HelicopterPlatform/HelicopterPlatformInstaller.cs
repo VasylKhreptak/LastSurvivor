@@ -50,6 +50,7 @@ namespace Main.Platforms.HelicopterPlatform
             BindUpgradeLogic();
             BindReceiveZoneVibration();
             BindBarrelPopAudioPlayer();
+            BindPlayerGridSizeUpdater();
         }
 
         private void BindUpgradeLogic()
@@ -67,5 +68,7 @@ namespace Main.Platforms.HelicopterPlatform
         private void BindReceiveZoneVibration() => Container.BindInterfacesTo<ReceiveZoneVibration>().AsSingle();
 
         private void BindBarrelPopAudioPlayer() => Container.Bind<AudioPlayer>().AsSingle().WithArguments(_barrelPopAudioPreferences);
+
+        private void BindPlayerGridSizeUpdater() => Container.BindInterfacesTo<PlayerGridSizeUpdater>().AsSingle();
     }
 }
