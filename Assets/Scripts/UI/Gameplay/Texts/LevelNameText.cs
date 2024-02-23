@@ -22,7 +22,7 @@ namespace UI.Gameplay.Texts
 
         private void OnValidate() => _tmp ??= GetComponent<TMP_Text>();
 
-        private void Awake() => _tmp.text = string.Format(_format, _persistentDataService.Data.PlayerData.CompletedLevels + 1);
+        private void Awake() => _tmp.text = string.Format(_format, _persistentDataService.Data.PlayerData.CompletedLevelsCount + 1);
 
         #endregion
     }

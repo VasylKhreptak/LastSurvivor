@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Data.Persistent;
 using Data.Persistent.Platforms;
+using Quests.Main.Core;
 
 namespace Infrastructure.Data.Persistent
 {
@@ -7,6 +9,7 @@ namespace Infrastructure.Data.Persistent
     {
         public readonly Resources Resources = new Resources();
         public readonly PlatformsData PlatformsData = new PlatformsData();
-        public int CompletedLevels;
+        public readonly HashSet<QuestType> CompletedQuests = new HashSet<QuestType>();
+        public int CompletedLevelsCount;
     }
 }

@@ -40,7 +40,7 @@ namespace Gameplay.Levels.ZombieSpawner
             _closestTargetObserver = closestTargetObserver;
             _zombieSpawners = zombieSpawners;
 
-            int currentLevel = persistentDataService.Data.PlayerData.CompletedLevels + 1;
+            int currentLevel = persistentDataService.Data.PlayerData.CompletedLevelsCount + 1;
             _spawnInterval = preferences.Interval.Get(currentLevel);
             _spawnCount = (int)preferences.Count.Get(currentLevel);
         }

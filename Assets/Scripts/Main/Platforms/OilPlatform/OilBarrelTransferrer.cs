@@ -59,7 +59,7 @@ namespace Main.Platforms.OilPlatform
 
         private void TryTransfer()
         {
-            if (_gridStack.Data.IsEmpty.Value || _playerGridStack.Data.IsFull.Value)
+            if (_gridStack.Bank.IsEmpty.Value || _playerGridStack.Bank.IsFull.Value)
                 return;
 
             if (_gridStack.TryPop(out GameObject barrelGameObject) == false)

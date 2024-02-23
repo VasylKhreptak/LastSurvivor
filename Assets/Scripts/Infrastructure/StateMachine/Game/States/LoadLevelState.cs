@@ -40,7 +40,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         private string GetAppropriateScene()
         {
-            int completedLevels = _persistentDataService.Data.PlayerData.CompletedLevels;
+            int completedLevels = _persistentDataService.Data.PlayerData.CompletedLevelsCount;
 
             if (completedLevels < _staticDataService.Config.Levels.Count)
                 return _staticDataService.Config.Levels[completedLevels].Name;

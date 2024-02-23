@@ -78,7 +78,7 @@ namespace Main.Platforms.DumpPlatform.Workers.StateMachine.States
                 {
                     SpawnGear();
 
-                    if (_gearsGrid.Data.IsFull.Value)
+                    if (_gearsGrid.Bank.IsFull.Value)
                         return;
 
                     StartSpawningGears();

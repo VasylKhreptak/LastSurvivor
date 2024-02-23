@@ -23,7 +23,7 @@ namespace Gameplay.Levels
 
         private void Awake()
         {
-            if (_persistentDataService.Data.PlayerData.CompletedLevels + 1 < _requiredLevel)
+            if (_persistentDataService.Data.PlayerData.CompletedLevelsCount + 1 < _requiredLevel)
                 Destroy(gameObject);
             else
                 _asset.SetActive(true);

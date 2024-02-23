@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputOutputTransform: {fileID: 8926923514575294111}
-  _tutorialArrow: {fileID: 4711835547486235760}
+  _questArrow: {fileID: 4711835547486235760}
 --- !u!95 &596578018800772039
 Animator:
   serializedVersion: 5
@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 7251933017637404949}
   - component: {fileID: 4711835547486235760}
   m_Layer: 2
-  m_Name: TutorialArrow
+  m_Name: QuestArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arrow: {fileID: 838123572815111867}
+  _distanceThreshold: 2
   Target: {fileID: 0}
 --- !u!1 &2936004180067939619
 GameObject:

@@ -128,7 +128,7 @@ namespace Gameplay.Entities.Zombie
         }
 
         private float GetDamage() =>
-            _staticDataService.Balance.ZombieDamage.Get(_persistentDataService.Data.PlayerData.CompletedLevels);
+            _staticDataService.Balance.ZombieDamage.Get(_persistentDataService.Data.PlayerData.CompletedLevelsCount);
 
         [Serializable]
         public class Preferences

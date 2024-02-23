@@ -45,10 +45,10 @@ namespace DebuggerOptions
         [Category("Game")]
         public void LoadPreviousLevel()
         {
-            _persistentDataService.Data.PlayerData.CompletedLevels--;
+            _persistentDataService.Data.PlayerData.CompletedLevelsCount--;
 
-            if (_persistentDataService.Data.PlayerData.CompletedLevels < 0)
-                _persistentDataService.Data.PlayerData.CompletedLevels = 0;
+            if (_persistentDataService.Data.PlayerData.CompletedLevelsCount < 0)
+                _persistentDataService.Data.PlayerData.CompletedLevelsCount = 0;
 
             _stateMachine.Enter<LoadLevelState, Action>(null);
         }
@@ -56,7 +56,7 @@ namespace DebuggerOptions
         [Category("Game")]
         public void LoadNextLevel()
         {
-            _persistentDataService.Data.PlayerData.CompletedLevels++;
+            _persistentDataService.Data.PlayerData.CompletedLevelsCount++;
             _stateMachine.Enter<LoadLevelState, Action>(null);
         }
     }
