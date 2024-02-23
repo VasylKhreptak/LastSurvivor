@@ -33,11 +33,11 @@ namespace Gameplay.Entities.Collector
         private List<Collector> _collectors;
 
         [Inject]
-        private void Constructor(PlayerHolder playerHolder, List<Collector> collectors)
+        private void Constructor(Player.Player player, List<Collector> collectors)
         {
             _collectors = collectors;
 
-            _followPoint = playerHolder.Instance.CollectorFollowPoints[_collectors.Count];
+            _followPoint = player.CollectorFollowPoints[_collectors.Count];
         }
 
         public override void InstallBindings()

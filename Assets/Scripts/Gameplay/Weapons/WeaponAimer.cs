@@ -1,5 +1,6 @@
 ﻿using System;
 using Gameplay.Aim;
+using Gameplay.Weapons.Core;
 using UnityEngine;
 using Zenject;
 
@@ -9,26 +10,26 @@ namespace Gameplay.Weapons
     {
         private readonly Trackpad _trackpad;
         private readonly Camera _camera;
-        private readonly WeaponHolder _weaponHolder;
+        private readonly IWeapon _weapon;
         private readonly Preferences _preferences;
 
-        public WeaponAimer(Trackpad trackpad, Camera camera, WeaponHolder weaponHolder, Preferences preferences)
+        public WeaponAimer(Trackpad trackpad, Camera camera, IWeapon weapon, Preferences preferences)
         {
             _trackpad = trackpad;
             _camera = camera;
-            _weaponHolder = weaponHolder;
+            _weapon = weapon;
             _preferences = preferences;
         }
 
         public bool Enabled = true;
 
         private Vector3 _lookPoint;
-        private Transform _transform;
+        private Transform _weaponTransform;
         private Vector3 _weaponPosition;
 
         public void Tick()
         {
-            if (Enabled == false || _weaponHolder.Instance.Value == null)
+            if (Enabled == false)
                 return;
 
             Aim();
@@ -38,12 +39,12 @@ namespace Gameplay.Weapons
         {
             _lookPoint = GetLookPoint();
 
-            _transform = _weaponHolder.Instance.Value.Transform;
-            _weaponPosition = _transform.position;
+            _weaponTransform = _weapon.Transform;
+            _weaponPosition = _weaponTransform.position;
 
             Debug.DrawLine(_weaponPosition, _lookPoint, Color.red);
 
-            _transform.rotation = Quaternion.LookRotation(_lookPoint - _weaponPosition);
+            _weaponTransform.rotation = Quaternion.LookRotation(_lookPoint - _weaponPosition);
         }
 
         private Vector3 GetLookPoint()

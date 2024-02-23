@@ -13,11 +13,18 @@ namespace Gameplay.Entities.Helicopter
         [SerializeField] private Transform _noiseLayer;
 
         [Header("Preferences")]
-        [SerializeField] private SplineContainer _splineContainer;
         [SerializeField] private SplineTargetFollower.Preferences _helicopterMovementPreferences;
         [SerializeField] private NoiseRotator.Preferences _noiseRotatorPreferences;
         [SerializeField] private NoiseMover.Preferences _noiseMoverPreferences;
-
+        
+        private SplineContainer _splineContainer;
+        
+        [Inject]
+        private void Constructor(SplineContainer splineContainer)
+        {
+            _splineContainer = splineContainer;
+        }
+        
         #region MonoBehaviour
 
         private void OnValidate() => _transform ??= GetComponent<Transform>();

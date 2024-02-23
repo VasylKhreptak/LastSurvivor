@@ -1,9 +1,7 @@
 ﻿using System;
-using Gameplay.Weapons;
 using Gameplay.Weapons.Core;
 using TMPro;
 using UI.Texts.Core;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -14,12 +12,12 @@ namespace UI.Gameplay.Texts
         [Header("References")]
         [SerializeField] private TMP_Text _tmp;
 
-        private WeaponHolder _weaponHolder;
+        private IWeapon _weapon;
 
         [Inject]
-        private void Constructor(WeaponHolder weaponHolder)
+        private void Constructor(IWeapon weapon)
         {
-            _weaponHolder = weaponHolder;
+            _weapon = weapon;
         }
 
         private PropertyTextConverter<int> _propertyTextConverter;
@@ -32,36 +30,12 @@ namespace UI.Gameplay.Texts
 
         private void OnEnable()
         {
-            StartObservingWeapon();
+            _propertyTextConverter = new PropertyTextConverter<int>(_tmp, _weapon.Ammo.Value);
+            _propertyTextConverter.Initialize();
         }
 
-        private void OnDisable()
-        {
-            StopObservingWeapon();
-            _propertyTextConverter?.Dispose();
-        }
+        private void OnDisable() => _propertyTextConverter?.Dispose();
 
         #endregion
-
-        private void StartObservingWeapon() => _weaponSubscription = _weaponHolder.Instance.Subscribe(OnWeaponChanged);
-
-        private void StopObservingWeapon() => _weaponSubscription?.Dispose();
-
-        private void OnWeaponChanged(IWeapon weapon)
-        {
-            if (weapon == null)
-            {
-                _propertyTextConverter?.Dispose();
-                return;
-            }
-
-            if (_propertyTextConverter == null)
-            {
-                _propertyTextConverter = new PropertyTextConverter<int>(_tmp, weapon.Ammo.Value);
-                _propertyTextConverter.Initialize();
-            }
-
-            _propertyTextConverter.SetObservable(weapon.Ammo.Value);
-        }
     }
 }

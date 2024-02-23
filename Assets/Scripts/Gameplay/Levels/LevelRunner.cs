@@ -1,5 +1,4 @@
-﻿using Gameplay.Entities.Player;
-using Gameplay.Levels.StateMachine.States;
+﻿using Gameplay.Levels.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using UnityEngine;
@@ -13,10 +12,7 @@ namespace Gameplay.Levels
         private IStateMachine<ILevelState> _levelStateMachine;
 
         [Inject]
-        private void Constructor(IStateMachine<ILevelState> levelStateMachine, PlayerHolder playerHolder)
-        {
-            _levelStateMachine = levelStateMachine;
-        }
+        private void Constructor(IStateMachine<ILevelState> levelStateMachine) => _levelStateMachine = levelStateMachine;
 
         public void OnPointerDown(PointerEventData eventData) => StartLevel();
 

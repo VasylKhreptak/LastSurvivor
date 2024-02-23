@@ -1,5 +1,4 @@
 ﻿using System;
-using Gameplay.Weapons;
 using Gameplay.Weapons.Core;
 using UniRx;
 using UnityEngine;
@@ -13,19 +12,18 @@ namespace UI.Gameplay.ProgressBars
         [Header("References")]
         [SerializeField] private Image _image;
 
-        private WeaponHolder _weaponHolder;
+        private IWeapon _weapon;
 
         [Inject]
-        private void Constructor(WeaponHolder weaponHolder)
+        private void Constructor(IWeapon weapon)
         {
-            _weaponHolder = weaponHolder;
+            _weapon = weapon;
         }
 
         private readonly int _propertyName = Shader.PropertyToID("_Arc2");
 
         private Material _material;
 
-        private IDisposable _weaponSubscription;
         private IDisposable _progressSubscription;
 
         #region MoonBehaviour
@@ -34,36 +32,13 @@ namespace UI.Gameplay.ProgressBars
 
         private void OnValidate() => _image ??= GetComponent<Image>();
 
-        private void OnEnable() => StartObserving();
+        private void OnEnable() => StartObservingProgress();
 
-        private void OnDisable() => StopObserving();
+        private void OnDisable() => StopObservingProgress();
 
         #endregion
 
-        private void StartObserving() => StartObservingWeapon();
-
-        private void StopObserving()
-        {
-            StopObservingWeapon();
-            StopObservingProgress();
-        }
-
-        private void StartObservingWeapon() => _weaponSubscription = _weaponHolder.Instance.Subscribe(OnWeaponChanged);
-
-        private void StopObservingWeapon() => _weaponSubscription?.Dispose();
-
-        private void OnWeaponChanged(IWeapon weapon)
-        {
-            StopObservingProgress();
-
-            if (weapon == null)
-                return;
-
-            StartObservingProgress(weapon.ReloadProgress);
-        }
-
-        private void StartObservingProgress(IReadOnlyReactiveProperty<float> progress) =>
-            _progressSubscription = progress.Subscribe(SetProgress);
+        private void StartObservingProgress() => _progressSubscription = _weapon.ReloadProgress.Subscribe(SetProgress);
 
         private void StopObservingProgress() => _progressSubscription?.Dispose();
 

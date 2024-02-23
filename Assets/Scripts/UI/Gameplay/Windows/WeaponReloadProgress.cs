@@ -1,5 +1,4 @@
 ﻿using System;
-using Gameplay.Weapons;
 using Gameplay.Weapons.Core;
 using Infrastructure.Graphics.UI.Windows.Core;
 using Plugins.Animations;
@@ -21,12 +20,12 @@ namespace UI.Gameplay.Windows
         [SerializeField] private FadeAnimation _aimFadeAnimation;
         [SerializeField] private FadeAnimation _reloadProgressFadeAnimation;
 
-        private WeaponHolder _weaponHolder;
+        private IWeapon _weapon;
 
         [Inject]
-        private void Constructor(WeaponHolder weaponHolder)
+        private void Constructor(IWeapon weapon)
         {
-            _weaponHolder = weaponHolder;
+            _weapon = weapon;
         }
 
         private IAnimation _showAnimation;
@@ -51,6 +50,21 @@ namespace UI.Gameplay.Windows
 
         #endregion
 
+        private void StartObserving()
+        {
+            _isWeaponReloadingSubscription = _weapon.IsReloading.Subscribe(OnWeaponReloadingStateChanged);
+        }
+
+        private void StopObserving() => _isWeaponReloadingSubscription?.Dispose();
+        
+        private void OnWeaponReloadingStateChanged(bool isReloading)
+        {
+            if (isReloading)
+                Show();
+            else
+                Hide();
+        }
+        
         public void Show(Action onComplete = null)
         {
             _reloadProgress.SetActive(true);
@@ -69,39 +83,6 @@ namespace UI.Gameplay.Windows
                 _reloadProgress.SetActive(false);
                 onComplete?.Invoke();
             });
-        }
-
-        private void StartObserving() => StartObservingWeapon();
-
-        private void StopObserving()
-        {
-            StopObservingWeapon();
-            _isWeaponReloadingSubscription?.Dispose();
-        }
-
-        private void StartObservingWeapon() => _weaponSubscription = _weaponHolder.Instance.Subscribe(OnWeaponChanged);
-
-        private void StopObservingWeapon() => _weaponSubscription?.Dispose();
-
-        private void OnWeaponChanged(IWeapon weapon)
-        {
-            _isWeaponReloadingSubscription?.Dispose();
-
-            if (weapon == null)
-            {
-                Hide();
-                return;
-            }
-
-            _isWeaponReloadingSubscription = weapon.IsReloading.Subscribe(OnWeaponReloadingStateChanged);
-        }
-
-        private void OnWeaponReloadingStateChanged(bool isReloading)
-        {
-            if (isReloading)
-                Show();
-            else
-                Hide();
         }
     }
 }

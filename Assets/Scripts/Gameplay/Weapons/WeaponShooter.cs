@@ -1,5 +1,6 @@
 ﻿using System;
 using Gameplay.Aim;
+using Gameplay.Weapons.Core;
 using UniRx;
 using Zenject;
 
@@ -8,12 +9,12 @@ namespace Gameplay.Weapons
     public class WeaponShooter : IInitializable, IDisposable
     {
         private readonly Trackpad _trackpad;
-        private readonly WeaponHolder _weaponHolder;
+        private readonly IWeapon _weapon;
 
-        public WeaponShooter(Trackpad trackpad, WeaponHolder weaponHolder)
+        public WeaponShooter(Trackpad trackpad, IWeapon weapon)
         {
             _trackpad = trackpad;
-            _weaponHolder = weaponHolder;
+            _weapon = weapon;
         }
 
         private IDisposable _subscription;
@@ -23,7 +24,7 @@ namespace Gameplay.Weapons
         public void Dispose()
         {
             StopObserving();
-            _weaponHolder.Instance.Value?.StopShooting();
+            _weapon.StopShooting();
         }
 
         private void StartObserving()
@@ -33,9 +34,9 @@ namespace Gameplay.Weapons
                 .Subscribe(isPressed =>
                 {
                     if (isPressed)
-                        _weaponHolder.Instance.Value?.StartShooting();
+                        _weapon.StartShooting();
                     else
-                        _weaponHolder.Instance.Value?.StopShooting();
+                        _weapon.StopShooting();
                 });
         }
 

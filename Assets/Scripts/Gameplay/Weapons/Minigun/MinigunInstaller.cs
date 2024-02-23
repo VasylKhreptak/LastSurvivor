@@ -29,18 +29,17 @@ namespace Gameplay.Weapons.Minigun
         [SerializeField] private ReloadState.Preferences _reloadStatePreferences;
 
         private HelicopterPlatformData _helicopterPlatformData;
-        private WeaponHolder _weaponHolder;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService, WeaponHolder weaponHolder)
+        private void Constructor(IPersistentDataService persistentDataService)
         {
             _helicopterPlatformData = persistentDataService.Data.PlayerData.PlatformsData.HelicopterPlatformData;
-            _weaponHolder = weaponHolder;
         }
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<TransformVelocityProvider>().AsSingle().WithArguments(transform);
+            Container.BindInstance(transform).AsSingle();
+            Container.BindInterfacesTo<TransformVelocityProvider>().AsSingle();
 
             BindMinigunAmmo();
             BindBarrelSpiner();
@@ -49,8 +48,6 @@ namespace Gameplay.Weapons.Minigun
             BindShootAudioPlayer();
             BindShellSpawner();
             BindStateMachine();
-            BindWeapon();
-            RegisterWeapon();
             EnterIdleState();
 
             Container.Bind<ToggleableManager>().AsSingle();
@@ -94,13 +91,5 @@ namespace Gameplay.Weapons.Minigun
         private void BindShellSpawner() => Container.Bind<ShellSpawner>().AsSingle().WithArguments(_shellSpawnerPreferences);
 
         private void EnterIdleState() => Container.Resolve<IStateMachine<IMinigunState>>().Enter<IdleState>();
-
-        private void BindWeapon()
-        {
-            Container.Bind<Transform>().FromComponentOnRoot().AsSingle().WhenInjectedInto<IWeapon>();
-            Container.BindInterfacesTo<Minigun>().AsSingle();
-        }
-
-        private void RegisterWeapon() => _weaponHolder.Instance.Value = Container.Resolve<IWeapon>();
     }
 }

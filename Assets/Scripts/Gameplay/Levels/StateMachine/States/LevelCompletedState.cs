@@ -16,7 +16,7 @@ namespace Gameplay.Levels.StateMachine.States
     public class LevelCompletedState : ILevelState, IState
     {
         private readonly List<Zombie> _zombies;
-        private readonly PlayerHolder _playerHolder;
+        private readonly Player _player;
         private readonly Trackpad _trackpad;
         private readonly LevelCompletedWindow _levelCompletedWindow;
         private readonly WeaponAim _weaponAim;
@@ -27,12 +27,12 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly List<Collector> _collectors;
         private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
 
-        public LevelCompletedState(List<Zombie> zombies, PlayerHolder playerHolder, Trackpad trackpad,
+        public LevelCompletedState(List<Zombie> zombies, Player player, Trackpad trackpad,
             LevelCompletedWindow levelCompletedWindow, WeaponAim weaponAim, WeaponAimer weaponAimer, HUD hud, Platoon platoon,
             IPersistentDataService persistentDataService, List<Collector> collectors, List<ZombieSpawner.ZombieSpawner> zombieSpawners)
         {
             _zombies = zombies;
-            _playerHolder = playerHolder;
+            _player = player;
             _trackpad = trackpad;
             _levelCompletedWindow = levelCompletedWindow;
             _weaponAim = weaponAim;
@@ -49,8 +49,8 @@ namespace Gameplay.Levels.StateMachine.States
             _zombieSpawners.ForEach(spawner => spawner.Disable());
             _zombies.ForEach(zombie => zombie.StateMachine.Enter<IdleState>());
 
-            if (_playerHolder.Instance != null && _playerHolder.Instance.Health.IsDeath.Value == false)
-                _playerHolder.Instance.StateMachine.Enter<Entities.Player.StateMachine.States.IdleState>();
+            if (_player.Health.IsDeath.Value == false)
+                _player.StateMachine.Enter<Entities.Player.StateMachine.States.IdleState>();
 
             _trackpad.enabled = false;
             _levelCompletedWindow.Show();

@@ -67,7 +67,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 5508219213158130143}
   _noiseLayer: {fileID: 7569575966004068094}
-  _splineContainer: {fileID: 0}
   _helicopterMovementPreferences:
     _followSpeed: 3
     _rotateSpeed: 2

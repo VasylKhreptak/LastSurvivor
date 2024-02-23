@@ -7,32 +7,34 @@ using Infrastructure.StateMachine.Main.Core;
 using Plugins.Banks;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay.Weapons.Minigun
 {
-    public class Minigun : IWeapon
+    public class Minigun : MonoBehaviour, IWeapon
     {
-        private readonly IStateMachine<IMinigunState> _stateMachine;
-        private readonly ReloadState _reloadState;
+        private Transform _transform;
+        private IStateMachine<IMinigunState> _stateMachine;
+        private ClampedIntegerBank _ammo;
+        private ReloadState _reloadState;
 
-        public Minigun(Transform transform, IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo,
+        [Inject]
+        private void Constructor(Transform transform, IStateMachine<IMinigunState> stateMachine, ClampedIntegerBank ammo,
             ReloadState reloadState)
         {
-            Transform = transform;
+            _transform = transform;
             _stateMachine = stateMachine;
-            Ammo = ammo;
+            _ammo = ammo;
             _reloadState = reloadState;
         }
-
-        private readonly InstanceHolder<Action> _spinUpPayload = new InstanceHolder<Action>();
 
         private readonly InstanceHolder<Action> _reloadStatePayload = new InstanceHolder<Action>();
 
         private bool _isReloading;
 
-        public Transform Transform { get; }
+        public Transform Transform => _transform;
 
-        public ClampedIntegerBank Ammo { get; }
+        public ClampedIntegerBank Ammo => _ammo;
 
         public IReadOnlyReactiveProperty<float> ReloadProgress => _reloadState.ReloadProgress;
 

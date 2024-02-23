@@ -35,15 +35,14 @@ namespace UI.Gameplay.Buttons
         [SerializeField] private FadeAnimation _fadeAnimation;
 
         private IWindow _levelFailedWindow;
-        private PlayerHolder _playerHolder;
+        private Player _player;
         private IStateMachine<ILevelState> _levelStateMachine;
 
         [Inject]
-        private void Constructor(LevelFailedWindow levelFailedWindow, PlayerHolder playerHolder,
-            IStateMachine<ILevelState> levelStateMachine)
+        private void Constructor(LevelFailedWindow levelFailedWindow, Player player, IStateMachine<ILevelState> levelStateMachine)
         {
             _levelFailedWindow = levelFailedWindow;
-            _playerHolder = playerHolder;
+            _player = player;
             _levelStateMachine = levelStateMachine;
         }
 
@@ -122,8 +121,8 @@ namespace UI.Gameplay.Buttons
         {
             _levelFailedWindow.Hide(() =>
             {
-                if (_playerHolder.Instance != null && _playerHolder.Instance.Health.IsDeath.Value)
-                    _playerHolder.Instance.StateMachine.Enter<ReviveState>();
+                if (_player.Health.IsDeath.Value)
+                    _player.StateMachine.Enter<ReviveState>();
 
                 _levelResumeDelaySubscription?.Dispose();
                 _levelResumeDelaySubscription = Observable

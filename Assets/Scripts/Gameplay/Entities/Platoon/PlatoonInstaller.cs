@@ -8,9 +8,16 @@ namespace Gameplay.Entities.Platoon
 {
     public class PlatoonInstaller : MonoInstaller
     {
-        [SerializeField] private SplineContainer _splineContainer;
         [SerializeField] private List<Transform> _soldierPoints;
         [SerializeField] private SplineTargetFollower.Preferences _movePreferences;
+
+        private SplineContainer _splineContainer;
+
+        [Inject]
+        private void Constructor(SplineContainer splineContainer)
+        {
+            _splineContainer = splineContainer;
+        }
 
         public override void InstallBindings()
         {

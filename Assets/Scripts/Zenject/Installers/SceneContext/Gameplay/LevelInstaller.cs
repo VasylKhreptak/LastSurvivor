@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DebuggerOptions;
-using EntryPoints;
-using EntryPoints.Core;
 using Gameplay.Aim;
 using Gameplay.Data;
 using Gameplay.Entities.Collector;
@@ -16,10 +14,16 @@ using Gameplay.Levels.StateMachine.States.Core;
 using Gameplay.Levels.ZombieSpawner;
 using Gameplay.Waypoints;
 using Gameplay.Weapons;
+using Gameplay.Weapons.Core;
+using Infrastructure.Data.Static;
+using Infrastructure.Data.Static.Core;
+using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.Services.StaticData.Core;
 using ObjectPoolSystem.PoolCategories;
 using Plugins.ObjectPoolSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Splines;
 using Utilities.CameraUtilities.Shaker;
 
 namespace Zenject.Installers.SceneContext.Gameplay
@@ -27,7 +31,6 @@ namespace Zenject.Installers.SceneContext.Gameplay
     public class LevelInstaller : MonoInstaller
     {
         [Header("References")]
-        [SerializeField] private Camera _camera;
         [SerializeField] private Trackpad _trackpad;
         [SerializeField] private Transform _playerSpawnPoint;
 
@@ -42,33 +45,45 @@ namespace Zenject.Installers.SceneContext.Gameplay
         [Header("Weapons")]
         [SerializeField] private WeaponAimer.Preferences _weaponAimPreferences;
 
-        [Header("Entities")]
-        [SerializeField] private Helicopter _helicopter;
-        [SerializeField] private Platoon _platoon;
+        [Header("Splines")]
+        [SerializeField] private SplineContainer _helicopterMovementSpline;
+        [SerializeField] private SplineContainer _platoonMovementSpline;
+
+        private GamePrefabs _gamePrefabs;
+        private IPersistentDataService _persistentDataService;
+
+        [Inject]
+        private void Constructor(IStaticDataService staticDataService, IPersistentDataService persistentDataService)
+        {
+            _gamePrefabs = staticDataService.Prefabs;
+            _persistentDataService = persistentDataService;
+        }
 
         #region MonoBehaviour
 
         [Button("Validate")]
         private void OnValidate()
         {
-            _camera ??= FindObjectOfType<Camera>(true);
             _trackpad ??= FindObjectOfType<Trackpad>(true);
-            _helicopter ??= FindObjectOfType<Helicopter>(true);
-            _platoon ??= FindObjectOfType<Platoon>(true);
         }
 
         #endregion
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_camera).AsSingle();
             Container.BindInstance(_trackpad).AsSingle();
-            Container.BindInstance(_helicopter).AsSingle();
-            Container.BindInstance(_platoon).AsSingle();
+            Container.BindInstance(_helicopterMovementSpline).WhenInjectedInto<HelicopterInstaller>();
+            Container.BindInstance(_platoonMovementSpline).WhenInjectedInto<PlatoonInstaller>();
 
-            BindHolders();
+            GameObject helicopterObject = CreateHelicopter();
+            BindWeapon(helicopterObject);
+            BindCamera(helicopterObject);
             BindCameraShaker();
             BindPlayerWaypoints();
+            BindPlayer();
+            BindHelicopter(helicopterObject);
+            BindPlatoon();
+            InitializeCollectors();
             BindObjectPools();
             BindZombiesList();
             BindCollectorsList();
@@ -78,19 +93,10 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindWeaponShooter();
             BindLevelStateMachine();
             BindLevelDebugger();
-            EnterEntryPoint();
         }
 
-        private void BindHolders()
-        {
-            Container.Bind<WeaponHolder>().AsSingle();
-            Container.Bind<PlayerHolder>().AsSingle();
-        }
-
-        private void BindCameraShaker()
-        {
+        private void BindCameraShaker() =>
             Container.BindInterfacesAndSelfTo<CameraShaker>().AsSingle().WithArguments(_cameraShakerPreferences);
-        }
 
         private void BindPlayerWaypoints()
         {
@@ -99,6 +105,73 @@ namespace Zenject.Installers.SceneContext.Gameplay
                 .AsSingle()
                 .WithArguments(_playerWaypoints)
                 .WhenInjectedInto<PlayerInstaller>();
+        }
+
+        private void BindPlayer()
+        {
+            GameObject playerObject = Container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayPlayer], _playerSpawnPoint.position,
+                _playerSpawnPoint.rotation, null);
+            Container.Bind<Player>().FromComponentOn(playerObject).AsSingle();
+        }
+
+        private void BindPlatoon()
+        {
+            Container.Bind<Platoon>().FromComponentInNewPrefab(_gamePrefabs[Prefab.Platoon]).AsSingle();
+            Platoon platoon = Container.Resolve<Platoon>();
+            platoon.TargetFollower.Target = Container.Resolve<Player>().transform;
+            platoon.TargetFollower.FollowTargetImmediately();
+            InitializeSoldiers();
+        }
+
+        private GameObject CreateHelicopter() => Container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayHelicopter]);
+
+        private void BindWeapon(GameObject helicopterObject) =>
+            Container.BindInstance(helicopterObject.GetComponentInChildren<IWeapon>()).AsSingle();
+
+        private void BindCamera(GameObject helicopterObject)
+        {
+            Camera camera = helicopterObject.GetComponentInChildren<Camera>(true);
+            Container.BindInstance(camera).AsSingle();
+        }
+
+        private void BindHelicopter(GameObject helicopterObject)
+        {
+            Helicopter helicopter = helicopterObject.GetComponent<Helicopter>();
+            Container.BindInstance(helicopter).AsSingle();
+            helicopter.TargetFollower.Target = Container.Resolve<Player>().transform;
+            helicopter.TargetFollower.FollowTargetImmediately();
+        }
+
+        private void InitializeSoldiers()
+        {
+            Platoon platoon = Container.Resolve<Platoon>();
+
+            int count = Mathf.Min(_persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Value.Value,
+                platoon.SoldierPoints.Count);
+
+            for (int i = 0; i < count; i++)
+            {
+                GameObject soldierObject = Container.InstantiatePrefab(_gamePrefabs[Prefab.GameplaySoldier]);
+                Rigidbody rigidbody = soldierObject.GetComponent<Rigidbody>();
+                rigidbody.position = platoon.SoldierPoints[i].position;
+                rigidbody.rotation = platoon.SoldierPoints[i].rotation;
+            }
+        }
+
+        private void InitializeCollectors()
+        {
+            Player player = Container.Resolve<Player>();
+
+            int count = Mathf.Min(_persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Value
+                .Value, player.CollectorFollowPoints.Count);
+
+            for (int i = 0; i < count; i++)
+            {
+                GameObject collectorObject = Container.InstantiatePrefab(_gamePrefabs[Prefab.GameplayCollector]);
+                Rigidbody rigidbody = collectorObject.GetComponent<Rigidbody>();
+                rigidbody.position = player.CollectorFollowPoints[i].position;
+                rigidbody.rotation = player.CollectorFollowPoints[i].rotation;
+            }
         }
 
         private void BindObjectPools()
@@ -151,11 +224,5 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindWeaponShooter() => Container.BindInterfacesAndSelfTo<WeaponShooter>().AsSingle();
 
         private void BindLevelDebugger() => Container.BindInterfacesTo<LevelOptions>().AsSingle();
-
-        private void EnterEntryPoint()
-        {
-            Container.BindInterfacesTo<LevelEntryPoint>().AsSingle().WithArguments(_playerSpawnPoint);
-            Container.Resolve<IEntryPoint>().Enter();
-        }
     }
 }
