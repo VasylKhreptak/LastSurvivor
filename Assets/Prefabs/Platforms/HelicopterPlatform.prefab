@@ -871,6 +871,7 @@ GameObject:
   - component: {fileID: 6049512134499636252}
   - component: {fileID: 9105572580215393425}
   - component: {fileID: 6878809874659327099}
+  - component: {fileID: 5177794676584225554}
   m_Layer: 0
   m_Name: HelicopterPlatform
   m_TagString: Untagged
@@ -1045,6 +1046,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
+--- !u!114 &5177794676584225554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6399390264546074170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924642cffc90437287d50765129f2a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7483964880424602202
 GameObject:
   m_ObjectHideFlags: 0

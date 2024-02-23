@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using DebuggerOptions;
+using EntryPoints;
+using EntryPoints.Core;
 using Gameplay.Aim;
 using Gameplay.Data;
 using Gameplay.Entities.Collector;
@@ -27,6 +29,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         [Header("References")]
         [SerializeField] private Camera _camera;
         [SerializeField] private Trackpad _trackpad;
+        [SerializeField] private Transform _playerSpawnPoint;
 
         [Header("Preferences")]
         [SerializeField] private CameraShaker.Preferences _cameraShakerPreferences;
@@ -75,6 +78,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindWeaponShooter();
             BindLevelStateMachine();
             BindLevelDebugger();
+            EnterEntryPoint();
         }
 
         private void BindHolders()
@@ -147,5 +151,11 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindWeaponShooter() => Container.BindInterfacesAndSelfTo<WeaponShooter>().AsSingle();
 
         private void BindLevelDebugger() => Container.BindInterfacesTo<LevelOptions>().AsSingle();
+
+        private void EnterEntryPoint()
+        {
+            Container.BindInterfacesTo<LevelEntryPoint>().AsSingle().WithArguments(_playerSpawnPoint);
+            Container.Resolve<IEntryPoint>().Enter();
+        }
     }
 }

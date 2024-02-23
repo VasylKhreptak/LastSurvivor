@@ -11,22 +11,20 @@ using Zenject;
 
 namespace EntryPoints
 {
-    public class LevelEntryPoint : MonoBehaviour, IEntryPoint
+    public class LevelEntryPoint : IEntryPoint
     {
-        [Header("References")]
-        [SerializeField] private Transform _playerSpawnPoint;
+        private readonly Transform _playerSpawnPoint;
+        private readonly DiContainer _container;
+        private readonly PlayerHolder _playerHolder;
+        private readonly GamePrefabs _gamePrefabs;
+        private readonly Helicopter _helicopter;
+        private readonly Platoon _platoon;
+        private readonly IPersistentDataService _persistentDataService;
 
-        private DiContainer _container;
-        private PlayerHolder _playerHolder;
-        private GamePrefabs _gamePrefabs;
-        private Helicopter _helicopter;
-        private Platoon _platoon;
-        private IPersistentDataService _persistentDataService;
-
-        [Inject]
-        private void Constructor(DiContainer container, PlayerHolder playerHolder, IStaticDataService staticDataService,
+        private LevelEntryPoint(Transform playerSpawnPoint, DiContainer container, PlayerHolder playerHolder, IStaticDataService staticDataService,
             Helicopter helicopter, Platoon platoon, IPersistentDataService persistentDataService)
         {
+            _playerSpawnPoint = playerSpawnPoint;
             _container = container;
             _playerHolder = playerHolder;
             _gamePrefabs = staticDataService.Prefabs;
@@ -34,12 +32,6 @@ namespace EntryPoints
             _platoon = platoon;
             _persistentDataService = persistentDataService;
         }
-
-        #region MonoBehaviour
-
-        private void Start() => Enter();
-
-        #endregion
 
         public void Enter()
         {
@@ -66,6 +58,7 @@ namespace EntryPoints
 
         private void InitializePlatoon()
         {
+            Debug.Log(_platoon.TargetFollower == null);
             _platoon.TargetFollower.Target = _playerHolder.Instance.transform;
             _platoon.TargetFollower.FollowTargetImmediately();
             InitializeSoldiers();

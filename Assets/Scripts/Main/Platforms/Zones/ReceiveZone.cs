@@ -10,6 +10,7 @@ using Plugins.Banks;
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Player = Main.Entities.Player.Player;
 using Random = UnityEngine.Random;
 
 namespace Main.Platforms.Zones
@@ -75,20 +76,20 @@ namespace Main.Platforms.Zones
 
         private void OnTriggerEnter(Collider other)
         {
-            if(_player != null)
-                return;
-            
-            if (other.TryGetComponent(out _player))
+            if (other.TryGetComponent(out Player player))
+            {
+                _player = player;
                 StartObservingInputInteraction();
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(_player == null)
-                return;
-            
-            if (other.TryGetComponent(out _player))
+            if (other.TryGetComponent(out Player _))
+            {
+                _player = null;
                 StopObservingInputInteraction();
+            }
         }
 
         #endregion

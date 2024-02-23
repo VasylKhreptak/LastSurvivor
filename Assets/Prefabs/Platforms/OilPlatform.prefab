@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1980979240135305901}
   - component: {fileID: 9067025097472491869}
   - component: {fileID: 8542159695162403517}
+  - component: {fileID: 8900098841816324885}
   m_Layer: 0
   m_Name: OilPlatform
   m_TagString: Untagged
@@ -107,6 +108,18 @@ MonoBehaviour:
       RolloffMode: 1
       MinDistance: 1
       MaxDistance: 20
+--- !u!114 &8900098841816324885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124250166165220449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d88065e492c480e9e8c18dd65c3c6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &590290058452046142
 GameObject:
   m_ObjectHideFlags: 0

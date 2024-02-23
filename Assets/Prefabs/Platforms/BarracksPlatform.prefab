@@ -795,6 +795,7 @@ GameObject:
   - component: {fileID: 9172434714067693217}
   - component: {fileID: 4441346692355253902}
   - component: {fileID: 3201678056499230396}
+  - component: {fileID: 2862965453125020625}
   m_Layer: 0
   m_Name: BarracksPlatform
   m_TagString: Untagged
@@ -876,6 +877,18 @@ MonoBehaviour:
       RolloffMode: 1
       MinDistance: 1
       MaxDistance: 10
+--- !u!114 &2862965453125020625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183800981417285739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7817845537e6499e9c03c58c046ed74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &113636265390891453
 PrefabInstance:
   m_ObjectHideFlags: 0
