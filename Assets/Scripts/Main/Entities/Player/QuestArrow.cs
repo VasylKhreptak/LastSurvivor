@@ -19,12 +19,18 @@ namespace Main.Entities.Player
 
         private void Update()
         {
+            if (Target == null)
+            {
+                _arrow.gameObject.SetActive(false);
+                return;
+            }
+
             _position = transform.position;
 
             _lookPoint = Target.position;
             _lookPoint.y = _position.y;
 
-            if (Target == null || Vector3.Distance(_lookPoint, _position) < _distanceThreshold)
+            if (Vector3.Distance(_lookPoint, _position) < _distanceThreshold)
             {
                 _arrow.gameObject.SetActive(false);
                 return;

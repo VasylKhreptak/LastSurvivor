@@ -1,4 +1,5 @@
-﻿using Main.Entities.Player;
+﻿using System;
+using Main.Entities.Player;
 using Plugins.Animations.Extensions;
 using UnityEngine;
 using Zenject;

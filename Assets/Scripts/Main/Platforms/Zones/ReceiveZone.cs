@@ -47,19 +47,19 @@ namespace Main.Platforms.Zones
         private IntegerBank _bank;
         private ClampedIntegerBank _receiveContainer;
         private IMainInputService _inputService;
-        private Player _player;
         private GamePrefabs _gamePrefabs;
 
         [Inject]
-        public void Constructor(IntegerBank bank, ClampedIntegerBank receiveContainer, IMainInputService inputService, Player player,
+        public void Constructor(IntegerBank bank, ClampedIntegerBank receiveContainer, IMainInputService inputService,
             IStaticDataService staticDataService)
         {
             _bank = bank;
             _receiveContainer = receiveContainer;
             _inputService = inputService;
-            _player = player;
             _gamePrefabs = staticDataService.Prefabs;
         }
+
+        private Player _player;
 
         private IDisposable _inputInteractionSubscription;
         private IDisposable _transferSubscription;
@@ -75,13 +75,19 @@ namespace Main.Platforms.Zones
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player _))
+            if(_player != null)
+                return;
+            
+            if (other.TryGetComponent(out _player))
                 StartObservingInputInteraction();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out Player _))
+            if(_player == null)
+                return;
+            
+            if (other.TryGetComponent(out _player))
                 StopObservingInputInteraction();
         }
 

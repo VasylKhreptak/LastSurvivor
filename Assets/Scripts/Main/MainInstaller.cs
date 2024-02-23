@@ -22,7 +22,7 @@ namespace Main
         public override void InstallBindings()
         {
             BindInputService();
-            BindQuestSequence();
+            // BindQuestSequence();
         }
 
         private void BindInputService() => Container.BindInterfacesTo<MainInputService>().AsSingle().WithArguments(_joystick);
