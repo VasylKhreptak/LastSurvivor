@@ -15,15 +15,17 @@ namespace Main.Platforms.BuyZones.Core
         private readonly ReceiveZone _receiveZone;
         private readonly IInstantiator _instantiator;
         private readonly GamePrefabs _gamePrefabs;
+        private readonly DiContainer _container;
 
         [Inject]
         public PlatformBuyer(Prefab prefabType, ReceiveZone receiveZone, IInstantiator instantiator,
-            IStaticDataService staticDataService, IVibrationService vibrationService)
+            IStaticDataService staticDataService, IVibrationService vibrationService, DiContainer container)
         {
             _prefabType = prefabType;
             _receiveZone = receiveZone;
             _instantiator = instantiator;
             _gamePrefabs = staticDataService.Prefabs;
+            _container = container;
         }
 
         public event Action<GameObject> OnBought;
@@ -48,7 +50,7 @@ namespace Main.Platforms.BuyZones.Core
             platformObject.transform.SetParent(null);
             platformObject.transform.position = prefab.transform.position;
             platformObject.transform.localScale = prefab.transform.localScale;
-
+            
             OnBought?.Invoke(platformObject);
         }
     }
