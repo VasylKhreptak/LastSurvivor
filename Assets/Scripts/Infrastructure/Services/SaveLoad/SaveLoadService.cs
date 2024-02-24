@@ -11,8 +11,6 @@ namespace Infrastructure.Services.SaveLoad
         public void Save<T>(string key, T data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
-            
-            Debug.Log("Saved: " + jsonData);
 
             string path = Path.Combine(Application.persistentDataPath, key);
 
@@ -27,8 +25,6 @@ namespace Infrastructure.Services.SaveLoad
             {
                 string jsonData = File.ReadAllText(path);
 
-                Debug.Log("Loaded: " + jsonData);
-                
                 try
                 {
                     T instance = JsonConvert.DeserializeObject<T>(jsonData);

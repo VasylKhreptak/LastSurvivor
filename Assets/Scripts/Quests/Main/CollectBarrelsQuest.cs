@@ -5,7 +5,6 @@ using Main.Platforms.OilPlatform;
 using Quests.Core;
 using Quests.Main.Core;
 using UniRx;
-using UnityEngine;
 
 namespace Quests.Main
 {
@@ -22,7 +21,6 @@ namespace Quests.Main
             _persistentDataService = persistentDataService;
 
             _isCompleted.Value = _persistentDataService.Data.PlayerData.CompletedQuests.Contains(QuestType.CollectBarrels);
-            Debug.Log($"CollectBarrelsQuest: {_isCompleted.Value}");
         }
 
         private IDisposable _playerGridSubscription;
