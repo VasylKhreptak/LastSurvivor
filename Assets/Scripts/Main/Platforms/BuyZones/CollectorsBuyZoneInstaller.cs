@@ -50,8 +50,7 @@ namespace Main.Platforms.BuyZones
             Container.BindInterfacesAndSelfTo<PlatformBuyer>().AsSingle().WithArguments(Prefab.CollectorsPlatform);
 
         private void BindBuyVibration() => Container.BindInterfacesTo<PlatformBuyVibration>().AsSingle();
-        
-        private void BindBinder() => Container.BindInterfacesTo<CollectorsPlatform.CollectorsPlatform>().AsSingle();
 
+        private void BindBinder() => Container.BindInterfacesTo<CollectorsPlatform.CollectorsPlatform>().AsSingle();
     }
 }

@@ -7,7 +7,7 @@
         public T Load<T>(string key, T defaultValue = default);
 
         public bool HasKey(string key);
-        
+
         public void Delete(string key);
     }
 }

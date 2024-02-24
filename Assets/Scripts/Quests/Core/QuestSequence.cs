@@ -44,12 +44,12 @@ namespace Quests.Core
                     SetCurrentQuest(quest);
                     foundUncompletedQuest = true;
                 }
-                
+
                 quest.IsCompleted
                     .Where(x => x)
                     .Subscribe(_ => OnCompletedQuest())
                     .AddTo(_questCompletionSubscriptions);
-                
+
                 quest.StartObserving();
             }
         }
