@@ -8,9 +8,11 @@ namespace Infrastructure.Services.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {
-        public void Save<T>(T data, string key)
+        public void Save<T>(string key, T data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
+            
+            Debug.Log("Saved: " + jsonData);
 
             string path = Path.Combine(Application.persistentDataPath, key);
 
@@ -25,6 +27,8 @@ namespace Infrastructure.Services.SaveLoad
             {
                 string jsonData = File.ReadAllText(path);
 
+                Debug.Log("Loaded: " + jsonData);
+                
                 try
                 {
                     T instance = JsonConvert.DeserializeObject<T>(jsonData);

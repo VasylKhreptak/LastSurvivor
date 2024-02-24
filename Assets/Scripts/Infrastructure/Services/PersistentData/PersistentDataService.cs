@@ -6,6 +6,8 @@ namespace Infrastructure.Services.PersistentData
 {
     public class PersistentDataService : IPersistentDataService
     {
+        private const string Key = "Data";
+
         private ISaveLoadService _saveLoadService;
 
         public Data.Persistent.PersistentData Data { get; private set; }
@@ -16,8 +18,8 @@ namespace Infrastructure.Services.PersistentData
             _saveLoadService = saveLoadService;
         }
 
-        public void Save() => _saveLoadService.Save(Data, nameof(Infrastructure.Data.Persistent.PersistentData));
+        public void Save() => _saveLoadService.Save(Key, Data);
 
-        public void Load() => Data = _saveLoadService.Load(nameof(Data), new Data.Persistent.PersistentData());
+        public void Load() => Data = _saveLoadService.Load(Key, new Data.Persistent.PersistentData());
     }
 }

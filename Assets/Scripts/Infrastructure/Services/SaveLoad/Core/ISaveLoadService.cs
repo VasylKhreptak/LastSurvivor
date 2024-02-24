@@ -2,7 +2,7 @@
 {
     public interface ISaveLoadService
     {
-        public void Save<T>(T data, string key);
+        public void Save<T>(string key, T data);
 
         public T Load<T>(string key, T defaultValue = default);
 
