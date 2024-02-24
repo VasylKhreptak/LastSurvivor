@@ -2,13 +2,13 @@
 
 namespace Quests.Core
 {
-    public abstract class QuestSequence : IQuestSequence
+    public class QuestSequence : IQuestSequence
     {
         private readonly IQuest[] _quests;
 
-        public QuestSequence()
+        public QuestSequence(IQuest[] quests)
         {
-            _quests = BuildQuests();
+            _quests = quests;
         }
 
         private readonly BoolReactiveProperty _isCompleted = new BoolReactiveProperty();
@@ -30,13 +30,27 @@ namespace Quests.Core
 
             StopObserving();
 
+            bool foundUncompletedQuest = false;
             foreach (IQuest quest in _quests)
             {
-                quest.StartObserving();
+                if (quest.IsCompleted.Value)
+                {
+                    OnCompletedQuest();
+                    continue;
+                }
+
+                if (foundUncompletedQuest == false)
+                {
+                    SetCurrentQuest(quest);
+                    foundUncompletedQuest = true;
+                }
+                
                 quest.IsCompleted
                     .Where(x => x)
                     .Subscribe(_ => OnCompletedQuest())
                     .AddTo(_questCompletionSubscriptions);
+                
+                quest.StartObserving();
             }
         }
 
@@ -100,7 +114,5 @@ namespace Quests.Core
 
             _currentQuest = quest;
         }
-
-        protected abstract IQuest[] BuildQuests();
     }
 }

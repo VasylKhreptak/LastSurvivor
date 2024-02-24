@@ -1,5 +1,8 @@
-﻿namespace Quests.Main.Core
+﻿using System;
+
+namespace Quests.Main.Core
 {
+    [Serializable]
     public enum QuestType
     {
         CollectBarrels = 1,

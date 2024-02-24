@@ -20,6 +20,9 @@ namespace DebuggerOptions
         }
 
         [Category("Game")]
+        public void SaveGame() => _stateMachine.Enter<SaveDataState>();
+
+        [Category("Game")]
         public void EnterBootstrap() => _stateMachine.Enter<BootstrapState>();
 
         [Category("Game")]

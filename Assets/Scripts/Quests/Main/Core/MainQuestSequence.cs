@@ -1,28 +1,29 @@
 ﻿using System;
 using Quests.Core;
 using Zenject;
-using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace Quests.Main.Core
 {
-    public class MainQuestSequence : QuestSequence, IInitializable, IDisposable
+    public class MainQuestSequence : IInitializable, IDisposable
     {
         private readonly DiContainer _container;
+        private readonly IQuestSequence _questSequence;
 
         public MainQuestSequence(DiContainer container)
         {
             _container = container;
+            _questSequence = new QuestSequence(BuildQuests());
         }
 
         public void Initialize()
         {
-            StartObserving();
-            StartVisualization();
+            _questSequence.StartObserving();
+            _questSequence.StartVisualization();
         }
 
-        public void Dispose() => StopObserving();
+        public void Dispose() => _questSequence.StopObserving();
 
-        protected override IQuest[] BuildQuests()
+        private IQuest[] BuildQuests()
         {
             return new IQuest[]
             {

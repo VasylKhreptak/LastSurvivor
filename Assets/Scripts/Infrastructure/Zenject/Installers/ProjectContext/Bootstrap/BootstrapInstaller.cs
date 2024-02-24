@@ -2,6 +2,7 @@
 using DebuggerOptions;
 using Infrastructure.Coroutines.Runner;
 using Infrastructure.Coroutines.Runner.Core;
+using Infrastructure.Data.SaveLoad;
 using Infrastructure.LoadingScreen.Core;
 using Infrastructure.SceneManagement;
 using Infrastructure.SceneManagement.Core;
@@ -15,7 +16,6 @@ using Infrastructure.Services.PersistentData;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.SaveLoad.Core;
-using Infrastructure.Services.SaveLoadHandler;
 using Infrastructure.Services.Screen;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.StaticData.Core;
@@ -71,38 +71,22 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         {
             Container.Bind<IIDService>().To<IDService>().AsSingle();
             Container.Bind<ILogService>().To<LogService>().AsSingle();
-
-            IStaticDataService staticDataService = Container.Instantiate<StaticDataService>();
-            Container.Bind<IStaticDataService>().FromInstance(staticDataService).AsSingle();
-            staticDataService.Load();
-
-            Container.Bind<IPersistentDataService>().To<PersistentDataService>().AsSingle();
-            Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
+            Container.BindInterfacesTo<StaticDataService>().AsSingle();
+            Container.Resolve<IStaticDataService>().Load();
+            Container.BindInterfacesTo<PersistentDataService>().AsSingle();
+            Container.BindInterfacesTo<ApplicationPauseDataSaver>().AsSingle();
+            Container.BindInterfacesTo<SaveLoadService>().AsSingle();
             Container.BindInterfacesTo<FramerateService>().AsSingle();
             Container.BindInterfacesTo<ScreenService>().AsSingle();
             Container.BindInterfacesTo<AdvertisementService>().AsSingle();
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
-
-            BindSaveLoadHandlerService();
         }
 
         private void BindBackgroundMusic() =>
             Container.BindInterfacesTo<BackgroundMusicPlayer>().AsSingle().WithArguments(_backgroundMusicPreferences);
 
-        private void BindSaveLoadHandlerService()
-        {
-            SaveLoadHandlerService saveLoadHandlerService = Container.Instantiate<SaveLoadHandlerService>();
-
-            saveLoadHandlerService.Add(Container.Resolve<IPersistentDataService>());
-
-            Container.BindInterfacesTo<SaveLoadHandlerService>().FromInstance(saveLoadHandlerService).AsSingle();
-        }
-
-        private void BindSceneLoader()
-        {
-            Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
-        }
+        private void BindSceneLoader() => Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
 
         private void BindGameStateMachine()
         {
@@ -116,6 +100,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<BootstrapState>().AsSingle();
             Container.Bind<SetupApplicationState>().AsSingle();
             Container.Bind<LoadDataState>().AsSingle();
+            Container.Bind<SaveDataState>().AsSingle();
             Container.Bind<BootstrapAnalyticsState>().AsSingle();
             Container.Bind<FinalizeBootstrapState>().AsSingle();
             Container.Bind<LoadSceneAsyncState>().AsSingle();
@@ -133,10 +118,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             SRDebug.Instance.AddOptionContainer(Container.Instantiate<AdvertisementOptions>());
         }
 
-        private void MakeInitializable()
-        {
-            Container.Bind<IInitializable>().FromInstance(this).AsSingle();
-        }
+        private void MakeInitializable() => Container.Bind<IInitializable>().FromInstance(this).AsSingle();
 
         private void BootstrapGame() => Container.Resolve<IStateMachine<IGameState>>().Enter<BootstrapState>();
     }

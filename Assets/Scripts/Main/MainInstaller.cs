@@ -12,6 +12,7 @@ using Main.Platforms.CollectorsPlatform;
 using Main.Platforms.DumpPlatform;
 using Main.Platforms.HelicopterPlatform;
 using Main.Platforms.OilPlatform;
+using Quests.Main.Core;
 using UnityEngine;
 using Zenject;
 
@@ -47,6 +48,7 @@ namespace Main
             BindPlayer();
             BindCamera();
             BindPlatforms();
+            BindQuests();
         }
 
         private void BindInputService() => Container.BindInterfacesTo<MainInputService>().AsSingle().WithArguments(_joystick);
@@ -114,5 +116,7 @@ namespace Main
                 .AsSingle()
                 .NonLazy();
         }
+
+        private void BindQuests() => Container.BindInterfacesTo<MainQuestSequence>().AsSingle();
     }
 }

@@ -26,7 +26,6 @@ namespace Main.Entities.Player
             }
 
             _position = transform.position;
-
             _lookPoint = Target.position;
             _lookPoint.y = _position.y;
 
