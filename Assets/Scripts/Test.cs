@@ -1,10 +1,6 @@
-﻿using Infrastructure.Services.PersistentData.Core;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [Inject] private readonly IPersistentDataService _persistentDataService;
-
     private void Awake() { }
 }

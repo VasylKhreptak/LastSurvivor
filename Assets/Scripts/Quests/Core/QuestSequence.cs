@@ -2,7 +2,7 @@
 
 namespace Quests.Core
 {
-    public class QuestSequence : IQuestSequence
+    public class QuestSequence : IQuestSequence, IQuestVisualization
     {
         private readonly IQuest[] _quests;
 
@@ -73,13 +73,13 @@ namespace Quests.Core
             StopVisualization();
 
             _isVisualizationEnabled = true;
-            _currentQuest?.StartVisualization();
+            (_currentQuest as IQuestVisualization)?.StartVisualization();
         }
 
         public void StopVisualization()
         {
             _isVisualizationEnabled = false;
-            _currentQuest?.StopVisualization();
+            (_currentQuest as IQuestVisualization)?.StopVisualization();
         }
 
         private void OnCompletedQuest()
@@ -106,10 +106,13 @@ namespace Quests.Core
 
         private void SetCurrentQuest(IQuest quest)
         {
+            (_currentQuest as IQuestVisualization)?.StopVisualization();
+
             if (_isVisualizationEnabled)
             {
-                _currentQuest?.StopVisualization();
-                quest?.StartVisualization();
+                IQuestVisualization questVisualization = quest as IQuestVisualization;
+                questVisualization?.StopVisualization();
+                questVisualization?.StartVisualization();
             }
 
             _currentQuest = quest;

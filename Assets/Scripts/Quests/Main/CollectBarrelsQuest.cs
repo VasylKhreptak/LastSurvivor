@@ -8,7 +8,7 @@ using UniRx;
 
 namespace Quests.Main
 {
-    public class CollectBarrelsQuest : IQuest
+    public class CollectBarrelsQuest : IQuest, IQuestVisualization
     {
         private readonly OilPlatform _oilPlatform;
         private readonly Player _player;

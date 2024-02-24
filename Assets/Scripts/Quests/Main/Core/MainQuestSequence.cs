@@ -18,7 +18,7 @@ namespace Quests.Main.Core
         public void Initialize()
         {
             _questSequence.StartObserving();
-            _questSequence.StartVisualization();
+            (_questSequence as IQuestVisualization)?.StartVisualization();
         }
 
         public void Dispose() => _questSequence.StopObserving();

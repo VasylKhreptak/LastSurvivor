@@ -9,9 +9,5 @@ namespace Quests.Core
         public void StartObserving();
 
         public void StopObserving();
-
-        public void StartVisualization();
-
-        public void StopVisualization();
     }
 }
