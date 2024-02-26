@@ -7,10 +7,8 @@ namespace Quests.Main.Core
     {
         CollectBarrels = 1,
         FuelUpHelicopter = 2,
-        BuyDumPlatform = 3,
-        BuySoldiersPlatform = 4,
-        HireSoldier = 5,
-        BuyCollectorsPlatform = 6,
-        HireCollector = 7
+        EnterPlayState = 3,
+        BuyDumpPlatform = 4,
+        HireWorker = 5,
     }
 }

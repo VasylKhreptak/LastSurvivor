@@ -2,7 +2,7 @@
 
 namespace Quests.Core
 {
-    public class QuestSequence : IQuestSequence, IQuestVisualization
+    public class QuestSequence : IQuestSequence
     {
         private readonly IQuest[] _quests;
 
@@ -13,15 +13,17 @@ namespace Quests.Core
 
         private readonly BoolReactiveProperty _isCompleted = new BoolReactiveProperty();
 
+        private readonly ReactiveProperty<IQuest> _currentQuest = new ReactiveProperty<IQuest>();
+
         private readonly CompositeDisposable _questCompletionSubscriptions = new CompositeDisposable();
 
         private int _completedQuestsCount;
 
         private bool _isVisualizationEnabled;
 
-        private IQuest _currentQuest;
-
         public IReadOnlyReactiveProperty<bool> IsCompleted => _isCompleted;
+
+        public IReadOnlyReactiveProperty<IQuest> CurrentQuest => _currentQuest;
 
         public void StartObserving()
         {
@@ -47,7 +49,11 @@ namespace Quests.Core
 
                 quest.IsCompleted
                     .Where(x => x)
-                    .Subscribe(_ => OnCompletedQuest())
+                    .Subscribe(_ =>
+                    {
+                        quest.StopObserving();
+                        OnCompletedQuest();
+                    })
                     .AddTo(_questCompletionSubscriptions);
 
                 quest.StartObserving();
@@ -60,26 +66,13 @@ namespace Quests.Core
 
             foreach (IQuest quest in _quests)
             {
+                if (quest.IsCompleted.Value)
+                    continue;
+
                 quest.StopObserving();
             }
 
             _completedQuestsCount = 0;
-
-            StopVisualization();
-        }
-
-        public void StartVisualization()
-        {
-            StopVisualization();
-
-            _isVisualizationEnabled = true;
-            (_currentQuest as IQuestVisualization)?.StartVisualization();
-        }
-
-        public void StopVisualization()
-        {
-            _isVisualizationEnabled = false;
-            (_currentQuest as IQuestVisualization)?.StopVisualization();
         }
 
         private void OnCompletedQuest()
@@ -106,16 +99,11 @@ namespace Quests.Core
 
         private void SetCurrentQuest(IQuest quest)
         {
-            (_currentQuest as IQuestVisualization)?.StopVisualization();
+            (_currentQuest.Value as IQuestCallbackHandler)?.OnBecameActive(false);
 
-            if (_isVisualizationEnabled)
-            {
-                IQuestVisualization questVisualization = quest as IQuestVisualization;
-                questVisualization?.StopVisualization();
-                questVisualization?.StartVisualization();
-            }
+            (quest as IQuestCallbackHandler)?.OnBecameActive(true);
 
-            _currentQuest = quest;
+            _currentQuest.Value = quest;
         }
     }
 }

@@ -21,11 +21,17 @@ namespace Infrastructure.StateMachine.Game.States
             _persistentDataService = persistentDataService;
         }
 
-        public void Enter() => _transitionScreen.Show(LoadAppropriateLevel);
+        public event Action OnEnter;
+
+        public void Enter()
+        {
+            _transitionScreen.Show(LoadAppropriateLevel);
+        }
 
         private void LoadAppropriateLevel()
         {
             _stateMachine.Enter<LoadLevelState, Action>(ClearHelicopterFuelTank);
+            OnEnter?.Invoke();
         }
 
         private void ClearHelicopterFuelTank() =>

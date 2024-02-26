@@ -9,5 +9,7 @@ namespace Quests.Core
         public void StartObserving();
 
         public void StopObserving();
+
+        public void MarkAsCompleted();
     }
 }

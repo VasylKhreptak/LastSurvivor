@@ -44,6 +44,7 @@ namespace Gameplay.Levels.StateMachine.States
         {
             _persistentDataService.Data.PlayerData.Resources.Money.Add(_levelData.CollectedMoney.Value);
             _persistentDataService.Data.PlayerData.Resources.Gears.Add(_levelData.CollectedGears.Value);
+            _gameStateMachine.Enter<SaveDataState>();
         }
     }
 }

@@ -8,7 +8,7 @@ using UniRx;
 
 namespace Quests.Main
 {
-    public class CollectBarrelsQuest : IQuest, IQuestVisualization
+    public class CollectBarrelsQuest : Quest, IQuestCallbackHandler
     {
         private readonly OilPlatform _oilPlatform;
         private readonly Player _player;
@@ -20,30 +20,26 @@ namespace Quests.Main
             _player = player;
             _persistentDataService = persistentDataService;
 
-            _isCompleted.Value = _persistentDataService.Data.PlayerData.CompletedQuests.Contains(QuestType.CollectBarrels);
+            _isCompleted.Value = persistentDataService.Data.PlayerData.CompletedQuests.Contains(QuestType.CollectBarrels);
         }
 
-        private IDisposable _playerGridSubscription;
+        private IDisposable _subscription;
 
-        private readonly BoolReactiveProperty _isCompleted = new BoolReactiveProperty(false);
-
-        public IReadOnlyReactiveProperty<bool> IsCompleted => _isCompleted;
-
-        public void StartObserving()
+        public override void StartObserving()
         {
-            _playerGridSubscription = _player.BarrelGridStack.Bank.IsFull
+            _subscription = _player.BarrelGridStack.Bank.IsFull
                 .Where(x => x)
-                .Subscribe(_ =>
-                {
-                    _persistentDataService.Data.PlayerData.CompletedQuests.Add(QuestType.CollectBarrels);
-                    _isCompleted.Value = true;
-                });
+                .Subscribe(_ => MarkAsCompleted());
         }
 
-        public void StopObserving() => _playerGridSubscription?.Dispose();
+        public override void StopObserving() => _subscription?.Dispose();
 
-        public void StartVisualization() => _player.QuestArrow.Target = _oilPlatform.GridStackTransform;
+        public void OnBecameActive(bool isActive) => _player.QuestArrow.Target = isActive ? _oilPlatform.GridStackTransform : null;
 
-        public void StopVisualization() => _player.QuestArrow.Target = null;
+        public override void MarkAsCompleted()
+        {
+            _persistentDataService.Data.PlayerData.CompletedQuests.Add(QuestType.CollectBarrels);
+            base.MarkAsCompleted();
+        }
     }
 }

@@ -48,18 +48,18 @@ namespace Main.Platforms.Zones
         private ClampedIntegerBank _receiveContainer;
         private IMainInputService _inputService;
         private GamePrefabs _gamePrefabs;
+        private Player _player;
 
         [Inject]
         public void Constructor(IntegerBank bank, ClampedIntegerBank receiveContainer, IMainInputService inputService,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService, Player player)
         {
             _bank = bank;
             _receiveContainer = receiveContainer;
             _inputService = inputService;
             _gamePrefabs = staticDataService.Prefabs;
+            _player = player;
         }
-
-        private Player _player;
 
         private IDisposable _inputInteractionSubscription;
         private IDisposable _transferSubscription;
@@ -75,20 +75,14 @@ namespace Main.Platforms.Zones
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Player player))
-            {
-                _player = player;
+            if (other.TryGetComponent(out Player _))
                 StartObservingInputInteraction();
-            }
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out Player _))
-            {
-                _player = null;
                 StopObservingInputInteraction();
-            }
         }
 
         #endregion
@@ -180,7 +174,7 @@ namespace Main.Platforms.Zones
             });
         }
 
-        private void ThrowItem(GameObject item, Action onComplete = null)
+        private void ThrowItem(GameObject item, Action onComplete)
         {
             Vector3 initialScale = item.transform.localScale;
             item.transform.localScale = Vector3.zero;
@@ -202,13 +196,16 @@ namespace Main.Platforms.Zones
                 .Append(jumpTween)
                 .Join(rotateTween)
                 .Join(scaleTween)
-                .OnComplete(() => { onComplete?.Invoke(); })
+                .OnComplete(() => onComplete?.Invoke())
                 .Play();
         }
 
         private void OnReceivedAmount(int amount)
         {
             _receiveContainer.Add(amount);
+            Debug.Log("Added!");
+            Debug.Log(_receiveContainer.Value.Value + "/" + _receiveContainer.MaxValue.Value);
+            Debug.Log("Is full: " + _receiveContainer.IsFull.Value + " Is empty: " + _receiveContainer.IsEmpty.Value);
             OnReceived?.Invoke();
 
             if (_receiveContainer.IsFull.Value)
@@ -216,8 +213,8 @@ namespace Main.Platforms.Zones
                 if (_clearOnReceivedAll)
                     _receiveContainer.Clear();
 
-                OnReceivedAll?.Invoke();
                 StopTransferring();
+                OnReceivedAll?.Invoke();
             }
         }
 

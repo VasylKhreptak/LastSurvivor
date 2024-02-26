@@ -9,7 +9,7 @@ namespace Infrastructure.Data.Persistent
     {
         public readonly Resources Resources = new Resources();
         public readonly PlatformsData PlatformsData = new PlatformsData();
-        public readonly List<QuestType> CompletedQuests = new List<QuestType>();
+        public readonly HashSet<QuestType> CompletedQuests = new HashSet<QuestType>();
         public int CompletedLevelsCount;
     }
 }
