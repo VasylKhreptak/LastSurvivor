@@ -25,11 +25,11 @@ namespace Main.Platforms.BuyZones.Core
         }
 
         public event Action<GameObject> OnBought;
-        
+
         public void Initialize() => StartObserving();
 
         public void Dispose() => StopObserving();
-        
+
         private void StartObserving() => _receiveZone.OnReceivedAll += BuyPlatform;
 
         private void StopObserving() => _receiveZone.OnReceivedAll -= BuyPlatform;
@@ -42,7 +42,7 @@ namespace Main.Platforms.BuyZones.Core
             platformObject.transform.SetParent(null);
             platformObject.transform.position = prefab.transform.position;
             platformObject.transform.localScale = prefab.transform.localScale;
-            
+
             OnBought?.Invoke(platformObject);
         }
     }

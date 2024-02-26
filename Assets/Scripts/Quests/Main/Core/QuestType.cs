@@ -9,6 +9,6 @@ namespace Quests.Main.Core
         FuelUpHelicopter = 2,
         EnterPlayState = 3,
         BuyDumpPlatform = 4,
-        HireWorker = 5,
+        HireWorker = 5
     }
 }

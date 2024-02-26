@@ -40,7 +40,7 @@ namespace Quests.Core
                 if (quest.IsCompleted.Value == false)
                     quest.StartObserving();
             }
-            
+
             UpdateCurrentQuest();
         }
 
@@ -71,7 +71,7 @@ namespace Quests.Core
 
             UpdateCurrentQuest();
         }
-        
+
         private void UpdateCurrentQuest()
         {
             foreach (IQuest quest in _quests)

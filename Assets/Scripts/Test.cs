@@ -9,18 +9,9 @@ public class Test : MonoBehaviour
         // Debug.Log(foo as IBar == null);
     }
 
-    public interface IFoo
-    {
-        
-    }
+    public interface IFoo { }
 
-    public interface IBar : IFoo
-    {
-        
-    }
-    
-    public class Bar : IBar
-    {
-        
-    }
+    public interface IBar : IFoo { }
+
+    public class Bar : IBar { }
 }

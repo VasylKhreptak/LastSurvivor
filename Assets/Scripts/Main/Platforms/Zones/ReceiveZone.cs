@@ -113,7 +113,7 @@ namespace Main.Platforms.Zones
         private void StartTransferring()
         {
             StopTransferring();
-            
+
             int targetTransferCount = GetTransferCount();
 
             if (targetTransferCount == 0)
@@ -200,7 +200,7 @@ namespace Main.Platforms.Zones
             OnReceived?.Invoke();
 
             // if (_receiveContainer.IsFull.Value)
-            
+
             if (Mathf.Clamp(_receiveContainer.Value.Value + amount, 0, _receiveContainer.MaxValue.Value) ==
                 _receiveContainer.MaxValue.Value)
             {
