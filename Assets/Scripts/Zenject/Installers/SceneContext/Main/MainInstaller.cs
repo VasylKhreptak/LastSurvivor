@@ -15,9 +15,8 @@ using Main.Platforms.HelicopterPlatform;
 using Main.Platforms.OilPlatform;
 using Quests.Main.Core;
 using UnityEngine;
-using Zenject;
 
-namespace Main
+namespace Zenject.Installers.SceneContext.Main
 {
     public class MainInstaller : MonoInstaller
     {
