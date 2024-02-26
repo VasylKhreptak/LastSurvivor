@@ -80,6 +80,12 @@ namespace Entities.AI
                 .EveryUpdate()
                 .Subscribe(_ =>
                 {
+                    if (target == null)
+                    {
+                        _lookSubscription?.Dispose();
+                        return;
+                    }
+
                     Vector3 targetPosition = target.position;
                     Vector3 currentPosition = _rigidbody.position;
                     targetPosition.y = currentPosition.y;
