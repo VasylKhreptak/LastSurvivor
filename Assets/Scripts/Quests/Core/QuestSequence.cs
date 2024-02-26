@@ -19,8 +19,6 @@ namespace Quests.Core
 
         private int _completedQuestsCount;
 
-        private bool _isVisualizationEnabled;
-
         public IReadOnlyReactiveProperty<bool> IsCompleted => _isCompleted;
 
         public IReadOnlyReactiveProperty<IQuest> CurrentQuest => _currentQuest;
@@ -32,32 +30,18 @@ namespace Quests.Core
 
             StopObserving();
 
-            bool foundUncompletedQuest = false;
             foreach (IQuest quest in _quests)
             {
-                if (quest.IsCompleted.Value)
-                {
-                    OnCompletedQuest();
-                    continue;
-                }
-
-                if (foundUncompletedQuest == false)
-                {
-                    SetCurrentQuest(quest);
-                    foundUncompletedQuest = true;
-                }
-
                 quest.IsCompleted
                     .Where(x => x)
-                    .Subscribe(_ =>
-                    {
-                        quest.StopObserving();
-                        OnCompletedQuest();
-                    })
+                    .Subscribe(_ => OnCompletedQuest(quest))
                     .AddTo(_questCompletionSubscriptions);
 
-                quest.StartObserving();
+                if (quest.IsCompleted.Value == false)
+                    quest.StartObserving();
             }
+            
+            UpdateCurrentQuest();
         }
 
         public void StopObserving()
@@ -75,16 +59,21 @@ namespace Quests.Core
             _completedQuestsCount = 0;
         }
 
-        private void OnCompletedQuest()
+        private void OnCompletedQuest(IQuest quest)
         {
+            quest.StopObserving();
+
             if (++_completedQuestsCount == _quests.Length)
             {
                 _isCompleted.Value = true;
-                SetCurrentQuest(null);
                 StopObserving();
-                return;
             }
 
+            UpdateCurrentQuest();
+        }
+        
+        private void UpdateCurrentQuest()
+        {
             foreach (IQuest quest in _quests)
             {
                 if (quest.IsCompleted.Value == false)
