@@ -32,7 +32,11 @@ namespace Gameplay.Entities.Collector.StateMachine.States
 
         private IDisposable _closestLootBoxSubscription;
 
-        public void Enter() => StartObserving();
+        public void Enter()
+        {
+            Debug.Log("NavigationState Enter");
+            StartObserving();
+        }
 
         public void Exit()
         {

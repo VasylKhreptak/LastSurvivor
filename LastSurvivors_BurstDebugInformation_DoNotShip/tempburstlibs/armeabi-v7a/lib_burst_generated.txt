@@ -14,7 +14,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.Postprocessing.Runtime;
 --assembly-defines=StompyRobot.SRDebugger;
---assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Flexalon;
 --assembly-defines=Zenject;
 --assembly-defines=MoreMountains.Feel.Demos;
@@ -22,7 +21,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
 --assembly-defines=MoreMountains.Feedbacks.URP;
 --assembly-defines=UniRx;
---assembly-defines=NavMeshComponents;
 --assembly-defines=Unity.RenderPipelines.Core.ShaderLibrary;
 --assembly-defines=MoreMountains.Tools.TextMeshPro;
 --assembly-defines=Coffee.UIParticle;
@@ -117,7 +115,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.Postprocessing.Runtime;
 --assembly-defines=StompyRobot.SRDebugger;
---assembly-defines=Unity.AI.Navigation;
 --assembly-defines=Flexalon;
 --assembly-defines=Zenject;
 --assembly-defines=MoreMountains.Feel.Demos;
@@ -125,7 +122,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
 --assembly-defines=MoreMountains.Feedbacks.URP;
 --assembly-defines=UniRx;
---assembly-defines=NavMeshComponents;
 --assembly-defines=Unity.RenderPipelines.Core.ShaderLibrary;
 --assembly-defines=MoreMountains.Tools.TextMeshPro;
 --assembly-defines=Coffee.UIParticle;

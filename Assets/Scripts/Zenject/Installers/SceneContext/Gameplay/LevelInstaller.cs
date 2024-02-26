@@ -75,6 +75,9 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.BindInstance(_helicopterMovementSpline).WhenInjectedInto<HelicopterInstaller>();
             Container.BindInstance(_platoonMovementSpline).WhenInjectedInto<PlatoonInstaller>();
 
+            BindObjectPools();
+            BindZombiesList();
+            BindCollectorsList();
             GameObject helicopterObject = CreateHelicopter();
             BindWeapon(helicopterObject);
             BindCamera(helicopterObject);
@@ -84,9 +87,6 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindHelicopter(helicopterObject);
             BindPlatoon();
             InitializeCollectors();
-            BindObjectPools();
-            BindZombiesList();
-            BindCollectorsList();
             BindZombieSpawnerList();
             BindLevelData();
             BindWeaponAimer();

@@ -1,5 +1,5 @@
-﻿using Gameplay.Levels.StateMachine.States.Core;
-using Infrastructure.Services.PersistentData.Core;
+﻿using Gameplay.Data;
+using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using UI.Gameplay.Windows;
@@ -10,21 +10,19 @@ namespace Gameplay.Levels.StateMachine.States
     {
         private readonly IStateMachine<ILevelState> _levelStateMachine;
         private readonly LevelFailedWindow _levelFailedWindow;
-        private readonly IPersistentDataService _persistentDataService;
+        private readonly LevelData _levelData;
 
-        public LevelFailedState(IStateMachine<ILevelState> levelStateMachine, LevelFailedWindow levelFailedWindow,
-            IPersistentDataService persistentDataService)
+        public LevelFailedState(IStateMachine<ILevelState> levelStateMachine, LevelFailedWindow levelFailedWindow, LevelData levelData)
         {
             _levelStateMachine = levelStateMachine;
             _levelFailedWindow = levelFailedWindow;
-            _persistentDataService = persistentDataService;
+            _levelData = levelData;
         }
 
         public void Enter()
         {
             _levelFailedWindow.Show();
-            _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
-            _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
+            _levelData.LevelResult = LevelResult.Failed;
             _levelStateMachine.Enter<PauseLevelState>();
         }
     }

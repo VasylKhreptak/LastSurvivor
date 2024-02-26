@@ -44,6 +44,17 @@ namespace Gameplay.Levels.StateMachine.States
         {
             _persistentDataService.Data.PlayerData.Resources.Money.Add(_levelData.CollectedMoney.Value);
             _persistentDataService.Data.PlayerData.Resources.Gears.Add(_levelData.CollectedGears.Value);
+
+            if (_levelData.LevelResult == LevelResult.Completed)
+            {
+                _persistentDataService.Data.PlayerData.CompletedLevelsCount++;
+            }
+            else if (_levelData.LevelResult == LevelResult.Failed)
+            {
+                _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
+                _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
+            }
+
             _gameStateMachine.Enter<SaveDataState>();
         }
     }

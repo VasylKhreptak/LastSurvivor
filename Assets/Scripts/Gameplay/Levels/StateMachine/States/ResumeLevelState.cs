@@ -25,12 +25,11 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly Platoon _platoon;
         private readonly List<Collector> _collectors;
         private readonly List<ZombieSpawner.ZombieSpawner> _zombieSpawners;
-        private readonly Helicopter _helicopter;
         private readonly IStateMachine<ILevelState> _levelStateMachine;
 
         public ResumeLevelState(List<Zombie> zombies, Player player, Trackpad trackpad, WeaponAim weaponAim,
             WeaponAimer weaponAimer, HUD hud, Platoon platoon, List<Collector> collectors,
-            List<ZombieSpawner.ZombieSpawner> zombieSpawners, Helicopter helicopter, IStateMachine<ILevelState> levelStateMachine)
+            List<ZombieSpawner.ZombieSpawner> zombieSpawners, IStateMachine<ILevelState> levelStateMachine)
         {
             _zombies = zombies;
             _player = player;
@@ -41,7 +40,6 @@ namespace Gameplay.Levels.StateMachine.States
             _platoon = platoon;
             _collectors = collectors;
             _zombieSpawners = zombieSpawners;
-            _helicopter = helicopter;
             _levelStateMachine = levelStateMachine;
         }
 
@@ -57,7 +55,7 @@ namespace Gameplay.Levels.StateMachine.States
             _weaponAim.Show();
             _weaponAimer.Enabled = true;
             _hud.Show();
-
+            
             _collectors.ForEach(collector =>
                 collector.StateMachine.Enter<Entities.Collector.StateMachine.States.NavigationState>());
 
