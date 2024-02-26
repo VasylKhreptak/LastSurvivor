@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Main.Platforms.BuyZones.Core;
 using UnityEngine;
 using Zenject;
-using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace Main.Platforms
 {
@@ -21,6 +21,7 @@ namespace Main.Platforms
 
         public void Dispose() => _platformBuyer.OnBought -= OnBoundPlatform;
 
-        private void OnBoundPlatform(GameObject platform) => _container.Bind<T>().FromComponentOn(platform).AsSingle();
+        private void OnBoundPlatform(GameObject platform) =>
+            _container.ParentContainers.First().Bind<T>().FromComponentOn(platform).AsSingle();
     }
 }

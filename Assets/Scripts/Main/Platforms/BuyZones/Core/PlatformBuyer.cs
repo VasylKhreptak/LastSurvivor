@@ -42,9 +42,7 @@ namespace Main.Platforms.BuyZones.Core
             platformObject.transform.SetParent(null);
             platformObject.transform.position = prefab.transform.position;
             platformObject.transform.localScale = prefab.transform.localScale;
-
-            Debug.Log("Bought platform;", platformObject);
-
+            
             OnBought?.Invoke(platformObject);
         }
     }

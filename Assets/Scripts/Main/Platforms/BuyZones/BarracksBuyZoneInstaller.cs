@@ -51,6 +51,6 @@ namespace Main.Platforms.BuyZones
 
         private void BindBuyVibration() => Container.BindInterfacesTo<PlatformBuyVibration>().AsSingle();
 
-        private void BindBinder() => Container.BindInterfacesTo<BarracksPlatform.BarracksPlatform>().AsSingle();
+        private void BindBinder() => Container.BindInterfacesTo<PlatformBinder<BarracksPlatform.BarracksPlatform>>().AsSingle();
     }
 }

@@ -31,11 +31,7 @@ namespace Quests.Main
             _subscription = _persistentDataService.Data.PlayerData.PlatformsData.DumpPlatformData.WorkersBank.Value
                 .Pairwise()
                 .Select(pair => pair.Previous < pair.Current)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("Hired worker!");
-                    MarkAsCompleted();
-                });
+                .Subscribe(_ => MarkAsCompleted());
         }
 
         public override void StopObserving() => _subscription?.Dispose();

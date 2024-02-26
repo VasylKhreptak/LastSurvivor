@@ -5,7 +5,6 @@ using Main.Platforms.BuyZones;
 using Quests.Core;
 using Quests.Main.Core;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace Quests.Main
@@ -32,11 +31,7 @@ namespace Quests.Main
         {
             _subscription = _persistentDataService.Data.PlayerData.PlatformsData.DumpPlatformData.BuyContainer.IsFull
                 .Where(x => x)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("Bought dump platform!");
-                    MarkAsCompleted();
-                });
+                .Subscribe(_ => MarkAsCompleted());
         }
 
         public override void StopObserving() => _subscription?.Dispose();

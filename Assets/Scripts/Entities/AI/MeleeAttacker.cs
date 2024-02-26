@@ -4,9 +4,9 @@ using Gameplay.Entities.Health.Damages;
 using Pathfinding;
 using Plugins.Animations;
 using UniRx;
-using Unity.VisualScripting;
 using UnityEngine;
 using Visitor;
+using Zenject;
 
 namespace Entities.AI
 {

@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using Data.Persistent.Platforms;
+using DebuggerOptions;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.Input.Main;
@@ -49,6 +50,7 @@ namespace Main
             BindCamera();
             BindPlatforms();
             BindQuests();
+            BindQuestOptions();
         }
 
         private void BindInputService() => Container.BindInterfacesTo<MainInputService>().AsSingle().WithArguments(_joystick);
@@ -118,5 +120,7 @@ namespace Main
         }
 
         private void BindQuests() => Container.BindInterfacesTo<MainQuestSequence>().AsSingle();
+
+        private void BindQuestOptions() => Container.BindInterfacesTo<QuestOptions>().AsSingle();
     }
 }

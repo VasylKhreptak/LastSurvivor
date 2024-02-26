@@ -113,7 +113,7 @@ namespace Main.Platforms.Zones
         private void StartTransferring()
         {
             StopTransferring();
-
+            
             int targetTransferCount = GetTransferCount();
 
             if (targetTransferCount == 0)
@@ -125,11 +125,13 @@ namespace Main.Platforms.Zones
                 .Interval(TimeSpan.FromSeconds(_interval))
                 .Subscribe(_ =>
                 {
-                    if (TryTransfer() == false)
+                    if (_bank.IsEmpty.Value || currentTransferCount++ == targetTransferCount)
+                    {
                         StopTransferring();
+                        return;
+                    }
 
-                    if (++currentTransferCount == targetTransferCount)
-                        StopTransferring();
+                    Transfer();
                 });
         }
 
@@ -146,15 +148,6 @@ namespace Main.Platforms.Zones
             return remainder == 0 ? leftToFill / _maxTransfer : leftToFill / _maxTransfer + 1;
         }
 
-        private bool TryTransfer()
-        {
-            if (_bank.IsEmpty.Value)
-                return false;
-
-            Transfer();
-            return true;
-        }
-
         private void Transfer()
         {
             int transferAmount = Mathf.Min(_bank.Value.Value, _maxTransfer,
@@ -166,11 +159,11 @@ namespace Main.Platforms.Zones
                 Instantiate(_gamePrefabs[_prefabType], _player.InputOutputTransform.position, Quaternion.identity);
 
             _currentTransferAmount += transferAmount;
-            ThrowItem(transferringItem, () =>
+            ThrowItem(transferringItem, () => //callback is stopping after calling _bank.Add(value) in OnReceivedAmount(...)
             {
-                OnReceivedAmount(transferAmount);
                 Destroy(transferringItem);
                 _currentTransferAmount -= transferAmount;
+                OnReceivedAmount(transferAmount);
             });
         }
 
@@ -179,8 +172,10 @@ namespace Main.Platforms.Zones
             Vector3 initialScale = item.transform.localScale;
             item.transform.localScale = Vector3.zero;
 
+            Vector3 targetPosition = GetReceivePoint();
+
             Tween jumpTween = item.transform
-                .DOJump(GetReceivePoint(), _jumpPower, 1, _duration)
+                .DOJump(targetPosition, _jumpPower, 1, _duration)
                 .SetEase(_jumpCurve);
 
             Tween rotateTween = item.transform
@@ -193,22 +188,21 @@ namespace Main.Platforms.Zones
 
             DOTween
                 .Sequence()
-                .Append(jumpTween)
+                .Join(jumpTween)
                 .Join(rotateTween)
                 .Join(scaleTween)
                 .OnComplete(() => onComplete?.Invoke())
                 .Play();
         }
 
-        private void OnReceivedAmount(int amount)
+        private void OnReceivedAmount(int amount) // here is crunch(
         {
-            _receiveContainer.Add(amount);
-            Debug.Log("Added!");
-            Debug.Log(_receiveContainer.Value.Value + "/" + _receiveContainer.MaxValue.Value);
-            Debug.Log("Is full: " + _receiveContainer.IsFull.Value + " Is empty: " + _receiveContainer.IsEmpty.Value);
             OnReceived?.Invoke();
 
-            if (_receiveContainer.IsFull.Value)
+            // if (_receiveContainer.IsFull.Value)
+            
+            if (Mathf.Clamp(_receiveContainer.Value.Value + amount, 0, _receiveContainer.MaxValue.Value) ==
+                _receiveContainer.MaxValue.Value)
             {
                 if (_clearOnReceivedAll)
                     _receiveContainer.Clear();
@@ -216,6 +210,8 @@ namespace Main.Platforms.Zones
                 StopTransferring();
                 OnReceivedAll?.Invoke();
             }
+
+            _receiveContainer.Add(amount);
         }
 
         private Vector3 GetReceivePoint()
