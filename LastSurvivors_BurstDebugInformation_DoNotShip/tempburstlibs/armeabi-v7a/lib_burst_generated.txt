@@ -20,7 +20,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=MoreMountains.Feel.Demos;
 --assembly-defines=MoreMountains.Feedbacks.Cinemachine;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
---assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=MoreMountains.Feedbacks.URP;
 --assembly-defines=UniRx;
 --assembly-defines=NavMeshComponents;
@@ -36,7 +35,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=MoreMountains.Feedbacks.NiceVibrations;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Burst;
---assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Udar.SceneManager.Examples;
 --assembly-defines=MoreMountains.Feel.Demos.URP;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
@@ -52,7 +50,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Universal.Shaders;
 --assembly-defines=StompyRobot.SRF;
 --assembly-defines=MoreMountains.Feedbacks.MMTools;
---assembly-defines=Unity.VisualScripting.State;
 --assembly-defines=Cinemachine;
 --assembly-defines=MoreMountains.Feedbacks.PostProcessing;
 --assembly-defines=Pathfinding.Poly2Tri;
@@ -63,7 +60,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Sirenix.Utilities;
 --assembly-defines=DOTween;
 --assembly-defines=Pathfinding.ClipperLib;
---assembly-defines=Unity.VisualScripting.Antlr3.Runtime;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Newtonsoft.Json;
 --assembly-defines=Pathfinding.Ionic.Zip.Reduced;
@@ -127,7 +123,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=MoreMountains.Feel.Demos;
 --assembly-defines=MoreMountains.Feedbacks.Cinemachine;
 --assembly-defines=Unity.RenderPipelines.Universal.Config.Runtime;
---assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=MoreMountains.Feedbacks.URP;
 --assembly-defines=UniRx;
 --assembly-defines=NavMeshComponents;
@@ -143,7 +138,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=MoreMountains.Feedbacks.NiceVibrations;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
 --assembly-defines=Unity.Burst;
---assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Udar.SceneManager.Examples;
 --assembly-defines=MoreMountains.Feel.Demos.URP;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
@@ -159,7 +153,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.RenderPipelines.Universal.Shaders;
 --assembly-defines=StompyRobot.SRF;
 --assembly-defines=MoreMountains.Feedbacks.MMTools;
---assembly-defines=Unity.VisualScripting.State;
 --assembly-defines=Cinemachine;
 --assembly-defines=MoreMountains.Feedbacks.PostProcessing;
 --assembly-defines=Pathfinding.Poly2Tri;
@@ -170,7 +163,6 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Sirenix.Utilities;
 --assembly-defines=DOTween;
 --assembly-defines=Pathfinding.ClipperLib;
---assembly-defines=Unity.VisualScripting.Antlr3.Runtime;
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Newtonsoft.Json;
 --assembly-defines=Pathfinding.Ionic.Zip.Reduced;
