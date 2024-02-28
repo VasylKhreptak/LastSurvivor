@@ -242,7 +242,7 @@ MonoBehaviour:
   _gameObject: {fileID: 8756735038120823434}
   _scaleAnimation:
     _transform: {fileID: 550804704612967680}
-    _duration: 0.5
+    _duration: 0.3
     _delay: 0
     _startScale: {x: 0.2, y: 0.2, z: 0.2}
     _endScale: {x: 1, y: 1, z: 1}
@@ -272,7 +272,7 @@ MonoBehaviour:
       m_RotationOrder: 4
   _canvasFadeAnimation:
     _alphaAdapter: {fileID: 4700969148635458520}
-    _duration: 0.5
+    _duration: 0.3
     _delay: 0
     _startAlpha: 0
     _endAlpha: 1

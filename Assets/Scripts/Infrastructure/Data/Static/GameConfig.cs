@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Udar.SceneManager;
 using UnityEngine;
+using UnityEngine.Audio;
 using LogType = Infrastructure.Services.Log.Core.LogType;
 
 namespace Infrastructure.Data.Static
@@ -22,7 +23,7 @@ namespace Infrastructure.Data.Static
         [SerializeField] private LogType _buildLogType = LogType.Info;
 
         public string AppKey => _androidAppKey;
-
+        
         public SceneField BootstrapScene => _bootstrapScene;
         public SceneField MainScene => _mainScene;
         public IReadOnlyList<SceneField> Levels => _levels;

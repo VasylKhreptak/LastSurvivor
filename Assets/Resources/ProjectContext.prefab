@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230cfc2d07a24b3db22bc4bf876ffdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: ac705e16ae10a3a429b2efb2b3cd02af, type: 2}
   _coroutineRunnerPrefab: {fileID: 4887711409807021592, guid: af20cc914570f91468c1d19709321c30,
     type: 3}
   _loadingScreenPrefab: {fileID: 2892134926150037562, guid: f58594695b3bfe3459ed1fcb9c931960,
@@ -105,6 +106,7 @@ MonoBehaviour:
   _backgroundMusicPreferences:
     _clip: {fileID: 8300000, guid: 9829f492e45154b45ae57fc64bae2064, type: 3}
     _volumeUpDuration: 3
+    _delay: 0.5
     _audioSettings:
       AudioMixerGroup: {fileID: 6256812465944879583, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}

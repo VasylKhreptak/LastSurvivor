@@ -26,7 +26,9 @@ using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.Transition;
 using Infrastructure.Transition.Core;
 using Plugins.AudioService;
+using Settings;
 using UnityEngine;
+using UnityEngine.Audio;
 using Zenject;
 
 namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
@@ -34,6 +36,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
     public class BootstrapInstaller : MonoInstaller, IInitializable
     {
         [Header("References")]
+        [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private GameObject _coroutineRunnerPrefab;
         [SerializeField] private GameObject _loadingScreenPrefab;
         [SerializeField] private GameObject _transitionScreenPrefab;
@@ -44,6 +47,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
         public override void InstallBindings()
         {
+            BindInstances();
             BindMonoServices();
             BindSceneLoader();
             BindServices();
@@ -54,6 +58,11 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         }
 
         public void Initialize() => BootstrapGame();
+
+        private void BindInstances()
+        {
+            Container.BindInstance(_audioMixer).AsSingle();
+        }
 
         private void BindMonoServices()
         {
@@ -79,6 +88,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<AdvertisementService>().AsSingle();
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
+            Container.Bind<SettingsApplier>().AsSingle();
         }
 
         private void BindBackgroundMusic() =>

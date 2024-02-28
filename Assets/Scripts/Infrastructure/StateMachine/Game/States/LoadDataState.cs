@@ -19,7 +19,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _persistentDataService.Load();
-            _gameStateMachine.Enter<BootstrapAnalyticsState>();
+            _gameStateMachine.Enter<SetupApplicationState>();
         }
     }
 }

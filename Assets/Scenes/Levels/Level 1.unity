@@ -6806,7 +6806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ab48ec6fc94a128d38d57025409ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
   _trackpad: {fileID: 1154708855}
   _playerSpawnPoint: {fileID: 1620843402}
   _cameraShakerPreferences:
@@ -38253,7 +38252,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.5

@@ -42,11 +42,11 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=MoreMountains.Tools.Feedbacks;
 --assembly-defines=Flexalon.Samples;
 --assembly-defines=MoreMountains.Feedbacks.TextMeshPro;
---assembly-defines=Unity.Mathematics;
 --assembly-defines=MoreMountains.Feedbacks;
+--assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.Splines;
---assembly-defines=Unity.RenderPipelines.Universal.Shaders;
 --assembly-defines=StompyRobot.SRF;
+--assembly-defines=Unity.RenderPipelines.Universal.Shaders;
 --assembly-defines=MoreMountains.Feedbacks.MMTools;
 --assembly-defines=Cinemachine;
 --assembly-defines=MoreMountains.Feedbacks.PostProcessing;
@@ -143,11 +143,11 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=MoreMountains.Tools.Feedbacks;
 --assembly-defines=Flexalon.Samples;
 --assembly-defines=MoreMountains.Feedbacks.TextMeshPro;
---assembly-defines=Unity.Mathematics;
 --assembly-defines=MoreMountains.Feedbacks;
+--assembly-defines=Unity.Mathematics;
 --assembly-defines=Unity.Splines;
---assembly-defines=Unity.RenderPipelines.Universal.Shaders;
 --assembly-defines=StompyRobot.SRF;
+--assembly-defines=Unity.RenderPipelines.Universal.Shaders;
 --assembly-defines=MoreMountains.Feedbacks.MMTools;
 --assembly-defines=Cinemachine;
 --assembly-defines=MoreMountains.Feedbacks.PostProcessing;
