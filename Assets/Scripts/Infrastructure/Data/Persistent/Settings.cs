@@ -6,5 +6,6 @@
         public float MusicVolume = 1f;
         public float SoundVolume = 1f;
         public int QualityLevel = 0;
+        public int LocaleIndex = 0;
     }
 }

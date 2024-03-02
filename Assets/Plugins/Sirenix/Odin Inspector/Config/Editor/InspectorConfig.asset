@@ -16,4 +16,8 @@ MonoBehaviour:
   defaultEditorBehaviour: 11
   processMouseMoveInInspector: 1
   drawingConfig:
-    configs: []
+    configs:
+    - DrawnTypeName: UnityEditor.Localization.LocalizationProjectSettings, Unity.Localization.Editor
+      EditorTypeName: Sirenix.OdinInspector.Editor.OdinEditor, Sirenix.OdinInspector.Editor
+    - DrawnTypeName: UnityEngine.Localization.Components.LocalizeSpriteEvent, Unity.Localization
+      EditorTypeName: 

@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringTable
+  m_TableCollectionNameGuidString: 570e941e9e1bfab438b597dee6c2dab7
+  m_Entries:
+  - m_Id: 15119898771456
+    m_Key: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15973351555072
+    m_Key: Vibration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16024765333504
+    m_Key: Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16067899555840
+    m_Key: High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16225018183680
+    m_Key: Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16266487267328
+    m_Key: Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16339195527168
+    m_Key: Income
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18667856330752
+    m_Key: Upgrade pump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18764174327808
+    m_Key: Upgrade helicopter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19003933327360
+    m_Key: Buy dump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19354828800000
+    m_Key: Buy collectors tent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19645338877952
+    m_Key: Buy barracks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19699286016000
+    m_Key: Hire worker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19762343182336
+    m_Key: Hire soldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19868832366592
+    m_Key: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19925719711744
+    m_Key: Double
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19984020537344
+    m_Key: Revive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20800664109056
+    m_Key: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21833125593088
+    m_Key: Hire collector
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22897107271680
+    m_Key: Max
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23356358393856
+    m_Key: Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23680578093056
+    m_Key: Failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24658689785856
+    m_Key: Tap to Play!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45216378781696
+    m_Key: LEVEL
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8944663486603198492
+  references:
+    version: 2
+    RefIds:
+    - rid: 8944663486603198492
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1709375758628

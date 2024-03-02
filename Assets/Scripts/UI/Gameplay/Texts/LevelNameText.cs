@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Services.PersistentData.Core;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using Zenject;
 
 namespace UI.Gameplay.Texts
@@ -11,7 +12,7 @@ namespace UI.Gameplay.Texts
         [SerializeField] private TMP_Text _tmp;
 
         [Header("Preferences")]
-        [SerializeField] private string _format = "Level {0}";
+        [SerializeField] private LocalizedString _localizedString;
 
         private IPersistentDataService _persistentDataService;
 
@@ -22,8 +23,20 @@ namespace UI.Gameplay.Texts
 
         private void OnValidate() => _tmp ??= GetComponent<TMP_Text>();
 
-        private void Awake() => _tmp.text = string.Format(_format, _persistentDataService.Data.PlayerData.CompletedLevelsCount + 1);
+        private void OnEnable()
+        {
+            _localizedString.Arguments = new object[]
+            {
+                _persistentDataService.Data.PlayerData.CompletedLevelsCount + 1
+            };
+
+            _localizedString.StringChanged += UpdateText;
+        }
+
+        private void OnDisable() => _localizedString.StringChanged -= UpdateText;
 
         #endregion
+
+        private void UpdateText(string text) => _tmp.text = text;
     }
 }
