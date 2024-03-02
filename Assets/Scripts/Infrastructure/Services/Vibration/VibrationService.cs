@@ -20,7 +20,7 @@ namespace Infrastructure.Services.Vibration
 
         private void TryVibrate(HapticPatterns.PresetType preset)
         {
-            if (_persistentDataService.Data.SettingsData.IsVibrationEnabled)
+            if (_persistentDataService.Data.Settings.IsVibrationEnabled)
             {
                 HapticPatterns.PlayPreset(preset);
                 _logService.Log($"Vibrated with preset: {preset.ToString()}");

@@ -4,7 +4,7 @@ using Plugins.Animations;
 using Plugins.Animations.Core;
 using UnityEngine;
 
-namespace UI.Main.Windows
+namespace UI.Main.Windows.Settings
 {
     public class SettingsWindow : MonoBehaviour, IWindow
     {

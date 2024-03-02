@@ -1,4 +1,5 @@
 ﻿using UI.Main.Windows;
+using UI.Main.Windows.Settings;
 using UnityEngine;
 
 namespace Zenject.Installers.SceneContext.Main

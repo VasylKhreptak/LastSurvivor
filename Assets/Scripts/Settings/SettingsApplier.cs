@@ -26,11 +26,11 @@ namespace Settings
             ApplyQualityLevel();
         }
 
-        public void ApplyMusicVolume() => ApplyVolume(MusicVolumeParameter, _persistentDataService.Data.SettingsData.MusicVolume);
+        public void ApplyMusicVolume() => ApplyVolume(MusicVolumeParameter, _persistentDataService.Data.Settings.MusicVolume);
 
-        public void ApplySfxVolume() => ApplyVolume(SfxVolumeParameter, _persistentDataService.Data.SettingsData.SfxVolume);
+        public void ApplySfxVolume() => ApplyVolume(SfxVolumeParameter, _persistentDataService.Data.Settings.SoundVolume);
 
-        public void ApplyQualityLevel() => QualitySettings.SetQualityLevel(_persistentDataService.Data.SettingsData.QualityLevel);
+        public void ApplyQualityLevel() => QualitySettings.SetQualityLevel(_persistentDataService.Data.Settings.QualityLevel);
 
         private void ApplyVolume(string parameter, float volume) => _audioMixer.SetFloat(parameter, AudioExtensions.ToDB(volume));
     }

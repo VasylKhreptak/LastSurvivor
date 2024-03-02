@@ -4,6 +4,6 @@
     {
         public readonly PlayerData PlayerData = new PlayerData();
         public readonly AnalyticsData AnalyticsData = new AnalyticsData();
-        public readonly SettingsData SettingsData = new SettingsData();
+        public readonly Settings Settings = new Settings();
     }
 }
