@@ -12,7 +12,8 @@ namespace Gameplay.Levels.StateMachine.States
         private readonly LevelData _levelData;
         private readonly LevelCompletedWindow _levelCompletedWindow;
 
-        public LevelCompletedState(IStateMachine<ILevelState> levelStateMachine, LevelData levelData, LevelCompletedWindow levelCompletedWindow)
+        public LevelCompletedState(IStateMachine<ILevelState> levelStateMachine, LevelData levelData,
+            LevelCompletedWindow levelCompletedWindow)
         {
             _levelStateMachine = levelStateMachine;
             _levelData = levelData;

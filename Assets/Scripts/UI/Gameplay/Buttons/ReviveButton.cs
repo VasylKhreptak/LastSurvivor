@@ -123,6 +123,8 @@ namespace UI.Gameplay.Buttons
 
         private void OnClicked()
         {
+            _hideTimer.Stop();
+            
             if (_advertisementService.ShowRewardedVideo(OnRewarded) == false)
             {
                 _continueButton.Show();
@@ -146,7 +148,7 @@ namespace UI.Gameplay.Buttons
         private void OnRewarded()
         {
             _hideTimer.Stop();
-            
+
             _levelFailedWindow.Hide(() =>
             {
                 if (_player.Health.IsDeath.Value)

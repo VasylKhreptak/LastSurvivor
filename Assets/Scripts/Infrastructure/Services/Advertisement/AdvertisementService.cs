@@ -77,7 +77,6 @@ namespace Infrastructure.Services.Advertisement
             _interstitialAd.Show();
 
             _logService.Log("Interstitial ad shown");
-            return;
         }
 
         public void DestroyInterstitial()

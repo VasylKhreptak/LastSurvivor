@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Aim;
 using Gameplay.Entities.Collector;
-using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
@@ -55,7 +54,7 @@ namespace Gameplay.Levels.StateMachine.States
             _weaponAim.Show();
             _weaponAimer.Enabled = true;
             _hud.Show();
-            
+
             _collectors.ForEach(collector =>
                 collector.StateMachine.Enter<Entities.Collector.StateMachine.States.NavigationState>());
 

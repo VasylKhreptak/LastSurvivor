@@ -18,9 +18,7 @@ namespace UI.SwitchMenu
             if (CurrentIndex == _maxIndex)
             {
                 if (_loop)
-                {
                     SetIndex(0);
-                }
 
                 return;
             }
@@ -33,9 +31,7 @@ namespace UI.SwitchMenu
             if (CurrentIndex == 0)
             {
                 if (_loop)
-                {
                     SetIndex(_maxIndex);
-                }
 
                 return;
             }

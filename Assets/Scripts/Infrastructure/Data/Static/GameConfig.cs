@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Data.Static;
 using Udar.SceneManager;
 using UnityEngine;
-using UnityEngine.Audio;
 using LogType = Infrastructure.Services.Log.Core.LogType;
 
 namespace Infrastructure.Data.Static
@@ -28,7 +27,7 @@ namespace Infrastructure.Data.Static
         public IReadOnlyList<SceneField> Levels => _levels;
         public IReadOnlyList<SceneField> LoopedLevels => _loopedLevels;
         public LogType LogType => Application.isEditor ? _editorLogType : _buildLogType;
-        
+
         public GoogleAdsSettings GoogleAdsSettings => _googleAdsSettings;
     }
 }

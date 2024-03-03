@@ -34,8 +34,7 @@ namespace DebuggerOptions
         public void LoadRewardedVideo() => _advertisementService.LoadRewardedVideo();
 
         [Category("Advertisements")]
-        public void ShowRewardedVideo() =>
-            _advertisementService.ShowRewardedVideo(() => { _logService.Log($"Rewarded video shown"); });
+        public void ShowRewardedVideo() => _advertisementService.ShowRewardedVideo(() => { _logService.Log("Rewarded video shown"); });
 
         [Category("Advertisements")]
         public void DestroyRewardedVideo() => _advertisementService.DestroyRewardedVideo();

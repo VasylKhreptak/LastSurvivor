@@ -1,5 +1,4 @@
 ﻿using UI.Buttons.Core;
-using UI.Main.Windows;
 using UI.Main.Windows.Settings;
 using Zenject;
 
