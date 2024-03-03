@@ -1,4 +1,6 @@
 ﻿using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.Services.Vibration.Core;
+using Lofelt.NiceVibrations;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,9 +13,14 @@ namespace UI.Main.Windows.Settings
         [SerializeField] private Toggle _toggle;
 
         private IPersistentDataService _persistentDataService;
+        private IVibrationService _vibrationService;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService) => _persistentDataService = persistentDataService;
+        private void Constructor(IPersistentDataService persistentDataService, IVibrationService vibrationService)
+        {
+            _persistentDataService = persistentDataService;
+            _vibrationService = vibrationService;
+        }
 
         #region MonoBehaviour
 
@@ -27,6 +34,12 @@ namespace UI.Main.Windows.Settings
 
         #endregion
 
-        private void SetVibrationActive(bool enabled) => _persistentDataService.Data.Settings.IsVibrationEnabled = enabled;
+        private void SetVibrationActive(bool enabled)
+        {
+            _persistentDataService.Data.Settings.IsVibrationEnabled = enabled;
+
+            if (enabled)
+                _vibrationService.Vibrate(HapticPatterns.PresetType.RigidImpact);
+        }
     }
 }
