@@ -35,16 +35,12 @@ namespace Infrastructure.Services.Advertisement
 
             AdRequest adRequest = new AdRequest();
             _bannerView.LoadAd(adRequest);
-
-            _logService.Log("Banner ad shown");
         }
 
         public void DestroyBanner()
         {
             _bannerView?.Destroy();
             _bannerView = null;
-
-            _logService.Log("Banner ad destroyed");
         }
 
         public void LoadInterstitial()
@@ -59,11 +55,9 @@ namespace Infrastructure.Services.Advertisement
             {
                 if (error != null)
                 {
-                    _logService.Log($"Interstitial ad failed to load: {error}");
+                    _logService.LogError($"Interstitial ad failed to load: {error}");
                     return;
                 }
-
-                _logService.Log("Interstitial ad loaded");
 
                 _interstitialAd = ad;
             });
@@ -75,16 +69,12 @@ namespace Infrastructure.Services.Advertisement
                 return;
 
             _interstitialAd.Show();
-
-            _logService.Log("Interstitial ad shown");
         }
 
         public void DestroyInterstitial()
         {
             _interstitialAd?.Destroy();
             _interstitialAd = null;
-
-            _logService.Log("Interstitial ad destroyed");
         }
 
         public void LoadRewardedVideo()
@@ -99,13 +89,11 @@ namespace Infrastructure.Services.Advertisement
             {
                 if (error != null)
                 {
-                    _logService.Log($"Rewarded video ad failed to load: {error}");
+                    _logService.LogError($"Rewarded video ad failed to load: {error}");
                     return;
                 }
 
                 _rewardedAd = ad;
-
-                _logService.Log("Rewarded video ad loaded");
             });
         }
 
@@ -116,11 +104,10 @@ namespace Infrastructure.Services.Advertisement
 
             _rewardedAd.Show(_ =>
             {
-                _logService.Log("Rewarded video");
+                _logService.Log("Rewarded earned");
                 onRewarded?.Invoke();
             });
 
-            _logService.Log("Rewarded video ad shown");
             return true;
         }
 
@@ -128,11 +115,9 @@ namespace Infrastructure.Services.Advertisement
         {
             _rewardedAd?.Destroy();
             _rewardedAd = null;
-
-            _logService.Log("Rewarded video ad destroyed");
         }
 
-        private void OnInitialized() => _logService.Log("Google ads initialized");
+        private void OnInitialized() => _logService.Log("Admob initialized");
 
         private void InitializeBannerView()
         {

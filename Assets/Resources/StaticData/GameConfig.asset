@@ -53,8 +53,8 @@ MonoBehaviour:
     _path: Assets/Scenes/Levels/Looped/Looped Level 4.unity
     _buildIndex: 8
   _editorLogType: 21
-  _buildLogType: 0
+  _buildLogType: 21
   _googleAdsSettings:
-    _bannerId: ca-app-pub-3940256099942544/6300978111
-    _interstitialId: ca-app-pub-3940256099942544/1033173712
-    _rewardedVideoId: ca-app-pub-3940256099942544/5224354917
+    _bannerId: ca-app-pub-4055329757284699/7900507837
+    _interstitialId: ca-app-pub-4055329757284699/3961262824
+    _rewardedVideoId: ca-app-pub-4055329757284699/1067027242
