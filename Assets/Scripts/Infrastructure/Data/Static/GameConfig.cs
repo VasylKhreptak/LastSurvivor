@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data.Static;
 using Udar.SceneManager;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -9,9 +10,6 @@ namespace Infrastructure.Data.Static
     [CreateAssetMenu(fileName = "GameConfig", menuName = "ScriptableObjects/Static/GameConfig")]
     public class GameConfig : ScriptableObject
     {
-        [Header("Application")]
-        [SerializeField] private string _androidAppKey;
-
         [Header("Scenes")]
         [SerializeField] private SceneField _bootstrapScene;
         [SerializeField] private SceneField _mainScene;
@@ -22,12 +20,15 @@ namespace Infrastructure.Data.Static
         [SerializeField] private LogType _editorLogType = LogType.Info;
         [SerializeField] private LogType _buildLogType = LogType.Info;
 
-        public string AppKey => _androidAppKey;
-        
+        [Header("Ads")]
+        [SerializeField] private GoogleAdsSettings _googleAdsSettings;
+
         public SceneField BootstrapScene => _bootstrapScene;
         public SceneField MainScene => _mainScene;
         public IReadOnlyList<SceneField> Levels => _levels;
         public IReadOnlyList<SceneField> LoopedLevels => _loopedLevels;
         public LogType LogType => Application.isEditor ? _editorLogType : _buildLogType;
+        
+        public GoogleAdsSettings GoogleAdsSettings => _googleAdsSettings;
     }
 }

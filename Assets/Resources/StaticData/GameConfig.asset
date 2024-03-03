@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84647dd5db1ab8748910c4e8588df5bd, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  _androidAppKey: 1d8991295
   _bootstrapScene:
     _sceneOB: {fileID: 102900000, guid: 41e2ab1aacabcea4e866de989efaf9fc, type: 3}
     _name: Bootstrap
@@ -55,3 +54,7 @@ MonoBehaviour:
     _buildIndex: 8
   _editorLogType: 21
   _buildLogType: 0
+  _googleAdsSettings:
+    _bannerId: ca-app-pub-3940256099942544/6300978111
+    _interstitialId: ca-app-pub-3940256099942544/1033173712
+    _rewardedVideoId: ca-app-pub-3940256099942544/5224354917

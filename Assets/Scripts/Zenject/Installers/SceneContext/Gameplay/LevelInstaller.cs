@@ -17,6 +17,7 @@ using Gameplay.Weapons;
 using Gameplay.Weapons.Core;
 using Infrastructure.Data.Static;
 using Infrastructure.Data.Static.Core;
+using Infrastructure.Services.Advertisement.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using ObjectPoolSystem.PoolCategories;
@@ -51,12 +52,15 @@ namespace Zenject.Installers.SceneContext.Gameplay
 
         private GamePrefabs _gamePrefabs;
         private IPersistentDataService _persistentDataService;
+        private IAdvertisementService _advertisementService;
 
         [Inject]
-        private void Constructor(IStaticDataService staticDataService, IPersistentDataService persistentDataService)
+        private void Constructor(IStaticDataService staticDataService, IPersistentDataService persistentDataService,
+            IAdvertisementService advertisementService)
         {
             _gamePrefabs = staticDataService.Prefabs;
             _persistentDataService = persistentDataService;
+            _advertisementService = advertisementService;
         }
 
         #region MonoBehaviour
@@ -93,6 +97,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindWeaponShooter();
             BindLevelStateMachine();
             BindLevelDebugger();
+            PreloadVideoAd();
         }
 
         private void BindCameraShaker() =>
@@ -224,5 +229,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindWeaponShooter() => Container.BindInterfacesAndSelfTo<WeaponShooter>().AsSingle();
 
         private void BindLevelDebugger() => Container.BindInterfacesTo<LevelOptions>().AsSingle();
+
+        private void PreloadVideoAd() => _advertisementService.LoadRewardedVideo();
     }
 }

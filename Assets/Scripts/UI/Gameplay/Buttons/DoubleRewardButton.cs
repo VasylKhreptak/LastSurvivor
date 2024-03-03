@@ -1,5 +1,6 @@
 ﻿using System;
 using Gameplay.Data;
+using Infrastructure.Services.Advertisement.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Plugins.Animations.Move;
@@ -28,11 +29,13 @@ namespace UI.Gameplay.Buttons
         [SerializeField] private FadeAnimation _fadeAnimation;
 
         private LevelData _levelData;
+        private IAdvertisementService _advertisementService;
 
         [Inject]
-        private void Constructor(LevelData levelData)
+        private void Constructor(LevelData levelData, IAdvertisementService advertisementService)
         {
             _levelData = levelData;
+            _advertisementService = advertisementService;
         }
 
         private IAnimation _showAnimation;
@@ -105,11 +108,13 @@ namespace UI.Gameplay.Buttons
 
         private void OnClicked()
         {
-            _levelData.CollectedGears.Value *= 2;
-            _levelData.CollectedMoney.Value *= 2;
+            _hideTimer.Stop();
 
-            Hide();
-            _continueButton.Show();
+            if (_advertisementService.ShowRewardedVideo(OnRewarded) == false)
+            {
+                Hide();
+                _continueButton.Show();
+            }
 
             _button.interactable = false;
         }
@@ -124,5 +129,14 @@ namespace UI.Gameplay.Buttons
         }
 
         private void OnRemainingSecondsChanged(int remainingSeconds) => _leftSecondsText.text = remainingSeconds.ToString();
+
+        private void OnRewarded()
+        {
+            _levelData.CollectedGears.Value *= 2;
+            _levelData.CollectedMoney.Value *= 2;
+
+            Hide();
+            _continueButton.Show();
+        }
     }
 }

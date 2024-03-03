@@ -1,19 +1,24 @@
-﻿namespace Infrastructure.Services.Advertisement.Core
+﻿using System;
+using GoogleMobileAds.Api;
+
+namespace Infrastructure.Services.Advertisement.Core
 {
     public interface IAdvertisementService
     {
-        public void LoadBanner();
-
         public void ShowBanner();
-
+        
         public void DestroyBanner();
 
         public void LoadInterstitial();
 
         public void ShowInterstitial();
+        
+        public void DestroyInterstitial();
 
         public void LoadRewardedVideo();
 
-        public void ShowRewardedVideo();
+        public bool ShowRewardedVideo(Action onRewarded);
+        
+        public void DestroyRewardedVideo();
     }
 }

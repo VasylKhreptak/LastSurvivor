@@ -70,6 +70,12 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Newtonsoft.Json;
 --assembly-defines=Pathfinding.Ionic.Zip.Reduced;
+--assembly-defines=GoogleMobileAds.Android;
+--assembly-defines=GoogleMobileAds.Common;
+--assembly-defines=GoogleMobileAds;
+--assembly-defines=GoogleMobileAds.Ump.Android;
+--assembly-defines=GoogleMobileAds.Core;
+--assembly-defines=GoogleMobileAds.Ump;
 --assembly-defines=System.Runtime;
 --assembly-defines=netstandard;
 --assembly-defines=Mono.Security;
@@ -171,6 +177,12 @@ Library: C:\Users\chrep\UnityProjects\LastSurvivors\Temp\BurstOutput\tempburstli
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Newtonsoft.Json;
 --assembly-defines=Pathfinding.Ionic.Zip.Reduced;
+--assembly-defines=GoogleMobileAds.Android;
+--assembly-defines=GoogleMobileAds.Common;
+--assembly-defines=GoogleMobileAds;
+--assembly-defines=GoogleMobileAds.Ump.Android;
+--assembly-defines=GoogleMobileAds.Core;
+--assembly-defines=GoogleMobileAds.Ump;
 --assembly-defines=System.Runtime;
 --assembly-defines=netstandard;
 --assembly-defines=Mono.Security;

@@ -4,6 +4,7 @@ using Gameplay.Entities.Player.StateMachine.States;
 using Gameplay.Levels.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.Graphics.UI.Windows.Core;
+using Infrastructure.Services.Advertisement.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
@@ -37,13 +38,16 @@ namespace UI.Gameplay.Buttons
         private IWindow _levelFailedWindow;
         private Player _player;
         private IStateMachine<ILevelState> _levelStateMachine;
+        private IAdvertisementService _advertisementService;
 
         [Inject]
-        private void Constructor(LevelFailedWindow levelFailedWindow, Player player, IStateMachine<ILevelState> levelStateMachine)
+        private void Constructor(LevelFailedWindow levelFailedWindow, Player player, IStateMachine<ILevelState> levelStateMachine,
+            IAdvertisementService advertisementService)
         {
             _levelFailedWindow = levelFailedWindow;
             _player = player;
             _levelStateMachine = levelStateMachine;
+            _advertisementService = advertisementService;
         }
 
         private IAnimation _showAnimation;
@@ -119,19 +123,11 @@ namespace UI.Gameplay.Buttons
 
         private void OnClicked()
         {
-            _levelFailedWindow.Hide(() =>
+            if (_advertisementService.ShowRewardedVideo(OnRewarded) == false)
             {
-                if (_player.Health.IsDeath.Value)
-                    _player.StateMachine.Enter<ReviveState>();
-
-                _levelResumeDelaySubscription?.Dispose();
-                _levelResumeDelaySubscription = Observable
-                    .Timer(TimeSpan.FromSeconds(_levelResumeDelay))
-                    .Subscribe(_ => _levelStateMachine.Enter<ResumeLevelState>());
-
                 _continueButton.Show();
                 Hide();
-            });
+            }
 
             _button.interactable = false;
         }
@@ -146,5 +142,26 @@ namespace UI.Gameplay.Buttons
         }
 
         private void OnRemainingSecondsChanged(int remainingSeconds) => _leftSecondsText.text = remainingSeconds.ToString();
+
+        private void OnRewarded()
+        {
+            _hideTimer.Stop();
+            
+            _levelFailedWindow.Hide(() =>
+            {
+                if (_player.Health.IsDeath.Value)
+                    _player.StateMachine.Enter<ReviveState>();
+
+                _levelResumeDelaySubscription?.Dispose();
+                _levelResumeDelaySubscription = Observable
+                    .Timer(TimeSpan.FromSeconds(_levelResumeDelay))
+                    .Subscribe(_ => _levelStateMachine.Enter<ResumeLevelState>());
+
+                _continueButton.Show();
+                Hide();
+            });
+
+            _advertisementService.LoadRewardedVideo();
+        }
     }
 }
