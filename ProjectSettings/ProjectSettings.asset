@@ -253,14 +253,14 @@ PlayerSettings:
   clonedFromGUID: 3c72c65a16f0acb438eed22b8b16c24a
   templatePackageId: com.unity.template.urp-blank@3.0.2
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
-  useCustomLauncherManifest: 0
+  useCustomMainManifest: 1
+  useCustomLauncherManifest: 1
   useCustomMainGradleTemplate: 1
-  useCustomLauncherGradleManifest: 0
-  useCustomBaseGradleTemplate: 0
+  useCustomLauncherGradleManifest: 1
+  useCustomBaseGradleTemplate: 1
   useCustomGradlePropertiesTemplate: 1
   useCustomGradleSettingsTemplate: 0
-  useCustomProguardFile: 0
+  useCustomProguardFile: 1
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
@@ -817,7 +817,7 @@ PlayerSettings:
     PS5: EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2
     QNX: EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2
     Stadia: EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;MOREMOUNTAINS_TOOLS;MOREMOUNTAINS_POSTPROCESSING_INSTALLED;MOREMOUNTAINS_TOOLS_FOR_MMFEEDBACKS;MOREMOUNTAINS_CINEMACHINE_INSTALLED;MOREMOUNTAINS_TEXTMESHPRO_INSTALLED
     VisionOS: EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2
     WebGL: EPO_DOTWEEN;URP_OUTLINE;UNITY_POST_PROCESSING_STACK_V2
     Windows Store Apps: EPO_DOTWEEN;URP_OUTLINE
