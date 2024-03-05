@@ -7,6 +7,7 @@ using Infrastructure.LoadingScreen.Core;
 using Infrastructure.SceneManagement;
 using Infrastructure.SceneManagement.Core;
 using Infrastructure.Services.Advertisement;
+using Infrastructure.Services.Firebase;
 using Infrastructure.Services.Framerate;
 using Infrastructure.Services.ID;
 using Infrastructure.Services.ID.Core;
@@ -86,6 +87,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<FramerateService>().AsSingle();
             Container.BindInterfacesTo<ScreenService>().AsSingle();
             Container.BindInterfacesTo<AdvertisementService>().AsSingle();
+            Container.BindInterfacesTo<FirebaseDependencyResolver>().AsSingle();
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
             Container.Bind<SettingsApplier>().AsSingle();

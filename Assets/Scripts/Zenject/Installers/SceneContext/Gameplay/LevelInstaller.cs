@@ -8,6 +8,8 @@ using Gameplay.Entities.Helicopter;
 using Gameplay.Entities.Platoon;
 using Gameplay.Entities.Player;
 using Gameplay.Entities.Zombie;
+using Gameplay.Levels;
+using Gameplay.Levels.Analytics;
 using Gameplay.Levels.StateMachine;
 using Gameplay.Levels.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
@@ -79,6 +81,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             Container.BindInstance(_helicopterMovementSpline).WhenInjectedInto<HelicopterInstaller>();
             Container.BindInstance(_platoonMovementSpline).WhenInjectedInto<PlatoonInstaller>();
 
+            BindLevelManager();
             BindObjectPools();
             BindZombiesList();
             BindCollectorsList();
@@ -98,7 +101,10 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindLevelStateMachine();
             BindLevelDebugger();
             PreloadVideoAd();
+            BindLevelDurationEventLogger();
         }
+
+        private void BindLevelManager() => Container.Bind<LevelManager>().AsSingle();
 
         private void BindCameraShaker() =>
             Container.BindInterfacesAndSelfTo<CameraShaker>().AsSingle().WithArguments(_cameraShakerPreferences);
@@ -231,5 +237,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
         private void BindLevelDebugger() => Container.BindInterfacesTo<LevelOptions>().AsSingle();
 
         private void PreloadVideoAd() => _advertisementService.LoadRewardedVideo();
+
+        private void BindLevelDurationEventLogger() => Container.BindInterfacesTo<LevelLifetimeEventLogger>().AsSingle();
     }
 }

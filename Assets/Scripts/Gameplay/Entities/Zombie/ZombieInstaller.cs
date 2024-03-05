@@ -6,6 +6,7 @@ using Gameplay.Entities.Health.Damages;
 using Gameplay.Entities.Zombie.StateMachine;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
+using Gameplay.Levels;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -37,16 +38,15 @@ namespace Gameplay.Entities.Zombie
         [SerializeField] private IntMinMaxValue _priceForKill = new IntMinMaxValue(10, 30);
 
         private List<Zombie> _zombies;
-        private IPersistentDataService _persistentDataService;
         private IStaticDataService _staticDataService;
+        private LevelManager _levelManager;
 
         [Inject]
-        private void Constructor(List<Zombie> zombies, IPersistentDataService persistentDataService,
-            IStaticDataService staticDataService)
+        private void Constructor(List<Zombie> zombies, IStaticDataService staticDataService, LevelManager levelManager)
         {
             _zombies = zombies;
-            _persistentDataService = persistentDataService;
             _staticDataService = staticDataService;
+            _levelManager = levelManager;
         }
 
         public override void InstallBindings()
@@ -75,8 +75,7 @@ namespace Gameplay.Entities.Zombie
             RegisterZombie();
         }
 
-        private float GetHealth() =>
-            _staticDataService.Balance.ZombieHealth.Get(_persistentDataService.Data.PlayerData.CompletedLevelsCount);
+        private float GetHealth() => _staticDataService.Balance.ZombieHealth.Get(_levelManager.GetCurrentLevel());
 
         private void BindMoveAnimation() =>
             Container.BindInterfacesTo<MoveAnimation>().AsSingle().WithArguments(_moveAnimationPreferences);

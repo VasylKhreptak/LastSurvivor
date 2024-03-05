@@ -1,4 +1,4 @@
-﻿using Infrastructure.Services.PersistentData.Core;
+﻿using Gameplay.Levels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -14,10 +14,10 @@ namespace UI.Gameplay.Texts
         [Header("Preferences")]
         [SerializeField] private LocalizedString _localizedString;
 
-        private IPersistentDataService _persistentDataService;
+        private LevelManager _levelManager;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService) => _persistentDataService = persistentDataService;
+        private void Constructor(LevelManager levelManager) => _levelManager = levelManager;
 
         #region MonoBehaviour
 
@@ -27,7 +27,7 @@ namespace UI.Gameplay.Texts
         {
             _localizedString.Arguments = new object[]
             {
-                _persistentDataService.Data.PlayerData.CompletedLevelsCount + 1
+                _levelManager.GetCurrentLevel()
             };
 
             _localizedString.StringChanged += UpdateText;

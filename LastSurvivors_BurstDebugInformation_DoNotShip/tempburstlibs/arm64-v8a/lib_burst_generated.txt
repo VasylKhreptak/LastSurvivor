@@ -15,6 +15,10 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Cinemachine;
 --assembly-defines=Coffee.UIParticle;
 --assembly-defines=DOTween;
+--assembly-defines=Firebase.Analytics;
+--assembly-defines=Firebase.App;
+--assembly-defines=Firebase.Platform;
+--assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
 --assembly-defines=Flexalon.Samples;
 --assembly-defines=GoogleMobileAds.Android;
@@ -103,6 +107,10 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Cinemachine;
 --assembly-defines=Coffee.UIParticle;
 --assembly-defines=DOTween;
+--assembly-defines=Firebase.Analytics;
+--assembly-defines=Firebase.App;
+--assembly-defines=Firebase.Platform;
+--assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
 --assembly-defines=Flexalon.Samples;
 --assembly-defines=GoogleMobileAds.Android;

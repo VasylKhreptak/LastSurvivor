@@ -1,5 +1,4 @@
-﻿using Infrastructure.Services.PersistentData.Core;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Gameplay.Levels
@@ -12,10 +11,10 @@ namespace Gameplay.Levels
         [Header("Preferences")]
         [SerializeField] private int _requiredLevel = 5;
 
-        private IPersistentDataService _persistentDataService;
+        private LevelManager _levelManager;
 
         [Inject]
-        private void Constructor(IPersistentDataService persistentDataService) => _persistentDataService = persistentDataService;
+        private void Constructor(LevelManager levelManage) => _levelManager = levelManage;
 
         #region MonoBehaviour
 
@@ -23,7 +22,7 @@ namespace Gameplay.Levels
 
         private void Awake()
         {
-            if (_persistentDataService.Data.PlayerData.CompletedLevelsCount + 1 < _requiredLevel)
+            if (_levelManager.GetCurrentLevel() < _requiredLevel)
                 Destroy(gameObject);
             else
                 _asset.SetActive(true);

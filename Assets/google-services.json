@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1081225345728",
+    "project_id": "last-survivors-b9674",
+    "storage_bucket": "last-survivors-b9674.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081225345728:android:d019878b9585d139228b25",
+        "android_client_info": {
+          "package_name": "com.UnityTechnologies.com.fgames.lastsurvivors"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB93uwNsjxlNoxd3-ho2jd9T_kheCbz4jA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

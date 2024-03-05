@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using Firebase.Analytics;
+using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    private void Awake() { }
+    private void Awake()
+    {
+        FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelStart);
+    }
 }
