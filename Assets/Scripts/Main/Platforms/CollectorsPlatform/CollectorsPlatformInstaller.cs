@@ -50,6 +50,7 @@ namespace Main.Platforms.CollectorsPlatform
             BindCollectorPriceUpdater();
             BindReceiveZoneVibration();
             BindHireAudioPlayer();
+            BindHireEventLogger();
         }
 
         private void BindCollectorHireZone()
@@ -86,5 +87,7 @@ namespace Main.Platforms.CollectorsPlatform
 
         private void BindHireAudioPlayer() =>
             Container.BindInterfacesTo<HireAudioPlayer>().AsSingle().WithArguments(_hireAudioPreferences);
+
+        private void BindHireEventLogger() => Container.BindInterfacesTo<HireEventLogger>().AsSingle().WithArguments("Collector");
     }
 }

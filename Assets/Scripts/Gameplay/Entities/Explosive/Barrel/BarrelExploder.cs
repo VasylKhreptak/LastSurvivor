@@ -1,4 +1,6 @@
-﻿using Audio.Players;
+﻿using Analytics;
+using Audio.Players;
+using Firebase.Analytics;
 using Gameplay.Entities.Explosive.Core;
 using Gameplay.Entities.Health;
 using Gameplay.Entities.Health.Core;
@@ -44,6 +46,7 @@ namespace Gameplay.Entities.Explosive.Barrel
             _explosionAudioPlayer.Play(position);
             SpawnExplosionParticle();
             _vibrationService.Vibrate(HapticPatterns.PresetType.HeavyImpact);
+            FirebaseAnalytics.LogEvent(AnalyticEvents.BarrelExploded);
             Object.Destroy(_gameObject);
         }
 

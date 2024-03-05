@@ -50,6 +50,7 @@ namespace Main.Platforms.BarracksPlatform
             BindSoldierPriceUpdater();
             BindReceiveZoneVibration();
             BindHireAudioPlayer();
+            BindHireEventLogger();
         }
 
         private void BindSoldierHireZone()
@@ -61,10 +62,8 @@ namespace Main.Platforms.BarracksPlatform
             Container.BindInstance(_hireSoldierZone).AsSingle();
         }
 
-        private void BindSoldiersCountText()
-        {
+        private void BindSoldiersCountText() =>
             Container.BindInstance(_platformData.SoldiersBank).WhenInjectedInto<ClampedBankValuesText>();
-        }
 
         private void BindSoldiersRecruiter()
         {
@@ -86,5 +85,7 @@ namespace Main.Platforms.BarracksPlatform
 
         private void BindHireAudioPlayer() =>
             Container.BindInterfacesTo<HireAudioPlayer>().AsSingle().WithArguments(_hireSoldierAudioPreferences);
+
+        private void BindHireEventLogger() => Container.BindInterfacesTo<HireEventLogger>().AsSingle().WithArguments("Soldier");
     }
 }

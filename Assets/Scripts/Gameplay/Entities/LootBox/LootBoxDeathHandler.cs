@@ -1,4 +1,6 @@
-﻿using Gameplay.Entities.Health;
+﻿using Analytics;
+using Firebase.Analytics;
+using Gameplay.Entities.Health;
 using Gameplay.Entities.Health.Core;
 using Infrastructure.Services.Vibration.Core;
 using Lofelt.NiceVibrations;
@@ -24,6 +26,7 @@ namespace Gameplay.Entities.LootBox
         {
             _lootSpawner.Spawn();
             _vibrationService.Vibrate(HapticPatterns.PresetType.MediumImpact);
+            FirebaseAnalytics.LogEvent(AnalyticEvents.BrokeLootBox);
             Object.Destroy(_gameObject);
         }
     }

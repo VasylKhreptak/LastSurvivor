@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 9020576697804280567}
   - component: {fileID: 7430015677431751688}
   - component: {fileID: 2228860845299994163}
+  - component: {fileID: 5838688762913807727}
   m_Layer: 5
   m_Name: OpenSettingsButton
   m_TagString: Untagged
@@ -623,6 +624,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 9020576697804280567}
+--- !u!114 &5838688762913807727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5165711205712249333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450ede539c490f969e97b2241bb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 9020576697804280567}
+  _name: Open Settings Button
 --- !u!1 &6656822969854184218
 GameObject:
   m_ObjectHideFlags: 0

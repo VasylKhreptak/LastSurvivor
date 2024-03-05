@@ -1,4 +1,6 @@
 ﻿using System;
+using Analytics;
+using Firebase.Analytics;
 using Infrastructure.Services.PersistentData.Core;
 using Main.Entities.Player;
 using Main.Platforms.HelicopterPlatform;
@@ -40,6 +42,8 @@ namespace Quests.Main
         public override void MarkAsCompleted()
         {
             _persistentDataService.Data.PlayerData.CompletedQuests.Add(QuestType.FuelUpHelicopter);
+            FirebaseAnalytics.LogEvent(AnalyticEvents.CompletedQuest,
+                new Parameter(AnalyticParameters.Name, QuestType.FuelUpHelicopter.ToString()));
             base.MarkAsCompleted();
         }
     }

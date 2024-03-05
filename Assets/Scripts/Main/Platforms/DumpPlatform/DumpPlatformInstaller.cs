@@ -60,6 +60,7 @@ namespace Main.Platforms.DumpPlatform
             BindWorkerPriceUpdater();
             BindReceiveZoneVibration();
             BindHireAudioPlayer();
+            BindHireEventLogger();
         }
 
         private void BindHireWorkerZone()
@@ -102,5 +103,7 @@ namespace Main.Platforms.DumpPlatform
 
         private void BindHireAudioPlayer() =>
             Container.BindInterfacesTo<HireAudioPlayer>().AsSingle().WithArguments(_hireAudioPreferences);
+
+        private void BindHireEventLogger() => Container.BindInterfacesTo<HireEventLogger>().AsSingle().WithArguments("Worker");
     }
 }

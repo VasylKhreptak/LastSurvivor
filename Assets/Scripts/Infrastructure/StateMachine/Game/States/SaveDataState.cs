@@ -1,4 +1,6 @@
-﻿using Infrastructure.Services.Log.Core;
+﻿using Analytics;
+using Firebase.Analytics;
+using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -23,6 +25,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _persistentDataService.Save();
+            FirebaseAnalytics.LogEvent(AnalyticEvents.SavedData);
             _logService.Log("Saved Data");
             _gameStateMachine.Back();
         }

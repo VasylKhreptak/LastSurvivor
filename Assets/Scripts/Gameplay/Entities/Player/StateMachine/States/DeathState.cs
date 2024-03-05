@@ -1,4 +1,6 @@
-﻿using Gameplay.Entities.Player.StateMachine.States.Core;
+﻿using Analytics;
+using Firebase.Analytics;
+using Gameplay.Entities.Player.StateMachine.States.Core;
 using Gameplay.Levels.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -41,6 +43,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             _rigidbody.isKinematic = true;
             _collider.enabled = false;
             _ragdoll.Enable();
+            FirebaseAnalytics.LogEvent(AnalyticEvents.PlayerDied);
             _levelStateMachine.Enter<LevelFailedState>();
         }
     }

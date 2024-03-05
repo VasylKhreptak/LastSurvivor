@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace EntryPoints.Game
+namespace EntryPoints
 {
     public class GameRunner : MonoBehaviour, IEntryPoint
     {

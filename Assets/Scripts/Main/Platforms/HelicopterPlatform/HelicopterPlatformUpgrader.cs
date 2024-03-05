@@ -1,6 +1,8 @@
 ﻿using System;
+using Analytics;
 using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
+using Firebase.Analytics;
 using Main.Platforms.Zones;
 using Zenject;
 
@@ -36,6 +38,8 @@ namespace Main.Platforms.HelicopterPlatform
             TryIncreaseIncomeMultiplier();
             TryIncreaseUpgradeCost();
             TryIncreaseMinigunAmmoCapacity();
+
+            LogEvent();
         }
 
         private void TryIncreaseTankCapacity()
@@ -77,6 +81,17 @@ namespace Main.Platforms.HelicopterPlatform
             int capacity = _platformData.MinigunAmmoCapacity + _platformPreferences.MinigunAmmoCapacityUpgradeAmount;
             capacity = Math.Min(capacity, _platformPreferences.MaxMinigunAmmoCapacity);
             _platformData.MinigunAmmoCapacity = capacity;
+        }
+
+        private void LogEvent()
+        {
+            FirebaseAnalytics.LogEvent(AnalyticEvents.UpgradedPlatform,
+                new Parameter(AnalyticParameters.Name, "Helicopter Platform"),
+                new Parameter("Level", _platformData.Level.Value),
+                new Parameter("Tank capacity", _platformData.FuelTank.MaxValue.Value),
+                new Parameter("Income multiplier", _platformData.IncomeMultiplier.Value),
+                new Parameter("Upgrade Cost", _platformData.UpgradeContainer.MaxValue.Value),
+                new Parameter("Minigun ammo", _platformData.MinigunAmmoCapacity));
         }
     }
 }

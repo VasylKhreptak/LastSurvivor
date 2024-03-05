@@ -1,4 +1,6 @@
 ﻿using System;
+using Analytics;
+using Firebase.Analytics;
 using GoogleMobileAds.Api;
 using Infrastructure.Services.Advertisement.Core;
 using Infrastructure.Services.Log.Core;
@@ -105,6 +107,7 @@ namespace Infrastructure.Services.Advertisement
             _rewardedAd.Show(_ =>
             {
                 _logService.Log("Rewarded earned");
+                FirebaseAnalytics.LogEvent(AnalyticEvents.AdReward);
                 onRewarded?.Invoke();
             });
 

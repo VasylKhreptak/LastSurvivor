@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using Analytics;
+using Cinemachine;
 using Data.Persistent.Platforms;
 using DebuggerOptions;
 using Infrastructure.Data.Static;
@@ -50,6 +51,7 @@ namespace Zenject.Installers.SceneContext.Main
             BindPlatforms();
             BindQuests();
             BindQuestOptions();
+            BindSceneLifetimeEventLogger();
         }
 
         private void BindInputService() => Container.BindInterfacesTo<MainInputService>().AsSingle().WithArguments(_joystick);
@@ -121,5 +123,7 @@ namespace Zenject.Installers.SceneContext.Main
         private void BindQuests() => Container.BindInterfacesTo<MainQuestSequence>().AsSingle();
 
         private void BindQuestOptions() => Container.BindInterfacesTo<QuestOptions>().AsSingle();
+
+        private void BindSceneLifetimeEventLogger() => Container.BindInterfacesTo<SceneLifetimeEventLogger>().AsSingle();
     }
 }

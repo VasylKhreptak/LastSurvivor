@@ -1,6 +1,8 @@
 ﻿using System;
+using Analytics;
 using Data.Persistent.Platforms;
 using Data.Static.Balance.Platforms;
+using Firebase.Analytics;
 using Main.Platforms.Zones;
 using UnityEngine;
 using Zenject;
@@ -36,6 +38,8 @@ namespace Main.Platforms.OilPlatform
             TryReduceProduceTime();
             TryIncreaseUpgradeCost();
             TryIncreaseFuelCapacity();
+
+            LogEvent();
         }
 
         private void TryReduceProduceTime()
@@ -66,6 +70,16 @@ namespace Main.Platforms.OilPlatform
 
                 _platformData.GridData.SetMaxValue(fuelCapacity);
             }
+        }
+
+        private void LogEvent()
+        {
+            FirebaseAnalytics.LogEvent(AnalyticEvents.UpgradedPlatform,
+                new Parameter(AnalyticParameters.Name, "Oil Platform"),
+                new Parameter("Level", _platformData.Level.Value),
+                new Parameter("Product time", _platformData.BarrelProduceDuration.Value),
+                new Parameter("Upgrade Cost", _platformData.UpgradeContainer.MaxValue.Value),
+                new Parameter("Fuel Capacity", _platformData.GridData.MaxValue.Value));
         }
     }
 }

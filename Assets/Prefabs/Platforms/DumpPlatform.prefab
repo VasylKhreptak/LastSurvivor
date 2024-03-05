@@ -1276,7 +1276,7 @@ MonoBehaviour:
   _collectZone: {fileID: 4568120416187364163}
   _hireAudioPreferences:
     _clips:
-    - {fileID: 8300000, guid: 864a77302b6a527429efab34da93c5a8, type: 3}
+    - {fileID: 8300000, guid: 23cdd4f8bbb9fc6428b149515fbd9c8b, type: 3}
     _audioSettings:
       AudioMixerGroup: {fileID: 1511077489344870924, guid: ac705e16ae10a3a429b2efb2b3cd02af,
         type: 2}
@@ -1286,7 +1286,7 @@ MonoBehaviour:
       BypassReverbZones: 0
       Loop: 0
       Priority: 130
-      Volume: 0.5
+      Volume: 0.6
       Pitch: 1
       StereoPan: 0
       SpatialBlend: 1

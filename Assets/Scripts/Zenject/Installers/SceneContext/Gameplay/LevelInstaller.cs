@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Analytics;
 using DebuggerOptions;
 using Gameplay.Aim;
 using Gameplay.Data;
@@ -101,7 +102,7 @@ namespace Zenject.Installers.SceneContext.Gameplay
             BindLevelStateMachine();
             BindLevelDebugger();
             PreloadVideoAd();
-            BindLevelDurationEventLogger();
+            BindAnalytics();
         }
 
         private void BindLevelManager() => Container.Bind<LevelManager>().AsSingle();
@@ -238,6 +239,17 @@ namespace Zenject.Installers.SceneContext.Gameplay
 
         private void PreloadVideoAd() => _advertisementService.LoadRewardedVideo();
 
-        private void BindLevelDurationEventLogger() => Container.BindInterfacesTo<LevelLifetimeEventLogger>().AsSingle();
+        private void BindAnalytics()
+        {
+            BindSceneLifetimeEventLogger();
+            BindLevelEventLogger();
+            BindFailedFirstLevelEventLogger();
+        }
+
+        private void BindSceneLifetimeEventLogger() => Container.BindInterfacesTo<SceneLifetimeEventLogger>().AsSingle();
+
+        private void BindLevelEventLogger() => Container.BindInterfacesAndSelfTo<LevelEventLogger>().AsSingle();
+
+        private void BindFailedFirstLevelEventLogger() => Container.BindInterfacesTo<FailedFirstLevelEventLogger>().AsSingle();
     }
 }

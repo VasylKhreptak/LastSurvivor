@@ -32,10 +32,6 @@ namespace UI.Main.Windows.Settings
 
         #endregion
 
-        private void SetLocale(int localeIndex)
-        {
-            _persistentDataService.Data.Settings.LocaleIndex = localeIndex;
-            _settingsApplier.ApplyLocale();
-        }
+        private void SetLocale(int localeIndex) => _settingsApplier.ApplyLocale(localeIndex);
     }
 }

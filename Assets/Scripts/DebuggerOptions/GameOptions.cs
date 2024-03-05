@@ -23,9 +23,6 @@ namespace DebuggerOptions
         public void SaveGame() => _stateMachine.Enter<SaveDataState>();
 
         [Category("Game")]
-        public void EnterBootstrap() => _stateMachine.Enter<BootstrapState>();
-
-        [Category("Game")]
         public void ReloadScene()
         {
             string sceneName = SceneManager.GetActiveScene().name;
@@ -34,8 +31,7 @@ namespace DebuggerOptions
             {
                 LoadScenePayload = new LoadSceneAsyncState.Payload
                 {
-                    Name = sceneName,
-                    OnComplete = null
+                    Name = sceneName, OnComplete = null
                 }
             };
 

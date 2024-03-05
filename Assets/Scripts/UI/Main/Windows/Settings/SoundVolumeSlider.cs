@@ -6,7 +6,7 @@ using Zenject;
 
 namespace UI.Main.Windows.Settings
 {
-    public class SfxVolumeSlider : MonoBehaviour
+    public class SoundVolumeSlider : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private Slider _slider;
@@ -33,10 +33,6 @@ namespace UI.Main.Windows.Settings
 
         #endregion
 
-        private void SetVolume(float volume)
-        {
-            _persistentDataService.Data.Settings.SoundVolume = volume;
-            _settingsApplier.ApplySfxVolume();
-        }
+        private void SetVolume(float volume) => _settingsApplier.ApplySoundVolume(volume);
     }
 }

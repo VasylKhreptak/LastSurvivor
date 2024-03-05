@@ -1,4 +1,6 @@
 ﻿using System;
+using Analytics;
+using Firebase.Analytics;
 using Infrastructure.Services.PersistentData.Core;
 using Main.Entities.Player;
 using Main.Platforms.DumpPlatform;
@@ -41,6 +43,8 @@ namespace Quests.Main
         public override void MarkAsCompleted()
         {
             _persistentDataService.Data.PlayerData.CompletedQuests.Add(QuestType.HireWorker);
+            FirebaseAnalytics.LogEvent(AnalyticEvents.CompletedQuest,
+                new Parameter(AnalyticParameters.Name, QuestType.HireWorker.ToString()));
             base.MarkAsCompleted();
         }
     }

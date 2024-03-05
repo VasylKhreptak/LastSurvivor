@@ -57,8 +57,7 @@ namespace UI.Main.Windows.Settings
 
         private void SetQualityLevel(int qualityLevel)
         {
-            _persistentDataService.Data.Settings.QualityLevel = qualityLevel;
-            _settingsApplier.ApplyQualityLevel();
+            _settingsApplier.ApplyQualityLevel(qualityLevel);
             LocalizedString localizedString = _qualityLevelsMap[qualityLevel];
             StopObservingLocalizedString(_currentLocalizedString);
             StartObservingLocalizedString(localizedString);

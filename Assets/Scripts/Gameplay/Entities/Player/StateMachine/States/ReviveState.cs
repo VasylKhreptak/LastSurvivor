@@ -1,4 +1,6 @@
-﻿using Gameplay.Entities.Health.Core;
+﻿using Analytics;
+using Firebase.Analytics;
+using Gameplay.Entities.Health.Core;
 using Gameplay.Entities.Player.StateMachine.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
@@ -43,6 +45,7 @@ namespace Gameplay.Entities.Player.StateMachine.States
             _collider.enabled = true;
             _ragdoll.Disable();
             _health.Restore();
+            FirebaseAnalytics.LogEvent(AnalyticEvents.PlayerRevived);
             _playerStateMachine.Enter<IdleState>();
         }
     }

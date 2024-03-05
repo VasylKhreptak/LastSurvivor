@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Analytics;
+using Firebase.Analytics;
 using Gameplay.Data;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
@@ -52,6 +54,7 @@ namespace Gameplay.Entities.Zombie.StateMachine.States
             _ai.canMove = false;
             _rigidbody.isKinematic = true;
             _ragdoll.Enable();
+            FirebaseAnalytics.LogEvent(AnalyticEvents.ZombieDied);
             _levelData.CollectedMoney.Value += (int)(_priceForKill.GetRandom() *
                                                      _persistentDataService.Data.PlayerData.PlatformsData
                                                          .HelicopterPlatformData

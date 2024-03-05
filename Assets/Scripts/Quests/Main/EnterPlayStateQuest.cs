@@ -1,4 +1,6 @@
-﻿using Infrastructure.Services.PersistentData.Core;
+﻿using Analytics;
+using Firebase.Analytics;
+using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Game.States;
 using Quests.Core;
 using Quests.Main.Core;
@@ -25,6 +27,8 @@ namespace Quests.Main
         public override void MarkAsCompleted()
         {
             _persistentDataService.Data.PlayerData.CompletedQuests.Add(QuestType.EnterPlayState);
+            FirebaseAnalytics.LogEvent(AnalyticEvents.CompletedQuest,
+                new Parameter(AnalyticParameters.Name, QuestType.EnterPlayState.ToString()));
             base.MarkAsCompleted();
         }
     }

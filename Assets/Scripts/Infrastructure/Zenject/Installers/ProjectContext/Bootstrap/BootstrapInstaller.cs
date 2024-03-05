@@ -1,4 +1,5 @@
-﻿using Audio;
+﻿using Analytics;
+using Audio;
 using DebuggerOptions;
 using Infrastructure.Coroutines.Runner;
 using Infrastructure.Coroutines.Runner.Core;
@@ -26,6 +27,7 @@ using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.Transition;
 using Infrastructure.Transition.Core;
+using Observers;
 using Plugins.AudioService;
 using Settings;
 using UnityEngine;
@@ -51,10 +53,14 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             BindInstances();
             BindMonoServices();
             BindSceneLoader();
+            ResolveFirebaseDependencies();
             BindServices();
-            BindBackgroundMusic();
+            BindSettingsApplier();
+            BindAnalytics();
             BindGameStateMachine();
+            BindApplicationPauseDataSaver();
             InitializeDebugger();
+            BindBackgroundMusic();
             MakeInitializable();
         }
 
@@ -75,6 +81,10 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<ITransitionScreen>().To<TransitionScreen>().FromComponentInNewPrefab(_transitionScreenPrefab).AsSingle();
         }
 
+        private void BindSceneLoader() => Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
+
+        private void ResolveFirebaseDependencies() => Container.BindInterfacesTo<FirebaseDependencyResolver>().AsSingle();
+
         private void BindServices()
         {
             Container.Bind<IIDService>().To<IDService>().AsSingle();
@@ -82,21 +92,25 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<StaticDataService>().AsSingle();
             Container.Resolve<IStaticDataService>().Load();
             Container.BindInterfacesTo<PersistentDataService>().AsSingle();
-            Container.BindInterfacesTo<ApplicationPauseDataSaver>().AsSingle();
             Container.BindInterfacesTo<SaveLoadService>().AsSingle();
             Container.BindInterfacesTo<FramerateService>().AsSingle();
             Container.BindInterfacesTo<ScreenService>().AsSingle();
             Container.BindInterfacesTo<AdvertisementService>().AsSingle();
-            Container.BindInterfacesTo<FirebaseDependencyResolver>().AsSingle();
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
-            Container.Bind<SettingsApplier>().AsSingle();
+        }
+
+        private void BindSettingsApplier() => Container.Bind<SettingsApplier>().AsSingle();
+
+        private void BindAnalytics()
+        {
+            Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
+            Container.BindInterfacesTo<ApplicationPauseEventLogger>().AsSingle();
+            Container.BindInterfacesTo<IdleEventLogger>().AsSingle();
         }
 
         private void BindBackgroundMusic() =>
             Container.BindInterfacesTo<BackgroundMusicPlayer>().AsSingle().WithArguments(_backgroundMusicPreferences);
-
-        private void BindSceneLoader() => Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
 
         private void BindGameStateMachine()
         {
@@ -119,6 +133,8 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<PlayState>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
         }
+
+        private void BindApplicationPauseDataSaver() => Container.BindInterfacesTo<ApplicationPauseDataSaver>().AsSingle();
 
         private void InitializeDebugger()
         {

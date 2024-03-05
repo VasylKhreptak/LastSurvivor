@@ -967,6 +967,7 @@ GameObject:
   - component: {fileID: 8849531832091867256}
   - component: {fileID: 8842132388678609804}
   - component: {fileID: 3772932364492710820}
+  - component: {fileID: 5323330175804455106}
   m_Layer: 5
   m_Name: ReviveButton
   m_TagString: Untagged
@@ -1130,6 +1131,20 @@ MonoBehaviour:
   _startScale: {x: 1, y: 1, z: 1}
   _endScale: {x: 1.1, y: 1.1, z: 1.1}
   _speed: 3
+--- !u!114 &5323330175804455106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5294728920548680157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450ede539c490f969e97b2241bb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 4266717879764310177}
+  _name: Revive Button
 --- !u!1 &5815103709477068629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2011,7 @@ GameObject:
   - component: {fileID: 3399183859284418213}
   - component: {fileID: 1200089554586626517}
   - component: {fileID: 7105142206568244334}
+  - component: {fileID: 1077153206655000255}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -2143,6 +2159,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 1200089554586626517}
+--- !u!114 &1077153206655000255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423442616251600859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450ede539c490f969e97b2241bb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6661135139518537753}
+  _name: Continue Button
 --- !u!1 &7982794758484474897
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using Infrastructure.Data.Core;
+using Infrastructure.Data.SaveLoad.Core;
 using Infrastructure.Data.Static;
 
 namespace Infrastructure.Services.StaticData.Core

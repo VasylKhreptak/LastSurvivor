@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Data.Static.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Main.Platforms.BuyZones.Core;
+using Main.Platforms.BuyZones.Core.Analytics;
 using Main.Platforms.Zones;
 using Plugins.Banks;
 using UI.ClampedBanks;
@@ -36,6 +37,7 @@ namespace Main.Platforms.BuyZones
             BindPlatformBuyer();
             BindBuyVibration();
             BindBinder();
+            BindBuyPlatformEventLogger();
         }
 
         private void BindBuyZone()
@@ -52,5 +54,8 @@ namespace Main.Platforms.BuyZones
         private void BindBuyVibration() => Container.BindInterfacesTo<PlatformBuyVibration>().AsSingle();
 
         private void BindBinder() => Container.BindInterfacesTo<PlatformBinder<BarracksPlatform.BarracksPlatform>>().AsSingle();
+
+        private void BindBuyPlatformEventLogger() =>
+            Container.BindInterfacesTo<BuyPlatformEventLogger>().AsSingle().WithArguments("Barracks Platform");
     }
 }

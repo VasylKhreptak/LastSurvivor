@@ -1492,6 +1492,7 @@ GameObject:
   - component: {fileID: 571920555011221272}
   - component: {fileID: 7499881877218582235}
   - component: {fileID: 2320078642980863533}
+  - component: {fileID: 8720109937646603171}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1626,6 +1627,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 1668270064207953806}
+--- !u!114 &8720109937646603171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369264748169099143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450ede539c490f969e97b2241bb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 571920555011221272}
+  _name: Close Settings Button
 --- !u!1 &4502694036557874785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,6 +3326,7 @@ GameObject:
   - component: {fileID: 1434685630649613859}
   - component: {fileID: 4250593704110080699}
   - component: {fileID: 5405999744266510041}
+  - component: {fileID: 2713290799138666761}
   m_Layer: 5
   m_Name: CloseButon
   m_TagString: Untagged
@@ -3432,3 +3448,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 4250593704110080699}
+--- !u!114 &2713290799138666761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195266756744806735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450ede539c490f969e97b2241bb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 4250593704110080699}
+  _name: Close Settings Button

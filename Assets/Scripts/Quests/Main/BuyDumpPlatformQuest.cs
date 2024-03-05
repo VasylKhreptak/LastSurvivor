@@ -1,4 +1,6 @@
 ﻿using System;
+using Analytics;
+using Firebase.Analytics;
 using Infrastructure.Services.PersistentData.Core;
 using Main.Entities.Player;
 using Main.Platforms.BuyZones;
@@ -41,6 +43,8 @@ namespace Quests.Main
         public override void MarkAsCompleted()
         {
             _persistentDataService.Data.PlayerData.CompletedQuests.Add(QuestType.BuyDumpPlatform);
+            FirebaseAnalytics.LogEvent(AnalyticEvents.CompletedQuest,
+                new Parameter(AnalyticParameters.Name, QuestType.BuyDumpPlatform.ToString()));
             base.MarkAsCompleted();
         }
     }

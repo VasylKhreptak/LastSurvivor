@@ -1,9 +1,8 @@
-﻿using Infrastructure.StateMachine.Game.States.Core;
+﻿using Infrastructure.Services.PersistentData.Core;
+using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Settings;
-using UnityEngine;
-using Screen = UnityEngine.Device.Screen;
 
 namespace Infrastructure.StateMachine.Game.States
 {
@@ -11,22 +10,22 @@ namespace Infrastructure.StateMachine.Game.States
     {
         private readonly IStateMachine<IGameState> _gameStateMachine;
         private readonly SettingsApplier _settingsApplier;
+        private readonly IPersistentDataService _persistentDataService;
 
-        public SetupApplicationState(IStateMachine<IGameState> gameStateMachine, SettingsApplier settingsApplier)
+        public SetupApplicationState(IStateMachine<IGameState> gameStateMachine, SettingsApplier settingsApplier,
+            IPersistentDataService persistentDataService)
         {
             _gameStateMachine = gameStateMachine;
             _settingsApplier = settingsApplier;
+            _persistentDataService = persistentDataService;
         }
 
         public void Enter()
         {
-            DisableSleepTimeout();
             ApplySettings();
             _gameStateMachine.Enter<BootstrapAnalyticsState>();
         }
 
-        private void DisableSleepTimeout() => Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-        private void ApplySettings() => _settingsApplier.Apply();
+        private void ApplySettings() => _settingsApplier.Apply(_persistentDataService.Data.Settings);
     }
 }

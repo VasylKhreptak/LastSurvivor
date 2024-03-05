@@ -33,10 +33,6 @@ namespace UI.Main.Windows.Settings
 
         #endregion
 
-        private void SetVolume(float volume)
-        {
-            _persistentDataService.Data.Settings.MusicVolume = volume;
-            _settingsApplier.ApplyMusicVolume();
-        }
+        private void SetVolume(float volume) => _settingsApplier.ApplyMusicVolume(volume);
     }
 }

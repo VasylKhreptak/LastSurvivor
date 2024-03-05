@@ -22,9 +22,9 @@ namespace Infrastructure.Services.Firebase
                     DependencyStatus dependencyStatus = task.Result;
 
                     if (dependencyStatus == DependencyStatus.Available)
-                        _logService.Log("Firebase dependencies are available");
+                        _logService.Log("Resolved firebase dependencies");
                     else
-                        _logService.LogError("Firebase dependencies are not available");
+                        _logService.LogError("Could not resolve firebase dependencies");
                 });
         }
     }
