@@ -47,7 +47,7 @@ MonoBehaviour:
   version: 1
   graphMask:
     value: -1
-  type: 1
+  type: 0
   mesh: {fileID: 0}
   rectangleSize: {x: 1, y: 1}
   circleRadius: 0.48
