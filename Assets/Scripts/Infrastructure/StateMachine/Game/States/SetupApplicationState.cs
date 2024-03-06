@@ -23,7 +23,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             ApplySettings();
-            _gameStateMachine.Enter<BootstrapAnalyticsState>();
+            _gameStateMachine.Enter<FinalizeBootstrapState>();
         }
 
         private void ApplySettings() => _settingsApplier.Apply(_persistentDataService.Data.Settings);

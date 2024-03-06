@@ -29,6 +29,6 @@ namespace Infrastructure.StateMachine.Game.States
             _sceneLoader.LoadAsync(_staticDataService.Config.BootstrapScene.Name, OnLoadedScene);
         }
 
-        private void OnLoadedScene() => _stateMachine.Enter<LoadDataState>();
+        private void OnLoadedScene() => _stateMachine.Enter<LoginState>();
     }
 }

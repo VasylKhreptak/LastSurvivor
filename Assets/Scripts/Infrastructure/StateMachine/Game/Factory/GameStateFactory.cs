@@ -15,10 +15,10 @@ namespace Infrastructure.StateMachine.Game.Factory
             new Dictionary<Type, Func<IBaseState>>
             {
                 [typeof(BootstrapState)] = _container.Resolve<BootstrapState>,
+                [typeof(LoginState)] = _container.Resolve<LoginState>,
                 [typeof(SetupApplicationState)] = _container.Resolve<SetupApplicationState>,
                 [typeof(LoadDataState)] = _container.Resolve<LoadDataState>,
                 [typeof(SaveDataState)] = _container.Resolve<SaveDataState>,
-                [typeof(BootstrapAnalyticsState)] = _container.Resolve<BootstrapAnalyticsState>,
                 [typeof(FinalizeBootstrapState)] = _container.Resolve<FinalizeBootstrapState>,
                 [typeof(LoadSceneAsyncState)] = _container.Resolve<LoadSceneAsyncState>,
                 [typeof(LoadSceneWithTransitionAsyncState)] = _container.Resolve<LoadSceneWithTransitionAsyncState>,
