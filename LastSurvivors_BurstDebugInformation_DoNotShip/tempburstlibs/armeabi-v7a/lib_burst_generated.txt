@@ -22,6 +22,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
 --assembly-defines=Flexalon.Samples;
+--assembly-defines=Google.Play.Games;
 --assembly-defines=GoogleMobileAds.Android;
 --assembly-defines=GoogleMobileAds.Common;
 --assembly-defines=GoogleMobileAds.Core;
@@ -115,6 +116,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
 --assembly-defines=Flexalon.Samples;
+--assembly-defines=Google.Play.Games;
 --assembly-defines=GoogleMobileAds.Android;
 --assembly-defines=GoogleMobileAds.Common;
 --assembly-defines=GoogleMobileAds.Core;

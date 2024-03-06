@@ -9,6 +9,7 @@
     <package>com.google.firebase:firebase-common:20.4.2</package>
     <package>com.google.firebase:firebase-crashlytics-ndk:18.6.1</package>
     <package>com.google.firebase:firebase-crashlytics-unity:11.7.0</package>
+    <package>com.google.games:gpgs-plugin-support:0.11.01</package>
   </packages>
   <files>
     <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-analytics-unity/11.7.0/firebase-analytics-unity-11.7.0.aar</file>
