@@ -1,5 +1,6 @@
 ﻿using Analytics;
 using Audio;
+using Crashlytics;
 using DebuggerOptions;
 using Infrastructure.Coroutines.Runner;
 using Infrastructure.Coroutines.Runner.Core;
@@ -53,10 +54,11 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             BindInstances();
             BindMonoServices();
             BindSceneLoader();
+            BindCrashlyticsInitializer();
             ResolveFirebaseDependencies();
+            BindAnalytics();
             BindServices();
             BindSettingsApplier();
-            BindAnalytics();
             BindGameStateMachine();
             BindApplicationPauseDataSaver();
             InitializeDebugger();
@@ -83,7 +85,16 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
         private void BindSceneLoader() => Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
 
-        private void ResolveFirebaseDependencies() => Container.BindInterfacesTo<FirebaseDependencyResolver>().AsSingle();
+        private void BindCrashlyticsInitializer() => Container.Bind<CrashlyticsInitializer>().AsSingle();
+
+        private void ResolveFirebaseDependencies() => Container.BindInterfacesTo<FirebaseInitializer>().AsSingle();
+
+        private void BindAnalytics()
+        {
+            Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
+            Container.BindInterfacesTo<ApplicationPauseEventLogger>().AsSingle();
+            Container.BindInterfacesTo<IdleEventLogger>().AsSingle();
+        }
 
         private void BindServices()
         {
@@ -101,13 +112,6 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         }
 
         private void BindSettingsApplier() => Container.Bind<SettingsApplier>().AsSingle();
-
-        private void BindAnalytics()
-        {
-            Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
-            Container.BindInterfacesTo<ApplicationPauseEventLogger>().AsSingle();
-            Container.BindInterfacesTo<IdleEventLogger>().AsSingle();
-        }
 
         private void BindBackgroundMusic() =>
             Container.BindInterfacesTo<BackgroundMusicPlayer>().AsSingle().WithArguments(_backgroundMusicPreferences);

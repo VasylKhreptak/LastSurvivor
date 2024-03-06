@@ -1,19 +1,23 @@
-﻿using Firebase;
+﻿using Crashlytics;
+using Firebase;
 using Firebase.Extensions;
 using Infrastructure.Services.Log.Core;
 using Zenject;
 
 namespace Infrastructure.Services.Firebase
 {
-    public class FirebaseDependencyResolver : IInitializable
+    public class FirebaseInitializer : IInitializable
     {
         private readonly ILogService _logService;
+        private readonly CrashlyticsInitializer _crashlyticsInitializer;
 
-        public FirebaseDependencyResolver(ILogService logService) => _logService = logService;
+        public FirebaseInitializer(ILogService logService, CrashlyticsInitializer crashlyticsInitializer)
+        {
+            _logService = logService;
+            _crashlyticsInitializer = crashlyticsInitializer;
+        }
 
-        public void Initialize() => ResolveDependencies();
-
-        private void ResolveDependencies()
+        public void Initialize()
         {
             FirebaseApp
                 .CheckAndFixDependenciesAsync()
@@ -25,6 +29,8 @@ namespace Infrastructure.Services.Firebase
                         _logService.Log("Resolved firebase dependencies");
                     else
                         _logService.LogError("Could not resolve firebase dependencies");
+
+                    _crashlyticsInitializer.Initialize();
                 });
         }
     }
