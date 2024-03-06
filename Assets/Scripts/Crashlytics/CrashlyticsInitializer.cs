@@ -6,7 +6,7 @@ namespace Crashlytics
     public class CrashlyticsInitializer : IInitializable
     {
         private readonly ILogService _logService;
-        
+
         public CrashlyticsInitializer(ILogService logService)
         {
             _logService = logService;

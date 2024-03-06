@@ -7,7 +7,6 @@ using Gameplay.Entities.Zombie.StateMachine;
 using Gameplay.Entities.Zombie.StateMachine.States;
 using Gameplay.Entities.Zombie.StateMachine.States.Core;
 using Gameplay.Levels;
-using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Inspector.MinMax;

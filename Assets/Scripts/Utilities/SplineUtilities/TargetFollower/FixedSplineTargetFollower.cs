@@ -17,7 +17,11 @@ namespace Utilities.SplineUtilities.TargetFollower
 
         public void FixedTick() => _follower.Tick();
 
-        public Transform Target { get => _follower.Target; set => _follower.Target = value; }
+        public Transform Target
+        {
+            get => _follower.Target;
+            set => _follower.Target = value;
+        }
 
         public void FollowTargetImmediately() => _follower.FollowTargetImmediately();
     }

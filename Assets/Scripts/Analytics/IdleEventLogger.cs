@@ -11,7 +11,10 @@ namespace Analytics
     {
         private readonly IdleObserver _idleObserver;
 
-        public IdleEventLogger(IdleObserver idleObserver) => _idleObserver = idleObserver;
+        public IdleEventLogger(IdleObserver idleObserver)
+        {
+            _idleObserver = idleObserver;
+        }
 
         private readonly Stopwatch _stopwatch = new Stopwatch();
 

@@ -13,8 +13,7 @@ namespace Main.Platforms.DumpPlatform.Workers.StateMachine.States.Core
         protected override Dictionary<Type, Func<IBaseState>> BuildStatesRegister() =>
             new Dictionary<Type, Func<IBaseState>>
             {
-                [typeof(WorkState)] = _container.Resolve<WorkState>,
-                [typeof(IdleState)] = _container.Resolve<IdleState>
+                [typeof(WorkState)] = _container.Resolve<WorkState>, [typeof(IdleState)] = _container.Resolve<IdleState>
             };
     }
 }

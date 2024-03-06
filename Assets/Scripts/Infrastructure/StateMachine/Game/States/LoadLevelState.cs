@@ -30,8 +30,7 @@ namespace Infrastructure.StateMachine.Game.States
             {
                 LoadScenePayload = new LoadSceneAsyncState.Payload
                 {
-                    Name = sceneName,
-                    OnComplete = onComplete
+                    Name = sceneName, OnComplete = onComplete
                 }
             };
 

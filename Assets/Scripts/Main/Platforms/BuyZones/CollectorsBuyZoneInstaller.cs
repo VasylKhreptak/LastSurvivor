@@ -54,7 +54,7 @@ namespace Main.Platforms.BuyZones
         private void BindBuyVibration() => Container.BindInterfacesTo<PlatformBuyVibration>().AsSingle();
 
         private void BindBinder() => Container.BindInterfacesTo<PlatformBinder<CollectorsPlatform.CollectorsPlatform>>().AsSingle();
-        
+
         private void BindBuyPlatformEventLogger() =>
             Container.BindInterfacesTo<BuyPlatformEventLogger>().AsSingle().WithArguments("Collectors Platform");
     }

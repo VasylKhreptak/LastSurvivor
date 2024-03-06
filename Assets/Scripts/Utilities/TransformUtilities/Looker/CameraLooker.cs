@@ -39,11 +39,7 @@ namespace Utilities.TransformUtilities.Looker
         {
             TransformLookerPreferences preferences = new TransformLookerPreferences
             {
-                Source = _transform,
-                Target = _cameraTransform,
-                Upwards = _upwards,
-                Offset = _offset,
-                LookSpeed = _lookSpeed
+                Source = _transform, Target = _cameraTransform, Upwards = _upwards, Offset = _offset, LookSpeed = _lookSpeed
             };
 
             _looker = new TransformLooker(preferences);

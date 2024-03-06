@@ -8,7 +8,10 @@ namespace Gameplay.Levels.Analytics
     {
         private readonly LevelManager _levelManager;
 
-        public FailedFirstLevelEventLogger(LevelManager levelManager) => _levelManager = levelManager;
+        public FailedFirstLevelEventLogger(LevelManager levelManager)
+        {
+            _levelManager = levelManager;
+        }
 
         public void Dispose()
         {

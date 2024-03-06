@@ -124,7 +124,7 @@ namespace UI.Gameplay.Buttons
         private void OnClicked()
         {
             _hideTimer.Stop();
-            
+
             if (_advertisementService.ShowRewardedVideo(OnRewarded) == false)
             {
                 _continueButton.Show();

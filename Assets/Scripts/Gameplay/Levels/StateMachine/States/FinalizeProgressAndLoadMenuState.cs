@@ -33,7 +33,6 @@ namespace Gameplay.Levels.StateMachine.States
                 {
                     Name = _staticDataService.Config.MainScene.Name
                 },
-
                 OnTransitionShown = FinalizeProgress
             };
 
