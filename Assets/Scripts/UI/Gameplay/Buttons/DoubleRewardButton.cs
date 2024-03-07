@@ -1,6 +1,7 @@
 ﻿using System;
 using Gameplay.Data;
 using Infrastructure.Services.Advertisement.Core;
+using Infrastructure.Services.ToastMessage.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
 using Plugins.Animations.Move;
@@ -36,6 +37,14 @@ namespace UI.Gameplay.Buttons
         {
             _levelData = levelData;
             _advertisementService = advertisementService;
+        }
+
+        private IToastMessageService _toastMessageService;
+
+        [Inject]
+        private void Constructor(IToastMessageService toastMessageService)
+        {
+            _toastMessageService = toastMessageService;
         }
 
         private IAnimation _showAnimation;
@@ -114,6 +123,7 @@ namespace UI.Gameplay.Buttons
             {
                 Hide();
                 _continueButton.Show();
+                _toastMessageService.Send("No video available");
             }
 
             _button.interactable = false;

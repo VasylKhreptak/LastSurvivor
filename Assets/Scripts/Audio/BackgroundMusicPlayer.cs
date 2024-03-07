@@ -2,12 +2,11 @@
 using DG.Tweening;
 using Plugins.AudioService.Core;
 using UnityEngine;
-using Zenject;
 using AudioSettings = Plugins.AudioService.Data.AudioSettings;
 
 namespace Audio
 {
-    public class BackgroundMusicPlayer : IInitializable
+    public class BackgroundMusicPlayer
     {
         private readonly IAudioService _audioService;
         private readonly Preferences _preferences;
@@ -18,20 +17,23 @@ namespace Audio
             _preferences = preferences;
         }
 
-        public void Initialize() => Play();
+        private int _id;
 
-        private void Play()
+        public void Play()
         {
-            int id = _audioService.Play(_preferences.Clip, _preferences.AudioSettings);
+            Stop();
 
-            SetVolume(id, 0f);
+            _id = _audioService.Play(_preferences.Clip, _preferences.AudioSettings);
+
+            SetVolume(_id, 0f);
 
             DOTween
-                .To(() => GetVolume(id), x => SetVolume(id, x), _preferences.AudioSettings.Volume, _preferences.VolumeUpDuration)
+                .To(() => GetVolume(_id), x => SetVolume(_id, x), _preferences.AudioSettings.Volume, _preferences.VolumeUpDuration)
                 .SetEase(Ease.Linear)
-                .SetDelay(_preferences.Delay)
                 .Play();
         }
+
+        public void Stop() => _audioService.Stop(_id);
 
         private float GetVolume(int id)
         {
@@ -47,12 +49,10 @@ namespace Audio
         {
             [SerializeField] private AudioClip _clip;
             [SerializeField] private float _volumeUpDuration = 1f;
-            [SerializeField] private float _delay = 0.5f;
             [SerializeField] private AudioSettings _audioSettings;
 
             public AudioClip Clip => _clip;
             public float VolumeUpDuration => _volumeUpDuration;
-            public float Delay => _delay;
             public AudioSettings AudioSettings => _audioSettings;
         }
     }

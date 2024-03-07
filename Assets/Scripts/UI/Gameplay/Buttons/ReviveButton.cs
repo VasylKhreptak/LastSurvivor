@@ -5,6 +5,7 @@ using Gameplay.Levels.StateMachine.States;
 using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.Graphics.UI.Windows.Core;
 using Infrastructure.Services.Advertisement.Core;
+using Infrastructure.Services.ToastMessage.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Plugins.Animations;
 using Plugins.Animations.Core;
@@ -39,15 +40,17 @@ namespace UI.Gameplay.Buttons
         private Player _player;
         private IStateMachine<ILevelState> _levelStateMachine;
         private IAdvertisementService _advertisementService;
+        private IToastMessageService _toastMessageService;
 
         [Inject]
         private void Constructor(LevelFailedWindow levelFailedWindow, Player player, IStateMachine<ILevelState> levelStateMachine,
-            IAdvertisementService advertisementService)
+            IAdvertisementService advertisementService, IToastMessageService toastMessageService)
         {
             _levelFailedWindow = levelFailedWindow;
             _player = player;
             _levelStateMachine = levelStateMachine;
             _advertisementService = advertisementService;
+            _toastMessageService = toastMessageService;
         }
 
         private IAnimation _showAnimation;
@@ -128,6 +131,7 @@ namespace UI.Gameplay.Buttons
             if (_advertisementService.ShowRewardedVideo(OnRewarded) == false)
             {
                 _continueButton.Show();
+                _toastMessageService.Send("No video available");
                 Hide();
             }
 

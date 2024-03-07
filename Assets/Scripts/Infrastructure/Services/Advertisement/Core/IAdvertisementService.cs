@@ -1,9 +1,12 @@
 ﻿using System;
+using GoogleMobileAds.Api;
 
 namespace Infrastructure.Services.Advertisement.Core
 {
     public interface IAdvertisementService
     {
+        public void Initialize(Action<InitializationStatus> onComplete);
+
         public void ShowBanner();
 
         public void DestroyBanner();

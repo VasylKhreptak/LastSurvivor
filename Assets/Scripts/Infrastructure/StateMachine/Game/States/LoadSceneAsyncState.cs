@@ -24,8 +24,8 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void OnLoadedScene(Payload payload)
         {
-            payload.OnComplete?.Invoke();
             _gameStateMachine.Enter<GameLoopState>();
+            payload.OnComplete?.Invoke();
         }
 
         public class Payload

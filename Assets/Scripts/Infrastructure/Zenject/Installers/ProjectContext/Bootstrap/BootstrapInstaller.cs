@@ -1,25 +1,16 @@
-﻿using Analytics;
-using Audio;
-using Crashlytics;
-using DebuggerOptions;
+﻿using DebuggerOptions;
 using Infrastructure.Coroutines.Runner;
-using Infrastructure.Coroutines.Runner.Core;
-using Infrastructure.Data.SaveLoad;
-using Infrastructure.LoadingScreen.Core;
 using Infrastructure.SceneManagement;
-using Infrastructure.SceneManagement.Core;
 using Infrastructure.Services.Advertisement;
-using Infrastructure.Services.Firebase;
 using Infrastructure.Services.Framerate;
 using Infrastructure.Services.ID;
-using Infrastructure.Services.ID.Core;
 using Infrastructure.Services.Log;
-using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.PersistentData;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.Screen;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.StaticData.Core;
+using Infrastructure.Services.ToastMessage;
 using Infrastructure.Services.Vibration;
 using Infrastructure.StateMachine.Game;
 using Infrastructure.StateMachine.Game.Factory;
@@ -27,7 +18,6 @@ using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.Transition;
-using Infrastructure.Transition.Core;
 using Observers;
 using Plugins.AudioService;
 using Settings;
@@ -47,59 +37,40 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
         [Header("Preferences")]
         [SerializeField] private AudioService.Preferences _audioServicePreferences;
-        [SerializeField] private BackgroundMusicPlayer.Preferences _backgroundMusicPreferences;
 
         public override void InstallBindings()
         {
             BindInstances();
             BindMonoServices();
             BindSceneLoader();
-            BindCrashlyticsInitializer();
-            ResolveFirebaseDependencies();
-            BindAnalytics();
             BindServices();
+            BindObservers();
             BindSettingsApplier();
             BindGameStateMachine();
-            BindApplicationPauseDataSaver();
             InitializeDebugger();
-            BindBackgroundMusic();
             MakeInitializable();
         }
 
         public void Initialize() => BootstrapGame();
 
-        private void BindInstances()
-        {
-            Container.BindInstance(_audioMixer).AsSingle();
-        }
+        private void BindInstances() => Container.BindInstance(_audioMixer).AsSingle();
 
         private void BindMonoServices()
         {
-            Container.Bind<ICoroutineRunner>().To<CoroutineRunner>().FromComponentInNewPrefab(_coroutineRunnerPrefab).AsSingle();
-            Container.Bind<ILoadingScreen>()
-                .To<LoadingScreen.LoadingScreen>()
-                .FromComponentInNewPrefab(_loadingScreenPrefab)
-                .AsSingle();
-            Container.Bind<ITransitionScreen>().To<TransitionScreen>().FromComponentInNewPrefab(_transitionScreenPrefab).AsSingle();
+            Container.BindInterfacesTo<CoroutineRunner>().FromComponentInNewPrefab(_coroutineRunnerPrefab).AsSingle();
+            Container.BindInterfacesTo<LoadingScreen.LoadingScreen>().FromComponentInNewPrefab(_loadingScreenPrefab).AsSingle();
+            Container.BindInterfacesTo<TransitionScreen>().FromComponentInNewPrefab(_transitionScreenPrefab).AsSingle();
         }
 
-        private void BindSceneLoader() => Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
+        private void BindSceneLoader() => Container.BindInterfacesTo<SceneLoader>().AsSingle();
 
-        private void BindCrashlyticsInitializer() => Container.Bind<CrashlyticsInitializer>().AsSingle();
-
-        private void ResolveFirebaseDependencies() => Container.BindInterfacesTo<FirebaseInitializer>().AsSingle();
-
-        private void BindAnalytics()
-        {
-            Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
-            Container.BindInterfacesTo<ApplicationPauseEventLogger>().AsSingle();
-            Container.BindInterfacesTo<IdleEventLogger>().AsSingle();
-        }
+        private void BindObservers() => Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
 
         private void BindServices()
         {
-            Container.Bind<IIDService>().To<IDService>().AsSingle();
-            Container.Bind<ILogService>().To<LogService>().AsSingle();
+            Container.BindInterfacesTo<IDService>().AsSingle();
+            Container.BindInterfacesTo<LogService>().AsSingle();
+            Container.BindInterfacesTo<ToastMessageService>().AsSingle();
             Container.BindInterfacesTo<StaticDataService>().AsSingle();
             Container.Resolve<IStaticDataService>().Load();
             Container.BindInterfacesTo<PersistentDataService>().AsSingle();
@@ -113,32 +84,35 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
         private void BindSettingsApplier() => Container.Bind<SettingsApplier>().AsSingle();
 
-        private void BindBackgroundMusic() =>
-            Container.BindInterfacesTo<BackgroundMusicPlayer>().AsSingle().WithArguments(_backgroundMusicPreferences);
-
         private void BindGameStateMachine()
         {
+            BindGameStates();
             Container.Bind<GameStateFactory>().AsSingle();
             Container.BindInterfacesTo<GameStateMachine>().AsSingle();
-            BindGameStates();
         }
 
         private void BindGameStates()
         {
+            //chained
             Container.Bind<BootstrapState>().AsSingle();
             Container.Bind<LoginState>().AsSingle();
-            Container.Bind<SetupApplicationState>().AsSingle();
             Container.Bind<LoadDataState>().AsSingle();
+            Container.Bind<ApplySavedSettingsState>().AsSingle();
+            Container.Bind<BootstrapFirebaseState>().AsSingle();
+            Container.Bind<BootstrapAnalyticsState>().AsSingle();
+            Container.Bind<BootstrapCrashlyticsState>().AsSingle();
+            Container.Bind<BootstrapAdvertisementsState>().AsSingle();
+            Container.Bind<SetupAutomaticDataSaveState>().AsSingle();
+            Container.Bind<LoadMainSceneState>().AsSingle();
+            Container.Bind<SetupBackgroundMusicState>().AsSingle();
+            Container.Bind<GameLoopState>().AsSingle();
+            //another
             Container.Bind<SaveDataState>().AsSingle();
-            Container.Bind<FinalizeBootstrapState>().AsSingle();
             Container.Bind<LoadSceneAsyncState>().AsSingle();
             Container.Bind<LoadSceneWithTransitionAsyncState>().AsSingle();
-            Container.Bind<GameLoopState>().AsSingle();
             Container.Bind<PlayState>().AsSingle();
             Container.Bind<LoadLevelState>().AsSingle();
         }
-
-        private void BindApplicationPauseDataSaver() => Container.BindInterfacesTo<ApplicationPauseDataSaver>().AsSingle();
 
         private void InitializeDebugger()
         {

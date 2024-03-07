@@ -5,11 +5,10 @@ using GoogleMobileAds.Api;
 using Infrastructure.Services.Advertisement.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.StaticData.Core;
-using Zenject;
 
 namespace Infrastructure.Services.Advertisement
 {
-    public class AdvertisementService : IAdvertisementService, IInitializable
+    public class AdvertisementService : IAdvertisementService
     {
         private readonly IStaticDataService _staticDataService;
         private readonly ILogService _logService;
@@ -20,14 +19,23 @@ namespace Infrastructure.Services.Advertisement
             _logService = logService;
         }
 
+        private InitializationStatus _initializationStatus;
+
         private BannerView _bannerView;
         private InterstitialAd _interstitialAd;
         private RewardedAd _rewardedAd;
 
-        public void Initialize()
+        public void Initialize(Action<InitializationStatus> onComplete)
         {
+            if (_initializationStatus != null)
+                onComplete?.Invoke(_initializationStatus);
+
             MobileAds.RaiseAdEventsOnUnityMainThread = true;
-            MobileAds.Initialize(_ => OnInitialized());
+            MobileAds.Initialize(status =>
+            {
+                _initializationStatus = status;
+                onComplete?.Invoke(status);
+            });
         }
 
         public void ShowBanner()
@@ -119,8 +127,6 @@ namespace Infrastructure.Services.Advertisement
             _rewardedAd?.Destroy();
             _rewardedAd = null;
         }
-
-        private void OnInitialized() => _logService.Log("Admob initialized");
 
         private void InitializeBannerView()
         {

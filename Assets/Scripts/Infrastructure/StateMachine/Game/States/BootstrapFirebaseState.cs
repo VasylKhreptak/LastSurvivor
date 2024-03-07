@@ -1,24 +1,27 @@
-﻿using Crashlytics;
-using Firebase;
+﻿using Firebase;
 using Firebase.Extensions;
 using Infrastructure.Services.Log.Core;
-using Zenject;
+using Infrastructure.StateMachine.Game.States.Core;
+using Infrastructure.StateMachine.Main.Core;
+using Infrastructure.StateMachine.Main.States.Core;
 
-namespace Infrastructure.Services.Firebase
+namespace Infrastructure.StateMachine.Game.States
 {
-    public class FirebaseInitializer : IInitializable
+    public class BootstrapFirebaseState : IGameState, IState
     {
         private readonly ILogService _logService;
-        private readonly CrashlyticsInitializer _crashlyticsInitializer;
+        private readonly IStateMachine<IGameState> _stateMachine;
 
-        public FirebaseInitializer(ILogService logService, CrashlyticsInitializer crashlyticsInitializer)
+        public BootstrapFirebaseState(ILogService logService, IStateMachine<IGameState> stateMachine)
         {
             _logService = logService;
-            _crashlyticsInitializer = crashlyticsInitializer;
+            _stateMachine = stateMachine;
         }
 
-        public void Initialize()
+        public void Enter()
         {
+            _logService.Log("BootstrapFirebaseState");
+
             FirebaseApp
                 .CheckAndFixDependenciesAsync()
                 .ContinueWithOnMainThread(task =>
@@ -30,7 +33,7 @@ namespace Infrastructure.Services.Firebase
                     else
                         _logService.LogError("Could not resolve firebase dependencies");
 
-                    _crashlyticsInitializer.Initialize();
+                    _stateMachine.Enter<BootstrapAnalyticsState>();
                 });
         }
     }

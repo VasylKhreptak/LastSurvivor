@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Audio;
 using Data.Static;
 using Udar.SceneManager;
 using UnityEngine;
@@ -19,6 +20,9 @@ namespace Infrastructure.Data.Static
         [SerializeField] private LogType _editorLogType = LogType.Info;
         [SerializeField] private LogType _buildLogType = LogType.Info;
 
+        [Header("Music")]
+        [SerializeField] private BackgroundMusicPlayer.Preferences _backgroundMusicPreferences;
+
         [Header("Ads")]
         [SerializeField] private GoogleAdsSettings _googleAdsSettings;
 
@@ -27,6 +31,8 @@ namespace Infrastructure.Data.Static
         public IReadOnlyList<SceneField> Levels => _levels;
         public IReadOnlyList<SceneField> LoopedLevels => _loopedLevels;
         public LogType LogType => Application.isEditor ? _editorLogType : _buildLogType;
+
+        public BackgroundMusicPlayer.Preferences BackgroundMusicPreferences => _backgroundMusicPreferences;
 
         public GoogleAdsSettings GoogleAdsSettings => _googleAdsSettings;
     }

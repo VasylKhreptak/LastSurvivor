@@ -24,9 +24,10 @@ namespace Infrastructure.StateMachine.Game.States
 
         public void Enter()
         {
+            _logService.Log("SaveDataState");
             _persistentDataService.Save();
             FirebaseAnalytics.LogEvent(AnalyticEvents.SavedData);
-            _logService.Log("Saved Data");
+            _logService.Log("Saved data");
             _gameStateMachine.Back();
         }
     }
