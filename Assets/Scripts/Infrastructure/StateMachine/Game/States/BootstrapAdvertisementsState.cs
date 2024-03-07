@@ -31,7 +31,7 @@ namespace Infrastructure.StateMachine.Game.States
                 else
                     _logService.Log("Advertisement service initialized");
 
-                _stateMachine.Enter<SetupAutomaticDataSaveState>();
+                _stateMachine.Enter<BootstrapMessagingState>();
             });
         }
     }

@@ -102,6 +102,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<BootstrapAnalyticsState>().AsSingle();
             Container.Bind<BootstrapCrashlyticsState>().AsSingle();
             Container.Bind<BootstrapAdvertisementsState>().AsSingle();
+            Container.Bind<BootstrapMessagingState>().AsSingle();
             Container.Bind<SetupAutomaticDataSaveState>().AsSingle();
             Container.Bind<LoadMainSceneState>().AsSingle();
             Container.Bind<SetupBackgroundMusicState>().AsSingle();
