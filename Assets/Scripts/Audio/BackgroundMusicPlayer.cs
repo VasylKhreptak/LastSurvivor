@@ -35,6 +35,8 @@ namespace Audio
 
         public void Stop() => _audioService.Stop(_id);
 
+        public bool IsPlaying() => _audioService.IsActive(_id);
+
         private float GetVolume(int id)
         {
             _audioService.Volume.TryGet(id, out float volume);

@@ -25,7 +25,8 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("Started playing background music");
-            _backgroundMusicPlayer.Play();
+            if (_backgroundMusicPlayer.IsPlaying() == false)
+                _backgroundMusicPlayer.Play();
             _stateMachine.Enter<GameLoopState>();
         }
     }
