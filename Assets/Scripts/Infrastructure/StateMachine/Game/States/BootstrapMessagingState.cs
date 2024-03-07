@@ -8,7 +8,7 @@ namespace Infrastructure.StateMachine.Game.States
     public class BootstrapMessagingState : IGameState, IState
     {
         private readonly ILogService _logService;
-        private IStateMachine<IGameState> _stateMachine;
+        private readonly IStateMachine<IGameState> _stateMachine;
 
         public BootstrapMessagingState(ILogService logService, IStateMachine<IGameState> stateMachine)
         {
