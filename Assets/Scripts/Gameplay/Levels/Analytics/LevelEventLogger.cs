@@ -37,11 +37,19 @@ namespace Gameplay.Levels.Analytics
         public void LogLevelStartedEvent() =>
             FirebaseAnalytics.LogEvent(AnalyticEvents.LevelStarted, CreateLevelCountParameter(), CreateTimeParameter());
 
-        public void LogLevelCompletedEvent() =>
+        public void LogLevelCompletedEvent()
+        {
             FirebaseAnalytics.LogEvent(AnalyticEvents.LevelCompleted, CreateLevelCountParameter(), CreateTimeParameter());
+            FirebaseAnalytics.LogEvent(AnalyticEvents.LevelCompleted + "_" + _levelManager.GetCurrentLevel(),
+                CreateTimeParameter());
+        }
 
-        public void LogLevelFailedEvent() =>
+        public void LogLevelFailedEvent()
+        {
             FirebaseAnalytics.LogEvent(AnalyticEvents.LevelFailed, CreateLevelCountParameter(), CreateTimeParameter());
+            FirebaseAnalytics.LogEvent(AnalyticEvents.LevelFailed + "_" + _levelManager.GetCurrentLevel(),
+                CreateTimeParameter());
+        }
 
         private void LogLevelEndedEvent()
         {
