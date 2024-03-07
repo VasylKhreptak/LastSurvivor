@@ -18,6 +18,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Firebase.Analytics;
 --assembly-defines=Firebase.App;
 --assembly-defines=Firebase.Crashlytics;
+--assembly-defines=Firebase.Messaging;
 --assembly-defines=Firebase.Platform;
 --assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
@@ -111,6 +112,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Firebase.Analytics;
 --assembly-defines=Firebase.App;
 --assembly-defines=Firebase.Crashlytics;
+--assembly-defines=Firebase.Messaging;
 --assembly-defines=Firebase.Platform;
 --assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
