@@ -26,7 +26,6 @@ namespace Infrastructure.StateMachine.Game.States
 
         private IdleEventLogger _idleEventLogger;
         private ApplicationPauseEventLogger _applicationPauseEventLogger;
-        private ApplicationLifetimeEventLogger _applicationLifetimeEventLogger;
 
         public void Enter()
         {
@@ -34,7 +33,6 @@ namespace Infrastructure.StateMachine.Game.States
 
             Initialize(ref _idleEventLogger);
             Initialize(ref _applicationPauseEventLogger);
-            Initialize(ref _applicationLifetimeEventLogger);
 
             _stateMachine.Enter<BootstrapCrashlyticsState>();
         }

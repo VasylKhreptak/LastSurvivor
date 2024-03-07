@@ -3,7 +3,6 @@
     public static class AnalyticEvents
     {
         public const string ApplicationOpen = "custom_application_open";
-        public const string ApplicationClose = "custom_application_close";
         public const string FailedFirstLevel = "custom_failed_first_level";
         public const string LevelLoaded = "custom_level_loaded";
         public const string LevelStarted = "custom_level_started";
