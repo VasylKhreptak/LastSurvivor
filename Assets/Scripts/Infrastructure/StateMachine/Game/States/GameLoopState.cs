@@ -8,7 +8,10 @@ namespace Infrastructure.StateMachine.Game.States
     {
         private readonly ILogService _logService;
 
-        public GameLoopState(ILogService logService) => _logService = logService;
+        public GameLoopState(ILogService logService)
+        {
+            _logService = logService;
+        }
 
         public void Enter() => _logService.Log("GameLoopState");
     }
