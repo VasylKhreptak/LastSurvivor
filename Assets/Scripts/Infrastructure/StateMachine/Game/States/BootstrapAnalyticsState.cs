@@ -1,5 +1,6 @@
 ﻿using System;
 using Analytics;
+using Firebase.Analytics;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -24,6 +25,8 @@ namespace Infrastructure.StateMachine.Game.States
             _container = container;
         }
 
+        private bool _initialized;
+
         private IdleEventLogger _idleEventLogger;
         private ApplicationPauseEventLogger _applicationPauseEventLogger;
 
@@ -31,20 +34,30 @@ namespace Infrastructure.StateMachine.Game.States
         {
             _logService.Log("BootstrapAnalyticsState");
 
+            if (_initialized)
+            {
+                EnterNextState();
+                return;
+            }
+
+            LogApplicationOpenEvent();
             Initialize(ref _idleEventLogger);
             Initialize(ref _applicationPauseEventLogger);
 
-            _stateMachine.Enter<BootstrapCrashlyticsState>();
+            _initialized = true;
+
+            EnterNextState();
         }
+
+        private void EnterNextState() => _stateMachine.Enter<BootstrapCrashlyticsState>();
 
         private void Initialize<T>(ref T t) where T : IInitializable, IDisposable
         {
-            if (t != null)
-                return;
-
             t = _container.Instantiate<T>();
             t.Initialize();
             _disposableManager.Add(t);
         }
+
+        private void LogApplicationOpenEvent() => FirebaseAnalytics.LogEvent(AnalyticEvents.ApplicationOpen);
     }
 }
