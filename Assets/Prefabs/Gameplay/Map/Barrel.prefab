@@ -49,7 +49,7 @@ MonoBehaviour:
     value: -1
   type: 0
   mesh: {fileID: 0}
-  rectangleSize: {x: 1, y: 1}
+  rectangleSize: {x: 0.8, y: 0.8}
   circleRadius: 0.48
   circleResolution: 8
   height: 1
@@ -59,7 +59,7 @@ MonoBehaviour:
   isDual: 0
   cutsAddedGeom: 1
   updateRotationDistance: 5
-  useRotationAndScale: 1
+  useRotationAndScale: 0
 --- !u!1 &398295252882507785
 GameObject:
   m_ObjectHideFlags: 0
