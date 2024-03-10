@@ -25,7 +25,7 @@ namespace Gameplay.Entities.Zombie
     public class ZombieInstaller : MonoInstaller
     {
         [SerializeField] private MoveAnimation.Preferences _moveAnimationPreferences;
-        [SerializeField] private GameObjectRandomizer.Preferences _skinRandomizerPreferences;
+        [SerializeField] private SkinRandomizer.Preferences _skinRandomizerPreferences;
         [SerializeField] private RotationRandomizer.Preferences _rotationRandomizerPreferences;
         [SerializeField] private AgentMover.Preferences _agentMoverPreferences;
         [SerializeField] private AgentTransformFollower.Preferences _moveStatePreferences;
@@ -83,7 +83,8 @@ namespace Gameplay.Entities.Zombie
 
         private void RandomizeSkin()
         {
-            GameObjectRandomizer randomizer = new GameObjectRandomizer(_skinRandomizerPreferences);
+            Container.BindInstance(_skinRandomizerPreferences).AsSingle();
+            SkinRandomizer randomizer = Container.Instantiate<SkinRandomizer>();
             randomizer.Randomize();
         }
 
