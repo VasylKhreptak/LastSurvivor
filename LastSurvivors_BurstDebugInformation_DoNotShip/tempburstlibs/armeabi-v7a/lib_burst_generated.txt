@@ -75,6 +75,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Unity.Localization;
 --assembly-defines=Unity.Mathematics;
+--assembly-defines=Unity.Notifications.Android;
 --assembly-defines=Unity.Postprocessing.Runtime;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
@@ -169,6 +170,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Unity.Burst.Unsafe;
 --assembly-defines=Unity.Localization;
 --assembly-defines=Unity.Mathematics;
+--assembly-defines=Unity.Notifications.Android;
 --assembly-defines=Unity.Postprocessing.Runtime;
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;

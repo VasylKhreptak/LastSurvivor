@@ -26,6 +26,7 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(BootstrapMessagingState)] = _container.Resolve<BootstrapMessagingState>,
                 [typeof(SetupBackgroundMusicState)] = _container.Resolve<SetupBackgroundMusicState>,
                 [typeof(SetupAutomaticDataSaveState)] = _container.Resolve<SetupAutomaticDataSaveState>,
+                [typeof(ScheduleNotificationsState)] = _container.Resolve<ScheduleNotificationsState>,
                 [typeof(LoadMainSceneState)] = _container.Resolve<LoadMainSceneState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
                 //another

@@ -5,6 +5,7 @@ using Infrastructure.Services.Advertisement;
 using Infrastructure.Services.Framerate;
 using Infrastructure.Services.ID;
 using Infrastructure.Services.Log;
+using Infrastructure.Services.Notification;
 using Infrastructure.Services.PersistentData;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.Screen;
@@ -80,6 +81,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<AdvertisementService>().AsSingle();
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
+            Container.BindInterfacesTo<NotificationService>().AsSingle();
         }
 
         private void BindSettingsApplier() => Container.Bind<SettingsApplier>().AsSingle();
@@ -104,6 +106,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<BootstrapAdvertisementsState>().AsSingle();
             Container.Bind<BootstrapMessagingState>().AsSingle();
             Container.Bind<SetupAutomaticDataSaveState>().AsSingle();
+            Container.Bind<ScheduleNotificationsState>().AsSingle();
             Container.Bind<LoadMainSceneState>().AsSingle();
             Container.Bind<SetupBackgroundMusicState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();

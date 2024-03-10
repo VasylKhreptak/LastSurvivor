@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Audio;
 using Data.Static;
+using Notifications;
 using Udar.SceneManager;
 using UnityEngine;
 using LogType = Infrastructure.Services.Log.Core.LogType;
@@ -26,6 +27,9 @@ namespace Infrastructure.Data.Static
         [Header("Ads")]
         [SerializeField] private GoogleAdsSettings _googleAdsSettings;
 
+        [Header("Retention Notifications")]
+        [SerializeField] private List<BaseNotificationData> _retentionNotifications;
+
         public SceneField BootstrapScene => _bootstrapScene;
         public SceneField MainScene => _mainScene;
         public IReadOnlyList<SceneField> Levels => _levels;
@@ -35,5 +39,7 @@ namespace Infrastructure.Data.Static
         public BackgroundMusicPlayer.Preferences BackgroundMusicPreferences => _backgroundMusicPreferences;
 
         public GoogleAdsSettings GoogleAdsSettings => _googleAdsSettings;
+
+        public IReadOnlyList<BaseNotificationData> RetentionNotifications => _retentionNotifications;
     }
 }
