@@ -7,8 +7,8 @@ namespace Infrastructure.Services.Notification
 {
     public class NotificationService : INotificationService, IInitializable
     {
-        private const string SmallIcon = "small";
-        private const string LargeIcon = "large";
+        private const string SmallIcon = "default_small";
+        private const string LargeIcon = "default_large";
 
         private AndroidNotificationChannel _defaultChannel;
 
@@ -41,8 +41,8 @@ namespace Infrastructure.Services.Notification
                 Title = title,
                 Text = text,
                 FireTime = DateTime.Now.AddSeconds(delay.TotalSeconds),
-                LargeIcon = LargeIcon,
                 SmallIcon = SmallIcon,
+                LargeIcon = LargeIcon
             };
 
             return AndroidNotificationCenter.SendNotification(notification, _defaultChannel.Id);

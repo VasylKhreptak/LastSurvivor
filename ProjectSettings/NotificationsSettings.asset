@@ -37,22 +37,22 @@
             "m_Values": [
                 "False",
                 "0",
-                "False",
+                "True",
                 "com.unity3d.player.UnityPlayerActivity"
             ]
         },
         "DrawableResources": [
             {
-                "Id": "small",
+                "Id": "default_small",
                 "Type": 0,
                 "Asset": {
                     "fileID": 2800000,
-                    "guid": "1276e52026029f24ab6c4ef44ea5c116",
+                    "guid": "02c55e19a15676749b12605ccdf08eaf",
                     "type": 3
                 }
             },
             {
-                "Id": "large",
+                "Id": "default_large",
                 "Type": 1,
                 "Asset": {
                     "fileID": 2800000,

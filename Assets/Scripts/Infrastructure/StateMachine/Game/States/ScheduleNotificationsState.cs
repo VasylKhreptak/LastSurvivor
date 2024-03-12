@@ -49,12 +49,6 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void ScheduleRetentionNotification()
         {
-            ScheduleRetentionNotification(TimeSpan.FromSeconds(10f));
-            ScheduleRetentionNotification(TimeSpan.FromSeconds(10f));
-            ScheduleRetentionNotification(TimeSpan.FromSeconds(10f));
-            ScheduleRetentionNotification(TimeSpan.FromSeconds(10f));
-            ScheduleRetentionNotification(TimeSpan.FromSeconds(10f));
-            ScheduleRetentionNotification(TimeSpan.FromSeconds(10f));
             ScheduleRetentionNotification(TimeSpan.FromDays(1));
             ScheduleRetentionNotification(TimeSpan.FromDays(3));
             ScheduleRetentionNotification(TimeSpan.FromDays(7));
