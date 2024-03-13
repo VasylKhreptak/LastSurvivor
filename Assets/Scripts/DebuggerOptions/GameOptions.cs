@@ -24,7 +24,7 @@ namespace DebuggerOptions
         }
 
         [Category("Game")]
-        public void ReloadGame() => _stateMachine.Enter<BootstrapState>();
+        public void ReloadGame() => _stateMachine.Enter<ReloadState>();
 
         [Category("Game")]
         public void SaveGame() => _stateMachine.Enter<SaveDataState>();

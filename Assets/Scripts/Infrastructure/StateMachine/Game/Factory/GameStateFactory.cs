@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Infrastructure.StateMachine.Game.States;
+using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Infrastructure.StateMachine.Main.States.Factory;
 using Zenject;
@@ -30,6 +31,7 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(LoadMainSceneState)] = _container.Resolve<LoadMainSceneState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
                 //another
+                [typeof(ReloadState)] = _container.Resolve<ReloadState>,
                 [typeof(SaveDataState)] = _container.Resolve<SaveDataState>,
                 [typeof(LoadSceneAsyncState)] = _container.Resolve<LoadSceneAsyncState>,
                 [typeof(LoadSceneWithTransitionAsyncState)] = _container.Resolve<LoadSceneWithTransitionAsyncState>,

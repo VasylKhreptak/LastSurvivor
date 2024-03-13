@@ -28,7 +28,7 @@ namespace Infrastructure.StateMachine.Game.States
             _persistentDataService.Save();
             FirebaseAnalytics.LogEvent(AnalyticEvents.SavedData);
             _logService.Log("Saved data");
-            _gameStateMachine.Back();
+            _gameStateMachine.Enter<GameLoopState>();
         }
     }
 }

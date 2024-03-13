@@ -111,6 +111,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<SetupBackgroundMusicState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
             //another
+            Container.Bind<ReloadState>().AsSingle();
             Container.Bind<SaveDataState>().AsSingle();
             Container.Bind<LoadSceneAsyncState>().AsSingle();
             Container.Bind<LoadSceneWithTransitionAsyncState>().AsSingle();
