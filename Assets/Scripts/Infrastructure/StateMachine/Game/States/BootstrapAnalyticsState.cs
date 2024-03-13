@@ -29,22 +29,16 @@ namespace Infrastructure.StateMachine.Game.States
 
         private IdleEventLogger _idleEventLogger;
         private ApplicationPauseEventLogger _applicationPauseEventLogger;
+        private ResourcesCountEventLogger _resourcesCountEventLogger;
 
         public void Enter()
         {
             _logService.Log("BootstrapAnalyticsState");
 
-            if (_initialized)
-            {
-                EnterNextState();
-                return;
-            }
-
             LogApplicationOpenEvent();
             Initialize(ref _idleEventLogger);
             Initialize(ref _applicationPauseEventLogger);
-
-            _initialized = true;
+            Initialize(ref _resourcesCountEventLogger);
 
             EnterNextState();
         }
@@ -53,7 +47,8 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void Initialize<T>(ref T t) where T : IInitializable, IDisposable
         {
-            t = _container.Instantiate<T>();
+            t ??= _container.Instantiate<T>();
+            t.Dispose();
             t.Initialize();
             _disposableManager.Add(t);
         }
