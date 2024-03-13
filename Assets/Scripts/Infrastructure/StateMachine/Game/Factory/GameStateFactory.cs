@@ -30,7 +30,7 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(ScheduleNotificationsState)] = _container.Resolve<ScheduleNotificationsState>,
                 [typeof(LoadMainSceneState)] = _container.Resolve<LoadMainSceneState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
-                //another
+                //other
                 [typeof(ReloadState)] = _container.Resolve<ReloadState>,
                 [typeof(SaveDataState)] = _container.Resolve<SaveDataState>,
                 [typeof(LoadSceneAsyncState)] = _container.Resolve<LoadSceneAsyncState>,
