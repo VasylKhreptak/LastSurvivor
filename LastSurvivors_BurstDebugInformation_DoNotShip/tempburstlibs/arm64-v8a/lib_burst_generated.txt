@@ -70,6 +70,11 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Udar.SceneManager;
 --assembly-defines=Udar.SceneManager.Examples;
 --assembly-defines=UniRx;
+--assembly-defines=UniTask.Addressables;
+--assembly-defines=UniTask;
+--assembly-defines=UniTask.DOTween;
+--assembly-defines=UniTask.Linq;
+--assembly-defines=UniTask.TextMeshPro;
 --assembly-defines=Unity.Addressables;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.Burst.Unsafe;
@@ -165,6 +170,11 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Udar.SceneManager;
 --assembly-defines=Udar.SceneManager.Examples;
 --assembly-defines=UniRx;
+--assembly-defines=UniTask.Addressables;
+--assembly-defines=UniTask;
+--assembly-defines=UniTask.DOTween;
+--assembly-defines=UniTask.Linq;
+--assembly-defines=UniTask.TextMeshPro;
 --assembly-defines=Unity.Addressables;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.Burst.Unsafe;
