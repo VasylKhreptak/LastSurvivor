@@ -31,8 +31,10 @@ namespace Infrastructure.StateMachine.Game.States
                 else
                     _logService.Log("Advertisement service initialized");
 
-                _stateMachine.Enter<BootstrapMessagingState>();
+                EnterNextState();
             });
         }
+
+        private void EnterNextState() => _stateMachine.Enter<BootstrapMessagingState>();
     }
 }

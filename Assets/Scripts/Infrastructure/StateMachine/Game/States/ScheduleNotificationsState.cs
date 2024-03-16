@@ -34,7 +34,7 @@ namespace Infrastructure.StateMachine.Game.States
             _logService.Log("ScheduleNotificationsState");
             CancelScheduledNotifications();
             ScheduleNotifications();
-            LoadNextState();
+            EnterNextState();
         }
 
         private void CancelScheduledNotifications()
@@ -63,6 +63,6 @@ namespace Infrastructure.StateMachine.Game.States
             _persistentDataService.Data.PlayerData.ScheduledNotificationIDs.Add(id);
         }
 
-        private void LoadNextState() => _stateMachine.Enter<LoadMainSceneState>();
+        private void EnterNextState() => _stateMachine.Enter<LoadMainSceneState>();
     }
 }

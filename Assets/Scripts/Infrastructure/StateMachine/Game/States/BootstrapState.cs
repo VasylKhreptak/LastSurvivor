@@ -30,9 +30,9 @@ namespace Infrastructure.StateMachine.Game.States
         {
             _logService.Log("BootstrapState");
             _loadingScreen.Show();
-            _sceneLoader.LoadAsync(_staticDataService.Config.BootstrapScene.Name, OnLoadedScene);
+            _sceneLoader.LoadAsync(_staticDataService.Config.BootstrapScene.Name, LoadNextState);
         }
 
-        private void OnLoadedScene() => _stateMachine.Enter<LoginState>();
+        private void LoadNextState() => _stateMachine.Enter<BootstrapPlayServicesState>();
     }
 }

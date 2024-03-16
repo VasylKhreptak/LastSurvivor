@@ -97,6 +97,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
         {
             //chained
             Container.Bind<BootstrapState>().AsSingle();
+            Container.Bind<BootstrapPlayServicesState>().AsSingle();
             Container.Bind<LoginState>().AsSingle();
             Container.Bind<LoadDataState>().AsSingle();
             Container.Bind<ApplySavedSettingsState>().AsSingle();

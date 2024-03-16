@@ -34,7 +34,9 @@ namespace Infrastructure.StateMachine.Game.States
                 _initialized = true;
             }
 
-            _stateMachine.Enter<ScheduleNotificationsState>();
+            EnterNextState();
         }
+
+        private void EnterNextState() => _stateMachine.Enter<ScheduleNotificationsState>();
     }
 }

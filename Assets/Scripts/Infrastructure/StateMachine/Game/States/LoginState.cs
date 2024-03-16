@@ -34,9 +34,9 @@ namespace Infrastructure.StateMachine.Game.States
         private void ProcessAuthentication(bool authenticated)
         {
             Debug.Log("Logged in: " + authenticated);
-            LoadNextState();
+            EnterNextState();
         }
 
-        private void LoadNextState() => _stateMachine.Enter<LoadDataState>();
+        private void EnterNextState() => _stateMachine.Enter<LoadDataState>();
     }
 }

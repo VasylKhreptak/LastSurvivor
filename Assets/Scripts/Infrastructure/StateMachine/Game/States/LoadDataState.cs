@@ -34,10 +34,11 @@ namespace Infrastructure.StateMachine.Game.States
             _logService.Log("LoadDataState");
 
             LoadLocalData();
-
-            _gameStateMachine.Enter<ApplySavedSettingsState>();
+            EnterNextState();
         }
 
         private void LoadLocalData() => _persistentDataService.Data = _saveLoadService.Load(Key, new PersistentData());
+
+        private void EnterNextState() => _gameStateMachine.Enter<ApplySavedSettingsState>();
     }
 }

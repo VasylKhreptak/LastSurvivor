@@ -27,9 +27,11 @@ namespace Infrastructure.StateMachine.Game.States
         {
             _logService.Log("ApplySavedSettingsState");
             ApplySettings();
-            _gameStateMachine.Enter<BootstrapFirebaseState>();
+            EnterNextState();
         }
 
         private void ApplySettings() => _settingsApplier.Apply(_persistentDataService.Data.Settings);
+
+        private void EnterNextState() => _gameStateMachine.Enter<BootstrapFirebaseState>();
     }
 }

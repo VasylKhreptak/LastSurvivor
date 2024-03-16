@@ -33,8 +33,10 @@ namespace Infrastructure.StateMachine.Game.States
                     else
                         _logService.LogError("Could not resolve firebase dependencies");
 
-                    _stateMachine.Enter<BootstrapAnalyticsState>();
+                    EnterNextState();
                 });
         }
+
+        private void EnterNextState() => _stateMachine.Enter<BootstrapAnalyticsState>();
     }
 }

@@ -17,6 +17,7 @@ namespace Infrastructure.StateMachine.Game.Factory
             {
                 //chained
                 [typeof(BootstrapState)] = _container.Resolve<BootstrapState>,
+                [typeof(BootstrapPlayServicesState)] = _container.Resolve<BootstrapPlayServicesState>,
                 [typeof(LoginState)] = _container.Resolve<LoginState>,
                 [typeof(LoadDataState)] = _container.Resolve<LoadDataState>,
                 [typeof(ApplySavedSettingsState)] = _container.Resolve<ApplySavedSettingsState>,

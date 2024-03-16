@@ -24,7 +24,9 @@ namespace Infrastructure.StateMachine.Game.States
             Crashlytics.IsCrashlyticsCollectionEnabled = true;
             Crashlytics.ReportUncaughtExceptionsAsFatal = true;
 
-            _stateMachine.Enter<BootstrapAdvertisementsState>();
+            EnterNextState();
         }
+
+        private void EnterNextState() => _stateMachine.Enter<BootstrapAdvertisementsState>();
     }
 }

@@ -38,7 +38,9 @@ namespace Infrastructure.StateMachine.Game.States
         private void OnSceneLoaded()
         {
             _loadingScreen.Hide();
-            _stateMachine.Enter<SetupBackgroundMusicState>();
+            EnterNextState();
         }
+
+        private void EnterNextState() => _stateMachine.Enter<SetupBackgroundMusicState>();
     }
 }
