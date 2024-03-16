@@ -33,7 +33,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void ProcessAuthentication(bool authenticated)
         {
-            Debug.Log("Logged in: " + authenticated);
+            _logService.Log("Logged in: " + authenticated);
             EnterNextState();
         }
 
