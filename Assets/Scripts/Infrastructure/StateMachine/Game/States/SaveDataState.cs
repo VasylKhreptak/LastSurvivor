@@ -27,11 +27,11 @@ namespace Infrastructure.StateMachine.Game.States
             _saveLoadService = saveLoadService;
         }
 
-        public async void Enter()
+        public void Enter()
         {
             _logService.Log("SaveDataState");
 
-            SaveDataLocally();
+            SaveData();
 
             FirebaseAnalytics.LogEvent(AnalyticEvents.SavedData);
             _logService.Log("Saved data");
@@ -39,6 +39,6 @@ namespace Infrastructure.StateMachine.Game.States
             _gameStateMachine.Enter<GameLoopState>();
         }
 
-        private void SaveDataLocally() => _saveLoadService.Save(Key, _persistentDataService.Data);
+        private void SaveData() => _saveLoadService.Save(Key, _persistentDataService.Data);
     }
 }

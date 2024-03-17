@@ -11,9 +11,6 @@ namespace Infrastructure.StateMachine.Game.States
     public class LoadDataState : IState, IGameState
     {
         private const string Key = "Data";
-        private const int MaxSavedToDisplay = 5;
-        private const bool AllowCreateNew = false;
-        private const bool AllowDelete = true;
 
         private readonly IStateMachine<IGameState> _gameStateMachine;
         private readonly IPersistentDataService _persistentDataService;
@@ -33,11 +30,14 @@ namespace Infrastructure.StateMachine.Game.States
         {
             _logService.Log("LoadDataState");
 
-            LoadLocalData();
+            LoadData();
+
+            _logService.Log("Loaded data");
+
             EnterNextState();
         }
 
-        private void LoadLocalData() => _persistentDataService.Data = _saveLoadService.Load(Key, new PersistentData());
+        private void LoadData() => _persistentDataService.Data = _saveLoadService.Load(Key, new PersistentData());
 
         private void EnterNextState() => _gameStateMachine.Enter<ApplySavedSettingsState>();
     }
