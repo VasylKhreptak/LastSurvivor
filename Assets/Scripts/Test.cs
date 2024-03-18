@@ -1,6 +1,3 @@
 ﻿using UnityEngine;
 
-public class Test : MonoBehaviour
-{
-    private void Awake() { }
-}
+public class Test : MonoBehaviour { }

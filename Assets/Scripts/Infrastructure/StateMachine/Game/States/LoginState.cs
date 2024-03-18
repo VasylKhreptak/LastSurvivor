@@ -1,4 +1,6 @@
-﻿using GooglePlayGames;
+﻿using System;
+using Firebase.Auth;
+using GooglePlayGames;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -21,19 +23,50 @@ namespace Infrastructure.StateMachine.Game.States
         {
             _logService.Log("LoginState");
 
-            if (PlayGamesPlatform.Instance.IsAuthenticated())
-            {
-                ProcessAuthentication(true);
-                return;
-            }
-
-            PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+            Login(EnterNextState);
         }
 
-        private void ProcessAuthentication(bool authenticated)
+        private void Login(Action onComplete)
         {
-            _logService.Log("Logged in: " + authenticated);
-            EnterNextState();
+            PlayGamesPlatform.Instance.Authenticate(isAuthenticated =>
+            {
+                if (isAuthenticated == false)
+                {
+                    _logService.Log("Authentication failed");
+                    onComplete();
+                    return;
+                }
+
+                string authCode = PlayGamesPlatform.Instance.GetServerAuthCode();
+                LoginFirebase(authCode, onComplete);
+            });
+        }
+
+        private void LoginFirebase(string authCode, Action onComplete)
+        {
+            FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+            Credential credential = PlayGamesAuthProvider.GetCredential(authCode);
+            auth.SignInAndRetrieveDataWithCredentialAsync(credential)
+                .ContinueWith(task =>
+                {
+                    if (task.IsCanceled)
+                    {
+                        _logService.Log("Login canceled");
+                        onComplete();
+                        return;
+                    }
+
+                    if (task.IsFaulted)
+                    {
+                        _logService.Log($"Login failed: {task.Exception}");
+                        onComplete();
+                        return;
+                    }
+
+                    AuthResult result = task.Result;
+                    _logService.Log($"Login successful. DisplayName: {result.User.DisplayName}. ID: {result.User.UserId}");
+                    onComplete();
+                });
         }
 
         private void EnterNextState() => _stateMachine.Enter<LoadDataState>();

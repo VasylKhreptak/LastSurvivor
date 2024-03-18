@@ -1,9 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://last-survivors-b9674-default-rtdb.europe-west1.firebasedatabase.app</string>
   <string name="gcm_defaultSenderId" translatable="false">1081225345728</string>
   <string name="google_storage_bucket" translatable="false">last-survivors-b9674.appspot.com</string>
   <string name="project_id" translatable="false">last-survivors-b9674</string>
   <string name="google_api_key" translatable="false">AIzaSyB93uwNsjxlNoxd3-ho2jd9T_kheCbz4jA</string>
   <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB93uwNsjxlNoxd3-ho2jd9T_kheCbz4jA</string>
   <string name="google_app_id" translatable="false">1:1081225345728:android:d019878b9585d139228b25</string>
+  <string name="default_android_client_id" translatable="false">1081225345728-dtsqpc8rgahier3dn5rnckn5krjc4njp.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">1081225345728-id3uocgr9qf1788elp3vgohsc7ur80f3.apps.googleusercontent.com</string>
 </resources>

@@ -41,6 +41,7 @@ namespace Infrastructure.StateMachine.Game.States
         {
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
                 .EnableSavedGames()
+                .RequestServerAuthCode(false)
                 .Build();
 
             PlayGamesPlatform.InitializeInstance(config);

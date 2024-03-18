@@ -17,6 +17,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=DOTween;
 --assembly-defines=Firebase.Analytics;
 --assembly-defines=Firebase.App;
+--assembly-defines=Firebase.Auth;
 --assembly-defines=Firebase.Crashlytics;
 --assembly-defines=Firebase.Messaging;
 --assembly-defines=Firebase.Platform;
@@ -117,6 +118,7 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=DOTween;
 --assembly-defines=Firebase.Analytics;
 --assembly-defines=Firebase.App;
+--assembly-defines=Firebase.Auth;
 --assembly-defines=Firebase.Crashlytics;
 --assembly-defines=Firebase.Messaging;
 --assembly-defines=Firebase.Platform;

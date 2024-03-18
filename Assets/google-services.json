@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1081225345728",
+    "firebase_url": "https://last-survivors-b9674-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "last-survivors-b9674",
     "storage_bucket": "last-survivors-b9674.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.UnityTechnologies.com.fgames.lastsurvivors"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1081225345728-dtsqpc8rgahier3dn5rnckn5krjc4njp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.UnityTechnologies.com.fgames.lastsurvivors",
+            "certificate_hash": "6cb8638e6a2fcafc90842aec29df677450b3d1f9"
+          }
+        },
+        {
+          "client_id": "1081225345728-id3uocgr9qf1788elp3vgohsc7ur80f3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB93uwNsjxlNoxd3-ho2jd9T_kheCbz4jA"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081225345728-id3uocgr9qf1788elp3vgohsc7ur80f3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
