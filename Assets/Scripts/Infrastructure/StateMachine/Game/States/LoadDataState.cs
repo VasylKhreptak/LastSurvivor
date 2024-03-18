@@ -1,6 +1,4 @@
-﻿using System;
-using Infrastructure.Data.Persistent;
-using Infrastructure.Services.CloudSaveLoad.Core;
+﻿using Infrastructure.Data.Persistent;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.SaveLoad.Core;
@@ -18,42 +16,28 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly IPersistentDataService _persistentDataService;
         private readonly ILogService _logService;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly ICloudSaveLoadService _cloudSaveLoadService;
 
         public LoadDataState(IStateMachine<IGameState> gameStateMachine, IPersistentDataService persistentDataService,
-            ILogService logService, ISaveLoadService saveLoadService, ICloudSaveLoadService cloudSaveLoadService)
+            ILogService logService, ISaveLoadService saveLoadService)
         {
             _gameStateMachine = gameStateMachine;
             _persistentDataService = persistentDataService;
             _logService = logService;
             _saveLoadService = saveLoadService;
-            _cloudSaveLoadService = cloudSaveLoadService;
         }
 
         public void Enter()
         {
             _logService.Log("LoadDataState");
 
-            LoadData(EnterNextState);
+            LoadData();
+
+            _logService.Log("Loaded data");
+
+            EnterNextState();
         }
 
-        private void LoadData(Action onComplete)
-        {
-            _cloudSaveLoadService.Load<PersistentData>(Key, data =>
-            {
-                if (data == null)
-                {
-                    _persistentDataService.Data = _saveLoadService.Load(Key, new PersistentData());
-                    _logService.Log("Loaded local data");
-                    onComplete();
-                    return;
-                }
-
-                _persistentDataService.Data = data;
-                _logService.Log("Loaded cloud data");
-                onComplete();
-            });
-        }
+        private void LoadData() => _persistentDataService.Data = _saveLoadService.Load(Key, new PersistentData());
 
         private void EnterNextState() => _gameStateMachine.Enter<ApplySavedSettingsState>();
     }

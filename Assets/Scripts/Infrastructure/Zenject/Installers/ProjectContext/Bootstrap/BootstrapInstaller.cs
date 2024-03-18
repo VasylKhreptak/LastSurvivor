@@ -2,7 +2,6 @@
 using Infrastructure.Coroutines.Runner;
 using Infrastructure.SceneManagement;
 using Infrastructure.Services.Advertisement;
-using Infrastructure.Services.CloudSaveLoad;
 using Infrastructure.Services.Framerate;
 using Infrastructure.Services.ID;
 using Infrastructure.Services.Log;
@@ -83,7 +82,6 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.BindInterfacesTo<AudioService>().AsSingle().WithArguments(_audioServicePreferences);
             Container.BindInterfacesTo<VibrationService>().AsSingle();
             Container.BindInterfacesTo<NotificationService>().AsSingle();
-            Container.BindInterfacesTo<CloudSaveLoadService>().AsSingle();
         }
 
         private void BindSettingsApplier() => Container.Bind<SettingsApplier>().AsSingle();
