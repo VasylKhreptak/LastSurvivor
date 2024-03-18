@@ -47,6 +47,9 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void Initialize<T>(ref T t) where T : IInitializable, IDisposable
         {
+            if (t != null)
+                _disposableManager.Remove(t);
+
             t ??= _container.Instantiate<T>();
             t.Dispose();
             t.Initialize();

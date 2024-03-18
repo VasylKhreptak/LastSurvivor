@@ -22,7 +22,7 @@ namespace DebuggerOptions
         }
 
         [Category("Quests")]
-        public void Dispose() => SRDebug.Instance.RemoveOptionContainer(this);
+        public void Dispose() => SRDebug.Instance?.RemoveOptionContainer(this);
 
         [Category("Quests")]
         public void CompleteCurrentQuest() => _questSequence.CurrentQuest.Value?.MarkAsCompleted();

@@ -33,6 +33,6 @@ namespace Infrastructure.Data.SaveLoad
 
         private void OnApplicationPaused() => SaveData();
 
-        private void SaveData() => _gameStateMachine.Enter<SaveDataState>();
+        private void SaveData() => _gameStateMachine.Enter<SaveDataState, Action>(null);
     }
 }

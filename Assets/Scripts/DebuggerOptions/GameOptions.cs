@@ -27,7 +27,7 @@ namespace DebuggerOptions
         public void ReloadGame() => _stateMachine.Enter<ReloadState>();
 
         [Category("Game")]
-        public void SaveGame() => _stateMachine.Enter<SaveDataState>();
+        public void SaveGame() => _stateMachine.Enter<SaveDataState, Action>(null);
 
         [Category("Game")]
         public void ReloadScene()

@@ -1,4 +1,5 @@
-﻿using Gameplay.Data;
+﻿using System;
+using Gameplay.Data;
 using Gameplay.Levels.StateMachine.States.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
@@ -52,7 +53,7 @@ namespace Gameplay.Levels.StateMachine.States
                 _persistentDataService.Data.PlayerData.PlatformsData.BarracksPlatformData.SoldiersBank.Clear();
             }
 
-            _gameStateMachine.Enter<SaveDataState>();
+            _gameStateMachine.Enter<SaveDataState, Action>(null);
         }
     }
 }

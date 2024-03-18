@@ -3,7 +3,6 @@ using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
-using UnityEngine;
 
 namespace Infrastructure.StateMachine.Game.States
 {
@@ -21,12 +20,6 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("LoginState");
-
-            if (PlayGamesPlatform.Instance.IsAuthenticated())
-            {
-                ProcessAuthentication(true);
-                return;
-            }
 
             PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
         }
