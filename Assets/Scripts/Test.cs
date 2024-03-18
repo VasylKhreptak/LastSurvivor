@@ -2,7 +2,5 @@
 
 public class Test : MonoBehaviour
 {
-    private async void Awake()
-    {
-    }
+    private void Awake() { }
 }
