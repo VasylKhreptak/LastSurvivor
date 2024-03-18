@@ -21,6 +21,12 @@ namespace Infrastructure.StateMachine.Game.States
         {
             _logService.Log("LoginState");
 
+            if (PlayGamesPlatform.Instance.IsAuthenticated())
+            {
+                ProcessAuthentication(true);
+                return;
+            }
+
             PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
         }
 
