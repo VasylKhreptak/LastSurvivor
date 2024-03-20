@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
 using Infrastructure.Data.Persistent;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.SaveLoad.Core;
@@ -22,21 +23,25 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly IPersistentDataService _persistentDataService;
         private readonly ILogService _logService;
         private readonly ISaveLoadService _saveLoadService;
+        private readonly ILoadingScreen _loadingScreen;
 
         public LoadDataState(IStateMachine<IGameState> gameStateMachine, IPersistentDataService persistentDataService,
-            ILogService logService, ISaveLoadService saveLoadService)
+            ILogService logService, ISaveLoadService saveLoadService, ILoadingScreen loadingScreen)
         {
             _gameStateMachine = gameStateMachine;
             _persistentDataService = persistentDataService;
             _logService = logService;
             _saveLoadService = saveLoadService;
+            _loadingScreen = loadingScreen;
         }
 
         public async void Enter()
         {
             _logService.Log("LoadDataState");
+            _loadingScreen.SetInfoText("Loading data...");
 
             await LoadData();
+            
             EnterNextState();
         }
 

@@ -113,6 +113,7 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
             Container.Bind<ScheduleNotificationsState>().AsSingle();
             Container.Bind<LoadMainSceneState>().AsSingle();
             Container.Bind<SetupBackgroundMusicState>().AsSingle();
+            Container.Bind<FinalizeBootstrapState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
             //other
             Container.Bind<ReloadState>().AsSingle();

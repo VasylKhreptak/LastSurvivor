@@ -26,21 +26,16 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("LoadMainSceneState");
+            _loadingScreen.SetInfoText("Loading main scene...");
 
             LoadSceneAsyncState.Payload payload = new LoadSceneAsyncState.Payload
             {
-                Name = _staticDataService.Config.MainScene.Name, OnComplete = OnSceneLoaded
+                Name = _staticDataService.Config.MainScene.Name, OnComplete = EnterNextState
             };
 
             _stateMachine.Enter<LoadSceneAsyncState, LoadSceneAsyncState.Payload>(payload);
         }
 
-        private void OnSceneLoaded()
-        {
-            _loadingScreen.Hide();
-            EnterNextState();
-        }
-
-        private void EnterNextState() => _stateMachine.Enter<SetupBackgroundMusicState>();
+        private void EnterNextState() => _stateMachine.Enter<FinalizeBootstrapState>();
     }
 }

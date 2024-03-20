@@ -30,7 +30,6 @@ namespace Infrastructure.Services.Advertisement
             if (_initializationStatus != null)
                 onComplete?.Invoke(_initializationStatus);
 
-            MobileAds.RaiseAdEventsOnUnityMainThread = true;
             MobileAds.Initialize(status =>
             {
                 _initializationStatus = status;

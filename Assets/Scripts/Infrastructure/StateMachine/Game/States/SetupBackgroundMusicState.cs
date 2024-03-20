@@ -1,4 +1,5 @@
 ﻿using Audio;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States.Core;
@@ -13,18 +14,21 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly ILogService _logService;
         private readonly BackgroundMusicPlayer _backgroundMusicPlayer;
+        private readonly ILoadingScreen _loadingScreen;
 
         public SetupBackgroundMusicState(IStateMachine<IGameState> stateMachine, IAudioService audioService,
-            IStaticDataService staticDataService, ILogService logService)
+            IStaticDataService staticDataService, ILogService logService, ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;
             _logService = logService;
+            _loadingScreen = loadingScreen;
             _backgroundMusicPlayer = new BackgroundMusicPlayer(audioService, staticDataService.Config.BackgroundMusicPreferences);
         }
 
         public void Enter()
         {
             _logService.Log("Started playing background music");
+            _loadingScreen.SetInfoText("Setting up background music...");
 
             if (_backgroundMusicPlayer.IsPlaying() == false)
                 _backgroundMusicPlayer.Play();
@@ -32,6 +36,6 @@ namespace Infrastructure.StateMachine.Game.States
             EnterNextState();
         }
 
-        private void EnterNextState() => _stateMachine.Enter<GameLoopState>();
+        private void EnterNextState() => _stateMachine.Enter<LoadMainSceneState>();
     }
 }

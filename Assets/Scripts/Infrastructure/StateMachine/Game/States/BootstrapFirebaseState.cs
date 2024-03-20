@@ -1,5 +1,6 @@
 ﻿using Firebase;
 using Firebase.Extensions;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -11,16 +12,19 @@ namespace Infrastructure.StateMachine.Game.States
     {
         private readonly ILogService _logService;
         private readonly IStateMachine<IGameState> _stateMachine;
+        private readonly ILoadingScreen _loadingScreen;
 
-        public BootstrapFirebaseState(ILogService logService, IStateMachine<IGameState> stateMachine)
+        public BootstrapFirebaseState(ILogService logService, IStateMachine<IGameState> stateMachine, ILoadingScreen loadingScreen)
         {
             _logService = logService;
             _stateMachine = stateMachine;
+            _loadingScreen = loadingScreen;
         }
 
         public void Enter()
         {
             _logService.Log("BootstrapFirebaseState");
+            _loadingScreen.SetInfoText("Initializing Firebase...");
 
             FirebaseApp
                 .CheckAndFixDependenciesAsync()

@@ -1,4 +1,5 @@
 ﻿using Firebase.Crashlytics;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -10,16 +11,19 @@ namespace Infrastructure.StateMachine.Game.States
     {
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly ILogService _logService;
+        private readonly ILoadingScreen _loadingScreen;
 
-        public BootstrapCrashlyticsState(IStateMachine<IGameState> stateMachine, ILogService logService)
+        public BootstrapCrashlyticsState(IStateMachine<IGameState> stateMachine, ILogService logService, ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;
             _logService = logService;
+            _loadingScreen = loadingScreen;
         }
 
         public void Enter()
         {
             _logService.Log("BootstrapCrashlyticsState");
+            _loadingScreen.SetInfoText("Initializing crashlytics...");
 
             Crashlytics.IsCrashlyticsCollectionEnabled = true;
             Crashlytics.ReportUncaughtExceptionsAsFatal = true;

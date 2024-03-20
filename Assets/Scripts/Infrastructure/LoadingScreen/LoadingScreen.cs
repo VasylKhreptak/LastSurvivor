@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Infrastructure.LoadingScreen.Core;
+using TMPro;
 using UnityEngine;
 
 namespace Infrastructure.LoadingScreen
@@ -9,6 +10,7 @@ namespace Infrastructure.LoadingScreen
     {
         [Header("References")]
         [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private TMP_Text _infoTmp;
 
         [Header("Preferences")]
         [SerializeField] private float _duration;
@@ -50,6 +52,8 @@ namespace Infrastructure.LoadingScreen
                 .SetEase(_ease)
                 .Play();
         }
+
+        public void SetInfoText(string text) => _infoTmp.text = text;
 
         private void KillTween()
         {

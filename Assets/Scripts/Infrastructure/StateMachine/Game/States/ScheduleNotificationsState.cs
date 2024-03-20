@@ -1,5 +1,6 @@
 ﻿using System;
 using Extensions;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.Notification.Core;
 using Infrastructure.Services.PersistentData.Core;
@@ -18,20 +19,24 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly IPersistentDataService _persistentDataService;
         private readonly ILogService _logService;
         private readonly IStaticDataService _staticDataService;
+        private readonly ILoadingScreen _loadingScreen;
 
         public ScheduleNotificationsState(IStateMachine<IGameState> stateMachine, INotificationService notificationService,
-            IPersistentDataService persistentDataService, ILogService logService, IStaticDataService staticDataService)
+            IPersistentDataService persistentDataService, ILogService logService, IStaticDataService staticDataService,
+            ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;
             _notificationService = notificationService;
             _persistentDataService = persistentDataService;
             _logService = logService;
             _staticDataService = staticDataService;
+            _loadingScreen = loadingScreen;
         }
 
         public void Enter()
         {
             _logService.Log("ScheduleNotificationsState");
+            _loadingScreen.SetInfoText("Scheduling notifications...");
             CancelScheduledNotifications();
             ScheduleNotifications();
             EnterNextState();
@@ -63,6 +68,6 @@ namespace Infrastructure.StateMachine.Game.States
             _persistentDataService.Data.PlayerData.ScheduledNotificationIDs.Add(id);
         }
 
-        private void EnterNextState() => _stateMachine.Enter<LoadMainSceneState>();
+        private void EnterNextState() => _stateMachine.Enter<SetupBackgroundMusicState>();
     }
 }

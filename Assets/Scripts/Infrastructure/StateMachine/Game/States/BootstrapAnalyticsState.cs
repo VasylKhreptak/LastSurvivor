@@ -1,6 +1,7 @@
 ﻿using System;
 using Analytics;
 using Firebase.Analytics;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -15,14 +16,16 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly ILogService _logService;
         private readonly DisposableManager _disposableManager;
         private readonly DiContainer _container;
+        private readonly ILoadingScreen _loadingScreen;
 
         public BootstrapAnalyticsState(IStateMachine<IGameState> stateMachine, ILogService logService,
-            DisposableManager disposableManager, DiContainer container)
+            DisposableManager disposableManager, DiContainer container, ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;
             _logService = logService;
             _disposableManager = disposableManager;
             _container = container;
+            _loadingScreen = loadingScreen;
         }
 
         private bool _initialized;
@@ -34,6 +37,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("BootstrapAnalyticsState");
+            _loadingScreen.SetInfoText("Initializing analytics...");
 
             LogApplicationOpenEvent();
             Initialize(ref _idleEventLogger);

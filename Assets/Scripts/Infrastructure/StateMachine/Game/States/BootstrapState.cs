@@ -29,6 +29,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("BootstrapState");
+            _loadingScreen.SetInfoText("Bootstrapping...");
             _loadingScreen.Show();
             _sceneLoader.LoadAsync(_staticDataService.Config.BootstrapScene.Name, LoadNextState);
         }

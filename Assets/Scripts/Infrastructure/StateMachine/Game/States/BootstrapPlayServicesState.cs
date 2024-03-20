@@ -1,5 +1,6 @@
 ﻿using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -13,11 +14,13 @@ namespace Infrastructure.StateMachine.Game.States
 
         private readonly IStateMachine<IGameState> _stateMachine;
         private readonly ILogService _logService;
+        private readonly ILoadingScreen _loadingScreen;
 
-        public BootstrapPlayServicesState(IStateMachine<IGameState> stateMachine, ILogService logService)
+        public BootstrapPlayServicesState(IStateMachine<IGameState> stateMachine, ILogService logService, ILoadingScreen loadingScreen)
         {
             _stateMachine = stateMachine;
             _logService = logService;
+            _loadingScreen = loadingScreen;
         }
 
         private bool _initialized;
@@ -25,6 +28,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("BootstrapPlayServicesState");
+            _loadingScreen.SetInfoText("Initializing Google Play Services...");
 
             if (_initialized)
             {

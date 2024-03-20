@@ -26,10 +26,11 @@ namespace Infrastructure.StateMachine.Game.Factory
                 [typeof(BootstrapCrashlyticsState)] = _container.Resolve<BootstrapCrashlyticsState>,
                 [typeof(BootstrapAdvertisementsState)] = _container.Resolve<BootstrapAdvertisementsState>,
                 [typeof(BootstrapMessagingState)] = _container.Resolve<BootstrapMessagingState>,
-                [typeof(SetupBackgroundMusicState)] = _container.Resolve<SetupBackgroundMusicState>,
                 [typeof(SetupAutomaticDataSaveState)] = _container.Resolve<SetupAutomaticDataSaveState>,
                 [typeof(ScheduleNotificationsState)] = _container.Resolve<ScheduleNotificationsState>,
+                [typeof(SetupBackgroundMusicState)] = _container.Resolve<SetupBackgroundMusicState>,
                 [typeof(LoadMainSceneState)] = _container.Resolve<LoadMainSceneState>,
+                [typeof(FinalizeBootstrapState)] = _container.Resolve<FinalizeBootstrapState>,
                 [typeof(GameLoopState)] = _container.Resolve<GameLoopState>,
                 //other
                 [typeof(ReloadState)] = _container.Resolve<ReloadState>,

@@ -1,4 +1,5 @@
 ﻿using Firebase.Messaging;
+using Infrastructure.LoadingScreen.Core;
 using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -10,11 +11,13 @@ namespace Infrastructure.StateMachine.Game.States
     {
         private readonly ILogService _logService;
         private readonly IStateMachine<IGameState> _stateMachine;
+        private readonly ILoadingScreen _loadingScreen;
 
-        public BootstrapMessagingState(ILogService logService, IStateMachine<IGameState> stateMachine)
+        public BootstrapMessagingState(ILogService logService, IStateMachine<IGameState> stateMachine, ILoadingScreen loadingScreen)
         {
             _logService = logService;
             _stateMachine = stateMachine;
+            _loadingScreen = loadingScreen;
         }
 
         private bool _initialized;
@@ -22,6 +25,7 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("BootstrapMessagingState");
+            _loadingScreen.SetInfoText("Initializing messaging...");
 
             if (_initialized)
             {

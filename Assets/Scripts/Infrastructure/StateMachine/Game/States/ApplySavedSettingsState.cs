@@ -1,4 +1,5 @@
-﻿using Infrastructure.Services.Log.Core;
+﻿using Infrastructure.LoadingScreen.Core;
+using Infrastructure.Services.Log.Core;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
@@ -13,19 +14,22 @@ namespace Infrastructure.StateMachine.Game.States
         private readonly SettingsApplier _settingsApplier;
         private readonly IPersistentDataService _persistentDataService;
         private readonly ILogService _logService;
+        private readonly ILoadingScreen _loadingScreen;
 
         public ApplySavedSettingsState(IStateMachine<IGameState> gameStateMachine, SettingsApplier settingsApplier,
-            IPersistentDataService persistentDataService, ILogService logService)
+            IPersistentDataService persistentDataService, ILogService logService, ILoadingScreen loadingScreen)
         {
             _gameStateMachine = gameStateMachine;
             _settingsApplier = settingsApplier;
             _persistentDataService = persistentDataService;
             _logService = logService;
+            _loadingScreen = loadingScreen;
         }
 
         public void Enter()
         {
             _logService.Log("ApplySavedSettingsState");
+            _loadingScreen.SetInfoText("Applying settings...");
             ApplySettings();
             EnterNextState();
         }
