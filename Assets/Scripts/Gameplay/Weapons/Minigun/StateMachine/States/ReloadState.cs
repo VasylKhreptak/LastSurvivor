@@ -1,6 +1,5 @@
 ﻿using System;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
-using Holders.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Plugins.Banks;
@@ -10,7 +9,7 @@ using UnityEngine;
 
 namespace Gameplay.Weapons.Minigun.StateMachine.States
 {
-    public class ReloadState : IMinigunState, IPayloadedState<InstanceHolder<Action>>, IExitable
+    public class ReloadState : IMinigunState, IPayloadedState<Action>, IExitable
     {
         private readonly IStateMachine<IMinigunState> _stateMachine;
         private readonly ClampedIntegerBank _ammo;
@@ -36,7 +35,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
 
         public IReadOnlyReactiveProperty<bool> IsReloading => _isReloading;
 
-        public void Enter(InstanceHolder<Action> payload = null)
+        public void Enter(Action onComplete = null)
         {
             _barrelSpiner.SpinDown();
             _reloadTimer.Start(_preferences.Duration);
@@ -45,7 +44,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             {
                 _stateMachine.Enter<IdleState>();
                 _ammo.Fill();
-                payload?.Instance?.Invoke();
+                onComplete?.Invoke();
             });
         }
 

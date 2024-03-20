@@ -2,7 +2,6 @@
 using Gameplay.Weapons.Core;
 using Gameplay.Weapons.Minigun.StateMachine.States;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
-using Holders.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Plugins.Banks;
 using UniRx;
@@ -26,9 +25,8 @@ namespace Gameplay.Weapons.Minigun
             _reloadState = reloadState;
         }
 
-        private readonly InstanceHolder<Action> _reloadStatePayload = new InstanceHolder<Action>();
-
         private bool _isReloading;
+        private bool _isShooting;
 
         public Transform Transform { get; private set; }
 
@@ -40,28 +38,28 @@ namespace Gameplay.Weapons.Minigun
 
         public void StartShooting()
         {
-            _reloadStatePayload.Instance = StartShooting;
+            _isShooting = true;
 
             if (_stateMachine.ActiveStateType == typeof(ReloadState))
                 return;
 
-            _stateMachine.Enter<SpinUpState, Action>(() =>
-            {
-                _stateMachine.Enter<ShootState, InstanceHolder<Action>>(_reloadStatePayload);
-            });
+            _stateMachine.Enter<SpinUpState, Action>(() => { _stateMachine.Enter<ShootState, Action>(OnReloaded); });
         }
 
         public void StopShooting()
         {
+            _isShooting = false;
+
             if (_stateMachine.ActiveStateType == typeof(ReloadState))
-            {
-                _reloadStatePayload.Instance = null;
                 return;
-            }
 
             _stateMachine.Enter<SpinDownState>();
+        }
 
-            _reloadStatePayload.Instance = null;
+        private void OnReloaded()
+        {
+            if (_isShooting)
+                StartShooting();
         }
     }
 }

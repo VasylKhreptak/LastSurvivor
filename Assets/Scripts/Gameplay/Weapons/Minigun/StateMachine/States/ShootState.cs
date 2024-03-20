@@ -4,7 +4,6 @@ using Extensions;
 using Gameplay.Weapons.Bullets;
 using Gameplay.Weapons.Core.Fire;
 using Gameplay.Weapons.Minigun.StateMachine.States.Core;
-using Holders.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Inspector.MinMax;
@@ -18,7 +17,7 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Weapons.Minigun.StateMachine.States
 {
-    public class ShootState : IMinigunState, IPayloadedState<InstanceHolder<Action>>, IExitable
+    public class ShootState : IMinigunState, IPayloadedState<Action>, IExitable
     {
         private readonly Preferences _preferences;
         private readonly IObjectPools<GeneralPool> _generalPools;
@@ -42,17 +41,16 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             _stateMachine = stateMachine;
         }
 
-        private IDisposable _shootSubscription;
+        private Action _reloadCallback;
 
-        private InstanceHolder<Action> _reloadStatePayload;
+        private IDisposable _shootSubscription;
 
         private Vector3 _bulletPosition;
         private Quaternion _bulletRotation;
 
-        public void Enter(InstanceHolder<Action> payload = null)
+        public void Enter(Action onReloaded = null)
         {
-            _reloadStatePayload = payload;
-
+            _reloadCallback = onReloaded;
             StartShooting();
         }
 
@@ -77,7 +75,7 @@ namespace Gameplay.Weapons.Minigun.StateMachine.States
             if (_ammo.HasEnough(1))
                 return;
 
-            _stateMachine.Enter<ReloadState, InstanceHolder<Action>>(_reloadStatePayload);
+            _stateMachine.Enter<ReloadState, Action>(_reloadCallback);
         }
 
         private void Shoot()
