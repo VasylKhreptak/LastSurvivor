@@ -19,11 +19,13 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Firebase.App;
 --assembly-defines=Firebase.Auth;
 --assembly-defines=Firebase.Crashlytics;
+--assembly-defines=Firebase.Database;
 --assembly-defines=Firebase.Messaging;
 --assembly-defines=Firebase.Platform;
 --assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
 --assembly-defines=Flexalon.Samples;
+--assembly-defines=Google.MiniJson;
 --assembly-defines=GoogleMobileAds.Android;
 --assembly-defines=GoogleMobileAds.Common;
 --assembly-defines=GoogleMobileAds.Core;
@@ -120,11 +122,13 @@ Library: C:\Users\Vasyl Khreptak\Unity Projects\LastSurvivors\Temp\BurstOutput\t
 --assembly-defines=Firebase.App;
 --assembly-defines=Firebase.Auth;
 --assembly-defines=Firebase.Crashlytics;
+--assembly-defines=Firebase.Database;
 --assembly-defines=Firebase.Messaging;
 --assembly-defines=Firebase.Platform;
 --assembly-defines=Firebase.TaskExtension;
 --assembly-defines=Flexalon;
 --assembly-defines=Flexalon.Samples;
+--assembly-defines=Google.MiniJson;
 --assembly-defines=GoogleMobileAds.Android;
 --assembly-defines=GoogleMobileAds.Common;
 --assembly-defines=GoogleMobileAds.Core;

@@ -65,7 +65,10 @@ namespace Infrastructure.Zenject.Installers.ProjectContext.Bootstrap
 
         private void BindSceneLoader() => Container.BindInterfacesTo<SceneLoader>().AsSingle();
 
-        private void BindObservers() => Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
+        private void BindObservers()
+        {
+            Container.BindInterfacesAndSelfTo<IdleObserver>().AsSingle();
+        }
 
         private void BindServices()
         {

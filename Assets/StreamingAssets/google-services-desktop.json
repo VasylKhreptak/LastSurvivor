@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "1081225345728-dtsqpc8rgahier3dn5rnckn5krjc4njp.apps.googleusercontent.com",
+          "client_id": "1081225345728-lsjvlutvsgseta1acvo75j3h8pobk5d6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.UnityTechnologies.com.fgames.lastsurvivors",
@@ -23,7 +23,7 @@
           }
         },
         {
-          "client_id": "1081225345728-id3uocgr9qf1788elp3vgohsc7ur80f3.apps.googleusercontent.com",
+          "client_id": "1081225345728-tiqs3i9a06rubkr29nbqrn8siga6oad9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -36,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1081225345728-id3uocgr9qf1788elp3vgohsc7ur80f3.apps.googleusercontent.com",
+              "client_id": "1081225345728-tiqs3i9a06rubkr29nbqrn8siga6oad9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

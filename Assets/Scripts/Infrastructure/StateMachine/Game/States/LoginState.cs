@@ -5,6 +5,8 @@ using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using Observers;
+using UnityEngine;
 
 namespace Infrastructure.StateMachine.Game.States
 {
@@ -28,7 +30,7 @@ namespace Infrastructure.StateMachine.Game.States
 
         private void Login(Action onComplete)
         {
-            PlayGamesPlatform.Instance.Authenticate(isAuthenticated =>
+            Social.localUser.Authenticate(isAuthenticated =>
             {
                 if (isAuthenticated == false)
                 {

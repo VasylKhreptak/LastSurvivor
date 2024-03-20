@@ -38,7 +38,7 @@ namespace GooglePlayGames {
 
         public const string ApplicationId = "1081225345728"; // Filled in automatically
         public const string IosClientId = "__IOS_CLIENTID__"; // Filled in automatically
-        public const string WebClientId = "1081225345728-dtsqpc8rgahier3dn5rnckn5krjc4njp.apps.googleusercontent.com"; // Filled in automatically
+        public const string WebClientId = "1081225345728-tiqs3i9a06rubkr29nbqrn8siga6oad9.apps.googleusercontent.com"; // Filled in automatically
         public const string NearbyConnectionServiceId = "com.UnityTechnologies.com.fgames.lastsurvivors";
 
         public static bool ApplicationIdInitialized() {
