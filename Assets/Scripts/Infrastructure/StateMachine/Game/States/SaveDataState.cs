@@ -9,6 +9,7 @@ using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Newtonsoft.Json;
+using Utilities.Networking;
 
 namespace Infrastructure.StateMachine.Game.States
 {
@@ -55,6 +56,12 @@ namespace Infrastructure.StateMachine.Game.States
 
         private async Task SaveDataToDb()
         {
+            if (await InternetConnection.CheckAsync() == false)
+            {
+                _logService.Log("No internet connection. Data not saved to db");
+                return;
+            }
+
             FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
 
             if (user == null)

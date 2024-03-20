@@ -10,6 +10,7 @@ using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
 using Newtonsoft.Json;
+using Utilities.Networking;
 
 namespace Infrastructure.StateMachine.Game.States
 {
@@ -41,10 +42,18 @@ namespace Infrastructure.StateMachine.Game.States
 
         private async Task LoadData()
         {
+            if (await InternetConnection.CheckAsync() == false)
+            {
+                _logService.Log("No internet connection");
+                LoadLocalData();
+                return;
+            }
+
             FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
 
             if (user == null)
             {
+                _logService.Log("Not authenticated");
                 LoadLocalData();
                 return;
             }

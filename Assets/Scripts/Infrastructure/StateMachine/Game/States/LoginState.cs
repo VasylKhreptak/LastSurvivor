@@ -5,8 +5,8 @@ using Infrastructure.Services.Log.Core;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
-using Observers;
 using UnityEngine;
+using Utilities.Networking;
 
 namespace Infrastructure.StateMachine.Game.States
 {
@@ -28,8 +28,15 @@ namespace Infrastructure.StateMachine.Game.States
             Login(EnterNextState);
         }
 
-        private void Login(Action onComplete)
+        private async void Login(Action onComplete)
         {
+            if (await InternetConnection.CheckAsync() == false)
+            {
+                _logService.Log("No internet connection");
+                onComplete();
+                return;
+            }
+
             Social.localUser.Authenticate(isAuthenticated =>
             {
                 if (isAuthenticated == false)
