@@ -37,9 +37,7 @@ namespace Infrastructure.StateMachine.Game.States
 
             UpdateSaveDateStamp();
 
-            SaveDataLocally();
-
-            _logService.Log("Saved local data");
+            SaveLocalData();
 
             await SaveDataToDb();
 
@@ -48,11 +46,15 @@ namespace Infrastructure.StateMachine.Game.States
             onComplete?.Invoke();
         }
 
-        private void UpdateSaveDateStamp() => _persistentDataService.Data.Metadata.SaveDateStamp = DateTime.UtcNow;
+        private void UpdateSaveDateStamp() => _persistentDataService.Data.Metadata.SaveDateStamp = DateTime.Now;
 
         private void EnterNextState() => _gameStateMachine.Enter<GameLoopState>();
 
-        private void SaveDataLocally() => _saveLoadService.Save(Key, _persistentDataService.Data);
+        private void SaveLocalData()
+        {
+            _saveLoadService.Save(Key, _persistentDataService.Data);
+            _logService.Log("Saved data to local storage");
+        }
 
         private async Task SaveDataToDb()
         {

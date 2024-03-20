@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using Firebase.Auth;
 using GooglePlayGames;
 using Infrastructure.Services.Log.Core;
@@ -21,61 +21,68 @@ namespace Infrastructure.StateMachine.Game.States
             _logService = logService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
             _logService.Log("LoginState");
 
-            Login(EnterNextState);
+            await Login();
+
+            EnterNextState();
         }
 
-        private async void Login(Action onComplete)
+        private async Task Login()
         {
-            if (await InternetConnection.CheckAsync() == false)
+            FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
+
+            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
             {
-                _logService.Log("No internet connection");
-                onComplete();
+                _logService.Log($"Already authenticated. User display name: {user.DisplayName}. ID: {user.UserId}");
                 return;
             }
 
-            Social.localUser.Authenticate(isAuthenticated =>
+            if (await InternetConnection.CheckAsync() == false)
             {
-                if (isAuthenticated == false)
-                {
-                    _logService.Log("Authentication failed");
-                    onComplete();
-                    return;
-                }
+                _logService.Log("No internet connection");
+                return;
+            }
 
-                string authCode = PlayGamesPlatform.Instance.GetServerAuthCode();
-                LoginFirebase(authCode, onComplete);
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+            Social.localUser.Authenticate(async isAuthenticated =>
+            {
+                await OnAuthenticationFinished(isAuthenticated);
+                tcs.SetResult(true);
             });
+
+            await tcs.Task;
         }
 
-        private void LoginFirebase(string authCode, Action onComplete)
+        private async Task OnAuthenticationFinished(bool isAuthenticated)
+        {
+            if (isAuthenticated == false)
+            {
+                _logService.Log("Authentication failed");
+                return;
+            }
+
+            string authCode = PlayGamesPlatform.Instance.GetServerAuthCode();
+            await LoginFirebase(authCode);
+        }
+
+        private async Task LoginFirebase(string authCode)
         {
             FirebaseAuth auth = FirebaseAuth.DefaultInstance;
             Credential credential = PlayGamesAuthProvider.GetCredential(authCode);
-            auth.SignInAndRetrieveDataWithCredentialAsync(credential)
-                .ContinueWith(task =>
-                {
-                    if (task.IsCanceled)
-                    {
-                        _logService.Log("Login canceled");
-                        onComplete();
-                        return;
-                    }
+            AuthResult authResult = await auth.SignInAndRetrieveDataWithCredentialAsync(credential);
+            FirebaseUser user = authResult.User;
 
-                    if (task.IsFaulted)
-                    {
-                        _logService.Log($"Login failed: {task.Exception}");
-                        onComplete();
-                        return;
-                    }
+            if (user != null)
+            {
+                _logService.Log($"Login successful. DisplayName: {user.DisplayName}. ID: {user.UserId}");
+                return;
+            }
 
-                    AuthResult result = task.Result;
-                    _logService.Log($"Login successful. DisplayName: {result.User.DisplayName}. ID: {result.User.UserId}");
-                    onComplete();
-                });
+            _logService.Log("Login failed");
         }
 
         private void EnterNextState() => _stateMachine.Enter<LoadDataState>();
