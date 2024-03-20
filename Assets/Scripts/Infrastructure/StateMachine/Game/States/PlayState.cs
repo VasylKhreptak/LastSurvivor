@@ -29,14 +29,16 @@ namespace Infrastructure.StateMachine.Game.States
         public void Enter()
         {
             _logService.Log("PlayState");
-            _transitionScreen.Show(LoadAppropriateLevel);
+            _transitionScreen.Show(OnTransitionScreenShown);
         }
 
-        private void LoadAppropriateLevel()
+        private void OnTransitionScreenShown()
         {
-            _stateMachine.Enter<LoadLevelState, Action>(ClearHelicopterFuelTank);
             OnEnter?.Invoke();
+            _stateMachine.Enter<SaveDataState, Action>(LoadAppropriateLevel);
         }
+
+        private void LoadAppropriateLevel() => _stateMachine.Enter<LoadLevelState, Action>(ClearHelicopterFuelTank);
 
         private void ClearHelicopterFuelTank() =>
             _persistentDataService.Data.PlayerData.PlatformsData.HelicopterPlatformData.FuelTank.Clear();
