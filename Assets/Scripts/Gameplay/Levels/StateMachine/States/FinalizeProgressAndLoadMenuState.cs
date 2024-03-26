@@ -1,7 +1,6 @@
 ﻿using System;
 using Gameplay.Data;
 using Gameplay.Levels.StateMachine.States.Core;
-using GooglePlayGames;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States;
@@ -51,11 +50,15 @@ namespace Gameplay.Levels.StateMachine.States
             {
                 _persistentDataService.Data.PlayerData.CompletedLevelsCount++;
 
-                if (PlayGamesPlatform.Instance.IsAuthenticated())
-                {
-                    Social.ReportScore(_persistentDataService.Data.PlayerData.CompletedLevelsCount,
-                        _staticDataService.Config.GoogleLeaderboardIDs.Level, _ => { });
-                }
+                int completedLevelsCount = _persistentDataService.Data.PlayerData.CompletedLevelsCount;
+
+                Social.ReportScore(completedLevelsCount, _staticDataService.Config.GoogleLeaderboardIDs.Level, _ => { });
+
+                if (completedLevelsCount > 1)
+                    Social.ReportProgress(_staticDataService.Config.GoogleAchievementIDs.CompletedFirstLevel, 100, _ => { });
+
+                if (completedLevelsCount > 10)
+                    Social.ReportProgress(_staticDataService.Config.GoogleAchievementIDs.CompletedTenLevels, 100, _ => { });
             }
             else if (_levelData.LevelResult == LevelResult.Failed)
             {

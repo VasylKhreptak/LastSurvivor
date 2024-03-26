@@ -29,9 +29,12 @@ namespace Infrastructure.Data.Static
 
         [Header("Retention Notifications")]
         [SerializeField] private List<BaseNotificationData> _retentionNotifications;
-        
+
         [Header("Google Leaderboard")]
         [SerializeField] private GoogleLeaderboardIDs _googleLeaderboardIDs;
+
+        [Header("Achievements")]
+        [SerializeField] private GoogleAchievementIDs _googleAchievementIDs;
 
         public SceneField BootstrapScene => _bootstrapScene;
         public SceneField MainScene => _mainScene;
@@ -44,7 +47,9 @@ namespace Infrastructure.Data.Static
         public GoogleAdsSettings GoogleAdsSettings => _googleAdsSettings;
 
         public IReadOnlyList<BaseNotificationData> RetentionNotifications => _retentionNotifications;
-        
+
         public GoogleLeaderboardIDs GoogleLeaderboardIDs => _googleLeaderboardIDs;
+        
+        public GoogleAchievementIDs GoogleAchievementIDs => _googleAchievementIDs;
     }
 }

@@ -36,14 +36,6 @@ namespace Infrastructure.StateMachine.Game.States
 
         private async Task Login()
         {
-            FirebaseUser user = FirebaseAuth.DefaultInstance.CurrentUser;
-
-            if (FirebaseAuth.DefaultInstance.CurrentUser != null)
-            {
-                _logService.Log($"Already authenticated. User display name: {user.DisplayName}. ID: {user.UserId}");
-                return;
-            }
-
             if (await InternetConnection.CheckAsync() == false)
             {
                 _logService.Log("No internet connection");
