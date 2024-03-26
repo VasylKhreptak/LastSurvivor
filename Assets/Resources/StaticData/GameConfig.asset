@@ -80,6 +80,10 @@ MonoBehaviour:
     _bannerId: ca-app-pub-4055329757284699/7900507837
     _interstitialId: ca-app-pub-4055329757284699/3961262824
     _rewardedVideoId: ca-app-pub-4055329757284699/1067027242
+    _testBannerId: ca-app-pub-3940256099942544/6300978111
+    _testInterstitialId: ca-app-pub-3940256099942544/1033173712
+    _testRewardedVideoId: ca-app-pub-3940256099942544/5224354917
+    _testModeEnabled: 1
   _retentionNotifications:
   - Title: Survival Alert!
     Message: "Zombies approaching! Arm up! \U0001F9DF\u200D\u2642\uFE0F\U0001F6A8"
@@ -99,3 +103,5 @@ MonoBehaviour:
     Message: "Defend against the horde! Survive at all costs! \u2694\uFE0F\U0001F9DF\u200D\u2642\uFE0F"
   - Title: Survivor Warning!
     Message: "Alert! Zombies closing in! Ensure your safety! \U0001F6B7\U0001F198"
+  _googleLeaderboardIDs:
+    _levelID: CgkIwPW18LsfEAIQBA

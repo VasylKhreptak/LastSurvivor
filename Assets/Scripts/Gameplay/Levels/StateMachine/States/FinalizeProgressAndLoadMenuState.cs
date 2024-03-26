@@ -1,12 +1,14 @@
 ﻿using System;
 using Gameplay.Data;
 using Gameplay.Levels.StateMachine.States.Core;
+using GooglePlayGames;
 using Infrastructure.Services.PersistentData.Core;
 using Infrastructure.Services.StaticData.Core;
 using Infrastructure.StateMachine.Game.States;
 using Infrastructure.StateMachine.Game.States.Core;
 using Infrastructure.StateMachine.Main.Core;
 using Infrastructure.StateMachine.Main.States.Core;
+using UnityEngine;
 
 namespace Gameplay.Levels.StateMachine.States
 {
@@ -46,7 +48,15 @@ namespace Gameplay.Levels.StateMachine.States
             _persistentDataService.Data.PlayerData.Resources.Gears.Add(_levelData.CollectedGears.Value);
 
             if (_levelData.LevelResult == LevelResult.Completed)
+            {
                 _persistentDataService.Data.PlayerData.CompletedLevelsCount++;
+
+                if (PlayGamesPlatform.Instance.IsAuthenticated())
+                {
+                    Social.ReportScore(_persistentDataService.Data.PlayerData.CompletedLevelsCount,
+                        _staticDataService.Config.GoogleLeaderboardIDs.LevelID, _ => { });
+                }
+            }
             else if (_levelData.LevelResult == LevelResult.Failed)
             {
                 _persistentDataService.Data.PlayerData.PlatformsData.CollectorsPlatformData.CollectorsBank.Clear();
