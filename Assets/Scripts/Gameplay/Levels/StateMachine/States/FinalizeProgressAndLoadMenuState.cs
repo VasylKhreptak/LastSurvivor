@@ -54,7 +54,7 @@ namespace Gameplay.Levels.StateMachine.States
                 if (PlayGamesPlatform.Instance.IsAuthenticated())
                 {
                     Social.ReportScore(_persistentDataService.Data.PlayerData.CompletedLevelsCount,
-                        _staticDataService.Config.GoogleLeaderboardIDs.LevelID, _ => { });
+                        _staticDataService.Config.GoogleLeaderboardIDs.Level, _ => { });
                 }
             }
             else if (_levelData.LevelResult == LevelResult.Failed)

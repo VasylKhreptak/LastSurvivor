@@ -6,8 +6,8 @@ namespace Data.Static
     [Serializable]
     public class GoogleLeaderboardIDs
     {
-        [SerializeField] private string _levelID = "CgkIwPW18LsfEAIQBA";
+        [SerializeField] private string _level = "CgkIwPW18LsfEAIQBA";
 
-        public string LevelID => _levelID;
+        public string Level => _level;
     }
 }
