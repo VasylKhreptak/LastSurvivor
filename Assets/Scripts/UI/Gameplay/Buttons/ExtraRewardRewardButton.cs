@@ -14,7 +14,7 @@ using Zenject;
 
 namespace UI.Gameplay.Buttons
 {
-    public class DoubleRewardButton : MonoBehaviour
+    public class ExtraRewardRewardButton : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private GameObject _gameObject;
@@ -28,6 +28,9 @@ namespace UI.Gameplay.Buttons
         [Header("Show Animations")]
         [SerializeField] private AnchorMoveAnimation _anchorMoveAnimation;
         [SerializeField] private FadeAnimation _fadeAnimation;
+
+        [Header("Reward Preferences")]
+        [SerializeField] private float _rewardMultiplier = 1.1f;
 
         private LevelData _levelData;
         private IAdvertisementService _advertisementService;
@@ -142,11 +145,15 @@ namespace UI.Gameplay.Buttons
 
         private void OnRewarded()
         {
-            _levelData.CollectedGears.Value *= 2;
-            _levelData.CollectedMoney.Value *= 2;
-
+            AddExtraReward();
             Hide();
             _continueButton.Show();
+        }
+
+        private void AddExtraReward()
+        {
+            _levelData.CollectedGears.Value = (int)(_levelData.CollectedGears.Value * _rewardMultiplier);
+            _levelData.CollectedMoney.Value = (int)(_levelData.CollectedMoney.Value * _rewardMultiplier);
         }
     }
 }

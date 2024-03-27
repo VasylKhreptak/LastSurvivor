@@ -39,6 +39,6 @@ namespace UI.Platforms.HelicopterPlatform
 
         private void StopObserving() => _subscription?.Dispose();
 
-        private void OnValueChanged(float value) => _tmp.text = string.Format(_format, value.ToString("F1").Replace(",", "."));
+        private void OnValueChanged(float value) => _tmp.text = string.Format(_format, value.ToString("F2").Replace(",", "."));
     }
 }

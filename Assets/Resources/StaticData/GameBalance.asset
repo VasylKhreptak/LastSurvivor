@@ -75,7 +75,7 @@ MonoBehaviour:
     _upgradeFuelCapacityEachLevel: 2
     _fuelCapacityUpgradeAmount: 1
     _upgradeIncomeMultiplierEachLevel: 1
-    _incomeMultiplierUpgradeAmount: 0.1
+    _incomeMultiplierUpgradeAmount: 0.01
     _upgradeCostEachLevel: 1
     _costUpgradeAmount: 2
     _minigunAmmoCapacityUpgradeAmount: 4

@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 7506049543056399907}
   - component: {fileID: 4518967928144609842}
   m_Layer: 5
-  m_Name: DoubleRewardButton
+  m_Name: ExtraRewardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,6 +515,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  _rewardMultiplier: 1.1
 --- !u!1 &1090233573355632847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5782,7 +5783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DOUBLE
+  m_text: EXTRA REWARD
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe8ed18db6f77594291e549e9daf3fe9, type: 2}
   m_sharedMaterial: {fileID: -2713641943474931977, guid: fe8ed18db6f77594291e549e9daf3fe9,
@@ -6661,7 +6662,7 @@ GameObject:
   - component: {fileID: 7964351310546142663}
   - component: {fileID: 6688863043951516139}
   m_Layer: 5
-  m_Name: DoubleRewardButton
+  m_Name: ExtraRewardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6836,7 +6837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 4248446986652615568}
-  _name: Double Reward Button
+  _name: Extra Reward Button
 --- !u!1 &7223894218492972670
 GameObject:
   m_ObjectHideFlags: 0
