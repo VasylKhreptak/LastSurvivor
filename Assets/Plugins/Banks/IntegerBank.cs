@@ -1,4 +1,5 @@
 using Plugins.Banks.Core;
+using UniRx;
 using UnityEngine;
 
 namespace Plugins.Banks
@@ -8,6 +9,10 @@ namespace Plugins.Banks
         public IntegerBank() { }
 
         public IntegerBank(int value) : base(value) { }
+
+        public override IReadOnlyReactiveProperty<bool> IsEmpty => _value.Select(x => x == 0).ToReactiveProperty();
+
+        protected override int Clamp(int value) => Mathf.Max(0, value);
 
         public override void Add(int value)
         {

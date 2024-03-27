@@ -1,4 +1,6 @@
-﻿using Plugins.Banks.Core;
+﻿using System;
+using Plugins.Banks.Core;
+using UniRx;
 using UnityEngine;
 
 namespace Plugins.Banks
@@ -8,6 +10,9 @@ namespace Plugins.Banks
         public ClampedFloatBank() { }
 
         public ClampedFloatBank(float value, float maxValue) : base(value, maxValue) { }
+
+        public override IReadOnlyReactiveProperty<bool> IsEmpty =>
+            _value.Select(value => Mathf.Approximately(value, 0)).ToReadOnlyReactiveProperty();
 
         public override void Add(float value)
         {
@@ -47,6 +52,12 @@ namespace Plugins.Banks
 
             return _value.Value >= value;
         }
+
+        protected override float Clamp(float value) => Mathf.Max(0, value);
+
+        protected override float ClampMaxValue(float maxValue) => Mathf.Max(0, maxValue);
+
+        protected override float Clamp(float value, float maxValue) => Mathf.Clamp(value, 0, maxValue);
 
         protected override void UpdateFillAmount() => _fillAmount.Value = CalculateFillAmount();
 

@@ -1,11 +1,9 @@
-using System;
-using Plugins.Banks.Extensions;
 using UniRx;
 using UnityEngine;
 
 namespace Plugins.Banks.Core
 {
-    public abstract class ClampedBank<T> : Bank<T> where T : IComparable<T>
+    public abstract class ClampedBank<T> : Bank<T>
     {
         protected readonly ReactiveProperty<T> _maxValue;
         protected readonly ReactiveProperty<float> _fillAmount;
@@ -20,8 +18,8 @@ namespace Plugins.Banks.Core
 
         public ClampedBank(T value, T maxValue) : base(value)
         {
-            maxValue = GenericComparer.Max(default, maxValue);
-            value = GenericComparer.Clamp(value, default, maxValue);
+            maxValue = ClampMaxValue(maxValue);
+            value = Clamp(value, maxValue);
 
             _value.Value = value;
             _maxValue = new ReactiveProperty<T>(maxValue);
@@ -35,6 +33,10 @@ namespace Plugins.Banks.Core
 
         public IReadOnlyReactiveProperty<bool> IsFull =>
             _fillAmount.Select(fillAmount => Mathf.Approximately(fillAmount, 1f)).ToReadOnlyReactiveProperty();
+
+        protected abstract T ClampMaxValue(T maxValue);
+
+        protected abstract T Clamp(T value, T maxValue);
 
         protected abstract void UpdateFillAmount();
 
