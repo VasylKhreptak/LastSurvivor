@@ -72,7 +72,7 @@ namespace Gameplay.Weapons.Minigun
         {
             int ammoCapacity = _helicopterPlatformData.MinigunAmmoCapacity;
 
-            ClampedIntegerBank ammo = new ClampedIntegerBank(ammoCapacity, ammoCapacity);
+            ClampedIntegerBank ammo = new ClampedIntegerBank(1, ammoCapacity);
             Container.BindInstance(ammo).AsSingle();
         }
 
