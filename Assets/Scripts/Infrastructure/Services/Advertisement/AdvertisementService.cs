@@ -30,6 +30,8 @@ namespace Infrastructure.Services.Advertisement
             if (_initializationStatus != null)
                 onComplete?.Invoke(_initializationStatus);
 
+            MobileAds.RaiseAdEventsOnUnityMainThread = true;
+
             MobileAds.Initialize(status =>
             {
                 _initializationStatus = status;
@@ -64,7 +66,7 @@ namespace Infrastructure.Services.Advertisement
             {
                 if (error != null)
                 {
-                    _logService.LogError($"Interstitial ad failed to load: {error}");
+                    _logService.LogWarning($"Interstitial ad failed to load: {error}");
                     return;
                 }
 
